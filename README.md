@@ -18,7 +18,7 @@ dependencies:
 In your library add the following import:
 
 ```dart
-  import 'package:one_studio_core/core.dart';
+import 'package:one_studio_core/core.dart';
 ```
 
 ## Usage
