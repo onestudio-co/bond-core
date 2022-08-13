@@ -22,7 +22,7 @@ import 'package:one_studio_core/core.dart';
 ```
 
 ## Usage
-Comming soon 
+Coming soon 
 
 ## Package Content
 ```
