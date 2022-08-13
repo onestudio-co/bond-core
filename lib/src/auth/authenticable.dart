@@ -1,4 +1,4 @@
-abstract class Authenticable {
+mixin Authenticable {
   int get id;
   String? get name;
   String? get email;
