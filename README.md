@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk:
   one_studio_core:
-  git:
+    git:
       url: https://github.com/onestudio-co/one-studio-core.git
       ref: main
 ```
