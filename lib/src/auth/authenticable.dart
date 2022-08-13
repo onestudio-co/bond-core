@@ -3,5 +3,4 @@ mixin Authenticable {
   String? get name;
   String? get email;
   String? get phone;
-  String get createAt;
 }
