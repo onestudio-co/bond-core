@@ -49,6 +49,20 @@ class ApiClient {
     }
   }
 
+  Future<Response> postUri(uri, {Map<String, String>? headers, body}) async {
+    try {
+      return await client.postUri(uri,
+          data: body,
+          options: Options(
+            headers: headers,
+          ));
+    } on DioError catch (error) {
+      throw _handleDioError(error);
+    } catch (e) {
+      throw ServerException(errors: {"message": "$e"});
+    }
+  }
+
   Future<Response> put(
     String url, {
     required Map<String, dynamic> headers,
