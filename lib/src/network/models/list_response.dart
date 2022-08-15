@@ -27,5 +27,5 @@ class ListResponse<T extends Model> extends Equatable {
   Map<String, dynamic> toJson() => _$ListResponseToJson(this);
 
   @override
-  List<Object> get props => [data, meta ?? '', links ?? ''];
+  List<Object?> get props => [data, meta, links];
 }
