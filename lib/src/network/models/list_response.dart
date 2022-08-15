@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'meta.dart';
 import 'model.dart';
+import 'links.dart';
+import 'meta.dart';
 import 'response_converter.dart';
 
 part 'list_response.g.dart';
@@ -11,10 +12,12 @@ part 'list_response.g.dart';
 class ListResponse<T extends Model> extends Equatable {
   @ResponseConverter()
   final List<T> data;
+  final Links? links;
   final Meta? meta;
 
   const ListResponse({
     required this.data,
+    this.links,
     this.meta,
   });
 
@@ -24,5 +27,5 @@ class ListResponse<T extends Model> extends Equatable {
   Map<String, dynamic> toJson() => _$ListResponseToJson(this);
 
   @override
-  List<Object> get props => [data, meta ?? ''];
+  List<Object?> get props => [data, meta, links];
 }
