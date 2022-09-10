@@ -10,5 +10,5 @@ abstract class Model extends Equatable with Jsonable {
   });
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }
