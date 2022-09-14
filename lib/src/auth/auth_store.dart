@@ -13,6 +13,8 @@ abstract class AuthStore<T extends Authenticable> {
 
   set verificationAt(DateTime? verificationAt);
 
+  DateTime? get verificationAt;
+
   bool? get isVerify => null;
 
   Future<void> clearAppData();
