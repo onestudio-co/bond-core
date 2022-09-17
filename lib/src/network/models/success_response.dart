@@ -7,10 +7,10 @@ part 'success_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class SuccessResponse extends Equatable {
-  final String message;
-  final Meta meta;
+  const SuccessResponse({required this.message, this.meta});
 
-  const SuccessResponse(this.message, {required this.meta});
+  final String message;
+  final Meta? meta;
 
   factory SuccessResponse.fromJson(Map<String, dynamic> json) =>
       _$SuccessResponseFromJson(json);
@@ -18,5 +18,5 @@ class SuccessResponse extends Equatable {
   Map<String, dynamic> toJson() => _$SuccessResponseToJson(this);
 
   @override
-  List<Object> get props => [message, meta];
+  List<Object?> get props => [message, meta];
 }

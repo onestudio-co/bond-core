@@ -12,6 +12,7 @@ SingleMResponse<T, G>
         SingleMResponse<T, G>(
           ResponseConverter<T>().fromJson(json['data'] as Map<String, dynamic>),
           ResponseConverter<G>().fromJson(json['meta'] as Map<String, dynamic>),
+          message: json['message'] as String?,
         );
 
 Map<String, dynamic>
@@ -20,4 +21,5 @@ Map<String, dynamic>
         <String, dynamic>{
           'data': ResponseConverter<T>().toJson(instance.data),
           'meta': ResponseConverter<G>().toJson(instance.meta),
+          'message': instance.message,
         };

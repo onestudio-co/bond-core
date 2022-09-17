@@ -14,6 +14,7 @@ SingleResponse<T> _$SingleResponseFromJson<T extends Model>(
       meta: json['meta'] == null
           ? null
           : Meta.fromJson(json['meta'] as Map<String, dynamic>),
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$SingleResponseToJson<T extends Model>(
@@ -21,4 +22,5 @@ Map<String, dynamic> _$SingleResponseToJson<T extends Model>(
     <String, dynamic>{
       'data': ResponseConverter<T>().toJson(instance.data),
       'meta': instance.meta?.toJson(),
+      'message': instance.message,
     };

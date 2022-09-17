@@ -9,14 +9,16 @@ part 'list_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ListResponse<T extends Model> extends Equatable {
-  @ResponseConverter()
-  final List<T> data;
-  final Meta? meta;
-
   const ListResponse({
     required this.data,
     this.meta,
+    this.message,
   });
+
+  @ResponseConverter()
+  final List<T> data;
+  final Meta? meta;
+  final String? message;
 
   factory ListResponse.fromJson(Map<String, dynamic> json) =>
       _$ListResponseFromJson(json);
@@ -24,5 +26,5 @@ class ListResponse<T extends Model> extends Equatable {
   Map<String, dynamic> toJson() => _$ListResponseToJson(this);
 
   @override
-  List<Object> get props => [data, meta ?? ''];
+  List<Object?> get props => [data, meta, message];
 }
