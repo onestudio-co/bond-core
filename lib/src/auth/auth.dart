@@ -6,4 +6,6 @@ class Auth {
   static bool check() => sl<AuthStore>().hasToken;
 
   static Authenticable? user() => sl<AuthStore>().user;
+
+  static bool? isVerify() => sl<AuthStore>().isVerify;
 }
