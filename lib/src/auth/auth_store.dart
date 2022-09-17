@@ -17,5 +17,5 @@ abstract class AuthStore<T extends Authenticable> {
 
   bool? get isVerify => false;
 
-  Future<void> clearAppData();
+  Future<void> clearAppData(List<String>? expect);
 }
