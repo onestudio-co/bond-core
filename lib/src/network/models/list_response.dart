@@ -22,6 +22,7 @@ class ListResponse<T extends Model> extends Equatable {
   @ResponseConverter()
   final List<T> data;
   final Meta? meta;
+  final Links? links;
   final String? message;
 
   factory ListResponse.fromJson(Map<String, dynamic> json) =>
@@ -29,22 +30,22 @@ class ListResponse<T extends Model> extends Equatable {
 
   Map<String, dynamic> toJson() => _$ListResponseToJson(this);
 
-  @override
-  List<Object?> get props => [data, meta, links, message];
-
   String toJsonString() => json.encode(toJson());
 
   ListResponse<T> copyWith({
     List<T>? data,
-    Links? links,
     Meta? meta,
+    Links? links,
     String? message,
   }) {
     return ListResponse<T>(
       data: data ?? this.data,
-      links: links ?? this.links,
       meta: meta ?? this.meta,
+      links: links ?? this.links,
       message: message ?? this.message,
     );
   }
+
+  @override
+  List<Object?> get props => [data, meta, links, message];
 }

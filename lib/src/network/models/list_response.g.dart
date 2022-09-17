@@ -26,7 +26,7 @@ Map<String, dynamic> _$ListResponseToJson<T extends Model>(
         ListResponse<T> instance) =>
     <String, dynamic>{
       'data': instance.data.map(ResponseConverter<T>().toJson).toList(),
-      'links': instance.links?.toJson(),
       'meta': instance.meta?.toJson(),
+      'links': instance.links?.toJson(),
       'message': instance.message,
     };
