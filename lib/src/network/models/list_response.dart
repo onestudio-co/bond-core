@@ -16,14 +16,12 @@ class ListResponse<T extends Model> extends Equatable {
     required this.data,
     this.links,
     this.meta,
-    this.message,
   });
 
   @ResponseConverter()
   final List<T> data;
   final Meta? meta;
   final Links? links;
-  final String? message;
 
   factory ListResponse.fromJson(Map<String, dynamic> json) =>
       _$ListResponseFromJson(json);
@@ -42,10 +40,9 @@ class ListResponse<T extends Model> extends Equatable {
       data: data ?? this.data,
       meta: meta ?? this.meta,
       links: links ?? this.links,
-      message: message ?? this.message,
     );
   }
 
   @override
-  List<Object?> get props => [data, meta, links, message];
+  List<Object?> get props => [data, meta, links];
 }

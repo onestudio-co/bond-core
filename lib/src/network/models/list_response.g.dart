@@ -19,7 +19,6 @@ ListResponse<T> _$ListResponseFromJson<T extends Model>(
       meta: json['meta'] == null
           ? null
           : Meta.fromJson(json['meta'] as Map<String, dynamic>),
-      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$ListResponseToJson<T extends Model>(
@@ -28,5 +27,4 @@ Map<String, dynamic> _$ListResponseToJson<T extends Model>(
       'data': instance.data.map(ResponseConverter<T>().toJson).toList(),
       'meta': instance.meta?.toJson(),
       'links': instance.links?.toJson(),
-      'message': instance.message,
     };
