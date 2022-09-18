@@ -34,7 +34,6 @@ class ListResponse<T extends Model> extends Equatable {
     List<T>? data,
     Meta? meta,
     Links? links,
-    String? message,
   }) {
     return ListResponse<T>(
       data: data ?? this.data,
