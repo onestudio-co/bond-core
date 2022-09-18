@@ -12,36 +12,36 @@ part 'list_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ListResponse<T extends Model> extends Equatable {
-  @ResponseConverter()
-  final List<T> data;
-  final Links? links;
-  final Meta? meta;
-
   const ListResponse({
     required this.data,
     this.links,
     this.meta,
   });
 
+  @ResponseConverter()
+  final List<T> data;
+  final Meta? meta;
+  final Links? links;
+
   factory ListResponse.fromJson(Map<String, dynamic> json) =>
       _$ListResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ListResponseToJson(this);
 
-  @override
-  List<Object?> get props => [data, meta, links];
-
   String toJsonString() => json.encode(toJson());
 
   ListResponse<T> copyWith({
     List<T>? data,
-    Links? links,
     Meta? meta,
+    Links? links,
   }) {
     return ListResponse<T>(
       data: data ?? this.data,
-      links: links ?? this.links,
       meta: meta ?? this.meta,
+      links: links ?? this.links,
     );
   }
+
+  @override
+  List<Object?> get props => [data, meta, links];
 }

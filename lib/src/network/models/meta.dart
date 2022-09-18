@@ -4,14 +4,6 @@ part 'meta.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Meta {
-  final int? from;
-  @JsonKey(name: "last_page")
-  final int lastPage;
-  final String path;
-  @JsonKey(name: "per_page")
-  final int perPage;
-  final int? to;
-
   const Meta({
     required this.from,
     required this.lastPage,
@@ -19,6 +11,14 @@ class Meta {
     required this.perPage,
     required this.to,
   });
+
+  final int? from;
+  @JsonKey(name: "last_page")
+  final int lastPage;
+  final String path;
+  @JsonKey(name: "per_page")
+  final int perPage;
+  final int? to;
 
   factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
 
