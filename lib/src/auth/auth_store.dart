@@ -11,11 +11,5 @@ abstract class AuthStore<T extends Authenticable> {
 
   set token(String? token);
 
-  set verificationAt(DateTime? verificationAt);
-
-  DateTime? get verificationAt => null;
-
-  bool? get isVerify => verificationAt != null;
-
   Future<void> clearAppData(List<String>? expect);
 }
