@@ -1,7 +1,7 @@
 import 'package:one_studio_core/src/auth/authenticable.dart';
 
 abstract class AuthStore<T extends Authenticable> {
-  bool get hasToken => false;
+  bool get hasToken => token != null;
 
   T? get user => null;
 
@@ -15,7 +15,7 @@ abstract class AuthStore<T extends Authenticable> {
 
   DateTime? get verificationAt => null;
 
-  bool? get isVerify => false;
+  bool? get isVerify => verificationAt != null;
 
   Future<void> clearAppData(List<String>? expect);
 }
