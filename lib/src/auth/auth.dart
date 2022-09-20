@@ -7,5 +7,5 @@ class Auth {
 
   static Authenticable? user() => sl<AuthStore>().user;
 
-  static bool? isVerify() => sl<AuthStore>().isVerify;
+  static bool get isVerify => sl<AuthStore>().user?.verificationAt != null;
 }
