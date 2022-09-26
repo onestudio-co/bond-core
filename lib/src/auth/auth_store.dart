@@ -11,5 +11,5 @@ abstract class AuthStore<T extends Authenticable> {
 
   set token(String? token);
 
-  Future<void> clearAppData(List<String>? expect);
+  Future<void> clearAppData([List<String>? expect]);
 }
