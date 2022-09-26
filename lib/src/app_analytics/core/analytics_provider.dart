@@ -31,21 +31,39 @@ abstract class AnalyticsProvider {
 
   void logEvent(AnalyticsEvent event);
 
-  void logBeginTutorial();
+  void logBeginTutorial() {
+    throw UnimplementedError('Begin tutorial not implemented');
+  }
 
-  void logCompleteTutorial();
+  void logCompleteTutorial() {
+    throw UnimplementedError('Complete tutorial not implemented');
+  }
 
-  void logSignedUp(UserSignedUp event);
+  void logSignedUp(UserSignedUp event) {
+    throw UnimplementedError('Signed up not implemented');
+  }
 
-  void logSignedIn(UserLoggedIn event);
+  void logSignedIn(UserLoggedIn event) {
+    throw UnimplementedError('Signed in not implemented');
+  }
 
-  void updateProfile(UserUpdateProfile event);
+  void updateProfile(UserUpdateProfile event) {
+    throw UnimplementedError('Update profile not implemented');
+  }
 
-  void logViewItemList();
+  void logViewItemList() {
+    throw UnimplementedError('View item list not implemented');
+  }
 
-  void logAddToCart(UserAddedToCart event);
+  void logAddToCart(UserAddedToCart event) {
+    throw UnimplementedError('Add to cart not implemented');
+  }
 
-  void logBeginCheckout(UserBeginCheckout event);
+  void logBeginCheckout(UserBeginCheckout event) {
+    throw UnimplementedError('Begin checkout not implemented');
+  }
 
-  void logMadePurchase(UserMadePurchase event);
+  void logMadePurchase(UserMadePurchase event) {
+    throw UnimplementedError('Made purchase not implemented');
+  }
 }
