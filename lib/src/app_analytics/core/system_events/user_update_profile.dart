@@ -1,21 +1,21 @@
 mixin UserUpdateProfile {
-  int? get id;
+  int get id;
 
-  String? get name;
+  String? get name => null;
 
-  String? get mobile;
+  String? get mobile => null;
 
-  String? get email;
+  String? get email => null;
 
-  String? get dob;
+  String? get dob => null;
 
-  String? get gender;
+  String? get gender => null;
 
-  String? get country;
+  String? get country => null;
 
-  String? get city;
+  String? get city => null;
 
-  int? get age;
+  int? get age => null;
 
   Map<String, dynamic> get customAttributes => {};
 }
