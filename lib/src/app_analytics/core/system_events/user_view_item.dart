@@ -1,9 +1,9 @@
-import 'event_item.dart';
+import 'package:one_studio_core/core.dart';
 
 mixin UserViewItem {
-  String? get itemListId;
+  String? get currency;
 
-  String? get itemListName;
+  double? get value;
 
   List<EventItem>? get items;
 }
