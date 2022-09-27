@@ -18,10 +18,10 @@ class EventItem {
   final String? itemName;
   final String? itemVariant;
   final String? locationId;
-  final String? price;
+  final num? price;
   final String? promotionId;
   final String? promotionName;
-  final String? quantity;
+  final int? quantity;
 
   EventItem({
     this.affiliation,
