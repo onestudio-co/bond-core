@@ -106,11 +106,11 @@ abstract class AnalyticsProvider {
   }
 
   void logViewItem(UserViewItem event) {
-    throw UnimplementedError('View item list not implemented');
+    throw UnimplementedError('View item not implemented');
   }
 
   void logSelectItem(UserSelectItem event) {
-    throw UnimplementedError('View promotion not implemented');
+    throw UnimplementedError('Select item not implemented');
   }
 
   void logViewPromotion(UserViewPromotion event) {
@@ -118,7 +118,7 @@ abstract class AnalyticsProvider {
   }
 
   void logSelectPromotion(UserSelectPromotion event) {
-    throw UnimplementedError('View promotion not implemented');
+    throw UnimplementedError('Select promotion not implemented');
   }
 
   void logAddToCart(UserAddedToCart event) {
@@ -138,6 +138,6 @@ abstract class AnalyticsProvider {
   }
 
   void logRefundOrder(UserRefundOrder event) {
-    throw UnimplementedError('Made purchase not implemented');
+    throw UnimplementedError('Refund Order not implemented');
   }
 }
