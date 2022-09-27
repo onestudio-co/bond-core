@@ -19,6 +19,9 @@ abstract class AnalyticsProvider {
       case SystemEvents.signedIn:
         logSignedIn(event as UserSignedIn);
         break;
+      case SystemEvents.signedOut:
+        logSignedOut(event as UserSignedOut);
+        break;
       case SystemEvents.updateProfile:
         updateProfile(event as UserUpdateProfile);
         break;
@@ -60,6 +63,12 @@ abstract class AnalyticsProvider {
 
   void logEvent(AnalyticsEvent event);
 
+  void setUserId(int userId);
+
+  void setCurrentScreen(String screenName) {
+    throw UnimplementedError('Set current screen not implemented');
+  }
+
   void logBeginTutorial() {
     throw UnimplementedError('Begin tutorial not implemented');
   }
@@ -74,6 +83,10 @@ abstract class AnalyticsProvider {
 
   void logSignedIn(UserSignedIn event) {
     throw UnimplementedError('Signed in not implemented');
+  }
+
+  void logSignedOut(UserSignedOut event) {
+    throw UnimplementedError('Signed out not implemented');
   }
 
   void updateProfile(UserUpdateProfile event) {

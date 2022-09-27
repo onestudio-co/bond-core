@@ -11,6 +11,7 @@ enum SystemEvents {
   completeTutorial,
   signedUp,
   signedIn,
+  signedOut,
   updateProfile,
   viewItemList,
   viewItem,
