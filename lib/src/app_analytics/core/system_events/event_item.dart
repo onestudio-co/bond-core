@@ -4,8 +4,8 @@ class EventItem {
   final String? coupon;
   final String? creativeName;
   final String? creativeSlot;
-  final String? discount;
-  final String? index;
+  final num? discount;
+  final int? index;
   final String? itemBrand;
   final String? itemCategory;
   final String? itemCategory2;
