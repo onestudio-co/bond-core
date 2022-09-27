@@ -56,27 +56,6 @@ abstract class AnalyticsProvider {
         logEvent(event);
         break;
     }
-    if (event is UserBeginTutorial) {
-      logBeginTutorial();
-    } else if (event is UserCompleteTutorial) {
-      logCompleteTutorial();
-    } else if (event is UserSignedUp) {
-      logSignedUp(event as UserSignedUp);
-    } else if (event is UserSignedIn) {
-      logSignedIn(event as UserSignedIn);
-    } else if (event is UserUpdateProfile) {
-      updateProfile(event as UserUpdateProfile);
-    } else if (event is UserViewedItemList) {
-      logViewItemList(event as UserViewedItemList);
-    } else if (event is UserAddedToCart) {
-      logAddToCart(event as UserAddedToCart);
-    } else if (event is UserBeginCheckout) {
-      logBeginCheckout(event as UserBeginCheckout);
-    } else if (event is UserMadePurchase) {
-      logMadePurchase(event as UserMadePurchase);
-    } else {
-      logEvent(event);
-    }
   }
 
   void logEvent(AnalyticsEvent event);
