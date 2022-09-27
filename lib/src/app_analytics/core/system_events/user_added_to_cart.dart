@@ -1,3 +1,5 @@
+import 'event_item.dart';
+
 mixin UserAddedToCart {
   String get id;
 
@@ -7,22 +9,5 @@ mixin UserAddedToCart {
 
   double get value;
 
-  List<CartItem> get items;
-}
-
-class CartItem {
-  final String id;
-  final String name;
-  final String? category;
-  final int quantity;
-  final double price;
-  final String currency;
-
-  CartItem(
-      {required this.id,
-      required this.name,
-      required this.quantity,
-      this.category,
-      required this.price,
-      required this.currency});
+  List<EventItem> get items;
 }

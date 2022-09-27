@@ -6,18 +6,68 @@ import 'system_events.dart';
 abstract class AnalyticsProvider {
   @mustCallSuper
   void log(AnalyticsEvent event) {
+    switch (event.systemEventType) {
+      case SystemEvents.beginTutorial:
+        logBeginTutorial();
+        break;
+      case SystemEvents.completeTutorial:
+        logCompleteTutorial();
+        break;
+      case SystemEvents.signedUp:
+        logSignedUp(event as UserSignedUp);
+        break;
+      case SystemEvents.signedIn:
+        logSignedIn(event as UserSignedIn);
+        break;
+      case SystemEvents.updateProfile:
+        updateProfile(event as UserUpdateProfile);
+        break;
+      case SystemEvents.viewItemList:
+        logViewItemList(event as UserViewedItemList);
+        break;
+      case SystemEvents.viewItem:
+        logViewItem(event as UserViewItem);
+        break;
+      case SystemEvents.selectItem:
+        logSelectItem(event as UserSelectItem);
+        break;
+      case SystemEvents.viewPromotion:
+        logViewPromotion(event as UserViewPromotion);
+        break;
+      case SystemEvents.selectPromotion:
+        logSelectPromotion(event as UserSelectPromotion);
+        break;
+      case SystemEvents.addToCart:
+        logAddToCart(event as UserAddedToCart);
+        break;
+      case SystemEvents.removeFromCart:
+        logRemoveFromCart(event as UserRemovedFromCart);
+        break;
+      case SystemEvents.beginCheckout:
+        logBeginCheckout(event as UserBeginCheckout);
+        break;
+      case SystemEvents.madePurchase:
+        logMadePurchase(event as UserMadePurchase);
+        break;
+      case SystemEvents.refundOrder:
+        logRefundOrder(event as UserRefundOrder);
+        break;
+      case SystemEvents.unknown:
+        logEvent(event);
+        break;
+    }
     if (event is UserBeginTutorial) {
       logBeginTutorial();
     } else if (event is UserCompleteTutorial) {
       logCompleteTutorial();
     } else if (event is UserSignedUp) {
       logSignedUp(event as UserSignedUp);
-    } else if (event is UserLoggedIn) {
-      logSignedIn(event as UserLoggedIn);
+    } else if (event is UserSignedIn) {
+      logSignedIn(event as UserSignedIn);
     } else if (event is UserUpdateProfile) {
       updateProfile(event as UserUpdateProfile);
     } else if (event is UserViewedItemList) {
-      logViewItemList();
+      logViewItemList(event as UserViewedItemList);
     } else if (event is UserAddedToCart) {
       logAddToCart(event as UserAddedToCart);
     } else if (event is UserBeginCheckout) {
@@ -43,7 +93,7 @@ abstract class AnalyticsProvider {
     throw UnimplementedError('Signed up not implemented');
   }
 
-  void logSignedIn(UserLoggedIn event) {
+  void logSignedIn(UserSignedIn event) {
     throw UnimplementedError('Signed in not implemented');
   }
 
@@ -51,12 +101,32 @@ abstract class AnalyticsProvider {
     throw UnimplementedError('Update profile not implemented');
   }
 
-  void logViewItemList() {
+  void logViewItemList(UserViewedItemList event) {
     throw UnimplementedError('View item list not implemented');
+  }
+
+  void logViewItem(UserViewItem event) {
+    throw UnimplementedError('View item list not implemented');
+  }
+
+  void logSelectItem(UserSelectItem event) {
+    throw UnimplementedError('View promotion not implemented');
+  }
+
+  void logViewPromotion(UserViewPromotion event) {
+    throw UnimplementedError('View promotion not implemented');
+  }
+
+  void logSelectPromotion(UserSelectPromotion event) {
+    throw UnimplementedError('View promotion not implemented');
   }
 
   void logAddToCart(UserAddedToCart event) {
     throw UnimplementedError('Add to cart not implemented');
+  }
+
+  void logRemoveFromCart(UserRemovedFromCart event) {
+    throw UnimplementedError('Remove from cart not implemented');
   }
 
   void logBeginCheckout(UserBeginCheckout event) {
@@ -64,6 +134,10 @@ abstract class AnalyticsProvider {
   }
 
   void logMadePurchase(UserMadePurchase event) {
+    throw UnimplementedError('Made purchase not implemented');
+  }
+
+  void logRefundOrder(UserRefundOrder event) {
     throw UnimplementedError('Made purchase not implemented');
   }
 }

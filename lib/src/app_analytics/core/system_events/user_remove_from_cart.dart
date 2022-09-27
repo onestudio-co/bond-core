@@ -1,7 +1,9 @@
 import 'event_item.dart';
 
-mixin UserBeginCheckout {
-  String get coupon;
+mixin UserRemovedFromCart {
+  String get id;
+
+  String? get coupon;
 
   String get currency;
 

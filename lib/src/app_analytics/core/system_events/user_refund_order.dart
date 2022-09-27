@@ -1,6 +1,6 @@
 import 'event_item.dart';
 
-mixin UserMadePurchase {
+mixin UserRefundOrder {
   String get currency;
 
   String? get coupon;
