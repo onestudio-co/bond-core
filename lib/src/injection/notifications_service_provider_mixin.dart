@@ -1,7 +1,7 @@
 import 'package:one_studio_core/src/injection/service_provider.dart';
 import 'package:one_studio_core/src/notifications.dart';
 
-mixin NotificationServiceProvider on ServiceProvider {
+mixin NotificationServiceProviderMixin on ServiceProvider {
   List<AppNotification> get notifications;
 
   void registerNotifications() {
