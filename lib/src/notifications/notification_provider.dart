@@ -11,7 +11,7 @@ abstract class NotificationProvider {
 
   Stream<NotificationData> get onNotificationTapped;
 
-  Future<NotificationData?> get initialMessage;
+  Future<NotificationData?> get initialNotification;
 
   Future<void> deleteToken();
 }
