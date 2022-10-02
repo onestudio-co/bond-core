@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'notification.dart';
 import 'notification_provider.dart';
 
-mixin Listenable on Notification {
+mixin ListenableNotification on Notification {
   final List<StreamSubscription<NotificationData>> streamsSubscriptions = [];
 
   @mustCallSuper

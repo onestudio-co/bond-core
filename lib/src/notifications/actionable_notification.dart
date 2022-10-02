@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'notification.dart';
 import 'notification_provider.dart';
 
-mixin Actionable on Notification {
+mixin ActionableNotification on Notification {
   final List<StreamSubscription<NotificationData>> streamsSubscriptions = [];
 
   @mustCallSuper
