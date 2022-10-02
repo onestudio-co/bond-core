@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'notification.dart';
+import 'app_notification.dart';
 import 'notification_provider.dart';
 
-mixin ActionableNotification on Notification {
+mixin ActionableNotification on AppNotification {
   final List<StreamSubscription<NotificationData>> streamsSubscriptions = [];
 
   @mustCallSuper
