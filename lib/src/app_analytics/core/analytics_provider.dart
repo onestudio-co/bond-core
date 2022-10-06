@@ -6,6 +6,14 @@ import 'system_events.dart';
 abstract class AnalyticsProvider {
   @mustCallSuper
   void log(AnalyticsEvent event) {
+    try {
+      _log(event);
+    } on UnimplementedError catch (_) {
+      logEvent(event);
+    }
+  }
+
+  void _log(AnalyticsEvent event) {
     switch (event.systemEventType) {
       case SystemEvents.beginTutorial:
         logBeginTutorial();
