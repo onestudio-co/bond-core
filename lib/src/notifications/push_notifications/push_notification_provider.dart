@@ -1,15 +1,15 @@
-typedef NotificationData = Map<String, dynamic>;
+import '../core/notification_data.dart';
 
-abstract class NotificationProvider {
+abstract class PushNotificationProvider {
   Future<String?> get token;
 
   Future<String?> get apnsToken;
 
   Stream<String> get onTokenRefresh;
 
-  Stream<NotificationData> get onNotification;
+  Stream<NotificationData> get onPushNotification;
 
-  Stream<NotificationData> get onNotificationTapped;
+  Stream<NotificationData> get onPushNotificationTapped;
 
   Future<NotificationData?> get initialNotification;
 
