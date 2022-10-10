@@ -1,8 +1,6 @@
 import '../core/notification_data.dart';
 
 abstract class PushNotificationProvider {
-  void requestPermission();
-
   Future<String?> get token;
 
   Future<String?> get apnsToken;
