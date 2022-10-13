@@ -9,6 +9,14 @@ abstract class Failure extends Equatable {
   String toMessage();
 }
 
+class CacheFailure extends Failure{
+  const CacheFailure({required this.error});
+  final Map<String, dynamic> error;
+  @override
+  String toMessage() => error["message"] ?? '-';
+
+}
+
 class ServerFailure extends Failure {
   const ServerFailure({required this.error, required this.code});
 
@@ -31,3 +39,4 @@ class ConnectionFailure extends Failure {
   @override
   String toMessage() => 'Check you internet connection';
 }
+
