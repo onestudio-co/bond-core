@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:one_studio_core/src/injection.dart';
 
@@ -36,6 +37,7 @@ class PushNotificationsProviders extends NotificationProvider
 
   @override
   void onNotification(Map<String, dynamic> data) {
+    log('onNotification: $data');
     final featureProviders =
         providers.whereType<PushNotificationServiceProviderMixin>();
     for (final featureProvider in featureProviders) {
