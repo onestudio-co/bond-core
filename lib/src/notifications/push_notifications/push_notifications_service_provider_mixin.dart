@@ -11,7 +11,7 @@ mixin PushNotificationServiceProviderMixin on ServiceProvider {
 
   void handlePushNotification(NotificationData data) {
     log('try to handlePushNotification: $data');
-    final String? code = data['code'];
+    final String? code = data['code'] ?? data['item_type'];
     for (final pushNotification in pushNotifications) {
       if (pushNotification.code == code) {
         pushNotification.onNotification(data);
@@ -21,8 +21,9 @@ mixin PushNotificationServiceProviderMixin on ServiceProvider {
 
   void handlePushNotificationAction(NotificationData data) {
     log('try to handlePushNotificationAction: $data');
-    final String? code = data['code'];
-    final String? deepLink = data['deep_link'];
+    final String? code = data['code'] ?? data['item_type'];
+    final String? deepLink =
+        data['deep_link'] ?? data['item_type_id'].toString();
     if (deepLink == null) return;
     final actionablePushNotifications =
         pushNotifications.whereType<ActionablePushNotification>();
