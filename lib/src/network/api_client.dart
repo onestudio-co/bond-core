@@ -84,6 +84,21 @@ class ApiClient {
     }
   }
 
+  Future<Response> delete(url,
+      {required Map<String, String> headers, queryParameters}) async {
+    try {
+      return await client.delete(url,
+          queryParameters: queryParameters,
+          options: Options(
+            headers: headers,
+          ));
+    } on DioError catch (error) {
+      throw _handleDioError(error);
+    } catch (e) {
+      throw ServerException(errors: {"message": "$e"});
+    }
+  }
+
   ServerException _handleDioError(DioError error) {
     if (error.response != null && error.response!.data != null) {
       return ServerException(
