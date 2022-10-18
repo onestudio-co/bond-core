@@ -85,10 +85,11 @@ class ApiClient {
   }
 
   Future<Response> delete(url,
-      {required Map<String, String> headers, queryParameters}) async {
+      {required Map<String, String> headers, body, queryParameters}) async {
     try {
       return await client.delete(url,
           queryParameters: queryParameters,
+          data: body,
           options: Options(
             headers: headers,
           ));
