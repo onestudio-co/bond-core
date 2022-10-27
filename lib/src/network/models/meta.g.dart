@@ -12,6 +12,7 @@ Meta _$MetaFromJson(Map<String, dynamic> json) => Meta(
       path: json['path'] as String,
       perPage: json['per_page'] as int,
       to: json['to'] as int?,
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$MetaToJson(Meta instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$MetaToJson(Meta instance) => <String, dynamic>{
       'path': instance.path,
       'per_page': instance.perPage,
       'to': instance.to,
+      'message': instance.message,
     };
