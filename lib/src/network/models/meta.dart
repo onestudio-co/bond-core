@@ -15,10 +15,10 @@ class Meta {
 
   final int? from;
   @JsonKey(name: "last_page")
-  final int lastPage;
-  final String path;
+  final int? lastPage;
+  final String? path;
   @JsonKey(name: "per_page")
-  final int perPage;
+  final int? perPage;
   final int? to;
   final String? message;
 
