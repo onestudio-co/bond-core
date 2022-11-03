@@ -5,7 +5,7 @@ import 'push_notification.dart';
 import 'push_notifications_service_provider_mixin.dart';
 
 mixin ActionablePushNotification on PushNotification {
-  void onNotificationTapped(String deepLink);
+  void onNotificationTapped(NotificationData data);
 }
 
 mixin ActionableNotification on NotificationProvider {
