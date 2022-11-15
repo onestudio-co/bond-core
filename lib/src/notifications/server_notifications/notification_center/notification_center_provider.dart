@@ -78,8 +78,8 @@ class NotificationCenterProvider extends NotificationProvider
   }
 
   @override
-  void onTap(ServerNotificationModel notification) =>
-      onNotificationTapped(notification.data);
+  void onTap(ServerNotificationModel notification) => onNotificationTapped(
+      notification.data..putIfAbsent('code', () => notification.code));
 
   StreamSubscription<NotificationData>? _streamsSubscriptions;
 
