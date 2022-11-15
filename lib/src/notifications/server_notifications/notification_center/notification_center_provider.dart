@@ -102,6 +102,11 @@ class NotificationCenterProvider extends NotificationProvider
         data: notifications,
       ),
     );
+    final newServerNotificationData = ServerNotificationData(
+      type: SeverNotificationChangedType.loaded,
+      data: notifications,
+    );
+    currentServerNotificationData = newServerNotificationData;
   }
 
   @override
