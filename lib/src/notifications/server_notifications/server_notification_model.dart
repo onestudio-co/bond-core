@@ -78,6 +78,22 @@ class ServerNotificationModel extends Model {
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        uuid,
+        notifiableType,
+        notifiableId,
+        authableType,
+        authableId,
+        code,
+        body,
+        data,
+        senderName,
+        senderImage,
+        readAt,
+        createdAt,
+      ];
 }
 
 enum SeverNotificationChangedType {
