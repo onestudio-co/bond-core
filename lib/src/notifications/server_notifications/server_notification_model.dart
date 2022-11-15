@@ -80,4 +80,7 @@ class ServerNotificationModel extends Model {
   }
 }
 
-enum SeverNotificationChangedType { load, read, readAll }
+enum SeverNotificationChangedType {
+  loadingNextPage,
+  loaded,
+}
