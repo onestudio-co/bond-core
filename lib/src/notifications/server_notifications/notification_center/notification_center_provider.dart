@@ -31,6 +31,34 @@ class NotificationCenterProvider extends NotificationProvider
       serverNotificationStreamController.stream;
 
   @override
+  void load({String? nextUrl}) async {
+    final newResponse =
+        await notificationCenterDataSource.loadNotifications(nextUrl: nextUrl);
+    if (nextUrl != null) {
+      final serverNotificationData = await notifications.single;
+      final response = serverNotificationData.data;
+      final data = response.data.followedBy(newResponse.data).toList();
+      serverNotificationStreamController.add(
+        ServerNotificationData(
+          type: SeverNotificationChangedType.load,
+          data: response.copyWith(
+            data: data,
+            links: newResponse.links,
+            meta: newResponse.meta,
+          ),
+        ),
+      );
+    } else {
+      serverNotificationStreamController.add(
+        ServerNotificationData(
+          type: SeverNotificationChangedType.load,
+          data: newResponse,
+        ),
+      );
+    }
+  }
+
+  @override
   void read(ServerNotificationModel notification) async {
     await notificationCenterDataSource.read(notification.uuid);
     final serverNotificationData = await notifications.single;

@@ -7,6 +7,8 @@ mixin ServerNotificationsProvider on NotificationProvider {
 
   Stream<int> get unreadNotificationsCount;
 
+  void load({String? nextUrl});
+
   void read(ServerNotificationModel notification);
 
   void readAll();
