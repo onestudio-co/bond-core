@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:one_studio_core/src/network/models.dart';
 import 'package:one_studio_core/src/notifications/notifications_core.dart';
@@ -16,7 +17,7 @@ class NotificationCenterProvider extends NotificationProvider
   });
 
   final serverNotificationStreamController =
-      StreamController<ServerNotificationData>();
+      StreamController<ServerNotificationData>.broadcast();
 
   @override
   Stream<int> get unreadNotificationsCount =>
@@ -111,6 +112,7 @@ class NotificationCenterProvider extends NotificationProvider
 
   void _load() async {
     final newResponse = await notificationCenterDataSource.loadNotifications();
+    log('_load newResponse: $newResponse');
     serverNotificationStreamController.add(
       ServerNotificationData(
         type: SeverNotificationChangedType.loaded,
@@ -130,6 +132,7 @@ class NotificationCenterProvider extends NotificationProvider
     );
     final newResponse = await notificationCenterDataSource.loadNotifications(
         nextUrl: serverNotifications.links?.next);
+    log('_loadNextPage: $newResponse');
     final oldData = serverNotifications.data;
     final combinedData = oldData.followedBy(newResponse.data).toList();
     serverNotificationStreamController.add(
