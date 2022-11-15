@@ -21,8 +21,8 @@ ServerNotificationModel _$ServerNotificationModelFromJson(
       readAt: json['read_at'] == null
           ? null
           : DateTime.parse(json['read_at'] as String),
-      authableType: json['authable_type'] as String,
-      authableId: json['authable_id'] as int,
+      authableType: json['authable_type'] as String?,
+      authableId: json['authable_id'] as int?,
     );
 
 Map<String, dynamic> _$ServerNotificationModelToJson(

@@ -11,9 +11,9 @@ class ServerNotificationModel extends Model {
   @JsonKey(name: 'notifiable_id')
   final int notifiableId;
   @JsonKey(name: 'authable_type')
-  final String authableType;
+  final String? authableType;
   @JsonKey(name: 'authable_id')
-  final int authableId;
+  final int? authableId;
   final String code;
   final String body;
   final Map<String, dynamic> data;
@@ -37,8 +37,8 @@ class ServerNotificationModel extends Model {
     required this.notifiableId,
     required this.data,
     this.readAt,
-    required this.authableType,
-    required this.authableId,
+    this.authableType,
+    this.authableId,
   }) : super(id: -1);
 
   bool get read => readAt != null;
