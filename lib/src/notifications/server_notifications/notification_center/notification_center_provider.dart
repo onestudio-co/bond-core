@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:one_studio_core/src/network/models.dart';
 import 'package:one_studio_core/src/notifications/notifications_core.dart';
@@ -30,12 +29,12 @@ class NotificationCenterProvider extends NotificationProvider
   Stream<ServerNotificationData> get notifications =>
       serverNotificationStreamController.stream;
 
-  ListResponse<ServerNotificationModel>? _serverNotifications;
+  ListResponse<ServerNotificationModel>? currentServerNotifications;
 
   @override
   void load() async {
-    if (_serverNotifications != null) {
-      _loadNextPage(_serverNotifications!);
+    if (currentServerNotifications != null) {
+      _loadNextPage(currentServerNotifications!);
     } else {
       _load();
     }
@@ -43,9 +42,9 @@ class NotificationCenterProvider extends NotificationProvider
 
   @override
   void read(ServerNotificationModel notification) async {
-    if (_serverNotifications == null) return;
+    if (currentServerNotifications == null) return;
     await notificationCenterDataSource.read(notification.uuid);
-    final oldResponse = _serverNotifications!;
+    final oldResponse = currentServerNotifications!;
     final newData = oldResponse.data
         .map(
           (element) => element.uuid == notification.uuid
@@ -60,14 +59,14 @@ class NotificationCenterProvider extends NotificationProvider
         data: newResponse,
       ),
     );
-    _serverNotifications = newResponse;
+    currentServerNotifications = newResponse;
   }
 
   @override
   void readAll() async {
-    if (_serverNotifications == null) return;
+    if (currentServerNotifications == null) return;
     await notificationCenterDataSource.readAll();
-    final oldResponse = _serverNotifications!;
+    final oldResponse = currentServerNotifications!;
     final newData = oldResponse.data
         .map((element) => element.copyWith(readAt: DateTime.now()))
         .toList();
@@ -78,7 +77,7 @@ class NotificationCenterProvider extends NotificationProvider
         data: newResponse,
       ),
     );
-    _serverNotifications = newResponse;
+    currentServerNotifications = newResponse;
   }
 
   @override
@@ -112,14 +111,13 @@ class NotificationCenterProvider extends NotificationProvider
 
   void _load() async {
     final newResponse = await notificationCenterDataSource.loadNotifications();
-    log('_load newResponse: $newResponse');
     serverNotificationStreamController.add(
       ServerNotificationData(
         type: SeverNotificationChangedType.loaded,
         data: newResponse,
       ),
     );
-    _serverNotifications = newResponse;
+    currentServerNotifications = newResponse;
   }
 
   void _loadNextPage(
@@ -132,7 +130,6 @@ class NotificationCenterProvider extends NotificationProvider
     );
     final newResponse = await notificationCenterDataSource.loadNotifications(
         nextUrl: serverNotifications.links?.next);
-    log('_loadNextPage: $newResponse');
     final oldData = serverNotifications.data;
     final combinedData = oldData.followedBy(newResponse.data).toList();
     serverNotificationStreamController.add(
@@ -141,6 +138,6 @@ class NotificationCenterProvider extends NotificationProvider
         data: newResponse.copyWith(data: combinedData),
       ),
     );
-    _serverNotifications = newResponse;
+    currentServerNotifications = newResponse;
   }
 }
