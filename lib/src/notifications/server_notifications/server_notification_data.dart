@@ -1,8 +1,8 @@
-import 'server_notification_model.dart';
+import 'package:one_studio_core/core.dart';
 
 class ServerNotificationData {
   final SeverNotificationChangedType type;
-  final List<ServerNotificationModel> data;
+  final ListResponse<ServerNotificationModel> data;
 
   ServerNotificationData({
     required this.type,

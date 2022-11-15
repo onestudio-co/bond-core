@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:one_studio_core/core.dart';
 
 part 'server_notification_model.g.dart';
 
 @JsonSerializable()
-class ServerNotificationModel {
+class ServerNotificationModel extends Model {
   final String uuid;
   @JsonKey(name: 'notifiable_type')
   final String notifiableType;
@@ -38,14 +39,45 @@ class ServerNotificationModel {
     this.readAt,
     required this.authableType,
     required this.authableId,
-  });
+  }) : super(id: -1);
 
-  bool get getIsRead => readAt != null;
+  bool get read => readAt != null;
 
   factory ServerNotificationModel.fromJson(Map<String, dynamic> json) =>
       _$ServerNotificationModelFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$ServerNotificationModelToJson(this);
+
+  ServerNotificationModel copyWith({
+    String? uuid,
+    String? notifiableType,
+    int? notifiableId,
+    String? authableType,
+    int? authableId,
+    String? code,
+    String? body,
+    Map<String, dynamic>? data,
+    String? senderName,
+    String? senderImage,
+    DateTime? readAt,
+    DateTime? createdAt,
+  }) {
+    return ServerNotificationModel(
+      uuid: uuid ?? this.uuid,
+      notifiableType: notifiableType ?? this.notifiableType,
+      notifiableId: notifiableId ?? this.notifiableId,
+      authableType: authableType ?? this.authableType,
+      authableId: authableId ?? this.authableId,
+      code: code ?? this.code,
+      body: body ?? this.body,
+      data: data ?? this.data,
+      senderName: senderName ?? this.senderName,
+      senderImage: senderImage ?? this.senderImage,
+      readAt: readAt ?? this.readAt,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
 
 enum SeverNotificationChangedType { load, read, readAll }

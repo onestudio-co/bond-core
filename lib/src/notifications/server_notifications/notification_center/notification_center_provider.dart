@@ -22,7 +22,8 @@ class NotificationCenterProvider extends NotificationProvider
   @override
   Stream<int> get unreadNotificationsCount =>
       serverNotificationStreamController.stream.map(
-        (event) => event.data.where((element) => element.readAt == null).length,
+        (event) =>
+            event.data.data.where((element) => element.readAt == null).length,
       );
 
   @override
@@ -31,11 +32,20 @@ class NotificationCenterProvider extends NotificationProvider
 
   @override
   void read(ServerNotificationModel notification) async {
-    final notifications = await notificationCenterDataSource.read(notification);
+    await notificationCenterDataSource.read(notification.uuid);
+    final serverNotificationData = await notifications.single;
+    final response = serverNotificationData.data;
+    final data = response.data
+        .map(
+          (element) => element.uuid == notification.uuid
+              ? element.copyWith(readAt: DateTime.now())
+              : element,
+        )
+        .toList();
     serverNotificationStreamController.add(
       ServerNotificationData(
         type: SeverNotificationChangedType.read,
-        data: [notifications],
+        data: response.copyWith(data: data),
       ),
     );
   }
@@ -43,10 +53,15 @@ class NotificationCenterProvider extends NotificationProvider
   @override
   void readAll() async {
     await notificationCenterDataSource.readAll();
+    final serverNotificationData = await notifications.single;
+    final response = serverNotificationData.data;
+    final data = response.data
+        .map((element) => element.copyWith(readAt: DateTime.now()))
+        .toList();
     serverNotificationStreamController.add(
       ServerNotificationData(
         type: SeverNotificationChangedType.readAll,
-        data: [],
+        data: response.copyWith(data: data),
       ),
     );
   }

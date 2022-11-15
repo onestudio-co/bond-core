@@ -1,10 +1,9 @@
-import '../server_notification_model.dart';
+import 'package:one_studio_core/core.dart';
 
 abstract class NotificationCenterDataSource {
-  Future<List<ServerNotificationModel>> loadNotifications();
+  Future<ListResponse<ServerNotificationModel>> loadNotifications();
 
-  Future<ServerNotificationModel> read(
-      ServerNotificationModel serverNotificationModel);
+  Future<void> read(String uuid);
 
   Future<void> readAll();
 }
