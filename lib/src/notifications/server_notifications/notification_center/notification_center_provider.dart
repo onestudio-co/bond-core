@@ -53,7 +53,7 @@ class NotificationCenterProvider extends NotificationProvider
 
   @override
   void onTap(ServerNotificationModel notification) =>
-      onNotificationTapped(notification.toMap());
+      onNotificationTapped(notification.data);
 
   StreamSubscription<NotificationData>? _streamsSubscriptions;
 

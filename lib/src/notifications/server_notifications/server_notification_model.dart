@@ -1,41 +1,51 @@
-class ServerNotificationModel {
-  final String id;
-  final String tile;
-  final String body;
-  final String deepLink;
-  final String code;
-  final DateTime? readAt;
+import 'package:json_annotation/json_annotation.dart';
 
-  ServerNotificationModel({
-    required this.id,
-    required this.tile,
-    required this.body,
-    required this.deepLink,
+part 'server_notification_model.g.dart';
+
+@JsonSerializable()
+class ServerNotificationModel {
+  final String uuid;
+  @JsonKey(name: 'notifiable_type')
+  final String notifiableType;
+  @JsonKey(name: 'notifiable_id')
+  final int notifiableId;
+  @JsonKey(name: 'authable_type')
+  final String authableType;
+  @JsonKey(name: 'authable_id')
+  final int authableId;
+  final String code;
+  final String body;
+  final Map<String, dynamic> data;
+  @JsonKey(name: 'sender_name')
+  final String? senderName;
+  @JsonKey(name: 'sender_image')
+  final String? senderImage;
+  @JsonKey(name: 'read_at')
+  final DateTime? readAt;
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+
+  const ServerNotificationModel({
+    required this.createdAt,
+    required this.uuid,
     required this.code,
-    required this.readAt,
+    required this.body,
+    this.senderName,
+    this.senderImage,
+    required this.notifiableType,
+    required this.notifiableId,
+    required this.data,
+    this.readAt,
+    required this.authableType,
+    required this.authableId,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'tile': tile,
-      'body': body,
-      'deep_link': deepLink,
-      'code': code,
-      'read_at': readAt,
-    };
-  }
+  bool get getIsRead => readAt != null;
 
-  factory ServerNotificationModel.fromMap(Map<String, dynamic> map) {
-    return ServerNotificationModel(
-      id: map['id'] as String,
-      tile: map['tile'] as String,
-      body: map['body'] as String,
-      deepLink: map['deep_link'] as String,
-      code: map['code'] as String,
-      readAt: map['read_at'] as DateTime,
-    );
-  }
+  factory ServerNotificationModel.fromJson(Map<String, dynamic> json) =>
+      _$ServerNotificationModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ServerNotificationModelToJson(this);
 }
 
 enum SeverNotificationChangedType { load, read, readAll }
