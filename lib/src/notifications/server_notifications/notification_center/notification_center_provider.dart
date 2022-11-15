@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:one_studio_core/src/network/models.dart';
 import 'package:one_studio_core/src/notifications/notifications_core.dart';
 import 'package:one_studio_core/src/notifications/push_notifications.dart';
 import 'package:one_studio_core/src/notifications/server_notifications.dart';
@@ -29,12 +28,12 @@ class NotificationCenterProvider extends NotificationProvider
   Stream<ServerNotificationData> get notifications =>
       serverNotificationStreamController.stream;
 
-  ListResponse<ServerNotificationModel>? currentServerNotifications;
+  ServerNotificationData? currentServerNotificationData;
 
   @override
   void load() async {
-    if (currentServerNotifications != null) {
-      _loadNextPage(currentServerNotifications!);
+    if (currentServerNotificationData != null) {
+      _loadNextPage(currentServerNotificationData!);
     } else {
       _load();
     }
@@ -42,9 +41,9 @@ class NotificationCenterProvider extends NotificationProvider
 
   @override
   void read(ServerNotificationModel notification) async {
-    if (currentServerNotifications == null) return;
+    if (currentServerNotificationData == null) return;
     await notificationCenterDataSource.read(notification.uuid);
-    final oldResponse = currentServerNotifications!;
+    final oldResponse = currentServerNotificationData!.data;
     final newData = oldResponse.data
         .map(
           (element) => element.uuid == notification.uuid
@@ -53,31 +52,29 @@ class NotificationCenterProvider extends NotificationProvider
         )
         .toList();
     final newResponse = oldResponse.copyWith(data: newData);
-    serverNotificationStreamController.add(
-      ServerNotificationData(
-        type: SeverNotificationChangedType.loaded,
-        data: newResponse,
-      ),
+    final newServerNotificationData = ServerNotificationData(
+      type: SeverNotificationChangedType.loaded,
+      data: newResponse,
     );
-    currentServerNotifications = newResponse;
+    serverNotificationStreamController.add(newServerNotificationData);
+    currentServerNotificationData = newServerNotificationData;
   }
 
   @override
   void readAll() async {
-    if (currentServerNotifications == null) return;
+    if (currentServerNotificationData == null) return;
     await notificationCenterDataSource.readAll();
-    final oldResponse = currentServerNotifications!;
+    final oldResponse = currentServerNotificationData!.data;
     final newData = oldResponse.data
         .map((element) => element.copyWith(readAt: DateTime.now()))
         .toList();
     final newResponse = oldResponse.copyWith(data: newData);
-    serverNotificationStreamController.add(
-      ServerNotificationData(
-        type: SeverNotificationChangedType.loaded,
-        data: newResponse,
-      ),
+    final newServerNotificationData = ServerNotificationData(
+      type: SeverNotificationChangedType.loaded,
+      data: newResponse,
     );
-    currentServerNotifications = newResponse;
+    serverNotificationStreamController.add(newServerNotificationData);
+    currentServerNotificationData = newServerNotificationData;
   }
 
   @override
@@ -111,33 +108,30 @@ class NotificationCenterProvider extends NotificationProvider
 
   void _load() async {
     final newResponse = await notificationCenterDataSource.loadNotifications();
-    serverNotificationStreamController.add(
-      ServerNotificationData(
-        type: SeverNotificationChangedType.loaded,
-        data: newResponse,
-      ),
+    final newServerNotificationData = ServerNotificationData(
+      type: SeverNotificationChangedType.loaded,
+      data: newResponse,
     );
-    currentServerNotifications = newResponse;
+    serverNotificationStreamController.add(newServerNotificationData);
+    currentServerNotificationData = newServerNotificationData;
   }
 
-  void _loadNextPage(
-      ListResponse<ServerNotificationModel> serverNotifications) async {
+  void _loadNextPage(ServerNotificationData serverNotifications) async {
     serverNotificationStreamController.add(
       ServerNotificationData(
         type: SeverNotificationChangedType.loadingNextPage,
-        data: serverNotifications,
+        data: serverNotifications.data,
       ),
     );
     final newResponse = await notificationCenterDataSource.loadNotifications(
-        nextUrl: serverNotifications.links?.next);
-    final oldData = serverNotifications.data;
+        nextUrl: serverNotifications.data.links?.next);
+    final oldData = serverNotifications.data.data;
     final combinedData = oldData.followedBy(newResponse.data).toList();
-    serverNotificationStreamController.add(
-      ServerNotificationData(
-        type: SeverNotificationChangedType.loaded,
-        data: newResponse.copyWith(data: combinedData),
-      ),
+    final newServerNotificationData = ServerNotificationData(
+      type: SeverNotificationChangedType.loaded,
+      data: newResponse.copyWith(data: combinedData),
     );
-    currentServerNotifications = newResponse;
+    serverNotificationStreamController.add(newServerNotificationData);
+    currentServerNotificationData = newServerNotificationData;
   }
 }
