@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-void run(Widget app, RunTasks tasks) {
+void run(Widget Function() app, RunTasks tasks) {
   runZonedGuarded<Future<void>>(
     () async {
       final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
       await tasks.beforeRun(widgetsBinding);
 
-      runApp(app);
+      runApp(app());
 
       await tasks.afterRun();
     },
