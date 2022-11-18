@@ -1,17 +1,26 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 void run(Widget app, RunTasks tasks) {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded<Future<void>>(
+    () async {
+      final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-  tasks.beforeRun(widgetsBinding);
+      tasks.beforeRun(widgetsBinding);
 
-  runApp(app);
+      runApp(app);
 
-  tasks.afterRun();
+      tasks.afterRun();
+    },
+    tasks.onError,
+  );
 }
 
 abstract class RunTasks {
   void beforeRun(WidgetsBinding widgetsBinding);
 
   void afterRun();
+
+  void onError(Object error, StackTrace stack);
 }
