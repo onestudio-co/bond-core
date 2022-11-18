@@ -7,20 +7,20 @@ void run(Widget app, RunTasks tasks) {
     () async {
       final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
-      tasks.beforeRun(widgetsBinding);
+      await tasks.beforeRun(widgetsBinding);
 
       runApp(app);
 
-      tasks.afterRun();
+      await tasks.afterRun();
     },
     tasks.onError,
   );
 }
 
 abstract class RunTasks {
-  void beforeRun(WidgetsBinding widgetsBinding);
+  Future<void> beforeRun(WidgetsBinding widgetsBinding);
 
-  void afterRun();
+  Future<void> afterRun();
 
   void onError(Object error, StackTrace stack);
 }
