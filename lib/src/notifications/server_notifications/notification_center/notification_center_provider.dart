@@ -31,8 +31,8 @@ class NotificationCenterProvider extends NotificationProvider
   ServerNotificationData? currentServerNotificationData;
 
   @override
-  void load() async {
-    if (currentServerNotificationData != null) {
+  void load({bool reset = false}) async {
+    if (currentServerNotificationData != null && !reset) {
       _loadNextPage(currentServerNotificationData!);
     } else {
       _load();
