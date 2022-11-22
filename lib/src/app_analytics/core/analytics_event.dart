@@ -24,4 +24,5 @@ enum SystemEvents {
   madePurchase,
   refundOrder,
   unknown,
+  deleteAccount,
 }

@@ -17,3 +17,4 @@ export 'system_events/user_update_profile.dart';
 export 'system_events/user_view_item.dart';
 export 'system_events/user_view_item_list.dart';
 export 'system_events/user_view_promotion.dart';
+export 'system_events/user_delete_account.dart';

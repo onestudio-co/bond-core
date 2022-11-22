@@ -66,6 +66,9 @@ abstract class AnalyticsProvider {
       case SystemEvents.unknown:
         logEvent(event);
         break;
+      case SystemEvents.deleteAccount:
+        logDeleteAccount(event as UserDeleteAccount);
+        break;
     }
   }
 
@@ -139,5 +142,9 @@ abstract class AnalyticsProvider {
 
   void logRefundOrder(UserRefundOrder event) {
     throw UnimplementedError('Refund Order not implemented');
+  }
+
+  void logDeleteAccount(UserDeleteAccount event) {
+    throw UnimplementedError('Delete Account not implemented');
   }
 }
