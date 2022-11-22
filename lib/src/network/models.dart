@@ -1,6 +1,7 @@
 library models;
 
 export 'models/jsonable.dart';
+export 'models/links.dart';
 export 'models/list_response.dart';
 export 'models/meta.dart';
 export 'models/model.dart';
