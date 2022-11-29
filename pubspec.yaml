@@ -8,17 +8,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^4.0.4
-  equatable: ^2.0.3
-  json_annotation: ^4.4.0
+  dio: ^4.0.6
+  equatable: ^2.0.5
+  json_annotation: ^4.7.0
+  json_serializable: ^6.5.4
   device_info: ^2.0.3
-  get_it: ^7.2.0
   flutter_screenutil: ^5.5.3+2
-  shared_preferences: ^2.0.13
+  get_it: ^7.2.0
+  shared_preferences: ^2.0.15
   package_info_plus: ^3.0.2
   faker: ^2.0.0
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
-  build_runner: ^2.1.7
-  json_serializable: ^6.1.4
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.2
