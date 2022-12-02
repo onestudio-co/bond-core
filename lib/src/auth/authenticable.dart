@@ -8,4 +8,6 @@ mixin Authenticable {
   String? get phone;
 
   DateTime? get verificationAt;
+
+  Type get type => Authenticable;
 }
