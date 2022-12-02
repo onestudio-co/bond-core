@@ -16,6 +16,7 @@ class ServerNotificationModel extends Model {
   final int? authableId;
   final String code;
   final String body;
+  @JsonKey(defaultValue: {})
   final Map<String, dynamic> data;
   @JsonKey(name: 'sender_name')
   final String? senderName;

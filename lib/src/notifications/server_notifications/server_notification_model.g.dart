@@ -17,7 +17,7 @@ ServerNotificationModel _$ServerNotificationModelFromJson(
       senderImage: json['sender_image'] as String?,
       notifiableType: json['notifiable_type'] as String,
       notifiableId: json['notifiable_id'] as int,
-      data: json['data'] as Map<String, dynamic>,
+      data: json['data'] as Map<String, dynamic>? ?? {},
       readAt: json['read_at'] == null
           ? null
           : DateTime.parse(json['read_at'] as String),
