@@ -1,7 +1,7 @@
 import '../core/notification_data.dart';
 
 abstract class PushNotification {
-  String get code;
+  List<String> get code;
 
   void onNotification(NotificationData data);
 }
