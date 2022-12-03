@@ -13,7 +13,7 @@ mixin PushNotificationServiceProviderMixin on ServiceProvider {
     log('try to handlePushNotification: $data');
     final String? code = data['code'] ?? data['item_type'];
     for (final pushNotification in pushNotifications) {
-      if (pushNotification.code == code) {
+      if (pushNotification.code.contains(code)) {
         pushNotification.onNotification(data);
       }
     }
@@ -25,7 +25,7 @@ mixin PushNotificationServiceProviderMixin on ServiceProvider {
     final actionablePushNotifications =
         pushNotifications.whereType<ActionablePushNotification>();
     for (final pushNotification in actionablePushNotifications) {
-      if (pushNotification.code == code) {
+      if (pushNotification.code.contains(code)) {
         pushNotification.onNotificationTapped(data);
       }
     }
