@@ -73,6 +73,8 @@ abstract class AnalyticsProvider {
 
   void setUserId(int userId);
 
+  void setUserAttributes(Map<String, dynamic> attributes);
+
   void setCurrentScreen(String screenName) {
     throw UnimplementedError('Set current screen not implemented');
   }
