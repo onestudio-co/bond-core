@@ -76,39 +76,72 @@ abstract class AnalyticsProvider {
 
   void setUserId(int userId);
 
-  void setCurrentScreen(String screenName) {}
+  void setCurrentScreen(String screenName) {
+    throw UnimplementedError('Set current screen not implemented');
+  }
 
-  void logBeginTutorial() {}
+  void logBeginTutorial() {
+    throw UnimplementedError('Begin tutorial not implemented');
+  }
 
-  void logCompleteTutorial() {}
+  void logCompleteTutorial() {
+    throw UnimplementedError('Complete tutorial not implemented');
+  }
 
-  void logSignedUp(UserSignedUp event) {}
+  void logSignedUp(UserSignedUp event) {
+    throw UnimplementedError('Signed up not implemented');
+  }
 
-  void logSignedIn(UserSignedIn event) {}
+  void logSignedIn(UserSignedIn event) {
+    throw UnimplementedError('Signed in not implemented');
+  }
 
-  void logSignedOut(UserSignedOut event) {}
+  void logSignedOut(UserSignedOut event) {
+    throw UnimplementedError('Signed out not implemented');
+  }
 
-  void updateProfile(UserUpdateProfile event) {}
+  void updateProfile(UserUpdateProfile event) {
+    throw UnimplementedError('Update profile not implemented');
+  }
 
-  void logViewItemList(UserViewedItemList event) {}
+  void logViewItemList(UserViewedItemList event) {
+    throw UnimplementedError('View item list not implemented');
+  }
 
-  void logViewItem(UserViewItem event) {}
+  void logViewItem(UserViewItem event) {
+    throw UnimplementedError('View item not implemented');
+  }
 
-  void logSelectItem(UserSelectItem event) {}
+  void logSelectItem(UserSelectItem event) {
+    throw UnimplementedError('Select item not implemented');
+  }
 
-  void logViewPromotion(UserViewPromotion event) {}
+  void logViewPromotion(UserViewPromotion event) {
+    throw UnimplementedError('View promotion not implemented');
+  }
 
-  void logSelectPromotion(UserSelectPromotion event) {}
+  void logSelectPromotion(UserSelectPromotion event) {
+    throw UnimplementedError('Select promotion not implemented');
+  }
 
-  void logAddToCart(UserAddedToCart event) {}
+  void logAddToCart(UserAddedToCart event) {
+    throw UnimplementedError('Add to cart not implemented');
+  }
 
-  void logRemoveFromCart(UserRemovedFromCart event) {}
+  void logRemoveFromCart(UserRemovedFromCart event) {
+    throw UnimplementedError('Remove from cart not implemented');
+  }
 
-  void logBeginCheckout(UserBeginCheckout event) {}
+  void logBeginCheckout(UserBeginCheckout event) {
+    throw UnimplementedError('Begin checkout not implemented');
+  }
 
-  void logMadePurchase(UserMadePurchase event) {}
+  void logMadePurchase(UserMadePurchase event) {
+    throw UnimplementedError('Made purchase not implemented');
+  }
 
-  void logRefundOrder(UserRefundOrder event) {}
+  void logRefundOrder(UserRefundOrder event) {
+  }
 
   void logShareContent(UserShareContent event) {}
 }
