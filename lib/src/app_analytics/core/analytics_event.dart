@@ -24,5 +24,6 @@ enum SystemEvents {
   madePurchase,
   refundOrder,
   shareContent,
+  search,
   unknown,
 }

@@ -8,6 +8,7 @@ export 'system_events/user_complete_tutorial.dart';
 export 'system_events/user_made_purchase.dart';
 export 'system_events/user_refund_order.dart';
 export 'system_events/user_remove_from_cart.dart';
+export 'system_events/user_search.dart';
 export 'system_events/user_select_item.dart';
 export 'system_events/user_select_promotion.dart';
 export 'system_events/user_share_content.dart';
