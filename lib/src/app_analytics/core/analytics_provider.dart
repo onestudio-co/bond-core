@@ -63,6 +63,9 @@ abstract class AnalyticsProvider {
       case SystemEvents.refundOrder:
         logRefundOrder(event as UserRefundOrder);
         break;
+      case SystemEvents.shareContent:
+        logShareContent(event as UserShareContent);
+        break;
       case SystemEvents.unknown:
         logEvent(event);
         break;
@@ -138,6 +141,7 @@ abstract class AnalyticsProvider {
   }
 
   void logRefundOrder(UserRefundOrder event) {
-    throw UnimplementedError('Refund Order not implemented');
   }
+
+  void logShareContent(UserShareContent event) {}
 }

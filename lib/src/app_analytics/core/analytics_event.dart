@@ -23,5 +23,6 @@ enum SystemEvents {
   beginCheckout,
   madePurchase,
   refundOrder,
+  shareContent,
   unknown,
 }
