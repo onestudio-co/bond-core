@@ -66,6 +66,9 @@ abstract class AnalyticsProvider {
       case SystemEvents.shareContent:
         logShareContent(event as UserShareContent);
         break;
+      case SystemEvents.search:
+        logSearch(event as UserSearch);
+        break;
       case SystemEvents.unknown:
         logEvent(event);
         break;
@@ -141,7 +144,14 @@ abstract class AnalyticsProvider {
   }
 
   void logRefundOrder(UserRefundOrder event) {
+    throw UnimplementedError('Refund order not implemented');
   }
 
-  void logShareContent(UserShareContent event) {}
+  void logShareContent(UserShareContent event) {
+    throw UnimplementedError('Share not implemented');
+  }
+
+  void logSearch(UserSearch event) {
+    throw UnimplementedError('Search not implemented');
+  }
 }
