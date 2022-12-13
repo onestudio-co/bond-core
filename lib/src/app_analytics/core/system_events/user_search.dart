@@ -1,3 +1,3 @@
 mixin UserSearch {
-  String get keyword;
+  String get searchTerm;
 }

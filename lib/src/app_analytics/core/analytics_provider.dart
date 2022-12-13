@@ -69,6 +69,9 @@ abstract class AnalyticsProvider {
       case SystemEvents.search:
         logSearch(event as UserSearch);
         break;
+      case SystemEvents.viewSearchResults:
+        logViewSearchResults(event as UserViewSearchResult);
+        break;
       case SystemEvents.unknown:
         logEvent(event);
         break;
@@ -153,5 +156,9 @@ abstract class AnalyticsProvider {
 
   void logSearch(UserSearch event) {
     throw UnimplementedError('Search not implemented');
+  }
+
+  void logViewSearchResults(UserViewSearchResult event) {
+    throw UnimplementedError('View search results not implemented');
   }
 }
