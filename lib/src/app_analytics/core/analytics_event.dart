@@ -23,5 +23,8 @@ enum SystemEvents {
   beginCheckout,
   madePurchase,
   refundOrder,
+  shareContent,
+  search,
+  viewSearchResults,
   unknown,
 }
