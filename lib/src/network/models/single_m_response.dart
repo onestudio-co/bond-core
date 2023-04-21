@@ -23,3 +23,4 @@ class SingleMResponse<T extends Model, G extends Jsonable> extends Equatable {
   @override
   List<Object?> get props => [data, meta];
 }
+

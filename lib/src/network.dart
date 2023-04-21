@@ -6,3 +6,4 @@ export 'network/data_source.dart';
 export 'network/errors.dart';
 export 'network/factories.dart';
 export 'network/models.dart';
+export 'network/bond_fire.dart';
