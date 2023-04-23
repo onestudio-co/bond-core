@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:one_studio_core/src/cache.dart';
-
-part 'get_bond_api_request.dart';
+import 'package:one_studio_core/src/network/models/jsonable.dart';
 
 part 'cache_policy.dart';
+
+part 'get_bond_api_request.dart';
 
 /// BondApiRequest allows you to configure an API request
 /// by chaining methods for headers, query parameters, body, etc.
@@ -21,6 +22,7 @@ class BaseBondApiRequest<T> {
   Map<String, dynamic> _body = <String, dynamic>{};
   Factory<T>? _factory;
   ErrorFactory? _errorFactory;
+  final Map<String, String> _customCacheKeys = {};
 
   BaseBondApiRequest(
     this._dio,
@@ -54,6 +56,11 @@ class BaseBondApiRequest<T> {
     return this;
   }
 
+  BaseBondApiRequest<T> cacheCustomKey(String key, {required String path}) {
+    _customCacheKeys[key] = path;
+    return this;
+  }
+
   Future<T> execute() async {
     // Perform the request using _dio and handle the response
     // Convert the response JSON to the desired model using the provided factory method, error handler, etc.
@@ -67,6 +74,7 @@ class BaseBondApiRequest<T> {
           headers: _headers,
         ),
       );
+      await _cacheCustomKeys(response.data);
       if (_factory != null) {
         return _factory!(response.data);
       } else {
@@ -80,5 +88,27 @@ class BaseBondApiRequest<T> {
     } catch (error) {
       rethrow;
     }
+  }
+
+  Future<void> _cacheCustomKeys(Map<String, dynamic> result) async {
+    for (final customKey in _customCacheKeys.entries) {
+      final value = _getNestedValue(result, customKey.value);
+      if (value != null) {
+        await Cache.put(customKey.key, value);
+      }
+    }
+  }
+
+  dynamic _getNestedValue(Map<String, dynamic> map, String key) {
+    final keys = key.split('.');
+    dynamic value = map;
+    for (final k in keys) {
+      if (value is Map<String, dynamic> && value.containsKey(k)) {
+        value = value[k];
+      } else {
+        return null;
+      }
+    }
+    return value;
   }
 }

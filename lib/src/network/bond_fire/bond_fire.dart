@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:one_studio_core/src/injection.dart';
+import 'package:one_studio_core/src/network/models/jsonable.dart';
 
 import 'base_bond_api_request.dart';
 
@@ -13,7 +14,8 @@ class BondFire {
 
   BondFire._() : _dio = sl<Dio>();
 
-  GetBondApiRequest<T> get<T>(String path) => GetBondApiRequest<T>(_dio, path);
+  GetBondApiRequest<T> get<T extends Jsonable>(String path) =>
+      GetBondApiRequest<T>(_dio, path);
 
   BaseBondApiRequest<T> post<T>(String path) =>
       BaseBondApiRequest<T>(_dio, path, method: 'POST');

@@ -10,7 +10,7 @@ class ServerError extends Error {
   });
 
   final String message;
-  final int code;
+  final String code;
 
   factory ServerError.fromJson(Map<String, dynamic> json) =>
       _$ServerErrorFromJson(json);

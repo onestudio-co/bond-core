@@ -1,6 +1,6 @@
 part of 'base_bond_api_request.dart';
 
-class GetBondApiRequest<T> extends BaseBondApiRequest<T> {
+class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
   Duration? _cacheDuration;
   String? _cacheKey;
   CachePolicy _cachePolicy = CachePolicy.networkOnly;
@@ -16,7 +16,7 @@ class GetBondApiRequest<T> extends BaseBondApiRequest<T> {
     CachePolicy? cachePolicy,
   }) {
     _cacheDuration = duration ?? _cacheDuration;
-    _cacheKey = cacheKey ?? _cacheKey;
+    _cacheKey = cacheKey ?? _path;
     _cachePolicy = cachePolicy ?? _cachePolicy;
     return this;
   }
@@ -24,11 +24,7 @@ class GetBondApiRequest<T> extends BaseBondApiRequest<T> {
   // Override the execute method for GET requests and implement caching
   @override
   Future<T> execute() async {
-    assert(
-      _cachePolicy != CachePolicy.cacheThenNetwork,
-      'use streamExecute instead',
-    );
-    if (_cacheDuration != null && _cacheKey != null) {
+    if (_cacheKey != null) {
       final bool hasCache = await Cache.has(_cacheKey!);
       switch (_cachePolicy) {
         case CachePolicy.cacheElseNetwork:
@@ -47,11 +43,11 @@ class GetBondApiRequest<T> extends BaseBondApiRequest<T> {
             rethrow;
           }
         case CachePolicy.networkOnly:
-        default:
+        case CachePolicy.cacheThenNetwork:
           return await _executeAndCache();
       }
     } else {
-      return await super.execute();
+      return super.execute();
     }
   }
 

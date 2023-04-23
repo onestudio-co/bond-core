@@ -1,8 +1,7 @@
 import 'dart:convert';
 
+import 'package:one_studio_core/core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'cache_driver.dart';
 
 class SharedPreferencesCacheDriver implements CacheDriver {
   final SharedPreferences _sharedPreferences;
@@ -35,6 +34,11 @@ class SharedPreferencesCacheDriver implements CacheDriver {
       data: value,
       expiredAt: expiredAfter == null ? null : DateTime.now().add(expiredAfter),
     );
+    if (value is Jsonable) {
+      value = jsonEncode(value.toJson());
+    } else if (value is List<Jsonable>) {
+      value = jsonEncode(value.map((e) => e.toJson()).toList());
+    }
     final String stringCache = jsonEncode(cache.toJson());
     return _sharedPreferences.setString(key, stringCache);
   }
