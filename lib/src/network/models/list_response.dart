@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'jsonable.dart';
 import 'links.dart';
 import 'meta.dart';
 import 'model.dart';
@@ -11,7 +10,7 @@ import 'response_converter.dart';
 part 'list_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class ListResponse<T extends Model> extends Equatable {
+class ListResponse<T extends Model> extends Equatable with Jsonable {
   const ListResponse({
     required this.data,
     this.links,
@@ -26,9 +25,8 @@ class ListResponse<T extends Model> extends Equatable {
   factory ListResponse.fromJson(Map<String, dynamic> json) =>
       _$ListResponseFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$ListResponseToJson(this);
-
-  String toJsonString() => json.encode(toJson());
 
   ListResponse<T> copyWith({
     List<T>? data,
