@@ -24,11 +24,11 @@ class BaseBondApiRequest<T> {
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
 
-  BaseBondApiRequest(
-    this._dio,
-    String path, {
-    required String method,
-  })  : _path = path,
+  BaseBondApiRequest(this._dio,
+      String path, {
+        required String method,
+      })
+      : _path = path,
         _method = method;
 
   BaseBondApiRequest<T> header(Map<String, String> headers) {
@@ -74,7 +74,9 @@ class BaseBondApiRequest<T> {
           headers: _headers,
         ),
       );
-      await _cacheCustomKeys(response.data);
+      if (_customCacheKeys.entries.isNotEmpty) {
+        await _cacheCustomKeys(response.data);
+      }
       if (_factory != null) {
         return _factory!(response.data);
       } else {

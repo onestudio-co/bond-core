@@ -21,6 +21,12 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
     return this;
   }
 
+  @override
+  GetBondApiRequest<T> cacheCustomKey(String key, {required String path}) {
+    _customCacheKeys[key] = path;
+    return this;
+  }
+
   // Override the execute method for GET requests and implement caching
   @override
   Future<T> execute() async {
