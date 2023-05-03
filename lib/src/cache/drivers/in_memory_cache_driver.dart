@@ -14,7 +14,7 @@ class InMemoryCacheDriver implements CacheDriver {
   }
 
   @override
-  CacheDriverReturnType get(String key,
+  CacheDriverReturnType<T> get<T>(String key,
       {defaultValue, FromJsonFactory? factory}) {
     // TODO: implement get
     throw UnimplementedError();

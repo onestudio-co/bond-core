@@ -5,9 +5,9 @@ import 'drivers/cache_driver.dart';
 class Cache {
   static CacheDriver cacheDriver = sl<CacheDriver>();
 
-  static CacheDriverReturnType get(String key,
-          {dynamic defaultValue, FromJsonFactory? fromJsonFactory}) =>
-      cacheDriver.get(key,
+  static CacheDriverReturnType<T> get<T>(String key,
+          {dynamic defaultValue, FromJsonFactory<T>? fromJsonFactory}) =>
+      cacheDriver.get<T>(key,
           defaultValue: defaultValue, factory: fromJsonFactory);
 
   static Future<bool> has(String key) => cacheDriver.has(key);

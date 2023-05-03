@@ -7,7 +7,7 @@ import 'response_converter.dart';
 part 'single_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class SingleResponse<T extends Model> extends Equatable {
+class SingleResponse<T extends Model> extends Equatable with Jsonable {
   const SingleResponse({required this.data, this.meta});
 
   @ResponseConverter()
@@ -18,6 +18,7 @@ class SingleResponse<T extends Model> extends Equatable {
   factory SingleResponse.fromJson(Map<String, dynamic> json) =>
       _$SingleResponseFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$SingleResponseToJson(this);
 
   @override
