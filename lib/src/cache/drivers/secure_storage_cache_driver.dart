@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:one_studio_core/core.dart';
@@ -13,7 +14,8 @@ class SecureStorageCacheDriver implements CacheDriver {
     try {
       await _flutterSecureStorage.deleteAll();
       return true;
-    } catch (e) {
+    } catch (error , stack) {
+      log('flush error: $error , stackTrace : $stack' );
       return false;
     }
   }
@@ -23,7 +25,8 @@ class SecureStorageCacheDriver implements CacheDriver {
     try {
       await _flutterSecureStorage.delete(key: key);
       return true;
-    } catch (e) {
+    } catch (error , stack) {
+      log('forget error: $error , stackTrace : $stack' );
       return false;
     }
   }
@@ -60,7 +63,8 @@ class SecureStorageCacheDriver implements CacheDriver {
     try {
       await _flutterSecureStorage.write(key: key, value: stringCache);
       return true;
-    } catch (e) {
+    } catch (error , stack) {
+      log('put error: $error , stackTrace : $stack' );
       return false;
     }
   }
