@@ -1,5 +1,5 @@
 # one-studio-core
-Flutter package which contain the core file for one studio apps.
+Bond Core is a foundational library for the Flutter Bond framework, designed to streamline the development process in Flutter. It offers robust solutions for state management, authentication, theming, service provider registration, and caching, with built-in integrations for analytics and notifications. It is aimed at enhancing productivity and efficiency by providing a unified and simplified API for common Flutter tasks. Its modular and scalable design makes it suitable for projects of any size.
 
 ## Getting Started
 
