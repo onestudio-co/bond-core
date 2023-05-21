@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'jsonable.dart';
 import 'meta.dart';
 
 part 'success_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class SuccessResponse extends Equatable {
+class SuccessResponse extends Equatable with Jsonable {
   const SuccessResponse({required this.message, this.meta});
 
   final String message;
@@ -15,6 +16,7 @@ class SuccessResponse extends Equatable {
   factory SuccessResponse.fromJson(Map<String, dynamic> json) =>
       _$SuccessResponseFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$SuccessResponseToJson(this);
 
   @override
