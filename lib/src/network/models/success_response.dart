@@ -10,7 +10,7 @@ part 'success_response.g.dart';
 class SuccessResponse extends Equatable with Jsonable {
   const SuccessResponse({required this.message, this.meta});
 
-  final String message;
+  final String? message;
   final Meta? meta;
 
   factory SuccessResponse.fromJson(Map<String, dynamic> json) =>

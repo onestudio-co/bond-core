@@ -8,7 +8,7 @@ part of 'success_response.dart';
 
 SuccessResponse _$SuccessResponseFromJson(Map<String, dynamic> json) =>
     SuccessResponse(
-      message: json['message'] as String,
+      message: json['message'] as String?,
       meta: json['meta'] == null
           ? null
           : Meta.fromJson(json['meta'] as Map<String, dynamic>),

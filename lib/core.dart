@@ -1,6 +1,5 @@
 library one_studio_core;
 
-import 'package:flutter/material.dart' as material;
 import 'package:one_studio_core/src/form/form_state.dart';
 
 import 'src/form/form_fields/checkbox_field_state.dart';
