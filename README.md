@@ -11,7 +11,7 @@ dependencies:
     sdk:
   bond_core:
     git:
-      url: https://github.com/onestudio-co/one-studio-core.git
+      url: https://github.com/onestudio-co/bond-core.git
       ref: main
 ```
 
