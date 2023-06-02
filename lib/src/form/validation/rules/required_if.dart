@@ -1,5 +1,5 @@
-import 'package:one_studio_core/src/form/form_fields/form_field_state.dart';
-import 'package:one_studio_core/src/form/validation/validation_rule.dart';
+import 'package:bond_core/src/form/form_fields/form_field_state.dart';
+import 'package:bond_core/src/form/validation/validation_rule.dart';
 
 class RequiredIf extends ValidationRule<String> {
   final String? otherFieldName;

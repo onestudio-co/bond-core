@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:one_studio_core/src/injection/injection_container.dart';
+import 'package:bond_core/src/injection/injection_container.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class Api {

@@ -9,7 +9,7 @@ In the `pubspec.yaml` of your flutter project, add the following dependency:
 dependencies:
   flutter:
     sdk:
-  one_studio_core:
+  bond_core:
     git:
       url: https://github.com/onestudio-co/one-studio-core.git
       ref: main
@@ -18,7 +18,7 @@ dependencies:
 In your library add the following import:
 
 ```dart
-import 'package:one_studio_core/core.dart';
+import 'package:bond_core/core.dart';
 ```
 
 ## Usage

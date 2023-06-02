@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:one_studio_core/src/auth/authenticable.dart';
+import 'package:bond_core/src/auth/authenticable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthStore<User extends Authenticable> {

@@ -1,6 +1,8 @@
-library one_studio_core;
+library bond_core;
 
-import 'package:one_studio_core/src/form/form_state.dart';
+import 'dart:developer';
+
+import 'package:bond_core/src/form/form_state.dart';
 
 import 'src/form/form_fields/checkbox_field_state.dart';
 import 'src/form/form_fields/text_field_state.dart';
@@ -49,14 +51,5 @@ void main() {
     },
   );
 
-  // final text = material.TextFormField(
-  //   onChanged: formState.get('name').update,
-  //   // validator: (value) => formState.validate(name: 'email', value: value),
-  //   validator: formState.get('name').validate,
-  //   decoration: material.InputDecoration(
-  //     labelText: formState.get('email').state.label,
-  //     errorText: formState.get('email').state.error,
-  //   ),
-  // );
+  log('formState = $formState');
 }
-

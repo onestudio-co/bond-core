@@ -1,4 +1,4 @@
-import 'package:one_studio_core/src/injection.dart';
+import 'package:bond_core/src/injection.dart';
 
 import '../notifications_core.dart';
 import 'push_notification.dart';

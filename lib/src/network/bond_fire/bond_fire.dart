@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:one_studio_core/src/injection.dart';
-import 'package:one_studio_core/src/network/models/jsonable.dart';
+import 'package:bond_core/src/injection.dart';
+import 'package:bond_core/src/network/models/jsonable.dart';
 
 import 'base_bond_api_request.dart';
 

@@ -1,4 +1,4 @@
-import 'package:one_studio_core/src/form/validation/validation_rule.dart';
+import 'package:bond_core/src/form/validation/validation_rule.dart';
 
 import 'form_field_state.dart';
 

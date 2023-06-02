@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:one_studio_core/src/injection.dart';
+import 'package:bond_core/src/injection.dart';
 
 import 'jsonable.dart';
 

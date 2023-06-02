@@ -51,12 +51,12 @@ abstract class FormStateNotifier extends Notifier<FormState> {
 
   bool validateAll() {
     bool allValid = true;
-    _fields.keys.forEach((fieldName) {
-      var error = validate(fieldName);
+    for (final fieldName in _fields.keys) {
+      final error = validate(fieldName);
       if (error != null) {
         allValid = false;
       }
-    });
+    }
     return allValid;
   }
 

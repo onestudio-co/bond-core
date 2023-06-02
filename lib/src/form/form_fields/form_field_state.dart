@@ -1,5 +1,5 @@
-import 'package:meta/meta.dart';
-import 'package:one_studio_core/src/form/validation/validation_rule.dart';
+import 'package:meta/meta.dart' show nonVirtual;
+import 'package:bond_core/src/form/validation/validation_rule.dart';
 
 abstract class FormFieldState<T> {
   T value;

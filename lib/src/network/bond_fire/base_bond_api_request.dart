@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:one_studio_core/src/cache.dart';
-import 'package:one_studio_core/src/network/models/jsonable.dart';
+import 'package:bond_core/src/cache.dart';
+import 'package:bond_core/src/network/models/jsonable.dart';
 
 part 'cache_policy.dart';
 
