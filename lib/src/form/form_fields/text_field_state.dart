@@ -7,10 +7,13 @@ class TextFieldState extends FormFieldState<String?> {
     String? value, {
     required String label,
     List<ValidationRule<String?>> rules = const [],
-  }) : super(value: value, label: label, rules: rules);
-
-  @override
-  void update(String? newValue) {
-    value = newValue;
-  }
+    bool validateOnUpdate = true,
+    bool touched = false,
+  }) : super(
+          value: value,
+          label: label,
+          rules: rules,
+          validateOnUpdate: validateOnUpdate,
+          touched: touched,
+        );
 }

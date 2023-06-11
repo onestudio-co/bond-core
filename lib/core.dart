@@ -1,6 +1,5 @@
 library bond_core;
 
-import 'dart:developer';
 
 import 'package:bond_core/src/form/form_state.dart';
 
@@ -18,38 +17,57 @@ export 'src/network.dart';
 export 'src/notifications.dart';
 export 'src/utils.dart';
 
-void main() {
-  final formState = FormState(
-    fields: {
-      'email': TextFieldState(
-        null,
-        label: 'Email',
-        rules: [
-          Required(),
-          Email(),
-        ],
-      ),
-      'name': TextFieldState(
-        null,
-        label: 'Name',
-        rules: [
-          Required(),
-        ],
-      ),
-      'password': TextFieldState(
-        null,
-        label: 'Password',
-      ),
-      'passwordConfirmation': TextFieldState(
-        null,
-        label: 'Password Confirmation',
-      ),
-      'privacyPolicy': CheckboxFieldState(
-        false,
-        label: 'Accept Privacy Policy',
-      ),
-    },
-  );
+import 'package:flutter/material.dart' as material;
 
-  log('formState = $formState');
+class LoginFormStateNotifier extends FormStateNotifier {
+  LoginFormStateNotifier()
+      : super(
+          stopOnFirstError: true,
+          fields: {
+            'email': TextFieldState(
+              null,
+              label: 'Email',
+              rules: [
+                Required(),
+                Email(),
+              ],
+            ),
+            'name': TextFieldState(
+              null,
+              label: 'Name',
+              rules: [
+                Required(),
+              ],
+            ),
+            'password': TextFieldState(
+              null,
+              label: 'Password',
+            ),
+            'passwordConfirmation': TextFieldState(
+              null,
+              label: 'Password Confirmation',
+            ),
+            'privacyPolicy': CheckboxFieldState(
+              false,
+              label: 'Accept Privacy Policy',
+            ),
+          },
+        );
+
+  @override
+  Future<void> submit() async {}
 }
+
+void main() {
+  final formStateNotifier = LoginFormStateNotifier();
+  final text = material.TextField(
+    onChanged: (value) => formStateNotifier.update('email', value),
+    decoration: material.InputDecoration(
+      labelText: formStateNotifier.label('email'),
+      errorText: formStateNotifier.error('email'),
+    ),
+  );
+}
+
+//  form bond must be agnostic from state management solutions
+

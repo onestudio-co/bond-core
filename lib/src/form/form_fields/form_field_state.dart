@@ -6,15 +6,17 @@ abstract class FormFieldState<T> {
   String? error;
   String label;
   List<ValidationRule<T>> rules;
+  bool validateOnUpdate;
+  bool touched;
 
   FormFieldState({
     required this.value,
     this.error,
     required this.label,
+    this.touched = false,
+    this.validateOnUpdate = true,
     this.rules = const [],
   });
-
-  void update(T newValue);
 
   @nonVirtual
   String? validate(Map<String, FormFieldState> fields) {
@@ -26,4 +28,3 @@ abstract class FormFieldState<T> {
     return null;
   }
 }
-

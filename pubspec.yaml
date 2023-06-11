@@ -20,8 +20,10 @@ dependencies:
   package_info_plus: ^3.0.2
   faker: ^2.0.0
   riverpod: ^2.3.6
+  intl: ^0.18.0
 
 
 dev_dependencies:
   flutter_lints: ^2.0.1
   build_runner: ^2.3.2
+  intl_translation: ^0.18.2

@@ -8,9 +8,4 @@ class CheckboxFieldState extends FormFieldState<bool?> {
     required String label,
     List<ValidationRule<bool?>> rules = const [],
   }) : super(value: value, label: label, rules: rules);
-
-  @override
-  void update(bool? newValue) {
-    value = newValue;
-  }
 }
