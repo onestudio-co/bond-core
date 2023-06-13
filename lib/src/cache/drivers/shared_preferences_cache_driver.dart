@@ -23,10 +23,7 @@ class SharedPreferencesCacheDriver implements CacheDriver {
   }
 
   @override
-  Future<bool> has(String key) async {
-    final Map<String, dynamic>? results = await get(key);
-    return results != null;
-  }
+  Future<bool> has(String key) async => _sharedPreferences.containsKey(key);
 
   @override
   Future<bool> put(String key, dynamic value, [Duration? expiredAfter]) async {
