@@ -82,7 +82,7 @@ class BaseBondApiRequest<T> {
       } else {
         return response.data;
       }
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       if (_errorFactory != null && error.response != null) {
         throw _errorFactory!(error.response!.data);
       }

@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m3(fieldName, min, max) => "${fieldName} يجب أن يكون حجمه بين ${min} و${max}.";
 
-  static m4(fieldName) => "${fieldName} يجب أن يكون منطقيا (true, false, 1, 0, \'1\', \'0\').";
+  static m4(fieldName) => "${fieldName} يجب أن يكون منطقيا (true, false, 1, 0, '1', '0').";
 
   static m5(fieldName) => "لا يتطابق تأكيد ${fieldName}.";
 

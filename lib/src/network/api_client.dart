@@ -22,7 +22,7 @@ class ApiClient {
           headers: headers,
         ),
       );
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
       throw ServerException(errors: {'message': '$e'});
@@ -42,7 +42,7 @@ class ApiClient {
           headers: headers,
         ),
       );
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
       throw ServerException(errors: {'message': '$e'});
@@ -56,7 +56,7 @@ class ApiClient {
           options: Options(
             headers: headers,
           ));
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
       throw ServerException(errors: {"message": "$e"});
@@ -77,7 +77,7 @@ class ApiClient {
         options: Options(headers: headers),
         onSendProgress: onSendProgress,
       );
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
       throw ServerException(errors: {'message': '$e'});
@@ -93,14 +93,14 @@ class ApiClient {
           options: Options(
             headers: headers,
           ));
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
       throw ServerException(errors: {"message": "$e"});
     }
   }
 
-  ServerException _handleDioError(DioError error) {
+  ServerException _handleDioError(DioException error) {
     if (error.response != null && error.response!.data != null) {
       return ServerException(
         errors: error.response!.data,

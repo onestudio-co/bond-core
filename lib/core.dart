@@ -60,7 +60,7 @@ class LoginFormStateNotifier extends FormStateNotifier {
 
 void main() {
   final formStateNotifier = LoginFormStateNotifier();
-  final text = material.TextField(
+  material.TextField(
     onChanged: (value) => formStateNotifier.update('email', value),
     decoration: material.InputDecoration(
       labelText: formStateNotifier.label('email'),
