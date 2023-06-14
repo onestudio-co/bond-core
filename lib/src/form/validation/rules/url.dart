@@ -2,7 +2,11 @@ import 'package:bond_core/src/form/validation/validation_rule.dart';
 import 'package:bond_core/src/form/form_fields/form_field_state.dart';
 
 class Url extends ValidationRule<String> {
-  Url() : super('Must be a valid URL');
+  Url({String? message}) : super(message);
+
+  @override
+  String validatorMessage(String fieldName) =>
+      l10n.urlValidationMessage(fieldName);
 
   @override
   bool validate(String value, Map<String, FormFieldState> fields) {

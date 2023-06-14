@@ -22,7 +22,7 @@ abstract class FormFieldState<T> {
   String? validate(Map<String, FormFieldState> fields) {
     for (var rule in rules) {
       if (!rule.validate(value, fields)) {
-        return rule.message;
+        return rule.message(label);
       }
     }
     return null;

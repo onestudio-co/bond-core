@@ -1,264 +1,254 @@
 {
-   "@@locale":"ar",
-   "requiredValidationMessage":"{fieldName} مطلوب.",
-   "@requiredValidationMessage":{
-      "description":"رسالة التحقق من الصلاحية للحقل المطلوب",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-         }
+  "@@locale": "ar",
+  "requiredValidationMessage": "{fieldName} مطلوب.",
+  "@requiredValidationMessage": {
+    "description": "رسالة التحقق من الصلاحية للحقل المطلوب",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "emailValidationMessage":"{fieldName} يجب أن يكون عنوان بريد إلكتروني صالح.",
-   "@emailValidationMessage":{
-      "description":"رسالة التحقق من الصلاحية للحقل البريدي",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-         }
+    }
+  },
+  "emailValidationMessage": "{fieldName} يجب أن يكون عنوان بريد إلكتروني صالح.",
+  "@emailValidationMessage": {
+    "description": "رسالة التحقق من الصلاحية للحقل البريدي",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "minValueValidationMessage":"{fieldName} يجب أن يكون لديه قيمة دنيا {value}.",
-   "@minValueValidationMessage":{
-      "description":"رسالة التحقق من الصلاحية للحقل بالقيمة الدنيا",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "value":{
-
-         }
+    }
+  },
+  "minValueValidationMessage": "{fieldName} يجب أن يكون لديه قيمة دنيا {value}.",
+  "@minValueValidationMessage": {
+    "description": "رسالة التحقق من الصلاحية للحقل بالقيمة الدنيا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "value": {
       }
-   },
-   "maxValueValidationMessage":"{fieldName} يجب أن يكون لديه قيمة عليا {value}.",
-   "@maxValueValidationMessage":{
-      "description":"رسالة التحقق من الصلاحية للحقل بالقيمة العليا",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "value":{
-
-         }
+    }
+  },
+  "maxValueValidationMessage": "{fieldName} يجب أن يكون لديه قيمة عليا {value}.",
+  "@maxValueValidationMessage": {
+    "description": "رسالة التحقق من الصلاحية للحقل بالقيمة العليا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "value": {
       }
-   },
-   "inValuesValidationMessage":"{fieldName} يجب أن يكون ضمن القائمة المعطاة.",
-   "@inValuesValidationMessage":{
-      "description":"رسالة التحقق من الصلاحية للحقل الذي يجب أن يكون ضمن قائمة",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "minLengthValidationMessage": "يجب أن يكون {fieldName} على الأقل {length} حروف.",
+  "@minLengthValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يكون أقل من الحد الأدنى من الأحرف",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "length": {
       }
-   },
-   "notInValuesValidationMessage":"{fieldName} يجب أن لا يكون ضمن القائمة المعطاة.",
-   "@notInValuesValidationMessage":{
-      "description":"رسالة التحقق من الصلاحية للحقل الذي لا يجب أن يكون ضمن قائمة",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "maxLengthValidationMessage": "لا يجب أن يتجاوز {fieldName} {length} حروف.",
+  "@maxLengthValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يكون أطول من الحد الأقصى من الأحرف",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "length": {
       }
-   },
-   "integerValidationMessage":"{fieldName} يجب أن يكون عددا صحيحا.",
-   "@integerValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون عددا صحيحا",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "inValuesValidationMessage": "{fieldName} يجب أن يكون ضمن القائمة المعطاة.",
+  "@inValuesValidationMessage": {
+    "description": "رسالة التحقق من الصلاحية للحقل الذي يجب أن يكون ضمن قائمة",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "numericValidationMessage":"{fieldName} يجب أن يكون رقميا.",
-   "@numericValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون رقميا",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "notInValuesValidationMessage": "{fieldName} يجب أن لا يكون ضمن القائمة المعطاة.",
+  "@notInValuesValidationMessage": {
+    "description": "رسالة التحقق من الصلاحية للحقل الذي لا يجب أن يكون ضمن قائمة",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "digitsValidationMessage":"{fieldName} يجب أن يكون رقميا وأن يكون طوله بالضبط {value}.",
-   "@digitsValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون رقميا وأن يكون طوله محدد",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "value":{
-
-         }
+    }
+  },
+  "integerValidationMessage": "{fieldName} يجب أن يكون عددا صحيحا.",
+  "@integerValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون عددا صحيحا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "digitsBetweenValidationMessage":"{fieldName} يجب أن يكون طوله بين {min} و{max}.",
-   "@digitsBetweenValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون طوله بين قيمتين",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "min":{
-
-         },
-         "max":{
-
-         }
+    }
+  },
+  "numericValidationMessage": "{fieldName} يجب أن يكون رقميا.",
+  "@numericValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون رقميا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "sizeValidationMessage":"{fieldName} يجب أن يكون حجمه {value}.",
-   "@sizeValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون حجمه محدد",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "value":{
-
-         }
+    }
+  },
+  "digitsValidationMessage": "{fieldName} يجب أن يكون رقميا وأن يكون طوله بالضبط {value}.",
+  "@digitsValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون رقميا وأن يكون طوله محدد",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "value": {
       }
-   },
-   "betweenValidationMessage":"{fieldName} يجب أن يكون حجمه بين {min} و{max}.",
-   "@betweenValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون حجمه بين قيمتين",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "min":{
-
-         },
-         "max":{
-
-         }
+    }
+  },
+  "digitsBetweenValidationMessage": "{fieldName} يجب أن يكون طوله بين {min} و{max}.",
+  "@digitsBetweenValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون طوله بين قيمتين",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "min": {
+      },
+      "max": {
       }
-   },
-   "booleanValidationMessage":"{fieldName} يجب أن يكون منطقيا (true, false, 1, 0, '1', '0').",
-   "@booleanValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون منطقيا",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "sizeValidationMessage": "{fieldName} يجب أن يكون حجمه {value}.",
+  "@sizeValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون حجمه محدد",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "value": {
       }
-   },
-   "confirmedValidationMessage":"لا يتطابق تأكيد {fieldName}.",
-   "@confirmedValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يحتاج إلى تأكيد",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "betweenValidationMessage": "{fieldName} يجب أن يكون حجمه بين {min} و{max}.",
+  "@betweenValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون حجمه بين قيمتين",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "min": {
+      },
+      "max": {
       }
-   },
-   "dateValidationMessage":"{fieldName} يجب أن يكون تاريخا صحيحا.",
-   "@dateValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون تاريخا",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "booleanValidationMessage": "{fieldName} يجب أن يكون منطقيا (true, false, 1, 0, '1', '0').",
+  "@booleanValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون منطقيا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "dateFormatValidationMessage":"{fieldName} يجب أن يتوافق مع النسق {format}.",
-   "@dateFormatValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يتوافق مع نسق معين",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "format":{
-
-         }
+    }
+  },
+  "confirmedValidationMessage": "لا يتطابق تأكيد {fieldName}.",
+  "@confirmedValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يحتاج إلى تأكيد",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "differentValidationMessage":"{fieldName} يجب أن يكون له قيمة مختلفة عن {field}.",
-   "@differentValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون مختلفا عن حقل آخر",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "field":{
-
-         }
+    }
+  },
+  "dateValidationMessage": "{fieldName} يجب أن يكون تاريخا صحيحا.",
+  "@dateValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون تاريخا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "sameValidationMessage":"{fieldName} يجب أن يكون له نفس القيمة كـ {field}.",
-   "@sameValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون له نفس قيمة حقل آخر",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         },
-         "field":{
-
-         }
+    }
+  },
+  "dateFormatValidationMessage": "{fieldName} يجب أن يتوافق مع النسق {format}.",
+  "@dateFormatValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يتوافق مع نسق معين",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "format": {
       }
-   },
-   "alphaValidationMessage":"{fieldName} يجب أن يحتوي فقط على أحرف أبجدية.",
-   "@alphaValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يحتوي فقط على أحرف أبجدية",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "differentValidationMessage": "{fieldName} يجب أن يكون له قيمة مختلفة عن {field}.",
+  "@differentValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون مختلفا عن حقل آخر",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "field": {
       }
-   },
-   "alphaDashValidationMessage":"{fieldName} قد يحتوي فقط على أحرف أبجدية رقمية، شرطات، وشرطات سفلية.",
-   "@alphaDashValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي قد يحتوي فقط على أحرف أبجدية رقمية، شرطات، وشرطات سفلية",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "sameValidationMessage": "{fieldName} يجب أن يكون له نفس القيمة كـ {field}.",
+  "@sameValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون له نفس قيمة حقل آخر",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "field": {
       }
-   },
-   "alphaNumValidationMessage":"{fieldName} يجب أن يحتوي فقط على أحرف أبجدية رقمية.",
-   "@alphaNumValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يحتوي فقط على أحرف أبجدية رقمية",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "alphaValidationMessage": "{fieldName} يجب أن يحتوي فقط على أحرف أبجدية.",
+  "@alphaValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يحتوي فقط على أحرف أبجدية",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "urlValidationMessage":"{fieldName} يجب أن يكون عنوان URL صالح.",
-   "@urlValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يكون عنوان URL صالح",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "alphaDashValidationMessage": "{fieldName} قد يحتوي فقط على أحرف أبجدية رقمية، شرطات، وشرطات سفلية.",
+  "@alphaDashValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي قد يحتوي فقط على أحرف أبجدية رقمية، شرطات، وشرطات سفلية",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   },
-   "regexValidationMessage":"{fieldName} يجب أن يطابق النمط المحدد.",
-   "@regexValidationMessage":{
-      "description":"رسالة التحقق للحقل الذي يجب أن يطابق نمط regex",
-      "type":"text",
-      "placeholders":{
-         "fieldName":{
-
-         }
+    }
+  },
+  "alphaNumValidationMessage": "{fieldName} يجب أن يحتوي فقط على أحرف أبجدية رقمية.",
+  "@alphaNumValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يحتوي فقط على أحرف أبجدية رقمية",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
       }
-   }
+    }
+  },
+  "urlValidationMessage": "{fieldName} يجب أن يكون عنوان URL صالح.",
+  "@urlValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون عنوان URL صالح",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
+  },
+  "regexValidationMessage": "{fieldName} يجب أن يطابق النمط المحدد.",
+  "@regexValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يطابق نمط regex",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
+  }
 }

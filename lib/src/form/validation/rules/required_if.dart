@@ -6,14 +6,19 @@ class RequiredIf extends ValidationRule<String> {
   final dynamic expectedValue;
   final bool Function()? condition;
 
-  RequiredIf(this.otherFieldName, {required this.expectedValue})
+  RequiredIf(this.otherFieldName,
+      {required this.expectedValue, String? message})
       : condition = null,
-        super("This field is required");
+        super(message);
 
-  RequiredIf.condition(this.condition)
+  RequiredIf.condition(this.condition, {String? message})
       : otherFieldName = null,
         expectedValue = null,
-        super("This field is required");
+        super(message);
+
+  @override
+  String validatorMessage(String fieldName) =>
+      l10n.requiredValidationMessage(fieldName);
 
   @override
   bool validate(String? value, Map<String, FormFieldState> fields) {

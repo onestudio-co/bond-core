@@ -61,6 +61,26 @@ class ValidatorLocalizations {
     );
   }
 
+  String minLengthValidationMessage(String fieldName, int length) {
+    return Intl.message(
+      '$fieldName must be at least $length characters long.',
+      name: 'minLengthValidationMessage',
+      desc: 'Validation message for a field shorter than the minimum length',
+      args: [fieldName, length],
+      locale: localeName,
+    );
+  }
+
+  String maxLengthValidationMessage(String fieldName, int length) {
+    return Intl.message(
+      '$fieldName must not exceed $length characters.',
+      name: 'maxLengthValidationMessage',
+      desc: 'Validation message for a field longer than the maximum length',
+      args: [fieldName, length],
+      locale: localeName,
+    );
+  }
+
   String inValuesValidationMessage(String fieldName) {
     return Intl.message(
       '$fieldName must be in the given list.',

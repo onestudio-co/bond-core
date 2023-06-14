@@ -1,6 +1,5 @@
 library bond_core;
 
-
 import 'package:bond_core/src/form/form_state.dart';
 
 import 'src/form/form_fields/checkbox_field_state.dart';
@@ -18,6 +17,8 @@ export 'src/notifications.dart';
 export 'src/utils.dart';
 
 import 'package:flutter/material.dart' as material;
+
+import 'src/form/validation/rules/same.dart';
 
 class LoginFormStateNotifier extends FormStateNotifier {
   LoginFormStateNotifier()
@@ -46,6 +47,10 @@ class LoginFormStateNotifier extends FormStateNotifier {
             'passwordConfirmation': TextFieldState(
               null,
               label: 'Password Confirmation',
+              rules: [
+                Required(),
+                Same('password'),
+              ],
             ),
             'privacyPolicy': CheckboxFieldState(
               false,
@@ -70,4 +75,3 @@ void main() {
 }
 
 //  form bond must be agnostic from state management solutions
-

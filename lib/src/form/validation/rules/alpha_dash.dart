@@ -2,8 +2,11 @@ import 'package:bond_core/src/form/validation/validation_rule.dart';
 import 'package:bond_core/src/form/form_fields/form_field_state.dart';
 
 class AlphaDash extends ValidationRule<String> {
-  AlphaDash()
-      : super('Must be alpha-numeric, dash, or underscore');
+  AlphaDash({String? message}) : super(message);
+
+  @override
+  String validatorMessage(String fieldName) =>
+      l10n.alphaDashValidationMessage(fieldName);
 
   @override
   bool validate(String value, Map<String, FormFieldState> fields) {
