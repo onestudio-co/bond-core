@@ -15,6 +15,7 @@ export 'src/injection.dart';
 export 'src/network.dart';
 export 'src/notifications.dart';
 export 'src/utils.dart';
+export 'src/chat_bot/chat_bot.dart';
 
 import 'package:flutter/material.dart' as material;
 
