@@ -7,7 +7,7 @@ class ChatState {
 
   ChatState(this.messages, this.loading, this.error);
 
-  factory ChatState.initial() => ChatState([], false, null);
+  factory ChatState.initial() => ChatState([], true, null);
 
   ChatState copyWith({
     List<ChatMessage>? messages,

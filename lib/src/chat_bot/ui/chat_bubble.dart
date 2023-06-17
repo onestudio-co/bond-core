@@ -19,15 +19,25 @@ class ChatBubble extends StatelessWidget {
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
     return Container(
       margin: decoration.margin,
-      width: MediaQuery.of(context).size.width,
+      width: double.infinity,
       alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
       child: Container(
+        constraints: BoxConstraints(
+          maxWidth: decoration.maxWidth,
+          minWidth: decoration.minWidth,
+        ),
         padding: decoration.padding,
         decoration: BoxDecoration(
           color: bubbleDecoration.color,
           borderRadius: bubbleDecoration.borderRadius,
         ),
-        child: chatMessageBuilder.build(message),
+        child: chatMessageBuilder.build(message) ??
+            Text(
+              message.content,
+              style: isUserMessage
+                  ? decoration.userTextStyle
+                  : decoration.botTextStyle,
+            ),
       ),
     );
   }

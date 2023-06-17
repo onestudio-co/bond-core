@@ -8,4 +8,12 @@ abstract class ChatBubbleDecoration {
   BoxDecoration get userDecoration;
 
   BoxDecoration get botDecoration;
+
+  TextStyle get userTextStyle;
+
+  TextStyle get botTextStyle;
+
+  double get maxWidth;
+
+  double get minWidth;
 }
