@@ -1,14 +1,14 @@
-import 'dart:ui';
-
 import 'package:bond_core/src/chat_bot/data_source/chat_data_source.dart';
 import 'package:bond_core/src/chat_bot/models/chat_message.dart';
+import 'package:flutter/cupertino.dart';
 
 part 'chat_state.dart';
 
 class ChatController<T extends ChatMessageConvertible> {
   final ChatDataSource<T> chatService;
   Function(ChatState)? onStateChanged;
-  VoidCallback? onNewMessages;
+  final TextEditingController messageController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
 
   ChatController(int chatBotId, this.chatService) {
     loadMessages(chatBotId);
@@ -27,17 +27,42 @@ class ChatController<T extends ChatMessageConvertible> {
     }
   }
 
-  Future<void> sendMessage(Map<String, dynamic> body) async {
+  Future<void> sendMessage({Map<String, dynamic>? body}) async {
+    final mBody = body ??
+        {
+          if (messageController.text.trim().isNotEmpty)
+            'message': messageController.text.trim(),
+          if (_state.pendingAnswers != null) 'answers': _state.pendingAnswers,
+        };
     _updateState(_state.copyWith(loading: true));
     try {
-      final response = await chatService.sendMessage(body);
+      final response = await chatService.sendMessage(mBody);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
           messages: [..._state.messages, ...chatMessages], loading: false));
-      onNewMessages?.call();
+      Future.delayed(
+        const Duration(milliseconds: 500),
+        () {
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.linear,
+          );
+        },
+      );
+      messageController.clear();
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
+  }
+
+  void updatePendingAnswers(Map<String, String>? answers) {
+    _state = _state.copyWith(pendingAnswers: answers);
+  }
+
+  void dispose() {
+    messageController.dispose();
+    scrollController.dispose();
   }
 
   void _updateState(ChatState newState) {
