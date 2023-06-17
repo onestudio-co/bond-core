@@ -16,4 +16,9 @@ abstract class ChatBubbleDecoration {
   double get maxWidth;
 
   double get minWidth;
+
+  Duration get botDelayAnimationDuration;
+
+  Duration get userDelayAnimationDuration;
+
 }

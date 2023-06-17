@@ -21,6 +21,9 @@ dependencies:
   faker: ^2.0.0
   riverpod: ^2.3.6
   intl: ^0.18.0
+  delayed_display: ^2.0.0
+
+
 
 
 dev_dependencies:
