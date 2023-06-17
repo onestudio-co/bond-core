@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bond_core/src/chat_bot/data_source/chat_data_source.dart';
 import 'package:bond_core/src/chat_bot/models/chat_message.dart';
 
@@ -6,6 +8,7 @@ part 'chat_state.dart';
 class ChatController<T extends ChatMessageConvertible> {
   final ChatDataSource<T> chatService;
   Function(ChatState)? onStateChanged;
+  VoidCallback? onNewMessages;
 
   ChatController(int chatBotId, this.chatService) {
     loadMessages(chatBotId);
@@ -31,6 +34,7 @@ class ChatController<T extends ChatMessageConvertible> {
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
           messages: [..._state.messages, ...chatMessages], loading: false));
+      onNewMessages?.call();
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }

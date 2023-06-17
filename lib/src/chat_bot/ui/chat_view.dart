@@ -8,7 +8,7 @@ part 'chat_bubble_decoration.dart';
 
 part 'chat_message_builder.dart';
 
-class ChatView extends StatelessWidget {
+class ChatView extends StatefulWidget {
   final ChatController controller;
   final ChatState state;
   final ChatBubble Function(BuildContext, ChatMessage) bubbleBuilder;
@@ -25,19 +25,45 @@ class ChatView extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ChatView> createState() => _ChatViewState();
+}
+
+class _ChatViewState extends State<ChatView> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.onNewMessages = () {
+      Future.delayed(
+        const Duration(milliseconds: 500),
+        () {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.linear,
+          );
+        },
+      );
+    };
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: state.messages.length,
+            controller: _scrollController,
+            itemCount: widget.state.messages.length,
             itemBuilder: (context, index) {
-              return bubbleBuilder(context, state.messages[index]);
+              return widget.bubbleBuilder(
+                  context, widget.state.messages[index]);
             },
           ),
         ),
-        if (state.loading) typingIndicator,
-        inputView,
+        if (widget.state.loading) widget.typingIndicator,
+        widget.inputView,
       ],
     );
   }
