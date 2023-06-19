@@ -20,7 +20,7 @@ class TransactionManager {
 
   final Map<String, String> _files = {
     "main.dart": "lib/main.dart",
-    "main2.dart": "lib/main2.dart",
+    "build.gradle": "android/build.gradle",
   };
 
   factory TransactionManager() {
