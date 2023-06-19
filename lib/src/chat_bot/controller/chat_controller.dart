@@ -27,7 +27,7 @@ class ChatController<T extends ChatMessageConvertible> {
     }
   }
 
-  Future<void> sendMessage({Map<String, dynamic>? body}) async {
+  Future<void> sendMessage({required int chatBotId,Map<String, dynamic>? body,}) async {
     final mBody = body ??
         {
           if (messageController.text.trim().isNotEmpty)
