@@ -36,7 +36,7 @@ class ChatController<T extends ChatMessageConvertible> {
         };
     _updateState(_state.copyWith(loading: true));
     try {
-      final response = await chatService.sendMessage(mBody);
+      final response = await chatService.sendMessage(body: mBody,chatBotId:chatBotId );
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
           messages: [..._state.messages, ...chatMessages], loading: false));
