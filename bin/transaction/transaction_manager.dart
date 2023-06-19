@@ -106,7 +106,7 @@ PROJECT:  ${Directory(bondBuildPath).name}
       var transactionHistory = TransactionHistory(transaction.name, date);
       lst.add(transactionHistory);
     }
-
+    lst.sort((i,d) => i.date.compareTo(d.title));
     return lst;
   }
 
