@@ -8,12 +8,14 @@ part 'chat_message_convertible.dart';
 
 class ChatMessage {
   final int chatBotId;
+  final int id;
   final MessageSender sender;
   final MessageType type;
   final String content;
   final List<String>? choices; // only used if type is MessageType.multiChoice
 
   ChatMessage({
+    required this.id,
     required this.chatBotId,
     required this.sender,
     required this.type,
