@@ -1,11 +1,11 @@
-import 'package:bond_core/src/chat_bot/data_source/chat_data_source.dart';
-import 'package:bond_core/src/chat_bot/models/chat_message.dart';
+import 'package:bond_core/core.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'chat_state.dart';
 
-class ChatController<T extends ChatMessageConvertible> {
-  final ChatDataSource<T> chatService;
+class ChatController<T extends ChatMessageConvertible,
+    G extends ChatMetaConvertible> {
+  final ChatDataSource<T, G> chatService;
   Function(ChatState)? onStateChanged;
   final TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
@@ -21,7 +21,11 @@ class ChatController<T extends ChatMessageConvertible> {
     try {
       final response = await chatService.loadMessages(chatBotId);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
-      _updateState(_state.copyWith(messages: chatMessages, loading: false));
+
+      _updateState(_state.copyWith(
+          messages: chatMessages,
+          meta: response.meta.toChatMeta(),
+          loading: false));
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }

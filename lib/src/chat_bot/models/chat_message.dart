@@ -1,10 +1,12 @@
 import 'package:bond_core/src/network/models/model.dart';
 
+part 'chat_message_convertible.dart';
+
+part 'chat_meta.dart';
+
 part 'message_sender.dart';
 
 part 'message_type.dart';
-
-part 'chat_message_convertible.dart';
 
 class ChatMessage {
   final int chatBotId;
