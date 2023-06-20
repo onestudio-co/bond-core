@@ -5,16 +5,14 @@ class ChatState {
   final ChatMeta meta;
   final bool loading;
   final String? error;
-  final Map<String, String>? pendingAnswers;
 
   ChatState(
-      this.messages, this.meta, this.loading, this.error, this.pendingAnswers);
+      this.messages, this.meta, this.loading, this.error);
 
   factory ChatState.initial() => ChatState(
         [],
         ChatMeta(),
         true,
-        null,
         null,
       );
 
@@ -23,14 +21,12 @@ class ChatState {
     ChatMeta? meta,
     bool? loading,
     String? error,
-    Map<String, String>? pendingAnswers,
   }) {
     return ChatState(
       messages ?? this.messages,
       meta ?? this.meta,
       loading ?? this.loading,
       error ?? this.error,
-      pendingAnswers ?? this.pendingAnswers,
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:bond_core/core.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -31,41 +30,65 @@ class ChatController<T extends ChatMessageConvertible,
     }
   }
 
-  Future<void> sendMessage({
+  Future<void> sendTextMessage({
     required int chatBotId,
-    Map<String, dynamic>? body,
-    String? path
+    String? path,
   }) async {
-    final mBody = body ??
-        {
-          if (messageController.text.trim().isNotEmpty)
-            'message': messageController.text.trim(),
-          if (_state.pendingAnswers != null) 'answers': _state.pendingAnswers,
-        };
-    _updateState(_state.copyWith(loading: true));
+    final text = messageController.text;
+    // Create a temporary message to display immediately.
+    final tempMessage = ChatMessage(
+      chatBotId: chatBotId,
+      id: 0,
+      // Use a temporary id, like 0
+      content: text,
+      type: MessageType.text,
+      sender: MessageSender.user,
+    );
+    // Add the temporary message to the state.
+    _updateState(_state.copyWith(messages: [..._state.messages, tempMessage]));
+    _resetChat();
     try {
-      final response = await chatService.sendMessage(mBody, chatBotId,path);
+      Future.delayed(const Duration(milliseconds: 1500));
+      _updateState(_state.copyWith(loading: true));
+      final response = await chatService.sendTextMessage(chatBotId, text, path);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
           messages: [..._state.messages, ...chatMessages], loading: false));
-      Future.delayed(
-        const Duration(milliseconds: 500),
-        () {
-          scrollController.animateTo(
-            scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.linear,
-          );
-        },
-      );
-      messageController.clear();
+    } catch (e) {
+      _updateState(_state.copyWith(error: e.toString(), loading: false));
+    }
+
+  Future<void> answerQuestion({
+    required int chatBotId,
+    required Map<String, dynamic> body,
+    String? path,
+  }) async {
+    _updateState(_state.copyWith(loading: true));
+    try {
+      final response = await chatService.answerQuestion(chatBotId, body, path);
+      final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
+      _updateState(_state.copyWith(
+        messages: [..._state.messages, ...chatMessages],
+        loading: false,
+      ));
+      _resetChat();
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
   }
 
-  void updatePendingAnswers(Map<String, String>? answers) {
-    _state = _state.copyWith(pendingAnswers: answers);
+  void _resetChat() {
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.linear,
+        );
+      },
+    );
+    messageController.clear();
   }
 
   void dispose() {
