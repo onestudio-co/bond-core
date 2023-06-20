@@ -5,5 +5,8 @@ abstract class ChatDataSource<T extends ChatMessageConvertible,
   Future<ListMResponse<T, G>> loadMessages(int chatBotId);
 
   Future<ListMResponse<T, G>> sendMessage(
-      Map<String, dynamic> body, int chatBotId);
+    Map<String, dynamic> body,
+    int chatBotId,
+    String? path,
+  );
 }

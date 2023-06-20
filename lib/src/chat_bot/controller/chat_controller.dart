@@ -34,6 +34,7 @@ class ChatController<T extends ChatMessageConvertible,
   Future<void> sendMessage({
     required int chatBotId,
     Map<String, dynamic>? body,
+    String? path
   }) async {
     final mBody = body ??
         {
@@ -43,7 +44,7 @@ class ChatController<T extends ChatMessageConvertible,
         };
     _updateState(_state.copyWith(loading: true));
     try {
-      final response = await chatService.sendMessage(mBody, chatBotId);
+      final response = await chatService.sendMessage(mBody, chatBotId,path);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
           messages: [..._state.messages, ...chatMessages], loading: false));
