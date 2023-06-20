@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bond_core/core.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,7 +23,7 @@ class ChatController<T extends ChatMessageConvertible,
     try {
       final response = await chatService.loadMessages(chatBotId);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
-
+      log('just for testing $chatMessages');
       _updateState(_state.copyWith(
           messages: chatMessages,
           meta: response.meta.toChatMeta(),
