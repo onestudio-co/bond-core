@@ -4,6 +4,8 @@ part 'chat_message_convertible.dart';
 
 part 'chat_meta.dart';
 
+part 'choice.dart';
+
 part 'message_sender.dart';
 
 part 'message_type.dart';
@@ -14,7 +16,7 @@ class ChatMessage {
   final MessageSender sender;
   final MessageType type;
   final String content;
-  final List<String>? choices; // only used if type is MessageType.multiChoice
+  final List<Choice>? choices; // only used if type is MessageType.multiChoice
 
   ChatMessage({
     required this.id,
