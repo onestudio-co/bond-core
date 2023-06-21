@@ -7,3 +7,7 @@ mixin ChatMessageConvertible on Model {
 mixin ChatMetaConvertible on Model {
   ChatMeta toChatMeta();
 }
+
+mixin ChoiceConvertible on Model {
+  Choice toChoice();
+}
