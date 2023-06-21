@@ -77,10 +77,23 @@ class ChatController<T extends ChatMessageConvertible,
     }
   }
 
+
+  void dispose() {
+    messageController.dispose();
+    scrollController.dispose();
+  }
+
+}
+
+  void _updateState(ChatState newState) {
+    _state = newState;
+    onStateChanged?.call(_state);
+  }
+
   void _resetChat() {
     Future.delayed(
       const Duration(milliseconds: 500),
-      () {
+          () {
         scrollController.animateTo(
           scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 100),
@@ -91,13 +104,5 @@ class ChatController<T extends ChatMessageConvertible,
     messageController.clear();
   }
 
-  void dispose() {
-    messageController.dispose();
-    scrollController.dispose();
-  }
 
-  void _updateState(ChatState newState) {
-    _state = newState;
-    onStateChanged?.call(_state);
-  }
 }
