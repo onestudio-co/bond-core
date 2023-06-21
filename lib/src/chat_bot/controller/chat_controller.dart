@@ -53,7 +53,10 @@ class ChatController<T extends ChatMessageConvertible,
       final response = await chatService.sendTextMessage(chatBotId, text, path);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
-          messages: [..._state.messages, ...chatMessages], loading: false));
+        messages: [..._state.messages, ...chatMessages],
+        loading: false,
+        meta: response.meta.toChatMeta(),
+      ));
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
@@ -71,6 +74,7 @@ class ChatController<T extends ChatMessageConvertible,
       _updateState(_state.copyWith(
         messages: [..._state.messages, ...chatMessages],
         loading: false,
+        meta: response.meta.toChatMeta(),
       ));
       _resetChat();
     } catch (e) {

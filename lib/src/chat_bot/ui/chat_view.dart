@@ -39,7 +39,13 @@ class ChatView extends StatelessWidget {
           ),
         ),
         if (state.loading) typingIndicator,
-        inputView,
+        Visibility(
+          visible: state.meta.isVisible,
+          child: AbsorbPointer(
+            absorbing: !state.meta.isActive,
+            child: inputView,
+          ),
+        ),
       ],
     );
   }
