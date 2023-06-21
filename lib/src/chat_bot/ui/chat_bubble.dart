@@ -43,11 +43,12 @@ class ChatBubble extends StatelessWidget {
             child: chatMessageBuilder.build(message) ??
                 Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Visibility(
                       visible: message.title != null,
                       child: Text(
-                        message.title ?? '',
+                        message.title!,
                         style: decoration.botTitleTextStyle,
                       ),
                     ),
