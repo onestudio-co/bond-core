@@ -16,6 +16,7 @@ class ChatMessage {
   final MessageSender sender;
   final MessageType type;
   final String content;
+  String? key; //only used if type is MessageType.multiChoice key for multi-choice selection
   final List<Choice>? choices; // only used if type is MessageType.multiChoice
 
   ChatMessage({
@@ -24,6 +25,7 @@ class ChatMessage {
     required this.sender,
     required this.type,
     required this.content,
+    this.key,
     this.choices,
   });
 }
