@@ -48,7 +48,7 @@ class ChatBubble extends StatelessWidget {
                     Visibility(
                       visible: message.title != null,
                       child: Text(
-                        message.title!,
+                        message.title ?? '',
                         style: decoration.botTitleTextStyle,
                       ),
                     ),
