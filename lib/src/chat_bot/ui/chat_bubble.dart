@@ -31,23 +31,39 @@ class ChatBubble extends StatelessWidget {
         width: double.infinity,
         alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
         child: Container(
-          constraints: BoxConstraints(
-            maxWidth: decoration.maxWidth,
-            minWidth: decoration.minWidth,
-          ),
-          padding: decoration.padding,
-          decoration: BoxDecoration(
-            color: bubbleDecoration.color,
-            borderRadius: bubbleDecoration.borderRadius,
-          ),
-          child: chatMessageBuilder.build(message) ??
-              Text(
-                message.content,
-                style: isUserMessage
-                    ? decoration.userTextStyle
-                    : decoration.botTextStyle,
-              ),
-        ),
+            constraints: BoxConstraints(
+              maxWidth: decoration.maxWidth,
+              minWidth: decoration.minWidth,
+            ),
+            padding: decoration.padding,
+            decoration: BoxDecoration(
+              color: bubbleDecoration.color,
+              borderRadius: bubbleDecoration.borderRadius,
+            ),
+            child: chatMessageBuilder.build(message) ??
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Visibility(
+                      visible: message.title != null,
+                      child: Text(
+                        message.title ?? '',
+                        style: decoration.botTitleTextStyle,
+                      ),
+                    ),
+                    Visibility(
+                        visible: message.title != null,
+                        child: const SizedBox(
+                          height: 12,
+                        )),
+                    Text(
+                      message.content,
+                      style: isUserMessage
+                          ? decoration.userTextStyle
+                          : decoration.botTextStyle,
+                    ),
+                  ],
+                )),
       ),
     );
   }
