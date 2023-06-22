@@ -5,6 +5,8 @@ class ChatBubble extends StatelessWidget {
   final ChatMessage message;
   final ChatBubbleDecoration decoration;
   final ChatMessageBuilder chatMessageBuilder;
+  final bool? hasLeading;
+  final Widget? leading;
 
   const ChatBubble({
     Key? key,
@@ -12,6 +14,8 @@ class ChatBubble extends StatelessWidget {
     required this.message,
     required this.decoration,
     required this.chatMessageBuilder,
+    this.leading,
+    this.hasLeading,
   }) : super(key: key);
 
   @override
@@ -41,29 +45,10 @@ class ChatBubble extends StatelessWidget {
               borderRadius: bubbleDecoration.borderRadius,
             ),
             child: chatMessageBuilder.build(message) ??
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Visibility(
-                      visible: message.title != null,
-                      child: Text(
-                        message.title ?? '',
-                        style: decoration.botTitleTextStyle,
-                      ),
-                    ),
-                    Visibility(
-                        visible: message.title != null,
-                        child: const SizedBox(
-                          height: 12,
-                        )),
-                    Text(
-                      message.content,
-                      style: isUserMessage
-                          ? decoration.userTextStyle
-                          : decoration.botTextStyle,
-                    ),
-                  ],
+                DefaultChatBubble(
+                  message: message,
+                  decoration: decoration,
+                  isUserMessage: isUserMessage,
                 )),
       ),
     );
