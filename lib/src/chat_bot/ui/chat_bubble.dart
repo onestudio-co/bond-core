@@ -5,6 +5,8 @@ class ChatBubble extends StatelessWidget {
   final ChatMessage message;
   final ChatBubbleDecoration decoration;
   final ChatMessageBuilder chatMessageBuilder;
+  final bool? hasLeading;
+  final Widget? leading;
 
   const ChatBubble({
     Key? key,
@@ -12,6 +14,8 @@ class ChatBubble extends StatelessWidget {
     required this.message,
     required this.decoration,
     required this.chatMessageBuilder,
+    this.leading,
+    this.hasLeading,
   }) : super(key: key);
 
   @override
@@ -26,45 +30,55 @@ class ChatBubble extends StatelessWidget {
       delay: Duration(
         milliseconds: delayAnimationDuration.inMilliseconds * index,
       ),
-      child: Container(
-        margin: decoration.margin,
-        width: double.infinity,
-        alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
-        child: Container(
-            constraints: BoxConstraints(
-              maxWidth: decoration.maxWidth,
-              minWidth: decoration.minWidth,
-            ),
-            padding: decoration.padding,
-            decoration: BoxDecoration(
-              color: bubbleDecoration.color,
-              borderRadius: bubbleDecoration.borderRadius,
-            ),
-            child: chatMessageBuilder.build(message) ??
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Visibility(
-                      visible: message.title != null,
-                      child: Text(
-                        message.title ?? '',
-                        style: decoration.botTitleTextStyle,
-                      ),
-                    ),
-                    Visibility(
-                        visible: message.title != null,
-                        child: const SizedBox(
-                          height: 12,
-                        )),
-                    Text(
-                      message.content,
-                      style: isUserMessage
-                          ? decoration.userTextStyle
-                          : decoration.botTextStyle,
-                    ),
-                  ],
-                )),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 24,
+            height: 24,
+            child: leading,
+          ),
+          Container(
+            margin: decoration.margin,
+            width: double.infinity,
+            alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
+            child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: decoration.maxWidth,
+                  minWidth: decoration.minWidth,
+                ),
+                padding: decoration.padding,
+                decoration: BoxDecoration(
+                  color: bubbleDecoration.color,
+                  borderRadius: bubbleDecoration.borderRadius,
+                ),
+                child: chatMessageBuilder.build(message) ??
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Visibility(
+                          visible: message.title != null,
+                          child: Text(
+                            message.title ?? '',
+                            style: decoration.botTitleTextStyle,
+                          ),
+                        ),
+                        Visibility(
+                            visible: message.title != null,
+                            child: const SizedBox(
+                              height: 12,
+                            )),
+                        Text(
+                          message.content,
+                          style: isUserMessage
+                              ? decoration.userTextStyle
+                              : decoration.botTextStyle,
+                        ),
+                      ],
+                    )),
+          ),
+        ],
       ),
     );
   }
