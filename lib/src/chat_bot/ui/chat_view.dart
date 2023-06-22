@@ -1,5 +1,6 @@
 import 'package:bond_core/src/chat_bot/controller/chat_controller.dart';
 import 'package:bond_core/src/chat_bot/models/chat_message.dart';
+import 'package:bond_core/src/chat_bot/ui/default_chat_bubble.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/widgets.dart';
 
