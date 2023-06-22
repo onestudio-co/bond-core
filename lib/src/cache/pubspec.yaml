@@ -8,17 +8,7 @@ environment:
 
 dependencies:
   bond_core:
-    path: ../../../../bond-core
+    path: ../../src/core
   flutter:
     sdk: flutter
   shared_preferences: ^2.1.2
-
-dev_dependencies:
-  flutter_lints: ^2.0.1
-  build_runner: ^2.3.2
-  intl_translation: ^0.18.2
-
-
-
-executables:
-  bond_socialite: bond_socialite.dart
