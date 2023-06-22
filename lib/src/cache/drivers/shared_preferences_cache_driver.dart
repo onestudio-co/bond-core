@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bond_core/core.dart';
+import '../../../core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesCacheDriver implements CacheDriver {
