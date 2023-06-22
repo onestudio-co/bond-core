@@ -1,5 +1,7 @@
-import 'package:bond_core/src/core/core.dart';
+import 'package:bond_core_temp/src/chat_bot/data_source/chat_data_source.dart';
 import 'package:flutter/cupertino.dart';
+
+import 'package:bond_core_temp/src/chat_bot/models/chat_message.dart';
 
 part 'chat_state.dart';
 

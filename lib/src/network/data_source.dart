@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 import 'errors/exceptions.dart';
 import 'models.dart';
+import 'package:bond_core/core.dart';
 
 class DataSource {
   SingleMResponse<T, G> mapSingleMResponse<T extends Model, G extends Jsonable>(

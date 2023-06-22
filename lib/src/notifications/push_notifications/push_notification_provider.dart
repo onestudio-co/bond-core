@@ -1,6 +1,6 @@
-import 'package:bond_core/src/notifications/push_notifications/push_notification_provider_commons.dart';
+import 'push_notification_provider_commons.dart';
 
-abstract class PushNotificationProvider with NotificationProviderCommons {
+abstract class PushNotificationProvider with PushNotificationProviderCommons {
   Future<String?> get token;
 
   Future<String?> get apnsToken;

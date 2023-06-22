@@ -1,7 +1,9 @@
-import 'package:bond_core/src/core/core.dart';
-import 'package:bond_core/src/network/models/response_converter.dart';
+import 'package:bond_core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'model.dart';
+import 'response_converter.dart';
 
 part 'list_m_response.g.dart';
 

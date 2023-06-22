@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import 'jsonable.dart';
+import 'package:bond_core/core.dart';
 
 abstract class Model extends Equatable with Jsonable {
   const Model({

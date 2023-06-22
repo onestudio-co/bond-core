@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'jsonable.dart';
+import 'package:bond_core/core.dart';
 import 'meta.dart';
 
 part 'success_response.g.dart';

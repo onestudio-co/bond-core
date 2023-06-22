@@ -1,4 +1,6 @@
-import '../core/core.dart';
+import 'package:bond_core/core.dart';
+
+import 'drivers/cache_driver.dart';
 
 class Cache {
   static CacheDriver cacheDriver = sl<CacheDriver>();

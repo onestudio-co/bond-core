@@ -1,6 +1,6 @@
-import 'package:bond_core/src/core/core.dart';
-import 'package:bond_core/l10n/validator_localizations.dart';
-import 'package:bond_core/src/form/form_fields/form_field_state.dart';
+import 'package:bond_core_temp/l10n/validator_localizations.dart';
+import 'package:bond_core/core.dart';
+import 'package:bond_core_temp/src/form/form_fields/form_field_state.dart';
 
 abstract class ValidationRule<T> {
   ValidationRule(this._message);

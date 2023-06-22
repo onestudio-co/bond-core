@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:bond_core/src/core/core.dart';
+import 'package:bond_core/core.dart';
 
 part 'links.g.dart';
 

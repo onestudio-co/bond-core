@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bond_core/src/core/core.dart';
+import 'package:bond_core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:bond_core/src/cache.dart';
-import 'package:bond_core/src/network/models/jsonable.dart';
+import 'package:bond_cache/cache.dart';
+import 'package:bond_core/core.dart';
 
 part 'cache_policy.dart';
 
@@ -24,11 +24,11 @@ class BaseBondApiRequest<T> {
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
 
-  BaseBondApiRequest(this._dio,
-      String path, {
-        required String method,
-      })
-      : _path = path,
+  BaseBondApiRequest(
+    this._dio,
+    String path, {
+    required String method,
+  })  : _path = path,
         _method = method;
 
   BaseBondApiRequest<T> header(Map<String, String> headers) {

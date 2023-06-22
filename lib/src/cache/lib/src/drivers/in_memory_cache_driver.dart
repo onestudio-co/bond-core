@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import '../../core/core.dart';
-
+import 'cache_driver.dart';
+import 'package:bond_core/core.dart';
 
 class InMemoryCacheDriver implements CacheDriver {
   final Map<String, String> _cache = {};
