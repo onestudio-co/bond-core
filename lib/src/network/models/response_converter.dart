@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:bond_core/src/injection.dart';
-
-import 'jsonable.dart';
+import 'package:bond_core/core.dart';
 
 class ResponseConverter<T extends Jsonable>
     implements JsonConverter<T, Map<String, dynamic>> {

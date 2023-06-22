@@ -1,5 +1,5 @@
-import 'package:bond_core/src/form/validation/validation_rule.dart';
-import 'package:bond_core/src/form/form_fields/form_field_state.dart';
+import 'package:bond_core_temp/src/form/validation/validation_rule.dart';
+import 'package:bond_core_temp/src/form/form_fields/form_field_state.dart';
 
 class Digits extends ValidationRule<String> {
   final int digitLength;

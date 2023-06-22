@@ -1,5 +1,5 @@
+import 'package:bond_core_temp/src/network.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:bond_core/core.dart';
 
 part 'server_notification_model.g.dart';
 

@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:bond_core/core.dart';
 
+import 'meta.dart';
+import 'model.dart';
 import 'response_converter.dart';
 
 part 'single_response.g.dart';

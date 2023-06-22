@@ -1,4 +1,4 @@
-name: bond_core
+name: bond_core_temp
 description: Bond Core is a foundational library for the Flutter Bond framework.
 version: 0.0.1
 homepage: https://github.com/onestudio-co/flutter-bond
@@ -24,6 +24,11 @@ dependencies:
   delayed_display: ^2.0.0
   args: ^2.2.2
 
+  bond_core:
+    path: lib/src/core
+
+  bond_cache:
+    path: lib/src/cache
 
 
 

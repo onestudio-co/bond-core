@@ -1,4 +1,4 @@
-import 'package:bond_core/src/injection/injection_container.dart';
+import 'package:bond_core/core.dart';
 
 import 'drivers/cache_driver.dart';
 

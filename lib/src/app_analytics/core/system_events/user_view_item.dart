@@ -1,4 +1,4 @@
-import 'package:bond_core/core.dart';
+import 'event_item.dart';
 
 mixin UserViewItem {
   String? get currency;

@@ -1,6 +1,6 @@
-import 'package:bond_core/core.dart';
+import '../core/notification_data.dart';
 
-mixin NotificationProviderCommons {
+mixin PushNotificationProviderCommons {
   Stream<NotificationData> get onPushNotification;
 
   Stream<NotificationData> get onPushNotificationTapped;
