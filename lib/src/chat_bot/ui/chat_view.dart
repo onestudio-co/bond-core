@@ -28,6 +28,11 @@ class ChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<bool> valueNotifier = ValueNotifier<bool>(false);
+    Future.delayed(const Duration(milliseconds: 1400), () {
+      valueNotifier.value = state.meta.isVisible;
+    });
+
     return Column(
       children: [
         Expanded(
@@ -40,12 +45,17 @@ class ChatView extends StatelessWidget {
           ),
         ),
         if (state.loading) typingIndicator,
-        Visibility(
-          visible: state.meta.isVisible,
-          child: AbsorbPointer(
-            absorbing: !state.meta.isActive,
-            child: inputView,
-          ),
+        ValueListenableBuilder(
+          valueListenable: valueNotifier,
+          builder: (context, value, child) {
+            return Visibility(
+              visible: state.meta.isVisible,
+              child: AbsorbPointer(
+                absorbing: !state.meta.isActive,
+                child: inputView,
+              ),
+            );
+          },
         ),
       ],
     );
