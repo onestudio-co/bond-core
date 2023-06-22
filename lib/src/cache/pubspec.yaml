@@ -7,6 +7,8 @@ environment:
   sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
+  bond_core:
+    path: ../../../../bond-core
   flutter:
     sdk: flutter
   shared_preferences: ^2.1.2
