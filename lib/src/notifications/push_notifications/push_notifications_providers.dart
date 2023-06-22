@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bond_core/src/injection.dart';
+import 'package:bond_core/src/core/injection.dart';
 
 import '../notifications_core.dart';
 import '../push_notifications.dart';

@@ -1,4 +1,4 @@
-import 'package:bond_core/core.dart';
+import 'package:bond_core/src/core/core.dart';
 import 'package:bond_core/l10n/validator_localizations.dart';
 import 'package:bond_core/src/form/form_fields/form_field_state.dart';
 

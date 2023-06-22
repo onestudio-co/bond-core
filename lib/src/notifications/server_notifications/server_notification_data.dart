@@ -1,4 +1,4 @@
-import 'package:bond_core/core.dart';
+import 'package:bond_core/src/core/core.dart';
 
 class ServerNotificationData {
   final SeverNotificationChangedType type;

@@ -1,4 +1,4 @@
-import 'package:bond_core/core.dart';
+import 'package:bond_core/src/core/core.dart';
 import 'package:bond_core/src/network/models/response_converter.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';

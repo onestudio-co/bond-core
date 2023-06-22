@@ -1,4 +1,4 @@
-import 'package:bond_core/core.dart';
+import 'package:bond_core/src/core/core.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'chat_state.dart';

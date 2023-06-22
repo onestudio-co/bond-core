@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:bond_core/src/injection/service_provider.dart';
+
+import 'package:bond_core/src/core/core.dart';
 
 import '../core/notification_data.dart';
 import 'actionable_push_notification.dart';
