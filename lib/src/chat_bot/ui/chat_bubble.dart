@@ -30,41 +30,26 @@ class ChatBubble extends StatelessWidget {
       delay: Duration(
         milliseconds: delayAnimationDuration.inMilliseconds * index,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-            child: Container(
-              margin: decoration.margin,
-              width: double.infinity,
-              alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
-              child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: decoration.maxWidth,
-                    minWidth: decoration.minWidth,
-                  ),
-                  padding: decoration.padding,
-                  decoration: BoxDecoration(
-                    color: bubbleDecoration.color,
-                    borderRadius: bubbleDecoration.borderRadius,
-                  ),
-                  child: chatMessageBuilder.build(message) ??
-                      DefaultChatBubble(
-                        message: message,
-                        decoration: decoration,
-                        isUserMessage: isUserMessage,
-                      )),
+      child: Container(
+        margin: decoration.margin,
+        width: double.infinity,
+        alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
+        child: Container(
+            constraints: BoxConstraints(
+              maxWidth: decoration.maxWidth,
+              minWidth: decoration.minWidth,
             ),
-          ),
-          const SizedBox(
-            width: 4,
-          ),
-          SizedBox(
-            width: 24,
-            height: 24,
-            child: leading,
-          ),
-        ],
+            padding: decoration.padding,
+            decoration: BoxDecoration(
+              color: bubbleDecoration.color,
+              borderRadius: bubbleDecoration.borderRadius,
+            ),
+            child: chatMessageBuilder.build(message) ??
+                DefaultChatBubble(
+                  message: message,
+                  decoration: decoration,
+                  isUserMessage: isUserMessage,
+                )),
       ),
     );
   }
