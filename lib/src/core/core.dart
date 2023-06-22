@@ -1,25 +1,25 @@
 library bond_core;
 
-import 'package:bond_core/src/form/form_state.dart';
+import '../../src/form/form_state.dart';
 
-import 'src/form/form_fields/checkbox_field_state.dart';
-import 'src/form/form_fields/text_field_state.dart';
-import 'src/form/validation/rules/email.dart';
-import 'src/form/validation/rules/required.dart';
+import '../form/form_fields/checkbox_field_state.dart';
+import '../form/form_fields/text_field_state.dart';
+import '../form/validation/rules/email.dart';
+import '../form/validation/rules/required.dart';
 
-export 'src/app.dart';
-export 'src/app_analytics.dart';
-export 'src/auth.dart';
-export 'src/cache.dart';
-export 'src/injection.dart';
-export 'src/network.dart';
-export 'src/notifications.dart';
-export 'src/utils.dart';
-export 'src/chat_bot.dart';
+export '../app.dart';
+export '../app_analytics.dart';
+export '../auth.dart';
+export '../cache.dart';
+export 'injection.dart';
+export '../network.dart';
+export '../notifications.dart';
+export 'utils.dart';
+export '../chat_bot.dart';
 
 import 'package:flutter/material.dart' as material;
 
-import 'src/form/validation/rules/same.dart';
+import '../form/validation/rules/same.dart';
 
 class LoginFormStateNotifier extends FormStateNotifier {
   LoginFormStateNotifier()
