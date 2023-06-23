@@ -35,6 +35,11 @@ dependencies:
 
   bond_chat_bot:
     path: lib/src/chat_bot
+  
+  bond_notifications:
+    path: lib/src/notifications
+
+
 
 dev_dependencies:
   flutter_lints: ^2.0.1
