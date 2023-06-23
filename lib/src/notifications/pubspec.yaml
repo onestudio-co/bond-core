@@ -14,9 +14,6 @@ dependencies:
   bond_core:
     path: ../core
 
-  bond_cache:
-    path: ../cache
-
   bond_network:
     path: ../network
 
