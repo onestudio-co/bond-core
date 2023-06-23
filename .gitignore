@@ -40,3 +40,16 @@ lib/src/form/.flutter-plugins
 lib/src/form/.flutter-plugins-dependencies
 lib/src/notifications/.flutter-plugins
 lib/src/notifications/.flutter-plugins-dependencies
+packages/notifications/pubspec_overrides.yaml
+packages/network/pubspec_overrides.yaml
+packages/form/pubspec_overrides.yaml
+packages/chat_bot/pubspec_overrides.yaml
+packages/cache/pubspec_overrides.yaml
+packages/chat_bot/.flutter-plugins
+packages/chat_bot/.flutter-plugins-dependencies
+packages/form/.flutter-plugins-dependencies
+packages/form/.flutter-plugins
+packages/network/.flutter-plugins
+packages/network/.flutter-plugins-dependencies
+packages/notifications/.flutter-plugins-dependencies
+packages/notifications/.flutter-plugins
