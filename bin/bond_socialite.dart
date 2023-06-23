@@ -1,8 +1,11 @@
 import 'package:args/args.dart';
 import 'dart:io';
 
+import 'social/SocialDriverManager.dart';
+import 'social/providers/google/GoogleDriver.dart';
 import 'transaction/transaction_manager.dart';
 import 'util/console.dart';
+import 'util/file.dart';
 
 /*
   how execute this command bond_socialite:
@@ -63,7 +66,6 @@ void main(List<String> args) async {
         break;
 
       case 'rollback':
-
         if (!params.containsKey('id') || params['id'] == '') {
           print("please pass transaction id into --id=12345 flag");
           return;
@@ -117,4 +119,8 @@ Future<void> generate() async {
     return;
   }
   await transactionManager.open();
+  var manager = SocialDriverManager();
+  manager.addPlatform(GoogleDriver());
+
+  manager.start();
 }
