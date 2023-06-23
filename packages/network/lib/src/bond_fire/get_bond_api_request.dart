@@ -31,7 +31,7 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
   @override
   Future<T> execute() async {
     if (_cacheKey != null) {
-      final bool hasCache = await Cache.has(_cacheKey!);
+      final hasCache = await Cache.has(_cacheKey!);
       switch (_cachePolicy) {
         case CachePolicy.cacheElseNetwork:
           if (hasCache) {
@@ -74,7 +74,7 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
 
   Stream<T> _executeCacheThenNetwork() async* {
     if (_cacheDuration != null && _cacheKey != null) {
-      final bool hasCache = await Cache.has(_cacheKey!);
+      final hasCache = await Cache.has(_cacheKey!);
       if (hasCache) {
         yield await Cache.get<T>(_cacheKey!, fromJsonFactory: _factory);
       }

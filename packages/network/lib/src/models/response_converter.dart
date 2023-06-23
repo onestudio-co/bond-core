@@ -7,7 +7,7 @@ class ResponseConverter<T extends Jsonable>
 
   @override
   T fromJson(Map<String, dynamic> json) {
-    for (var provider in providers) {
+    for (final provider in providers) {
       final model = provider.responseConvert<T>(json);
       if (model != null) return model;
     }

@@ -1,5 +1,4 @@
-import 'package:bond_form/form.dart';
-
+import '../../../form.dart';
 
 class DigitsBetween extends ValidationRule<String> {
   final int min;

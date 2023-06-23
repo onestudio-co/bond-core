@@ -59,7 +59,7 @@ class ApiClient {
     } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
-      throw ServerException(errors: {"message": "$e"});
+      throw ServerException(errors: {'message': '$e'});
     }
   }
 
@@ -96,7 +96,7 @@ class ApiClient {
     } on DioException catch (error) {
       throw _handleDioError(error);
     } catch (e) {
-      throw ServerException(errors: {"message": "$e"});
+      throw ServerException(errors: {'message': '$e'});
     }
   }
 

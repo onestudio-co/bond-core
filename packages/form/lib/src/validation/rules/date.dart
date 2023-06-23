@@ -1,5 +1,4 @@
-import 'package:bond_form/form.dart';
-
+import '../../../form.dart';
 
 class Date extends ValidationRule<String> {
   Date({String? message}) : super(message);

@@ -1,5 +1,4 @@
-import 'package:bond_form/form.dart';
-
+import '../../../form.dart';
 
 class MaxValue extends ValidationRule<num> {
   MaxValue(this.max, {String? message}) : super(message);

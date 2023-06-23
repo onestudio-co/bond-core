@@ -24,7 +24,7 @@ class ServerFailure extends Failure {
   }
 
   @override
-  String toMessage() => error["message"] ?? "-";
+  String toMessage() => error['message'] ?? '-';
 }
 
 class ConnectionFailure extends Failure {

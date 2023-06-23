@@ -39,7 +39,7 @@ class InMemoryCacheDriver implements CacheDriver {
 
   @override
   Future<bool> put(String key, value, [Duration? expiredAfter]) {
-    final CacheData cache = CacheData(
+    final cache = CacheData(
       data: value,
       expiredAt: expiredAfter == null ? null : DateTime.now().add(expiredAfter),
     );
@@ -48,7 +48,7 @@ class InMemoryCacheDriver implements CacheDriver {
     } else if (value is List<Jsonable>) {
       value = jsonEncode(value.map((e) => e.toJson()).toList());
     }
-    final String stringCache = jsonEncode(cache.toJson());
+    final stringCache = jsonEncode(cache.toJson());
     _cache[key] = stringCache;
     return Future.value(true);
   }

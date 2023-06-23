@@ -55,7 +55,6 @@ abstract class FormStateNotifier extends Notifier<FormState> {
 
   String? error<T>(String fieldName) => get<T>(fieldName).error;
 
-
   void update<T>(String fieldName, T value) {
     var field = get<T>(fieldName);
     field.value = value;
@@ -69,7 +68,7 @@ abstract class FormStateNotifier extends Notifier<FormState> {
   }
 
   bool validateAll() {
-    bool allValid = true;
+    var allValid = true;
     for (final fieldName in _fields.keys) {
       final field = get(fieldName);
       final error = field.validate(_fields);

@@ -8,11 +8,10 @@ class ValidatorLocalizations {
   ValidatorLocalizations(this.localeName);
 
   static Future<ValidatorLocalizations> load(Locale locale) {
-    final String name =
-        locale.countryCode == null || locale.countryCode!.isEmpty
-            ? locale.languageCode
-            : locale.toString();
-    final String localeName = Intl.canonicalizedLocale(name);
+    final name = locale.countryCode == null || locale.countryCode!.isEmpty
+        ? locale.languageCode
+        : locale.toString();
+    final localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
       return ValidatorLocalizations(localeName);

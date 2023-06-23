@@ -35,9 +35,11 @@ class DataSource {
           json.encode(response.data), response.statusCode);
     }
   }
-  ListMResponse<T,G> mapListMResponse<T extends Model,G extends Jsonable>(Response<dynamic> response) {
+
+  ListMResponse<T, G> mapListMResponse<T extends Model, G extends Jsonable>(
+      Response<dynamic> response) {
     if ((response.statusCode ?? 0) <= 204) {
-      return ListMResponse<T,G>.fromJson(response.data);
+      return ListMResponse<T, G>.fromJson(response.data);
     } else {
       throw ServerException.fromResponse(
           json.encode(response.data), response.statusCode);

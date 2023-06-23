@@ -1,9 +1,9 @@
-import 'package:bond_form/form.dart';
+import '../../form.dart';
 
 class DateFieldState extends FormFieldState<DateTime?> {
   DateFieldState(
-      DateTime? value, {
-        required String label,
-        List<ValidationRule<DateTime?>> rules = const [],
-      }) : super(value: value, label: label, rules: rules);
+    DateTime? value, {
+    required String label,
+    List<ValidationRule<DateTime?>> rules = const [],
+  }) : super(value: value, label: label, rules: rules);
 }

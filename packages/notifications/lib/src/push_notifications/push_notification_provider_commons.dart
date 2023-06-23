@@ -1,4 +1,4 @@
-import 'package:bond_notifications/notifications.dart';
+import '../../notifications.dart';
 
 mixin PushNotificationProviderCommons {
   Stream<NotificationData> get onNotification;

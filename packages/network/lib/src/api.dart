@@ -8,7 +8,7 @@ class Api {
   static Map<String, String> Function()? extraHeaders;
 
   static Map<String, String> headers({Map<String, String>? extra}) {
-    Map<String, String> map = <String, String>{};
+    var map = <String, String>{};
     map['content-type'] = 'application/json';
     map['Accept'] = 'application/json';
     if (kIsWeb) {

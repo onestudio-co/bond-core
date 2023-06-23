@@ -14,7 +14,7 @@ class SharedPreferencesCacheDriver implements CacheDriver {
     final stringCache = _sharedPreferences.getString(key);
     if (stringCache == null) return _handleDefaultValue(defaultValue);
     final Map<String, dynamic> jsonCache = jsonDecode(stringCache);
-    final CacheData cache = CacheData.fromJson(jsonCache);
+    final cache = CacheData.fromJson(jsonCache);
     if (cache.isValid) {
       return Future.value(factory == null ? cache.data : factory(cache.data));
     }
@@ -27,7 +27,7 @@ class SharedPreferencesCacheDriver implements CacheDriver {
 
   @override
   Future<bool> put(String key, dynamic value, [Duration? expiredAfter]) async {
-    final CacheData cache = CacheData(
+    final cache = CacheData(
       data: value,
       expiredAt: expiredAfter == null ? null : DateTime.now().add(expiredAfter),
     );
@@ -36,7 +36,7 @@ class SharedPreferencesCacheDriver implements CacheDriver {
     } else if (value is List<Jsonable>) {
       value = jsonEncode(value.map((e) => e.toJson()).toList());
     }
-    final String stringCache = jsonEncode(cache.toJson());
+    final stringCache = jsonEncode(cache.toJson());
     return _sharedPreferences.setString(key, stringCache);
   }
 

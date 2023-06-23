@@ -1,5 +1,4 @@
-import 'package:bond_form/form.dart';
-
+import '../../../form.dart';
 
 class Required extends ValidationRule<String> {
   Required({String? message}) : super(message);

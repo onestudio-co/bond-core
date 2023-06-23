@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart' show nonVirtual;
-import 'package:bond_form/form.dart';
+import '../../form.dart';
 
 abstract class FormFieldState<T> {
   T value;
@@ -20,7 +20,7 @@ abstract class FormFieldState<T> {
 
   @nonVirtual
   String? validate(Map<String, FormFieldState> fields) {
-    for (var rule in rules) {
+    for (final rule in rules) {
       if (!rule.validate(value, fields)) {
         return rule.message(label);
       }

@@ -1,5 +1,4 @@
 mixin ChannelableInAppMessage {
-
   Future<void> suspendInAppNotifications();
 
   Future<void> discardInAppNotifications();

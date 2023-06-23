@@ -1,4 +1,4 @@
-import 'package:bond_chat_bot/src/data/models/chat_message.dart';
+import '../../data/models/chat_message.dart';
 import 'package:flutter/material.dart';
 
 import 'chat_view.dart';

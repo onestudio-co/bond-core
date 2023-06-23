@@ -6,8 +6,7 @@ class ChatState {
   final bool loading;
   final String? error;
 
-  ChatState(
-      this.messages, this.meta, this.loading, this.error);
+  ChatState(this.messages, this.meta, this.loading, this.error);
 
   factory ChatState.initial() => ChatState(
         [],

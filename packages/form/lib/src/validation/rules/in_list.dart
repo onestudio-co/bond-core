@@ -1,5 +1,4 @@
-import 'package:bond_form/form.dart';
-
+import '../../../form.dart';
 
 class InList extends ValidationRule<String> {
   final List<String> validValues;

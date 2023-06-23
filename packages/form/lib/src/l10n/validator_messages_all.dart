@@ -2,6 +2,4 @@
 // This is a library that looks up messages for specific locales by
 // delegating to the appropriate library.
 
-export 'validator_messages_all_locales.dart'
-  show initializeMessages;
-
+export 'validator_messages_all_locales.dart' show initializeMessages;

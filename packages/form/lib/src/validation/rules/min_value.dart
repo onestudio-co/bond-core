@@ -1,5 +1,4 @@
-import 'package:bond_form/form.dart';
-
+import '../../../form.dart';
 
 class MinValue extends ValidationRule<num> {
   MinValue(this.min, {String? message}) : super(message);
