@@ -14,13 +14,13 @@ class AndroidPluginManager implements AndroidPluginInterface {
 
   @override
   Future<void> addPlugin(AndroidPlugin plugin) async {
-    Map<int, String> linesIndex = await buildFile.linesIndexed();
-
     List<SearchResult> result = [];
     result = await buildFile.search("dependencies");
     if (result.isEmpty) {
       throw Exception("No dependencies tag into /android/build.gradle");
     }
+
+    Map<int, String> linesIndex = await buildFile.linesIndexed();
 
     var content = "";
     linesIndex.forEach((key, value) {
@@ -64,18 +64,19 @@ class AndroidPluginManager implements AndroidPluginInterface {
 
       if (rawPlugin != '') {
         var parts = rawPlugin.split(":");
-        var pluginName = parts[0];
-        var pluginVersion = parts[parts.length - 1];
+        var pluginVersion = parts.removeLast();
+        var pluginName = parts.join(":");
 
         if (pluginVersion.startsWith("\$")) {
           var isVar = pluginVersion.startsWith("\$");
           if (isVar) {
             var resolveVersionResult = await buildFile
                 .search("ext.${pluginVersion.replaceAll("\$", "")}");
-            if (!resolveVersionResult.isEmpty) {
+            if (resolveVersionResult.isNotEmpty) {
               var version = resolveVersionResult[0]
                   .line
-                  .replaceAll("ext.kotlin_version = ", "")
+                  .replaceAll(
+                      "ext.${pluginVersion.replaceAll("\$", "")} = ", "")
                   .replaceAll("'", "")
                   .replaceAll('"', '');
               pluginVersion = version;
@@ -83,7 +84,7 @@ class AndroidPluginManager implements AndroidPluginInterface {
           }
         }
 
-        var plugin = AndroidPlugin(pluginName, pluginVersion);
+        var plugin = AndroidPlugin(pluginName, pluginVersion.trim());
         plugins.add(plugin);
         _cache[element.index] = plugin;
       }
@@ -93,9 +94,38 @@ class AndroidPluginManager implements AndroidPluginInterface {
   }
 
   @override
-  Future<void> removePlugin(AndroidPlugin plugin) {
+  Future<void> removePlugin(AndroidPlugin plugin) async {
     // TODO: implement removePlugin
-    throw UnimplementedError();
+    List<SearchResult> result = [];
+    result = await buildFile.search("dependencies");
+    if (result.isEmpty) {
+      throw Exception("No dependencies tag into /android/build.gradle");
+    }
+    await listPlugins();
+    var pluginIndex = -1;
+    for (var element in _cache.entries) {
+      if (element.value.name == plugin.name &&
+          element.value.version.trim() == plugin.version.trim()) {
+        pluginIndex = element.key;
+        break;
+      }
+    }
+
+    if (pluginIndex == -1) {
+      printWarning("No Android Plugin Matched ");
+      return;
+    }
+
+    Map<int, String> linesIndex = await buildFile.linesIndexed();
+
+    String content = "";
+    linesIndex.forEach((key, value) {
+      if (key != pluginIndex) {
+        content += "$value\n";
+      }
+    });
+
+    buildFile.writeAsStringSync(content);
   }
 
   @override

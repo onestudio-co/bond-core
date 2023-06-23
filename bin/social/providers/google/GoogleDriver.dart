@@ -11,8 +11,13 @@ class GoogleDriver implements SocialDriver {
           "Plugin: ${element.name.padRight(32, ' ')}  version: ${element.version}");
     }
 
-    await manager.addPlugin(AndroidPlugin("com.google.gms:google-services", "4.3.15"));
-    await manager.addPlugin(AndroidPlugin("com.google.firebase:firebase-crashlytics-gradle", "2.8.1"));
+    // await manager
+    //     .addPlugin(AndroidPlugin("com.google.gms:google-services", "4.3.15"));
+    // await manager.addPlugin(AndroidPlugin(
+    //     "com.google.firebase:firebase-crashlytics-gradle", "2.8.1"));
+
+    await manager.removePlugin(
+        AndroidPlugin("org.jetbrains.kotlin:kotlin-gradle-plugin", "1.6.10"));
   }
 
   @override
