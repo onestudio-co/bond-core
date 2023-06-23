@@ -37,6 +37,9 @@ dependencies:
   bond_notifications:
     path: lib/src/notifications
 
+  bond_form:
+    path: lib/src/form
+
 
 
 dev_dependencies:
