@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: bond_cache
-      sha256: "4f219acc9b3fe66e1f17609560d07c9780f8ea895aaf0a8f27f52dadb375e7cf"
+      sha256: "0770bf875248a699b7f56b4db8de3e234c9ac362b0c66db384d41de04a7396d0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.1+1"
   bond_core:
     dependency: "direct main"
     description:
