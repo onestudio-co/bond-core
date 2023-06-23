@@ -2,6 +2,7 @@ name: bond_core_temp
 description: Bond Core is a foundational library for the Flutter Bond framework.
 version: 0.0.1
 homepage: https://github.com/onestudio-co/flutter-bond
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
