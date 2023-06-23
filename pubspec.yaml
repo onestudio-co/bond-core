@@ -1,57 +1,7 @@
-name: bond_core_temp
-description: Bond Core is a foundational library for the Flutter Bond framework.
-version: 0.0.1
-homepage: https://github.com/onestudio-co/flutter-bond
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+name: bond_core_workspace
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
-  dio: ^5.2.1+1
-  equatable: ^2.0.5
-  json_annotation: ^4.7.0
-  json_serializable: ^6.5.4
-  device_info: ^2.0.3
-  get_it: ^7.2.0
-  meta: ^1.8.0
-  shared_preferences: ^2.1.2
-  package_info_plus: ^4.0.2
-  faker: ^2.0.0
-  riverpod: ^2.3.6
-  intl: ^0.18.0
-  args: ^2.2.2
-
-  bond_core:
-    path: lib/src/core
-
-  bond_cache:
-    path: lib/src/cache
-
-  bond_network:
-    path: lib/src/network
-
-  bond_chat_bot:
-    path: lib/src/chat_bot
-  
-  bond_notifications:
-    path: lib/src/notifications
-
-  bond_form:
-    path: lib/src/form
-
-  bond_app_analytics:
-    path: lib/src/app_analytics
-
+  sdk: '>=2.18.0 <4.0.0'
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
-  build_runner: ^2.3.2
-  intl_translation: ^0.18.2
-
-
-
-executables:
-  bond_socialite: bond_socialite.dart
+  melos: ^3.1.0

@@ -34,14 +34,14 @@ packages:
     source: hosted
     version: "2.11.0"
   bond_cache:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../cache"
       relative: true
     source: path
     version: "0.0.1"
   bond_core:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       path: "../core"
       relative: true
@@ -118,6 +118,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  delayed_display:
+    dependency: "direct main"
+    description:
+      name: delayed_display
+      sha256: "8d722bb730071b872cef2bc0b07ef20549ebd269087a16ed1c5696896246c296"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   device_info:
     dependency: transitive
     description:
