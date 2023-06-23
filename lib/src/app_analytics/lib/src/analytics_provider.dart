@@ -1,10 +1,7 @@
-import 'package:flutter/foundation.dart';
-
-import 'analytics_event.dart';
-import 'system_events.dart';
+import 'core/analytics_event.dart';
+import 'core/system_events.dart';
 
 abstract class AnalyticsProvider {
-  @mustCallSuper
   void log(AnalyticsEvent event) {
     try {
       _log(event);
