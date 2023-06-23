@@ -30,3 +30,7 @@ migrate_working_dir/
 build/
 /.flutter-plugins
 /.flutter-plugins-dependencies
+lib/src/network/.flutter-plugins-dependencies
+lib/src/network/.flutter-plugins
+lib/src/chat_bot/.flutter-plugins-dependencies
+lib/src/chat_bot/.flutter-plugins

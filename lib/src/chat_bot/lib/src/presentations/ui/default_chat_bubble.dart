@@ -1,6 +1,6 @@
+import 'package:bond_chat_bot/src/data/models/chat_message.dart';
 import 'package:flutter/material.dart';
 
-import 'package:bond_core_temp/src/chat_bot/models/chat_message.dart';
 import 'chat_view.dart';
 
 class DefaultChatBubble extends StatelessWidget {
@@ -29,10 +29,11 @@ class DefaultChatBubble extends StatelessWidget {
           ),
         ),
         Visibility(
-            visible: message.title != null,
-            child: const SizedBox(
-              height: 12,
-            )),
+          visible: message.title != null,
+          child: const SizedBox(
+            height: 12,
+          ),
+        ),
         Text(
           message.content,
           style: isUserMessage
