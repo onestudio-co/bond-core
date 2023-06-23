@@ -31,6 +31,9 @@ dependencies:
   bond_cache:
     path: lib/src/cache
 
+  bond_network:
+    path: lib/src/network
+
 
 
 dev_dependencies:

@@ -1,0 +1,25 @@
+name: bond_network
+description: network is a Bond package provides a convenient way to handle API response.
+version: 0.0.1
+homepage: https://github.com/onestudio-co/flutter-bond
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.2.1+1
+  equatable: ^2.0.5
+  json_annotation: ^4.7.0
+  json_serializable: ^6.5.4
+  meta: ^1.8.0
+  shared_preferences: ^2.1.2
+  package_info_plus: ^4.0.2
+  faker: ^2.0.0
+
+  bond_core:
+    path: ../core
+
+  bond_cache:
+    path: ../cache

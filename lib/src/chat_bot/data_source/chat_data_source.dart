@@ -1,6 +1,6 @@
 
 import 'package:bond_core_temp/src/chat_bot/models/chat_message.dart';
-import 'package:bond_core_temp/src/network.dart';
+import 'package:bond_network/network.dart';
 
 abstract class ChatDataSource<T extends ChatMessageConvertible,
     G extends ChatMetaConvertible> {

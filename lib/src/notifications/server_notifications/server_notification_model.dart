@@ -1,4 +1,4 @@
-import 'package:bond_core_temp/src/network.dart';
+import 'package:bond_network/network.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'server_notification_model.g.dart';

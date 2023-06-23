@@ -1,4 +1,4 @@
-import 'package:bond_core_temp/src/network.dart';
+import 'package:bond_network/network.dart';
 
 part 'chat_message_convertible.dart';
 
