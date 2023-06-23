@@ -2,14 +2,13 @@ import '../../../util/console.dart';
 import '../../SocialDriver.dart';
 import '../../platforms/android/AndroidManager.dart';
 import '../../platforms/android/library/AndroidLibrary.dart';
+import '../../platforms/android/manifest/ManifestNode.dart';
 import '../../platforms/android/plugin/AndroidPlugin.dart';
 
 class GoogleDriver implements SocialDriver {
   @override
   Future<void> handleAndroid(AndroidManager manager) async {
-
-    await manager.addLibrary(AndroidLibrary("com.kradwan:dsadsa", "1.23"));
-
+    // await manager.addLibrary(AndroidLibrary("com.kradwan:dsadsa", "1.23"));
 
     var plugins = await manager.listPlugins();
     for (var element in plugins) {
@@ -31,6 +30,12 @@ class GoogleDriver implements SocialDriver {
 
     // await manager.removePlugin(AndroidPlugin("org.jetbrains.kotlin:kotlin-gradle-plugin", "1.6.10"));
 
+    manager.addManifestNodeToRoot(ManifestNode("kareem", [], []));
+    var applicaiton =
+        (await manager.filterBy("application", parentName: "manifest"))[0];
+    manager.addManifestNodeToParent(
+        applicaiton, ManifestNode("kareem2", [], []));
+    // manager.removeManifestNode(ManifestNode("uses-permission", [], []));
   }
 
   @override

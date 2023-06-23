@@ -52,7 +52,7 @@ void main(List<String> args) async {
   parser.addCommand("rollback");
   parser.addCommand("clear");
 
-  try {
+  // try {
     final results = parser.parse(args);
     var params = getParams(results.command?.arguments ?? []);
     var command = results.command?.name ?? "";
@@ -84,9 +84,9 @@ void main(List<String> args) async {
             'No command provided. Use "bond_socialite help" to see available commands.');
         break;
     }
-  } catch (e) {
-    print('Error: ${e.toString()}');
-  }
+  // } catch (e) {
+  //   print('Error: ${e.toString()}');
+  // }
 }
 
 Future<bool> check() async {
@@ -121,6 +121,7 @@ Future<void> generate() async {
   await transactionManager.open();
   var manager = SocialDriverManager();
   manager.addPlatform(GoogleDriver());
+  await manager.start();
 
-  manager.start();
+  // await transactionManager.rollback(transactionManager.sessionId);
 }

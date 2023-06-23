@@ -106,11 +106,6 @@ class AndroidManager
   }
 
   @override
-  Future<void> addManifestNode(ManifestNode node) async {
-    return await _manifestManager.addManifestNode(node);
-  }
-
-  @override
   Future<AndroidManifest> getManifest() async {
     return await _manifestManager.getManifest();
   }
@@ -121,7 +116,23 @@ class AndroidManager
   }
 
   @override
-  Future<void> setManifestNode(ManifestNode node) async {
-    return await _manifestManager.setManifestNode(node);
+  Future<void> addManifestNodeToParent(
+      ManifestNode parent, ManifestNode node) async {
+    return await _manifestManager.addManifestNodeToParent(parent, node);
+  }
+
+  @override
+  Future<void> addManifestNodeToRoot(ManifestNode node) async {
+    return await _manifestManager.addManifestNodeToRoot(node);
+  }
+
+  @override
+  Future<void> updateManifestNode(ManifestNode node) async {
+    return await _manifestManager.updateManifestNode(node);
+  }
+
+  @override
+  Future<List<ManifestNode>> filterBy(String name, {String? parentName})  async{
+    return await _manifestManager.filterBy(name, parentName: parentName);
   }
 }

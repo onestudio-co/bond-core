@@ -23,6 +23,7 @@ class TransactionManager {
     "1": "lib/main.dart",
     "2": "android/build.gradle",
     "3": "android/app/build.gradle",
+    "4": "android/app/src/main/AndroidManifest.xml",
   };
 
   factory TransactionManager() {
