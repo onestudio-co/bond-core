@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../util/console.dart';
 import 'transaction_history.dart';
 
 extension FileExtention on FileSystemEntity {
@@ -19,8 +20,9 @@ class TransactionManager {
       '${Directory.current.path}/.bond/$sessionId';
 
   final Map<String, String> _files = {
-    "main.dart": "lib/main.dart",
-    "build.gradle": "android/build.gradle",
+    "1": "lib/main.dart",
+    "2": "android/build.gradle",
+    "3": "android/app/build.gradle",
   };
 
   factory TransactionManager() {
@@ -49,9 +51,9 @@ class TransactionManager {
       await backupFile.create();
     }
 
-    for (var file in _files.values) {
-      var source = '$projectPath/$file';
-      var to = '$bondBuildPath/$sessionId/files/${file.split('/').last}';
+    for (var entry in _files.entries) {
+      var source = '$projectPath/${entry.value}';
+      var to = '$bondBuildPath/$sessionId/files/${entry.key}';
       await _copyFile(source, to);
     }
   }
@@ -106,11 +108,20 @@ PROJECT:  ${Directory(bondBuildPath).name}
       var transactionHistory = TransactionHistory(transaction.name, date);
       lst.add(transactionHistory);
     }
-    lst.sort((i,d) => i.date.compareTo(d.title));
+    lst.sort((i, d) => i.date.compareTo(d.title));
     return lst;
   }
 
-  void rollback(String sessionId) async {
+  Future<void> clear() async {
+    var directory = Directory(bondBuildPath);
+    var directories = await directory.list().toList();
+
+    for (var folder in directories) {
+      await folder.delete(recursive: true);
+    }
+  }
+
+  Future<void> rollback(String sessionId) async {
     for (var key in _files.keys) {
       var source = '$bondBuildPath/$sessionId/files/$key';
       var target = '$projectPath/${_files[key]}';
