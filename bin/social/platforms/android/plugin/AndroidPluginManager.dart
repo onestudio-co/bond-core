@@ -34,21 +34,33 @@ class AndroidPluginManager implements AndroidPluginInterface {
   }
 
   @override
-  Future<AndroidPlugin> getPlugin(String name, String version) {
-    // TODO: implement getPlugin
-    throw UnimplementedError();
+  Future<AndroidPlugin> getPlugin(String name, String version) async {
+    await listPlugins();
+    var items = _cache.values
+        .where((element) => element.name == name && element.version == version);
+
+    if (items.isEmpty) {
+      throw Exception(
+          "No Android Plugin found with name: ${name} and version: ${version}");
+    }
+    return items.first;
   }
 
   @override
-  Future<List<AndroidPlugin>> getPlugins(String name) {
-    // TODO: implement getPlugins
-    throw UnimplementedError();
+  Future<List<AndroidPlugin>> getPlugins(String name) async {
+    await listPlugins();
+
+    var items = _cache.values.where((element) => element.name == name).toList();
+    if (items.isEmpty) {
+      throw Exception("No Android Plugin found with name: ${name}");
+    }
+    return items;
   }
 
   @override
   Future<List<AndroidPlugin>> listPlugins() async {
     // TODO: implement listPlugins
-
+    _cache.clear();
     var result = await buildFile.search("classpath");
 
     if (result.isEmpty) {
