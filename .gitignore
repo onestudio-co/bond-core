@@ -34,3 +34,5 @@ lib/src/network/.flutter-plugins-dependencies
 lib/src/network/.flutter-plugins
 lib/src/chat_bot/.flutter-plugins-dependencies
 lib/src/chat_bot/.flutter-plugins
+lib/src/notifications/.flutter-plugins-dependencies
+lib/src/notifications/.flutter-plugins
