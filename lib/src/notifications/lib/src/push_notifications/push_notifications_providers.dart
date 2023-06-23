@@ -21,14 +21,14 @@ class PushNotificationsProviders extends NotificationProvider
   void listen() {
     for (final pushNotificationProvider in pushNotificationProviders) {
       final onPushNotificationStreamSubscription =
-          pushNotificationProvider.onPushNotification.listen(onNotification);
+          pushNotificationProvider.onNotification.listen(onNotification);
       _onNotificationsStreamsSubscriptions
           .add(onPushNotificationStreamSubscription);
     }
 
     for (final pushNotificationProvider in pushNotificationProviders) {
       final onPushNotificationTappedStreamSubscription =
-          pushNotificationProvider.onPushNotificationTapped
+          pushNotificationProvider.onNotificationTapped
               .listen(onNotificationTapped);
       _onNotificationsTappedStreamsSubscriptions
           .add(onPushNotificationTappedStreamSubscription);

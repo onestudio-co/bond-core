@@ -87,7 +87,7 @@ class NotificationCenterProvider extends NotificationProvider
   @override
   void listen() {
     _streamsSubscriptions =
-        pushNotificationProvider.onPushNotification.listen(onNotification);
+        pushNotificationProvider.onNotification.listen(onNotification);
   }
 
   @override
