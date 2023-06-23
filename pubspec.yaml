@@ -39,6 +39,8 @@ dependencies:
   bond_notifications:
     path: lib/src/notifications
 
+  bond_app_analytics:
+    path: lib/src/app_analytics
 
 
 dev_dependencies:
