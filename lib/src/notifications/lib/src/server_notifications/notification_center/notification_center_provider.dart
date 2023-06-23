@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bond_core_temp/src/notifications.dart';
+import 'package:bond_notifications/notifications.dart';
 
 class NotificationCenterProvider extends NotificationProvider
     with ServerNotificationsProvider, ActionableNotification {
