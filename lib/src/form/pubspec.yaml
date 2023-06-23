@@ -10,29 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dio: ^5.2.1+1
-  equatable: ^2.0.5
-  json_annotation: ^4.7.0
-  json_serializable: ^6.5.4
-  device_info: ^2.0.3
-  get_it: ^7.2.0
   meta: ^1.8.0
-  shared_preferences: ^2.1.2
-  package_info_plus: ^4.0.2
-  faker: ^2.0.0
   riverpod: ^2.3.6
   intl: ^0.18.0
-  delayed_display: ^2.0.0
-  args: ^2.2.2
 
   bond_core:
     path: ../core
-
-  bond_cache:
-    path: ../cache
-
-  bond_network:
-    path: ../network
-
-  bond_notifications:
-    path: ../notifications
