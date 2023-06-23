@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class MinLength extends ValidationRule<String> {
   final int min;

@@ -1,5 +1,5 @@
-import 'package:bond_core/core.dart';
-import '../../form.dart';
+import 'package:bond_core/bond_core.dart';
+import '../../bond_form.dart';
 
 abstract class ValidationRule<T> {
   ValidationRule(this._message);

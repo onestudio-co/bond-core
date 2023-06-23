@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:bond_cache/cache.dart';
-import 'package:bond_core/core.dart';
+import 'package:bond_cache/bond_cache.dart';
+import 'package:bond_core/bond_core.dart';
 
 part 'cache_policy.dart';
 

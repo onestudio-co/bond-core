@@ -1,5 +1,5 @@
-import 'package:bond_network/network.dart';
-import '../../../notifications.dart';
+import 'package:bond_network/bond_network.dart';
+import '../../server_notifications.dart';
 
 abstract class NotificationCenterDataSource extends DataSource {
   Future<ListResponse<ServerNotificationModel>> loadNotifications(

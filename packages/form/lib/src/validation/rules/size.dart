@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class Size extends ValidationRule<String> {
   final int size;

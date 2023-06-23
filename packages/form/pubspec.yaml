@@ -1,8 +1,7 @@
 name: bond_form
-description: form is a Bond package provides a convenient way to handle Form.
+description: Form is a Bond package provides a convenient way to handle Form.
 version: 0.0.1
 homepage: https://github.com/onestudio-co/flutter-bond
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
@@ -14,5 +13,4 @@ dependencies:
   riverpod: ^2.3.6
   intl: ^0.18.0
 
-  bond_core:
-    path: ../core
+  bond_core: ^0.0.1

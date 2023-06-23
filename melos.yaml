@@ -20,3 +20,6 @@ scripts:
     exec: melos run analyze && melos run fix && melos run format
     description: Runs all the previous commands in sequence analysis, fixes, and formatting.
 
+  publish:
+    exec: melos flutter pub publish --dry-run
+    description: Publishes all packages to pub.dev.

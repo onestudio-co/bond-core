@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:bond_core/core.dart';
+import 'package:bond_core/bond_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'cache_driver.dart';
 

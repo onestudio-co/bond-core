@@ -12,10 +12,11 @@ packages:
   bond_core:
     dependency: "direct main"
     description:
-      path: "../core"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: bond_core
+      sha256: "9107569a07fde3701811e3cada7ba5e409e67d9f3e9cf235833bae09a54d7dd6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1+1"
   characters:
     dependency: transitive
     description:

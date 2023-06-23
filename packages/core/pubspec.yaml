@@ -1,8 +1,7 @@
 name: bond_core
-description: core is a package Bond Core Foundational Library for the Flutter Bond framework.
-version: 0.0.1
+description: Bond Core Foundational Library for the Flutter Bond framework.
+version: 0.0.1+1
 homepage: https://github.com/onestudio-co/flutter-bond
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ">=2.16.0 <3.0.0"

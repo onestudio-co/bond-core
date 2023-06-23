@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:bond_core/core.dart';
+import 'package:bond_core/bond_core.dart';
 
 import '../core/notification_data.dart';
 import 'actionable_push_notification.dart';

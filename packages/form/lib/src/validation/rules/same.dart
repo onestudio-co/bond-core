@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class Same extends ValidationRule<String> {
   final String otherField;

@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class Integer extends ValidationRule<String> {
   Integer({String? message}) : super(message);

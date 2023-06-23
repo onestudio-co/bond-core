@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class Email extends ValidationRule<String> {
   Email({String? message}) : super(message);

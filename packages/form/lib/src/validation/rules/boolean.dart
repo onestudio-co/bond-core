@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class Boolean extends ValidationRule<String> {
   Boolean({String? message}) : super(message);

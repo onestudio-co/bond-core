@@ -1,4 +1,4 @@
-import '../../../form.dart';
+import '../../../bond_form.dart';
 
 class Digits extends ValidationRule<String> {
   final int digitLength;

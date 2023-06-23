@@ -2,7 +2,6 @@ name: bond_chat_bot
 description: A flexible, customizable Flutter chat bot package for diverse message types.
 version: 0.0.1
 homepage: https://github.com/onestudio-co/flutter-bond
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
@@ -12,5 +11,4 @@ dependencies:
     sdk: flutter
 
   delayed_display: ^2.0.0
-  bond_network:
-    path: ../network
+  bond_network: ^0.0.1

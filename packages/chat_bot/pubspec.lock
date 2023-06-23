@@ -34,25 +34,28 @@ packages:
     source: hosted
     version: "2.11.0"
   bond_cache:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../cache"
-      relative: true
-    source: path
+      name: bond_cache
+      sha256: "4f219acc9b3fe66e1f17609560d07c9780f8ea895aaf0a8f27f52dadb375e7cf"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.1"
   bond_core:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../core"
-      relative: true
-    source: path
-    version: "0.0.1"
+      name: bond_core
+      sha256: "9107569a07fde3701811e3cada7ba5e409e67d9f3e9cf235833bae09a54d7dd6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1+1"
   bond_network:
     dependency: "direct main"
     description:
-      path: "../network"
-      relative: true
-    source: path
+      name: bond_network
+      sha256: dd1639428235c622e54a580c7aea3a53fddfa0b616fa181c84d228171903b491
+      url: "https://pub.dev"
+    source: hosted
     version: "0.0.1"
   build:
     dependency: transitive

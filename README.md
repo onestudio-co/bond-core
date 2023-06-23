@@ -18,7 +18,7 @@ dependencies:
 In your library add the following import:
 
 ```dart
-import 'package:bond_core/core.dart';
+import 'package:bond_core/bond_core.dart';
 ```
 
 ## Usage

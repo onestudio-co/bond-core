@@ -1,4 +1,4 @@
-import 'package:bond_core/core.dart';
+import 'package:bond_core/bond_core.dart';
 
 import '../notifications_core.dart';
 import 'push_notification.dart';
