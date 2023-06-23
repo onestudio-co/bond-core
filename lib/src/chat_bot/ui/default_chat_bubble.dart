@@ -1,5 +1,7 @@
-import 'package:bond_core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bond_core_temp/src/chat_bot/models/chat_message.dart';
+import 'chat_view.dart';
 
 class DefaultChatBubble extends StatelessWidget {
   const DefaultChatBubble({
