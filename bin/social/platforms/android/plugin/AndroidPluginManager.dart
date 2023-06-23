@@ -95,7 +95,6 @@ class AndroidPluginManager implements AndroidPluginInterface {
 
   @override
   Future<void> removePlugin(AndroidPlugin plugin) async {
-    // TODO: implement removePlugin
     List<SearchResult> result = [];
     result = await buildFile.search("dependencies");
     if (result.isEmpty) {
@@ -129,8 +128,37 @@ class AndroidPluginManager implements AndroidPluginInterface {
   }
 
   @override
-  Future<void> updatePlugin(AndroidPlugin plugin) {
-    // TODO: implement updatePlugin
-    throw UnimplementedError();
+  Future<void> updatePlugin(AndroidPlugin plugin) async {
+    List<SearchResult> result = [];
+    result = await buildFile.search("dependencies");
+    if (result.isEmpty) {
+      throw Exception("No dependencies tag into /android/build.gradle");
+    }
+    await listPlugins();
+
+    var pluginIndex = -1;
+    for (var element in _cache.entries) {
+      if (element.value.name == plugin.name &&
+          element.value.version.trim() == plugin.version.trim()) {
+        pluginIndex = element.key;
+        break;
+      }
+    }
+
+    if (pluginIndex == -1) {
+      printWarning("No Android Plugin Matched ");
+      return;
+    }
+
+    Map<int, String> linesIndex = await buildFile.linesIndexed();
+
+    String content = "";
+    linesIndex.forEach((key, value) {
+      if (key != pluginIndex) {
+        content += "        classpath '${plugin.name}:${plugin.version}'\n";
+      }
+    });
+
+    buildFile.writeAsStringSync(content);
   }
 }
