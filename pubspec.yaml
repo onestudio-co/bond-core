@@ -22,7 +22,6 @@ dependencies:
   faker: ^2.0.0
   riverpod: ^2.3.6
   intl: ^0.18.0
-  delayed_display: ^2.0.0
   args: ^2.2.2
 
   bond_core:
@@ -34,6 +33,9 @@ dependencies:
   bond_network:
     path: lib/src/network
 
+  bond_chat_bot:
+    path: lib/src/chat_bot
+  
   bond_notifications:
     path: lib/src/notifications
 

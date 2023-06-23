@@ -1,5 +1,5 @@
-import 'package:bond_core_temp/src/chat_bot/controller/chat_controller.dart';
-import 'package:bond_core_temp/src/chat_bot/models/chat_message.dart';
+import 'package:bond_chat_bot/src/data/models/chat_message.dart';
+import 'package:bond_chat_bot/src/presentations/controller/chat_controller.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/widgets.dart';
 
