@@ -2,6 +2,7 @@ import 'package:args/args.dart';
 import 'dart:io';
 
 import 'transaction/transaction_manager.dart';
+import 'util/console.dart';
 
 /*
   how execute this command bond_socialite:
@@ -14,63 +15,72 @@ import 'transaction/transaction_manager.dart';
     dart ./bin/bond_socialite.dart generate
 
  */
-void main(List<String> args) {
+
+Map<String, String> getParams(List<String> commandArgs) {
+  Map<String, String> params = {};
+
+  for (var arg in commandArgs) {
+    var delimiter = arg.contains(" ") ? " " : "=";
+    var parts = arg.split(delimiter);
+    if (parts.length != 2) {
+      continue;
+    }
+    if (parts[0] == '') {
+      continue;
+    }
+    var key = parts[0].replaceAll("--", "");
+    var value = parts[1];
+    params[key] = value;
+  }
+
+  return params;
+}
+
+var transactionManager = TransactionManager();
+
+void main(List<String> args) async {
   final parser = ArgParser();
-  parser.addCommand("rollback");
   parser.addOption("id");
-  parser.addFlag('help',
-      abbr: 'h', negatable: false, help: 'Prints usage information.');
-  // parser.addFlag('rollback', abbr: 'r', negatable: false, help: 'Rollback .');
+
+  parser.addCommand("help");
+  parser.addCommand("check");
+  parser.addCommand("generate");
+  parser.addCommand("history");
+  parser.addCommand("rollback");
+  parser.addCommand("clear");
 
   try {
     final results = parser.parse(args);
-
+    var params = getParams(results.command?.arguments ?? []);
     var command = results.command?.name ?? "";
 
-    if (command == "rollback") {
-      var commandArgs = results.command?.arguments ?? [];
-      var sessionId = "";
-      for (var value in commandArgs) {
-        if (value.contains("--id")) {
-          sessionId = value.replaceAll("--id=", "");
-          break;
+    switch (command) {
+      case 'clear':
+        await transactionManager.clear();
+        break;
+      case 'help':
+        printSuccess('Usage: bond_socialite <command>');
+        break;
+
+      case 'rollback':
+
+        if (!params.containsKey('id') || params['id'] == '') {
+          print("please pass transaction id into --id=12345 flag");
+          return;
         }
-      }
+        await transactionManager.rollback(params['id'] ?? "");
 
-      if (sessionId.trim() == '') {
-        print("please pass transaction id into --id flag");
-        return;
-      }
-
-      TransactionManager().rollback(sessionId);
-      return;
-    }
-
-    if (results['help'] as bool) {
-      print('Usage: bond_socialite <command>');
-      // Print additional help information if needed
-    } else {
-      // Handle different commands and execute appropriate actions
-      // Example: `bond_socialite generate`
-      if (results.rest.isNotEmpty) {
-        final command = results.rest[0];
-        switch (command) {
-          case 'check':
-            check();
-            break;
-          case 'generate':
-            generate();
-            break;
-          case 'history':
-            history();
-            break;
-          default:
-            print('Unknown command: $command');
-        }
-      } else {
+        break;
+      case 'generate':
+        await generate();
+        break;
+      case 'history':
+        await history();
+        break;
+      default:
         print(
             'No command provided. Use "bond_socialite help" to see available commands.');
-      }
+        break;
     }
   } catch (e) {
     print('Error: ${e.toString()}');
@@ -79,36 +89,32 @@ void main(List<String> args) {
 
 Future<bool> check() async {
   var currentPath = Directory.current.path;
-
-  var pubspecFile = File('${currentPath}/pubspec.yaml');
-  var configFile = File('${currentPath}/socialite_config.dart');
+  var pubspecFile = File('$currentPath/pubspec.yaml');
+  var configFile = File('$currentPath/socialite_config.json');
 
   bool isPubspecExists = await pubspecFile.exists();
   if (!isPubspecExists) {
-    print("Your Project not configured well, not fluuter project");
+    print("Your Project not configured well, not flutter project");
     return false;
   }
   bool isConfigExists = await configFile.exists();
   if (!isConfigExists) {
-    print("Your Project not configured well, socialite_config.dart is missing");
+    print("Your Project not configured well, socialite_config.json is missing");
     return false;
   }
   return true;
 }
 
-void history() async {
-  var historyList = await TransactionManager().history();
+Future<void> history() async {
+  var historyList = await transactionManager.history();
   for (var value in historyList) {
     print("ID: ${value.title}  Date: ${value.date}");
   }
 }
 
-void generate() async {
+Future<void> generate() async {
   if (!await check()) {
     return;
   }
-
-  await TransactionManager().open();
-  print('Generating...');
-  // Implement the logic for the "generate" command
+  await transactionManager.open();
 }
