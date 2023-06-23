@@ -36,3 +36,7 @@ lib/src/chat_bot/.flutter-plugins-dependencies
 lib/src/chat_bot/.flutter-plugins
 lib/src/notifications/.flutter-plugins-dependencies
 lib/src/notifications/.flutter-plugins
+lib/src/form/.flutter-plugins
+lib/src/form/.flutter-plugins-dependencies
+lib/src/notifications/.flutter-plugins
+lib/src/notifications/.flutter-plugins-dependencies
