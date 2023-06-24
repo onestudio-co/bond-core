@@ -20,7 +20,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
-      - run: dart pub get
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.2'
+          channel: 'stable'
+      - run: flutter pub get
       - run: mkdir build
       - run: dart compile exe bin/bond_socialite.dart -o build/${{ matrix.output-name }}
       - uses: actions/upload-artifact@v1
