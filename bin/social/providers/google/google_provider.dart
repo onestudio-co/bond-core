@@ -1,5 +1,7 @@
 import '../../../util/console.dart';
 import '../../config.dart';
+import '../../platforms/flutter/flutter_manager.dart';
+import '../../platforms/flutter/pubspec/dependency/flutter_dependency.dart';
 import '../../social_provider.dart';
 import '../../platforms/android/android_manager.dart';
 import '../../platforms/android/library/android_library.dart';
@@ -52,9 +54,15 @@ class GoogleProvider implements SocialDriver {
           activities[0], ManifestNode("kareem3", [], []));
     }
 
-    // manager.removeManifestNode(ManifestNode("uses-permission", [], []));
   }
 
   @override
   Future<void> handleIOS() async {}
+
+  @override
+  Future<void> handleFlutter(FlutterManager manager) async {
+    await manager.listDependencies();
+    await manager.addDependency(FlutterDependency("kareem", "1.2.3"));
+    await manager.remove(FlutterDependency("meta", "^1.8.2"));
+  }
 }

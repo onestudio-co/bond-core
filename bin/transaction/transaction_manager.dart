@@ -24,6 +24,7 @@ class TransactionManager {
     "2": "android/build.gradle",
     "3": "android/app/build.gradle",
     "4": "android/app/src/main/AndroidManifest.xml",
+    "5": "pubspec.yaml",
   };
 
   factory TransactionManager() {
