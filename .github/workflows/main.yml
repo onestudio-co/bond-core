@@ -18,8 +18,9 @@ jobs:
             output-name: hello-windows.exe
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: DanTup/gh-actions/setup-dart@master
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+      - run: dart pub get
       - run: mkdir build
       - run: dart compile exe bin/bond_socialite.dart -o build/${{ matrix.output-name }}
       - uses: actions/upload-artifact@v1
