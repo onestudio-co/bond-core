@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'chat_view.dart';
 
-class DefaultChatBubble extends StatelessWidget {
-  const DefaultChatBubble({
+class DefaultChatMessageView extends StatelessWidget {
+  const DefaultChatMessageView({
     Key? key,
     required this.message,
     required this.decoration,

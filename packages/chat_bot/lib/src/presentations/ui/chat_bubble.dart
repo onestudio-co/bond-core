@@ -45,7 +45,7 @@ class ChatBubble extends StatelessWidget {
             borderRadius: bubbleDecoration.borderRadius,
           ),
           child: chatMessageBuilder.build(message) ??
-              DefaultChatBubble(
+              DefaultChatMessageView(
                 message: message,
                 decoration: decoration,
               ),

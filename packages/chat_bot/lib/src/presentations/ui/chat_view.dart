@@ -3,7 +3,7 @@ import '../controller/chat_controller.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/widgets.dart';
 
-import 'default_chat_bubble.dart';
+import 'default_chat_message_view.dart';
 
 part 'chat_bubble.dart';
 
