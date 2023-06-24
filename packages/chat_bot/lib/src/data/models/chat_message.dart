@@ -8,6 +8,8 @@ part 'message_sender.dart';
 
 part 'message_type.dart';
 
+part 'choice.dart';
+
 class ChatMessage {
   final int chatBotId;
   final int id;
@@ -16,6 +18,8 @@ class ChatMessage {
   final String? title;
   final String? icon;
   final String content;
+  final String? key;
+  final List<Choice>? choices; // only used if type is MessageType.multiChoice
 
   const ChatMessage({
     required this.id,
@@ -25,5 +29,7 @@ class ChatMessage {
     this.title,
     this.icon,
     required this.content,
+    this.key,
+    this.choices,
   });
 }
