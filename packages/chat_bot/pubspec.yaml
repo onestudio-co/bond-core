@@ -10,5 +10,5 @@ dependencies:
   flutter:
     sdk: flutter
 
-  delayed_display: ^2.0.0
+  delayed_display: any
   bond_network: ^0.0.1

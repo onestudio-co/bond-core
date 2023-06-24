@@ -10,4 +10,4 @@ dependencies:
   flutter:
     sdk: flutter
   bond_core: ^0.0.1+1
-  shared_preferences: ^2.1.2
+  shared_preferences: any
