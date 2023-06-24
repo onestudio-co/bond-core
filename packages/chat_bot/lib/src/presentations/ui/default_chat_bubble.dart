@@ -13,23 +13,20 @@ class DefaultChatBubble extends StatelessWidget {
   final ChatMessage message;
   final ChatBubbleDecoration decoration;
 
+  bool get _haveTitle => message.title != null && message.title!.isNotEmpty;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Visibility(
-          visible: message.title != null && message.title!.isNotEmpty,
-          child: Text(
-            message.title!,
+        if (_haveTitle)
+          Text(
+            message.title ?? '',
             style: decoration.botTitleTextStyle,
           ),
-        ),
-        Visibility(
-          visible: message.title != null && message.title!.isNotEmpty,
-          child: const SizedBox(height: 12),
-        ),
+        if (_haveTitle) const SizedBox(height: 12),
         Text(
           message.content,
           style: message.sender == MessageSender.user
