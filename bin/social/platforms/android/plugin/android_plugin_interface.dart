@@ -1,4 +1,4 @@
-import 'AndroidPlugin.dart';
+import 'android_plugin.dart';
 
 abstract class AndroidPluginInterface {
   Future<List<AndroidPlugin>> listPlugins();

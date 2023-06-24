@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'AndroidManifest.dart';
-import 'ManifestInterface.dart';
-import 'ManifestNode.dart';
+import 'android_manifest.dart';
+import 'manifest_interface.dart';
+import 'manifest_node.dart';
 import 'package:xml/xml.dart';
 
 class ManifestManager implements ManifestInterface {

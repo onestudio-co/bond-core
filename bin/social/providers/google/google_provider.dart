@@ -1,11 +1,16 @@
 import '../../../util/console.dart';
-import '../../SocialDriver.dart';
-import '../../platforms/android/AndroidManager.dart';
-import '../../platforms/android/library/AndroidLibrary.dart';
-import '../../platforms/android/manifest/ManifestNode.dart';
-import '../../platforms/android/plugin/AndroidPlugin.dart';
+import '../../config.dart';
+import '../../social_provider.dart';
+import '../../platforms/android/android_manager.dart';
+import '../../platforms/android/library/android_library.dart';
+import '../../platforms/android/manifest/manifest_node.dart';
+import '../../platforms/android/plugin/android_plugin.dart';
 
-class GoogleDriver implements SocialDriver {
+class GoogleProvider implements SocialDriver {
+  GoogleConfig config;
+
+  GoogleProvider(this.config);
+
   @override
   Future<void> handleAndroid(AndroidManager manager) async {
     // await manager.addLibrary(AndroidLibrary("com.kradwan:dsadsa", "1.23"));
@@ -42,10 +47,10 @@ class GoogleDriver implements SocialDriver {
     var activities =
         (await manager.filterBy("activity", parentName: "application2"));
 
-    // if (activities.isNotEmpty) {
+    if (activities.isNotEmpty) {
       await manager.addManifestNodeToParent(
           activities[0], ManifestNode("kareem3", [], []));
-    // }
+    }
 
     // manager.removeManifestNode(ManifestNode("uses-permission", [], []));
   }

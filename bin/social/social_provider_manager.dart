@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'SocialDriver.dart';
-import 'platforms/android/AndroidManager.dart';
+import 'social_provider.dart';
+import 'platforms/android/android_manager.dart';
 
 class SocialDriverManager {
   final List<SocialDriver> _drivers = [];

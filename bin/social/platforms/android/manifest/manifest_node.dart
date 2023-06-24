@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import 'ManifestProp.dart';
+import 'manifest_prop.dart';
 
 class ManifestNode {
   final String uuid = "${DateTime.now().microsecondsSinceEpoch}";

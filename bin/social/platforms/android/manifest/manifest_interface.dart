@@ -1,5 +1,5 @@
-import 'AndroidManifest.dart';
-import 'ManifestNode.dart';
+import 'android_manifest.dart';
+import 'manifest_node.dart';
 
 abstract class ManifestInterface {
   Future<AndroidManifest> getManifest();

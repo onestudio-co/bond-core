@@ -3,8 +3,8 @@ import 'dart:io';
 import '../../../../transaction/transaction_manager.dart';
 import '../../../../util/console.dart';
 import '../../../../util/file.dart';
-import 'AndroidPlugin.dart';
-import 'AndroidPluginInterface.dart';
+import 'android_plugin.dart';
+import 'android_plugin_interface.dart';
 
 class AndroidPluginManager implements AndroidPluginInterface {
   File buildFile;

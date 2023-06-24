@@ -1,4 +1,4 @@
-import 'AndroidLibrary.dart';
+import 'android_library.dart';
 
 abstract class AndroidLibraryInterface {
   Future<List<AndroidLibrary>> listLibraries();

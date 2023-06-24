@@ -1,4 +1,4 @@
-import 'platforms/android/AndroidManager.dart';
+import 'platforms/android/android_manager.dart';
 
 abstract class SocialDriver {
 

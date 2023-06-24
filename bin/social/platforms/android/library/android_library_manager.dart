@@ -2,8 +2,8 @@ import 'dart:io';
 
 import '../../../../util/console.dart';
 import '../../../../util/file.dart';
-import 'AndroidLibrary.dart';
-import 'AndroidLibraryInterface.dart';
+import 'android_library.dart';
+import 'android_library_interface.dart';
 
 class AndroidLibraryManager implements AndroidLibraryInterface {
   File buildFile;

@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import 'library/AndroidLibrary.dart';
-import 'library/AndroidLibraryInterface.dart';
-import 'library/AndroidLibraryManager.dart';
-import 'manifest/AndroidManifest.dart';
-import 'manifest/ManifestInterface.dart';
-import 'manifest/ManifestManager.dart';
-import 'plugin/AndroidPlugin.dart';
-import 'manifest/ManifestNode.dart';
-import 'plugin/AndroidPluginInterface.dart';
-import 'plugin/AndroidPluginManager.dart';
+import 'library/android_library.dart';
+import 'library/android_library_interface.dart';
+import 'library/android_library_manager.dart';
+import 'manifest/android_manifest.dart';
+import 'manifest/manifest_interface.dart';
+import 'manifest/manifest_manager.dart';
+import 'plugin/android_plugin.dart';
+import 'manifest/manifest_node.dart';
+import 'plugin/android_plugin_interface.dart';
+import 'plugin/android_plugin_manager.dart';
 
 class AndroidManager
     implements

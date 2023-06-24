@@ -1,6 +1,6 @@
 import 'package:xml/xml.dart';
 
-import 'ManifestNode.dart';
+import 'manifest_node.dart';
 
 class AndroidManifest {
   final ManifestNode _root;

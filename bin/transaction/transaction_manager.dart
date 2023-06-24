@@ -134,7 +134,7 @@ PROJECT:  ${Directory(bondBuildPath).name}
     try {
       await Directory("$bondBuildPath/$sessionId").delete(recursive: true);
     } catch (e) {
-      printWarning("No Session With Id: $sessionId");
+      // printWarning("No Session With Id: $sessionId");
     }
   }
 }
