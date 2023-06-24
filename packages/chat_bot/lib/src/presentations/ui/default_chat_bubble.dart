@@ -8,12 +8,10 @@ class DefaultChatBubble extends StatelessWidget {
     Key? key,
     required this.message,
     required this.decoration,
-    required this.isUserMessage,
   }) : super(key: key);
 
   final ChatMessage message;
   final ChatBubbleDecoration decoration;
-  final bool isUserMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +20,19 @@ class DefaultChatBubble extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Visibility(
-          visible: message.title != null,
+          visible: message.title != null && message.title!.isNotEmpty,
           child: Text(
-            message.title ?? '',
+            message.title!,
             style: decoration.botTitleTextStyle,
           ),
         ),
         Visibility(
-          visible: message.title != null,
-          child: const SizedBox(
-            height: 12,
-          ),
+          visible: message.title != null && message.title!.isNotEmpty,
+          child: const SizedBox(height: 12),
         ),
         Text(
           message.content,
-          style: isUserMessage
+          style: message.sender == MessageSender.user
               ? decoration.userTextStyle
               : decoration.botTextStyle,
         ),

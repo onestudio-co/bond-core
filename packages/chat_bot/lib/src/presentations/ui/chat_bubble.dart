@@ -48,7 +48,6 @@ class ChatBubble extends StatelessWidget {
               DefaultChatBubble(
                 message: message,
                 decoration: decoration,
-                isUserMessage: isUserMessage,
               ),
         ),
       ),
