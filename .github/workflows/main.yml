@@ -1,6 +1,10 @@
 name: Build on Push
 
-on: [push]
+on:
+  push:
+    branches:
+      - feature/create-cli-for-socialite-feature
+
 
 jobs:
   build:
