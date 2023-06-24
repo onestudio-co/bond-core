@@ -1,11 +1,12 @@
 import 'package:args/args.dart';
 import 'dart:io';
 
-import 'social/SocialDriverManager.dart';
-import 'social/providers/google/GoogleDriver.dart';
+import 'social/config.dart';
+import 'social/providers/apple/apple_provider.dart';
+import 'social/social_provider_manager.dart';
+import 'social/providers/google/google_provider.dart';
 import 'transaction/transaction_manager.dart';
 import 'util/console.dart';
-import 'util/file.dart';
 
 /*
   how execute this command bond_socialite:
@@ -25,6 +26,11 @@ Map<String, String> getParams(List<String> commandArgs) {
   for (var arg in commandArgs) {
     var delimiter = arg.contains(" ") ? " " : "=";
     var parts = arg.split(delimiter);
+
+    if (parts.length == 1) {
+      params[parts[0].replaceAll("--", "")] = "";
+      continue;
+    }
     if (parts.length != 2) {
       continue;
     }
@@ -43,6 +49,8 @@ var transactionManager = TransactionManager();
 
 void main(List<String> args) async {
   final parser = ArgParser();
+
+  parser.addFlag("last");
   parser.addOption("id");
 
   parser.addCommand("help");
@@ -52,7 +60,7 @@ void main(List<String> args) async {
   parser.addCommand("rollback");
   parser.addCommand("clear");
 
-  // try {
+  try {
     final results = parser.parse(args);
     var params = getParams(results.command?.arguments ?? []);
     var command = results.command?.name ?? "";
@@ -60,18 +68,28 @@ void main(List<String> args) async {
     switch (command) {
       case 'clear':
         await transactionManager.clear();
+        printSuccess("Clear history successfully");
         break;
       case 'help':
         printSuccess('Usage: bond_socialite <command>');
         break;
 
       case 'rollback':
+        var isLast = params.containsKey("last");
+
+        if (isLast) {
+          var sessionId = (await transactionManager.history()).last.title;
+          await transactionManager.rollback(sessionId);
+          printSuccess("Rollback successfully");
+          break;
+        }
+
         if (!params.containsKey('id') || params['id'] == '') {
           print("please pass transaction id into --id=12345 flag");
           return;
         }
         await transactionManager.rollback(params['id'] ?? "");
-
+        printSuccess("Rollback successfully");
         break;
       case 'generate':
         await generate();
@@ -84,9 +102,20 @@ void main(List<String> args) async {
             'No command provided. Use "bond_socialite help" to see available commands.');
         break;
     }
-  // } catch (e) {
-  //   print('Error: ${e.toString()}');
-  // }
+  } catch (e, stack) {
+    printError("\n\nError on Execution: ${e}\n\n");
+    printBlue("Rollback starting");
+
+    try {
+      await transactionManager.rollback(transactionManager.sessionId);
+      await transactionManager.deleteSession(transactionManager.sessionId);
+      printSuccess("Rollback successfully");
+    } catch (e) {
+      printError("Error on rollback: ${e}");
+    }
+
+    print(stack);
+  }
 }
 
 Future<bool> check() async {
@@ -118,10 +147,24 @@ Future<void> generate() async {
   if (!await check()) {
     return;
   }
+
+  var content = File("${Directory.current.path}/socialite_config.json")
+      .readAsStringSync();
+
+  Config config = Config.parse(content);
+
   await transactionManager.open();
   var manager = SocialDriverManager();
-  manager.addPlatform(GoogleDriver());
+  if (config.google != null) {
+    manager.addPlatform(GoogleProvider(config.google!));
+  }
+
+  if (config.apple != null) {
+    manager.addPlatform(AppleProvider(config.apple!));
+  }
+
   await manager.start();
+
 
   // await transactionManager.rollback(transactionManager.sessionId);
 }
