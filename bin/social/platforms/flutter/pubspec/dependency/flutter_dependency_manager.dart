@@ -1,14 +1,12 @@
-import 'dart:convert';
 import 'dart:io';
 
-import '../../../../../util/console.dart';
 import 'flutter_dependency.dart';
 import 'flutter_dependency_interface.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 import 'package:yaml/yaml.dart';
 
 class FlutterDependencyManager implements FlutterDependencyInterface {
-  File _pubspecFile;
+  final File _pubspecFile;
   late YamlEditor _editor;
 
   FlutterDependencyManager(this._pubspecFile) {
@@ -20,8 +18,6 @@ class FlutterDependencyManager implements FlutterDependencyInterface {
     var currentDependencies = await listDependencies(name: dependency.name);
 
     if (currentDependencies.isNotEmpty) {
-      printWarning(
-          "There are already dependency exists with name: ${dependency.name}");
       return;
     }
 
@@ -29,7 +25,7 @@ class FlutterDependencyManager implements FlutterDependencyInterface {
     var dependencies = Map.from(immutableDependencies.value);
     dependencies[dependency.name] = dependency.version;
     _editor.update(["dependencies"], dependencies);
-    // await _flush();
+    await _flush();
   }
 
   @override
@@ -66,18 +62,11 @@ class FlutterDependencyManager implements FlutterDependencyInterface {
 
     try {
       var currentVersion = _editor.parseAt(["dependencies", dependency.name]);
-
       if (currentVersion.toString() == dependency.version) {
         var removed = _editor.remove(['dependencies', dependency.name]);
         await _flush();
-      } else {
-        printWarning(
-            "FlutterDependencyManager: No dependency with name: ${dependency.name} and version: ${dependency.version}");
       }
-    } catch (error) {
-      printWarning(
-          "FlutterDependencyManager: failed to remove dependency with name: ${dependency.name}");
-    }
+    } catch (error) {}
   }
 
   @override
@@ -89,7 +78,11 @@ class FlutterDependencyManager implements FlutterDependencyInterface {
   }
 
   Future<void> _flush() async {
-    print(_editor);
-    // print(json.encode(_pubspec));
+    _pubspecFile.writeAsStringSync(_editor.toString());
+  }
+
+  @override
+  Future<void> pubGet() async {
+    await Process.run("flutter", ["pub", "get"]);
   }
 }

@@ -1,3 +1,4 @@
+import '../plugin/android_plugin.dart';
 import 'android_library.dart';
 
 abstract class AndroidLibraryInterface {
@@ -12,4 +13,6 @@ abstract class AndroidLibraryInterface {
   Future<void> removeLibrary(AndroidLibrary library);
 
   Future<void> addLibrary(AndroidLibrary library);
+
+  Future<void> applyPlugin(AndroidPlugin plugin);
 }

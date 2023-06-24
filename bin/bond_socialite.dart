@@ -48,9 +48,18 @@ Map<String, String> getParams(List<String> commandArgs) {
 var transactionManager = TransactionManager();
 
 void main(List<String> args) async {
+  var isValidProject = await check();
+
+  if (!isValidProject) {
+    printError("Please, Check you are working on Flutter project");
+    return;
+  }
+
+  final manager = SocialManager();
   final parser = ArgParser();
 
   parser.addFlag("last");
+  parser.addFlag("debug");
   parser.addOption("id");
 
   parser.addCommand("help");
@@ -60,9 +69,9 @@ void main(List<String> args) async {
   parser.addCommand("rollback");
   parser.addCommand("clear");
 
+  final results = parser.parse(args);
+  var params = getParams(results.command?.arguments ?? []);
   try {
-    final results = parser.parse(args);
-    var params = getParams(results.command?.arguments ?? []);
     var command = results.command?.name ?? "";
 
     switch (command) {
@@ -80,7 +89,9 @@ void main(List<String> args) async {
         if (isLast) {
           var sessionId = (await transactionManager.history()).last.title;
           await transactionManager.rollback(sessionId);
+          await manager.rollback();
           printSuccess("Rollback successfully");
+
           break;
         }
 
@@ -89,10 +100,12 @@ void main(List<String> args) async {
           return;
         }
         await transactionManager.rollback(params['id'] ?? "");
+        await manager.rollback();
+
         printSuccess("Rollback successfully");
         break;
       case 'generate':
-        await generate();
+        await generate(manager);
         break;
       case 'history':
         await history();
@@ -114,7 +127,10 @@ void main(List<String> args) async {
       printError("Error on rollback: ${e}");
     }
 
-    print(stack);
+    if (params.containsKey("debug")) {
+      printError("\n\nBond Stacktrace: \n\n");
+      print("$stack");
+    }
   }
 }
 
@@ -125,12 +141,13 @@ Future<bool> check() async {
 
   bool isPubspecExists = await pubspecFile.exists();
   if (!isPubspecExists) {
-    print("Your Project not configured well, not flutter project");
+    printError("Your Project not configured well, not flutter project");
     return false;
   }
   bool isConfigExists = await configFile.exists();
   if (!isConfigExists) {
-    print("Your Project not configured well, socialite_config.json is missing");
+    printError(
+        "Your Project not configured well, socialite_config.json is missing");
     return false;
   }
   return true;
@@ -139,11 +156,11 @@ Future<bool> check() async {
 Future<void> history() async {
   var historyList = await transactionManager.history();
   for (var value in historyList) {
-    print("ID: ${value.title}  Date: ${value.date}");
+    printWarning("ID: ${value.title}  Date: ${value.date}");
   }
 }
 
-Future<void> generate() async {
+Future<void> generate(SocialManager manager) async {
   if (!await check()) {
     return;
   }
@@ -154,7 +171,6 @@ Future<void> generate() async {
   Config config = Config.parse(content);
 
   await transactionManager.open();
-  var manager = SocialDriverManager();
   if (config.google != null) {
     manager.addPlatform(GoogleProvider(config.google!));
   }
@@ -164,7 +180,4 @@ Future<void> generate() async {
   }
 
   await manager.start();
-
-
-  // await transactionManager.rollback(transactionManager.sessionId);
 }

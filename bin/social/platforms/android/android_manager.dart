@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'build/android_build_manager.dart';
 import 'library/android_library.dart';
 import 'library/android_library_interface.dart';
 import 'library/android_library_manager.dart';
@@ -15,12 +16,14 @@ class AndroidManager
     implements
         AndroidPluginInterface,
         AndroidLibraryInterface,
-        ManifestInterface {
+        ManifestInterface,
+        AndroidBuildManager {
   Directory _android;
 
   late AndroidPluginManager _pluginManager;
   late AndroidLibraryManager _libraryManager;
   late ManifestManager _manifestManager;
+  late AndroidBuildManager _buildManager;
 
   AndroidManager(this._android) {
     var pluginBuildFile = File("${_android.path}/build.gradle");
@@ -43,6 +46,8 @@ class AndroidManager
           "file AndroidManifest.xml is missing inside /app/src/main/ folder");
     }
     _manifestManager = ManifestManager(manifestFile);
+
+    _buildManager = AndroidBuildManager();
   }
 
   @override
@@ -132,7 +137,22 @@ class AndroidManager
   }
 
   @override
-  Future<List<ManifestNode>> filterBy(String name, {String? parentName})  async{
+  Future<List<ManifestNode>> filterBy(String name, {String? parentName}) async {
     return await _manifestManager.filterBy(name, parentName: parentName);
+  }
+
+  @override
+  Future<void> applyPlugin(AndroidPlugin plugin) async {
+    return await _libraryManager.applyPlugin(plugin);
+  }
+
+  @override
+  Future<bool> build() async {
+    return await _buildManager.build();
+  }
+
+  @override
+  Future<void> prepareEnv() async {
+    return await _buildManager.prepareEnv();
   }
 }

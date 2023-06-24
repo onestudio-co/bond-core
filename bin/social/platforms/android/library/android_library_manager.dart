@@ -2,6 +2,7 @@ import 'dart:io';
 
 import '../../../../util/console.dart';
 import '../../../../util/file.dart';
+import '../plugin/android_plugin.dart';
 import 'android_library.dart';
 import 'android_library_interface.dart';
 
@@ -46,7 +47,8 @@ class AndroidLibraryManager implements AndroidLibraryInterface {
           }
         }
 
-        var library = AndroidLibrary(libraryName, libraryVersion.trim());
+        var library =
+            AndroidLibrary(libraryName, version: libraryVersion.trim());
         libs.add(library);
         _cache[element.index] = library;
       }
@@ -56,7 +58,7 @@ class AndroidLibraryManager implements AndroidLibraryInterface {
   }
 
   @override
-  Future<AndroidLibrary> getLibrary(String name, String version) async {
+  Future<AndroidLibrary> getLibrary(String name, String? version) async {
     await listLibraries();
     var items = _cache.values
         .where((element) => element.name == name && element.version == version);
@@ -91,7 +93,7 @@ class AndroidLibraryManager implements AndroidLibraryInterface {
     var libraryIndex = -1;
     for (var element in _cache.entries) {
       if (element.value.name == library.name &&
-          element.value.version.trim() == library.version.trim()) {
+          element.value.version?.trim() == library.version?.trim()) {
         libraryIndex = element.key;
         break;
       }
@@ -125,7 +127,7 @@ class AndroidLibraryManager implements AndroidLibraryInterface {
     var libraryIndex = -1;
     for (var element in _cache.entries) {
       if (element.value.name == library.name &&
-          element.value.version.trim() == library.version.trim()) {
+          element.value.version?.trim() == library.version?.trim()) {
         libraryIndex = element.key;
         break;
       }
@@ -151,21 +153,58 @@ class AndroidLibraryManager implements AndroidLibraryInterface {
   @override
   Future<void> addLibrary(AndroidLibrary library) async {
     List<SearchResult> result = [];
+
+    try {
+      await listLibraries();
+      await getLibrary(library.name, library.version);
+      return;
+    } catch (error) {}
+
     result = await buildFile.search("dependencies");
+    Map<int, String> linesIndex = await buildFile.linesIndexed();
+    var content = "";
     if (result.isEmpty) {
-      throw Exception("No dependencies tag into /android/app/build.gradle");
+      linesIndex.forEach((key, value) {
+        content += "$value\n";
+      });
+      content += "dependencies {\n";
+      content += library.toGradle();
+      content += "}";
+    } else {
+      linesIndex.forEach((key, value) {
+        if (key == result[0].index + 1) {
+          content += library.toGradle();
+        }
+        content += "$value\n";
+      });
+    }
+    buildFile.writeAsStringSync(content);
+  }
+
+  @override
+  Future<void> applyPlugin(AndroidPlugin plugin) async {
+    var result = await buildFile.search("apply plugin:");
+    if (result.isEmpty) {
+      return;
     }
 
+    var insertedIndex = result.last.index;
     Map<int, String> linesIndex = await buildFile.linesIndexed();
+
+
+    for (var element in linesIndex.values) {
+      if (element.contains("apply") && element.contains(plugin.name)) {
+        return;
+      }
+    }
 
     var content = "";
     linesIndex.forEach((key, value) {
-      if (key == result[0].index + 1) {
-        content += '    implementation "${library.name}:${library.version}"\n';
+      if (key == insertedIndex) {
+        content += "${plugin.apply()}\n";
       }
       content += "$value\n";
     });
-
     buildFile.writeAsStringSync(content);
   }
 }

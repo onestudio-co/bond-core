@@ -33,4 +33,10 @@ class FlutterManager implements FlutterDependencyInterface {
   Future<void> update(FlutterDependency dependency) async {
     return await _dependencyManager.update(dependency);
   }
+
+  @override
+  Future<void> pubGet() async {
+    // TODO: implement pubGet
+    return await _dependencyManager.pubGet();
+  }
 }

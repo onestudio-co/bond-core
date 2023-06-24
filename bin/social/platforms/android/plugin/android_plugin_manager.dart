@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import '../../../../transaction/transaction_manager.dart';
 import '../../../../util/console.dart';
 import '../../../../util/file.dart';
 import 'android_plugin.dart';
@@ -20,6 +19,11 @@ class AndroidPluginManager implements AndroidPluginInterface {
       throw Exception("No dependencies tag into /android/build.gradle");
     }
 
+    try {
+      var currentPlugin = await getPlugin(plugin.name, plugin.version);
+      return;
+    } catch (error) {}
+
     Map<int, String> linesIndex = await buildFile.linesIndexed();
 
     var content = "";
@@ -31,6 +35,8 @@ class AndroidPluginManager implements AndroidPluginInterface {
     });
 
     buildFile.writeAsStringSync(content);
+
+    // TODO Apply Plugin
   }
 
   @override
