@@ -45,7 +45,10 @@ class ManifestNode {
 
   List<ManifestNode> filterByName(String name, {String? parentName}) {
     var lst = _childs
-        .where((element) => element.title == name)
+        .where((element) =>
+            element.title == name &&
+            ((parentName == null || element._parent == null) ||
+                (parentName == element._parent?.title)))
         .toList();
     for (var item in _childs) {
       lst.addAll(item.filterByName(name, parentName: parentName));

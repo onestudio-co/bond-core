@@ -31,10 +31,22 @@ class GoogleDriver implements SocialDriver {
     // await manager.removePlugin(AndroidPlugin("org.jetbrains.kotlin:kotlin-gradle-plugin", "1.6.10"));
 
     manager.addManifestNodeToRoot(ManifestNode("kareem", [], []));
-    var applicaiton =
-        (await manager.filterBy("application", parentName: "manifest"))[0];
-    manager.addManifestNodeToParent(
-        applicaiton, ManifestNode("kareem2", [], []));
+    var applications =
+        (await manager.filterBy("application", parentName: "manifest"));
+
+    if (applications.isNotEmpty) {
+      await manager.addManifestNodeToParent(
+          applications[0], ManifestNode("kareem2", [], []));
+    }
+
+    var activities =
+        (await manager.filterBy("activity", parentName: "application2"));
+
+    // if (activities.isNotEmpty) {
+      await manager.addManifestNodeToParent(
+          activities[0], ManifestNode("kareem3", [], []));
+    // }
+
     // manager.removeManifestNode(ManifestNode("uses-permission", [], []));
   }
 

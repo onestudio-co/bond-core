@@ -129,4 +129,12 @@ PROJECT:  ${Directory(bondBuildPath).name}
       await _copyFile(source, target);
     }
   }
+
+  Future<void> deleteSession(String sessionId) async {
+    try {
+      await Directory("$bondBuildPath/$sessionId").delete(recursive: true);
+    } catch (e) {
+      printWarning("No Session With Id: $sessionId");
+    }
+  }
 }

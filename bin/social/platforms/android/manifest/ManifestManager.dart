@@ -7,12 +7,9 @@ import 'package:xml/xml.dart';
 
 class ManifestManager implements ManifestInterface {
   File manifestFile;
+  late AndroidManifest _manifest;
 
-  ManifestManager(this.manifestFile);
-
-  @override
-  Future<AndroidManifest> getManifest() async {
-    // TODO: implement getManifest
+  ManifestManager(this.manifestFile) {
     final document = XmlDocument.parse(manifestFile.readAsStringSync());
     XmlElement? applicationElement = document.getElement("manifest");
     if (applicationElement == null) {
@@ -20,7 +17,13 @@ class ManifestManager implements ManifestInterface {
     }
     ManifestNode application = ManifestNode.parse(applicationElement);
     AndroidManifest model = AndroidManifest(application);
-    return model;
+    _manifest = model;
+  }
+
+  @override
+  Future<AndroidManifest> getManifest() async {
+    // TODO: implement getManifest
+    return _manifest;
   }
 
   @override
@@ -34,12 +37,10 @@ class ManifestManager implements ManifestInterface {
   Future<void> addManifestNodeToParent(
       ManifestNode parent, ManifestNode node) async {
     var manifest = await getManifest();
-    var result = manifest.filterBy(parent);
-    print("result: ${result.length}");
-    if (result.length == 1) {
-      result[0].add(node);
-      manifestFile.writeAsStringSync(manifest.toXml());
-    }
+    // parent.add(node);
+    var result = manifest.filterBy(parent)[0];
+    result.add(node);
+    manifestFile.writeAsStringSync(manifest.toXml());
   }
 
   @override
@@ -64,6 +65,6 @@ class ManifestManager implements ManifestInterface {
   @override
   Future<List<ManifestNode>> filterBy(String name, {String? parentName}) async {
     var manifest = await getManifest();
-    return  manifest.filterByName(name, parentName: parentName);
+    return manifest.filterByName(name, parentName: parentName);
   }
 }
