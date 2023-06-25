@@ -24,6 +24,7 @@ dependencies:
   delayed_display: ^2.0.0
   args: ^2.2.2
   dependency_manipulator: ^0.0.4
+  file_based_transaction_manager: ^0.0.3
 
 
 

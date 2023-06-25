@@ -1,11 +1,11 @@
 import 'package:args/args.dart';
+import 'package:file_based_transaction_manager/transaction_manager.dart';
 import 'dart:io';
 
 import 'social/config.dart';
 import 'social/providers/apple/apple_provider.dart';
 import 'social/social_provider_manager.dart';
 import 'social/providers/google/google_provider.dart';
-import 'transaction/transaction_manager.dart';
 import 'util/console.dart';
 
 /*
@@ -46,6 +46,7 @@ Map<String, String> getParams(List<String> commandArgs) {
 }
 
 var transactionManager = TransactionManager();
+var session = transactionManager.beginSession();
 
 void main(List<String> args) async {
   var isValidProject = await check();
@@ -76,7 +77,7 @@ void main(List<String> args) async {
 
     switch (command) {
       case 'clear':
-        await transactionManager.clear();
+        transactionManager.close(session);
         printSuccess("Clear history successfully");
         break;
       case 'help':
@@ -88,7 +89,7 @@ void main(List<String> args) async {
 
         if (isLast) {
           var sessionId = (await transactionManager.history()).last.title;
-          await transactionManager.rollback(sessionId);
+          await transactionManager.rollbackById(sessionId);
           await manager.rollback();
           printSuccess("Rollback successfully");
 
@@ -99,7 +100,7 @@ void main(List<String> args) async {
           print("please pass transaction id into --id=12345 flag");
           return;
         }
-        await transactionManager.rollback(params['id'] ?? "");
+        await transactionManager.rollbackById(params['id'] ?? "");
         await manager.rollback();
 
         printSuccess("Rollback successfully");
@@ -120,8 +121,8 @@ void main(List<String> args) async {
     printBlue("Rollback starting");
 
     try {
-      await transactionManager.rollback(transactionManager.sessionId);
-      await transactionManager.deleteSession(transactionManager.sessionId);
+      transactionManager.rollback(session);
+      transactionManager.close(session);
       printSuccess("Rollback successfully");
     } catch (e) {
       printError("Error on rollback: ${e}");
@@ -170,7 +171,6 @@ Future<void> generate(SocialManager manager) async {
 
   Config config = Config.parse(content);
 
-  await transactionManager.open();
   if (config.google != null) {
     manager.addPlatform(GoogleProvider(config.google!));
   }
