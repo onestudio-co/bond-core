@@ -1,3 +1,7 @@
+## 0.0.1+3
+
+* update bond_network dependency.
+
 ## 0.0.1+2
 
 * provide default value for title on .
