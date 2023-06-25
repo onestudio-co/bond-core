@@ -1,8 +1,7 @@
-import 'platforms/android/android_manager.dart';
-import 'platforms/flutter/flutter_manager.dart';
+import 'package:dependency_manipulator/platforms/android/android.dart';
+import 'package:dependency_manipulator/platforms/flutter/flutter.dart';
 
 abstract class SocialDriver {
-
   Future<void> handleAndroid(AndroidManager manager);
 
   Future<void> handleIOS();

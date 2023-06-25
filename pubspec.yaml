@@ -23,8 +23,7 @@ dependencies:
   intl: ^0.18.0
   delayed_display: ^2.0.0
   args: ^2.2.2
-  xml: ^5.4.0
-  yaml_edit: ^2.1.0
+  dependency_manipulator: ^0.0.2
 
 
 

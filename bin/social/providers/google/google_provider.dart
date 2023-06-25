@@ -1,12 +1,9 @@
 import 'dart:io';
 
 import '../../config.dart';
-import '../../platforms/flutter/flutter_manager.dart';
-import '../../platforms/flutter/pubspec/dependency/flutter_dependency.dart';
 import '../../social_provider.dart';
-import '../../platforms/android/android_manager.dart';
-import '../../platforms/android/library/android_library.dart';
-import '../../platforms/android/plugin/android_plugin.dart';
+import 'package:dependency_manipulator/platforms/android/android.dart';
+import 'package:dependency_manipulator/platforms/flutter/flutter.dart';
 
 class GoogleProvider implements SocialDriver {
   GoogleConfig config;

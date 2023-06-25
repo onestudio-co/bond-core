@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import '../util/console.dart';
-import 'platforms/flutter/flutter_manager.dart';
 import 'social_provider.dart';
-import 'platforms/android/android_manager.dart';
+import 'package:dependency_manipulator/platforms/android/android.dart';
+import 'package:dependency_manipulator/platforms/flutter/flutter.dart';
 
 class SocialManager {
   final List<SocialDriver> _drivers = [];
@@ -11,7 +11,7 @@ class SocialManager {
   final AndroidManager _androidManager =
       AndroidManager(Directory("${Directory.current.path}/android"));
   final FlutterManager _flutterManager =
-      FlutterManager("${Directory.current.path}/pubspec.yaml");
+      FlutterManager(File("${Directory.current.path}/pubspec.yaml"));
 
   void addPlatform(SocialDriver driver) {
     _drivers.add(driver);
