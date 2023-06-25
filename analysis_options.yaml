@@ -18,7 +18,6 @@ linter:
     - prefer_collection_literals
     - prefer_conditional_assignment
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_final_in_for_each
     - prefer_for_elements_to_map_fromIterable
     - prefer_is_not_empty
