@@ -1,6 +1,8 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import 'package:bond_cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
+import 'package:dio/dio.dart';
 
 part 'cache_policy.dart';
 
@@ -84,7 +86,14 @@ class BaseBondApiRequest<T> {
       }
     } on DioException catch (error) {
       if (_errorFactory != null && error.response != null) {
-        throw _errorFactory!(error.response!.data);
+        final data = error.response!.data;
+        if (data is Map<String, dynamic>) {
+          throw _errorFactory!(data);
+        } else if (data is String) {
+          throw _errorFactory!(jsonDecode(data));
+        } else {
+          rethrow;
+        }
       }
       rethrow;
     } catch (error) {
