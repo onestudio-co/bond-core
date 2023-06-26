@@ -56,6 +56,9 @@ class ChatBubble extends StatelessWidget {
                   ),
             ),
             Visibility(
+                visible: !_hasTrailing,
+                child: const SizedBox(width: 28,)),
+            Visibility(
               visible: _hasTrailing,
               child: const SizedBox(width: 4),
             ),
