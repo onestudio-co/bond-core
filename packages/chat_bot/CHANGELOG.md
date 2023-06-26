@@ -1,8 +1,9 @@
-## 0.0.1+4
+## 0.0.1+5
 
 * update bond_network dependency.
 * chat_bubble now has optional trailing widget
 * chat_view now has padding from chat_bubble_decoration
+* chat_bubble refactor spacing when chat bubble does not have trailing widget
 
 ## 0.0.1+2
 
