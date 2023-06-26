@@ -21,7 +21,7 @@ class BaseBondApiRequest<T> {
 
   Map<String, String> _headers = <String, String>{};
   Map<String, dynamic> _queryParameters = <String, dynamic>{};
-  Map<String, dynamic> _body = <String, dynamic>{};
+  Map<String, dynamic>? _body;
   Factory<T>? _factory;
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
