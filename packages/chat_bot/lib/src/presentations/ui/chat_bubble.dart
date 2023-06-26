@@ -5,8 +5,7 @@ class ChatBubble extends StatelessWidget {
   final ChatMessage message;
   final ChatBubbleDecoration decoration;
   final ChatMessageBuilder chatMessageBuilder;
-  final bool hasLeading;
-  final Widget? leading;
+  final Widget? trailing;
 
   const ChatBubble({
     Key? key,
@@ -14,9 +13,10 @@ class ChatBubble extends StatelessWidget {
     required this.message,
     required this.decoration,
     required this.chatMessageBuilder,
-    this.leading,
-    this.hasLeading = false,
+    this.trailing,
   }) : super(key: key);
+
+  bool get _hasTrailing => trailing != null;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ChatBubble extends StatelessWidget {
         width: double.infinity,
         alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -56,14 +56,12 @@ class ChatBubble extends StatelessWidget {
                   ),
             ),
             Visibility(
-              visible: hasLeading,
-              child: const SizedBox(
-                width: 4,
-              ),
+              visible: _hasTrailing,
+              child: const SizedBox(width: 4),
             ),
             Visibility(
-              visible: hasLeading,
-              child: leading ?? SizedBox.shrink(),
+              visible: _hasTrailing,
+              child: trailing ?? SizedBox.shrink(),
             )
           ],
         ),
