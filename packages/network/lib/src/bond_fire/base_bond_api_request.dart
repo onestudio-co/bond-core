@@ -12,7 +12,7 @@ part 'get_bond_api_request.dart';
 /// by chaining methods for headers, query parameters, body, etc.
 
 typedef Factory<T> = T Function(Map<String, dynamic>);
-typedef ErrorFactory<T extends Error> = T Function(Map<String, dynamic>);
+typedef ErrorFactory<T extends Error  > = T Function(Map<String, dynamic>);
 
 class BaseBondApiRequest<T> {
   final Dio _dio;
@@ -21,7 +21,7 @@ class BaseBondApiRequest<T> {
 
   Map<String, String> _headers = <String, String>{};
   Map<String, dynamic> _queryParameters = <String, dynamic>{};
-  Map<String, dynamic> _body = <String, dynamic>{};
+  Map<String, dynamic>? _body;
   Factory<T>? _factory;
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
