@@ -17,6 +17,7 @@ class ChatView extends StatelessWidget {
   final ChatBubble Function(BuildContext, int, ChatMessage) bubbleBuilder;
   final Widget typingIndicator;
   final Widget inputView;
+  final ChatBubbleDecoration decoration;
 
   const ChatView({
     Key? key,
@@ -25,6 +26,7 @@ class ChatView extends StatelessWidget {
     required this.typingIndicator,
     required this.inputView,
     required this.state,
+    required this.decoration,
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class ChatView extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.builder(
+            padding: decoration.chatViewPadding,
             controller: controller.scrollController,
             itemCount: state.messages.length,
             itemBuilder: (context, index) {
