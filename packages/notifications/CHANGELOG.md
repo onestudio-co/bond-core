@@ -1,3 +1,8 @@
+## 0.0.1+3
+
+* update bond_network dependency.
+* update bond_core dependency.
+
 ## 0.0.1+2
 
 * update bond_network dependency.
