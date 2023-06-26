@@ -1,3 +1,7 @@
+## 0.0.1+3
+
+* add necessary imports to bond form
+
 ## 0.0.1+2
 
 * update bond_core dependency.
