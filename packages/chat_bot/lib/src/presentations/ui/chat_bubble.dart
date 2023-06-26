@@ -5,8 +5,7 @@ class ChatBubble extends StatelessWidget {
   final ChatMessage message;
   final ChatBubbleDecoration decoration;
   final ChatMessageBuilder chatMessageBuilder;
-  final bool? hasLeading;
-  final Widget? leading;
+  final Widget? trailing;
 
   const ChatBubble({
     Key? key,
@@ -14,9 +13,10 @@ class ChatBubble extends StatelessWidget {
     required this.message,
     required this.decoration,
     required this.chatMessageBuilder,
-    this.leading,
-    this.hasLeading,
+    this.trailing,
   }) : super(key: key);
+
+  bool get _hasTrailing => trailing != null;
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +31,39 @@ class ChatBubble extends StatelessWidget {
         milliseconds: delayAnimationDuration.inMilliseconds * index,
       ),
       child: Container(
-        margin: decoration.margin,
+        margin: isUserMessage ? decoration.userMargin : decoration.botMargin,
         width: double.infinity,
         alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
-        child: Container(
-          constraints: BoxConstraints(
-            maxWidth: decoration.maxWidth,
-            minWidth: decoration.minWidth,
-          ),
-          padding: decoration.padding,
-          decoration: BoxDecoration(
-            color: bubbleDecoration.color,
-            borderRadius: bubbleDecoration.borderRadius,
-          ),
-          child: chatMessageBuilder.build(message) ??
-              DefaultChatMessageView(
-                message: message,
-                decoration: decoration,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              constraints: BoxConstraints(
+                maxWidth: decoration.maxWidth,
+                minWidth: decoration.minWidth,
               ),
+              padding: decoration.padding,
+              decoration: BoxDecoration(
+                color: bubbleDecoration.color,
+                borderRadius: bubbleDecoration.borderRadius,
+              ),
+              child: chatMessageBuilder.build(message) ??
+                  DefaultChatMessageView(
+                    message: message,
+                    decoration: decoration,
+                  ),
+            ),
+            Visibility(
+              visible: _hasTrailing,
+              child: const SizedBox(width: 4),
+            ),
+            Visibility(
+              visible: _hasTrailing,
+              child: trailing ?? SizedBox.shrink(),
+            )
+          ],
         ),
       ),
     );

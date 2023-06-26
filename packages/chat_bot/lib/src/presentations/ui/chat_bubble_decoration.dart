@@ -3,7 +3,9 @@ part of 'chat_view.dart';
 abstract class ChatBubbleDecoration {
   EdgeInsets get padding;
 
-  EdgeInsets get margin;
+  EdgeInsets get botMargin;
+
+  EdgeInsets get userMargin;
 
   BoxDecoration get userDecoration;
 

@@ -1,6 +1,7 @@
 ## 0.0.1+3
 
 * update bond_network dependency.
+* chat_bubble now has optional trailing widget
 
 ## 0.0.1+2
 
