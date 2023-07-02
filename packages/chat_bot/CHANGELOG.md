@@ -1,3 +1,7 @@
+## 0.0.1+8
+
+* remove unused generics G code from bond_chat
+
 ## 0.0.1+7
 
 * refactor chat message model

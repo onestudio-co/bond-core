@@ -6,10 +6,9 @@ import '../../data/models/chat_bot_message.dart';
 
 part 'chat_bot_state.dart';
 
-class ChatBotController<T extends ChatBotMessageConvertible,
-    G extends ChatBotMessageMetaConvertible> {
+class ChatBotController<T extends ChatBotMessageConvertible> {
   final int chatBotId;
-  final ChatDataSource<T, G> chatService;
+  final ChatDataSource<T> chatService;
   Function(ChatBotState)? onStateChanged;
 
   ChatBotController({required this.chatBotId, required this.chatService}) {
