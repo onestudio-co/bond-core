@@ -33,7 +33,6 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
           .map((e) => e.data)
           .expand((element) => element)
           .map((e) => e.toChatBotMessage())
-          .expand((element) => element)
           .groupListsBy((element) => element.key)
           .values
           .toList();

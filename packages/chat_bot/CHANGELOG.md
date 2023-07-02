@@ -1,3 +1,8 @@
+## 0.0.1+9
+
+* ChatBotMessageConvertible method `toChatBotMessage` method that returns a ChatBotMessage not
+  List<ChatBotMessage>.
+
 ## 0.0.1+8
 
 * remove unused generics G code from bond_chat
