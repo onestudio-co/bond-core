@@ -1,3 +1,4 @@
+import 'package:bond_chat_bot/src/data/models/chat_data.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../data/data_source/chat_data_source.dart';
@@ -22,10 +23,10 @@ class ChatController<T extends ChatMessageConvertible,
     _updateState(_state.copyWith(loading: true));
     try {
       final response = await chatService.loadMessages(chatBotId);
-      final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
+      final chatData = response.data as ChatData;
+      final chatMessages = chatData.convertToChatMessages();
       _updateState(_state.copyWith(
           messages: chatMessages,
-          meta: response.meta.toChatMeta(),
           loading: false));
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
@@ -50,12 +51,12 @@ class ChatController<T extends ChatMessageConvertible,
       Future.delayed(const Duration(milliseconds: 1500));
       _updateState(_state.copyWith(loading: true));
       final response = await chatService.sendTextMessage(chatBotId, text);
-      final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
-      _updateState(_state.copyWith(
-        messages: [..._state.messages, ...chatMessages],
-        loading: false,
-        meta: response.meta.toChatMeta(),
-      ));
+      // final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
+      // _updateState(_state.copyWith(
+      //   messages: [..._state.messages, ...chatMessages],
+      //   loading: false,
+      //   meta: response.meta.toChatMeta(),
+      // ));
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
@@ -69,12 +70,12 @@ class ChatController<T extends ChatMessageConvertible,
     _updateState(_state.copyWith(loading: true));
     try {
       final response = await chatService.answerQuestion(chatBotId, body);
-      final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
-      _updateState(_state.copyWith(
-        messages: [..._state.messages, ...chatMessages],
-        loading: false,
-        meta: response.meta.toChatMeta(),
-      ));
+      // final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
+      // _updateState(_state.copyWith(
+      //   messages: [..._state.messages, ...chatMessages],
+      //   loading: false,
+      //   meta: response.meta.toChatMeta(),
+      // ));
       _resetChat();
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
