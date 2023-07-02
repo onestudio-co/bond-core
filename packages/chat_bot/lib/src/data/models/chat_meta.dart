@@ -1,11 +1,13 @@
 part of 'chat_message.dart';
 
 class ChatMeta {
-  final bool isVisible;
-  final bool isActive;
+  final bool active;
+  final String? titleButton;
+  final String? icon;
 
   ChatMeta({
-    this.isVisible = false,
-    this.isActive = false,
+    this.active = false,
+    this.titleButton ,
+    this.icon,
   });
 }

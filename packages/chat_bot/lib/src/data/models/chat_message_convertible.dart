@@ -11,3 +11,6 @@ mixin ChatMetaConvertible on Model {
 mixin ChoiceConvertible on Model {
   Choice toChoice();
 }
+mixin MessageRuleConvertible on Model {
+  MessageRule toMessageRule();
+}
