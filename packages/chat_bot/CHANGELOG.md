@@ -1,3 +1,8 @@
+## 0.0.1+7
+
+* refactor chat message model
+
+
 ## 0.0.1+6
 
 * update bond_network dependency.
