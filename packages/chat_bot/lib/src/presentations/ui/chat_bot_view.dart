@@ -1,25 +1,25 @@
-import '../../data/models/chat_message.dart';
-import '../controller/chat_controller.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/widgets.dart';
 
-import 'default_chat_message_view.dart';
+import '../../data/models/chat_bot_message.dart';
+import '../controller/chat_bot_controller.dart';
+import 'chat_bot_default_message_view.dart';
 
-part 'chat_bubble.dart';
+part 'chat_bot_bubble.dart';
 
-part 'chat_bubble_decoration.dart';
+part 'chat_bot_bubble_decoration.dart';
 
-part 'chat_message_builder.dart';
+part 'chat_bot_message_builder.dart';
 
-class ChatView extends StatelessWidget {
-  final ChatController controller;
-  final ChatState state;
-  final ChatBubble Function(BuildContext, int, ChatMessage) bubbleBuilder;
+class ChatBotView extends StatelessWidget {
+  final ChatBotController controller;
+  final ChatBotState state;
+  final ChatBotBubble Function(BuildContext, int, ChatBotMessage) bubbleBuilder;
   final Widget typingIndicator;
   final Widget inputView;
-  final ChatBubbleDecoration decoration;
+  final ChatBotBubbleDecoration decoration;
 
-  const ChatView({
+  const ChatBotView({
     Key? key,
     required this.controller,
     required this.bubbleBuilder,
@@ -39,15 +39,19 @@ class ChatView extends StatelessWidget {
             controller: controller.scrollController,
             itemCount: state.messages.length,
             itemBuilder: (context, index) {
-              return bubbleBuilder(context, index, state.messages[index]);
+              return bubbleBuilder(
+                context,
+                index,
+                state.visibleMessages[index],
+              );
             },
           ),
         ),
         if (state.loading) typingIndicator,
         Visibility(
-          visible: state.meta.active,
+          visible: state.visibleTextInput,
           child: AbsorbPointer(
-            absorbing: !state.meta.active,
+            absorbing: !(state.activeTextInput),
             child: inputView,
           ),
         ),

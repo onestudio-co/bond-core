@@ -1,6 +1,6 @@
-part of 'chat_message.dart';
+part of 'chat_bot_message.dart';
 
-enum MessageSender {
+enum ChatBotMessageSender {
   user, // message was sent by the user
   bot, // message was sent by the bot
 }
