@@ -1,19 +1,19 @@
-import '../../data/models/chat_message.dart';
 import 'package:flutter/material.dart';
 
-import 'chat_view.dart';
+import '../../data/models/chat_bot_message.dart';
+import 'chat_bot_view.dart';
 
-class DefaultChatMessageView extends StatelessWidget {
-  const DefaultChatMessageView({
+class ChatBotDefaultMessageView extends StatelessWidget {
+  const ChatBotDefaultMessageView({
     Key? key,
     required this.message,
     required this.decoration,
   }) : super(key: key);
 
-  final ChatMessage message;
-  final ChatBubbleDecoration decoration;
+  final ChatBotMessage message;
+  final ChatBotBubbleDecoration decoration;
 
-  bool get _haveTitle => message.title != null && message.title!.isNotEmpty;
+  bool get _haveTitle => message.text != null && message.text!.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,14 @@ class DefaultChatMessageView extends StatelessWidget {
       children: [
         if (_haveTitle)
           Text(
-            message.title ?? '',
+            message.text ?? '',
             style: decoration.botTitleTextStyle,
           ),
         if (_haveTitle) const SizedBox(height: 12),
         Text(
-          message.content??'',
+          message.content ?? '',
           textWidthBasis: TextWidthBasis.longestLine,
-          style: message.type == MessageType.userInput
+          style: message.type == ChatBotMessageSender.user
               ? decoration.userTextStyle
               : decoration.botTextStyle,
         ),

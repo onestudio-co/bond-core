@@ -1,6 +1,6 @@
-part of 'chat_view.dart';
+part of 'chat_bot_view.dart';
 
-abstract class ChatBubbleDecoration {
+abstract class ChatBotBubbleDecoration {
   EdgeInsets get padding;
   EdgeInsets get chatViewPadding;
 

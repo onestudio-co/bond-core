@@ -1,13 +1,13 @@
-part of 'chat_view.dart';
+part of 'chat_bot_view.dart';
 
-class ChatBubble extends StatelessWidget {
+class ChatBotBubble extends StatelessWidget {
   final int index;
-  final ChatMessage message;
-  final ChatBubbleDecoration decoration;
+  final ChatBotMessage message;
+  final ChatBotBubbleDecoration decoration;
   final ChatMessageBuilder chatMessageBuilder;
   final Widget? trailing;
 
-  const ChatBubble({
+  const ChatBotBubble({
     Key? key,
     required this.index,
     required this.message,
@@ -20,7 +20,7 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isUserMessage = message.type == MessageType.userInput;
+    final isUserMessage = message.sender == ChatBotMessageSender.user;
     final bubbleDecoration =
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
     final delayAnimationDuration = isUserMessage
@@ -50,14 +50,16 @@ class ChatBubble extends StatelessWidget {
                 borderRadius: bubbleDecoration.borderRadius,
               ),
               child: chatMessageBuilder.build(message) ??
-                  DefaultChatMessageView(
+                  ChatBotDefaultMessageView(
                     message: message,
                     decoration: decoration,
                   ),
             ),
             Visibility(
                 visible: !_hasTrailing,
-                child: const SizedBox(width: 28,)),
+                child: const SizedBox(
+                  width: 28,
+                )),
             Visibility(
               visible: _hasTrailing,
               child: const SizedBox(width: 4),
