@@ -45,9 +45,9 @@ class ChatView extends StatelessWidget {
         ),
         if (state.loading) typingIndicator,
         Visibility(
-          visible: state.meta.isVisible,
+          visible: state.meta.active,
           child: AbsorbPointer(
-            absorbing: !state.meta.isActive,
+            absorbing: !state.meta.active,
             child: inputView,
           ),
         ),
