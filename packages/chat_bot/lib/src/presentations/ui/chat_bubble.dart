@@ -20,7 +20,7 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isUserMessage = message.sender == MessageSender.user;
+    final isUserMessage = message.type == MessageType.userInput;
     final bubbleDecoration =
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
     final delayAnimationDuration = isUserMessage

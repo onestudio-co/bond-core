@@ -1,6 +1,6 @@
-import '../../data/data_source/chat_data_source.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../data/data_source/chat_data_source.dart';
 import '../../data/models/chat_message.dart';
 
 part 'chat_state.dart';
@@ -34,17 +34,14 @@ class ChatController<T extends ChatMessageConvertible,
 
   Future<void> sendTextMessage({
     required int chatBotId,
-    String? path,
   }) async {
     final text = messageController.text;
     // Create a temporary message to display immediately.
     final tempMessage = ChatMessage(
-      chatBotId: chatBotId,
       id: 0,
       // Use a temporary id, like 0
       content: text,
       type: MessageType.text,
-      sender: MessageSender.user,
     );
     // Add the temporary message to the state.
     _updateState(_state.copyWith(messages: [..._state.messages, tempMessage]));
@@ -52,7 +49,7 @@ class ChatController<T extends ChatMessageConvertible,
     try {
       Future.delayed(const Duration(milliseconds: 1500));
       _updateState(_state.copyWith(loading: true));
-      final response = await chatService.sendTextMessage(chatBotId, text, path);
+      final response = await chatService.sendTextMessage(chatBotId, text);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
         messages: [..._state.messages, ...chatMessages],
@@ -71,7 +68,7 @@ class ChatController<T extends ChatMessageConvertible,
   }) async {
     _updateState(_state.copyWith(loading: true));
     try {
-      final response = await chatService.answerQuestion(chatBotId, body, path);
+      final response = await chatService.answerQuestion(chatBotId, body);
       final chatMessages = response.data.map((e) => e.toChatMessage()).toList();
       _updateState(_state.copyWith(
         messages: [..._state.messages, ...chatMessages],

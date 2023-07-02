@@ -28,9 +28,9 @@ class DefaultChatMessageView extends StatelessWidget {
           ),
         if (_haveTitle) const SizedBox(height: 12),
         Text(
-          message.content,
+          message.content??'',
           textWidthBasis: TextWidthBasis.longestLine,
-          style: message.sender == MessageSender.user
+          style: message.type == MessageType.userInput
               ? decoration.userTextStyle
               : decoration.botTextStyle,
         ),

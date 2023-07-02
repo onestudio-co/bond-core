@@ -9,12 +9,10 @@ abstract class ChatDataSource<T extends ChatMessageConvertible,
   Future<ListMResponse<T, G>> sendTextMessage(
     int chatBotId,
     String text,
-    String? path,
   );
 
   Future<ListMResponse<T, G>> answerQuestion(
     int chatBotId,
     Map<String, dynamic> body,
-    String? path,
   );
 }
