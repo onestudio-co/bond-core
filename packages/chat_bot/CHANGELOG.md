@@ -1,3 +1,8 @@
+## 0.0.1+15
+
+* scroll to bottom when 'updateAllowedMessage' method called.
+* 'updateAllowedMessage' method just update the allowed message keys not override them
+
 ## 0.0.1+14
 
 * sort chat bot messages by index.
