@@ -16,7 +16,7 @@ abstract class ChatBotMessage {
   final ChatBotMessageSender sender;
   final String key;
   final String? text;
-  final String? content;
+  final String? title;
   final String? icon;
   final ChatBotMessageMeta meta;
   final List<ChatBotMessageOption> options;
@@ -26,7 +26,7 @@ abstract class ChatBotMessage {
     required this.type,
     required this.sender,
     required this.key,
-    this.content,
+    this.title,
     this.text,
     this.icon,
     this.meta = const ChatBotMessageMeta.defaults(),
