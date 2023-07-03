@@ -26,17 +26,12 @@ class ChatBotBubble extends StatelessWidget {
     final isUserMessage = message.sender == ChatBotMessageSender.user;
     final bubbleDecoration =
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
-    final delayAnimationDuration = isUserMessage
-        ? decoration.userDelayAnimationDuration
-        : decoration.botDelayAnimationDuration;
     final chatBotMessageDelay = message is ChatBotMessageHasDelay
         ? (message as ChatBotMessageHasDelay).delay
         : Duration.zero;
     return DelayedDisplay(
       delay: chatBotMessageDelay,
-      fadingDuration: Duration(
-        milliseconds: delayAnimationDuration.inMilliseconds,
-      ),
+      fadingDuration: chatBotMessageDelay,
       slidingBeginOffset: Offset.zero,
       child: Container(
         margin: isUserMessage ? decoration.userMargin : decoration.botMargin,

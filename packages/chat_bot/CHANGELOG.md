@@ -1,3 +1,8 @@
+## 0.0.1+18
+
+* remove 'PageStorageKey('chat_bot')'.
+* read bubble chat bot fade duration from new mixin ChatBotMessageHasDelay.
+
 ## 0.0.1+17
 
 * introduce new mixin ChatBotMessageHasDelay to manage delay foreach message.
