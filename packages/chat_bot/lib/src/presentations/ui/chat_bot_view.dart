@@ -37,7 +37,7 @@ class ChatBotView extends StatelessWidget {
           child: ListView.builder(
             padding: decoration.chatViewPadding,
             controller: controller.scrollController,
-            itemCount: state.messages.length,
+            itemCount: state.visibleMessages.length,
             itemBuilder: (context, index) {
               return bubbleBuilder(
                 context,

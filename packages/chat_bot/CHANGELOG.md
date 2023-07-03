@@ -1,3 +1,7 @@
+## 0.0.1+10
+
+* fix ChatBotView itemCount read from state.visibleMessages.
+
 ## 0.0.1+9
 
 * ChatBotMessageConvertible method `toChatBotMessage` method that returns a ChatBotMessage not
