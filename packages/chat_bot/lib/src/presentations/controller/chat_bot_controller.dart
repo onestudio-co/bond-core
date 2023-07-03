@@ -54,7 +54,10 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
-    _updateState(_state.copyWith(allowedMessage: allowedMessageKey));
+    _updateState(_state.copyWith(allowedMessage: [
+      ..._state.allowedMessage,
+      ...allowedMessageKey,
+    ]));
     await _scrollToBottom();
   }
 
