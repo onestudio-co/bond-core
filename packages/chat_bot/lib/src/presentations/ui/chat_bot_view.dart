@@ -35,14 +35,20 @@ class ChatBotView extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.builder(
+            key: PageStorageKey('chat_bot'),
+            // Helps maintain state across rebuilds
             padding: padding,
             controller: controller.scrollController,
             itemCount: state.visibleMessages.length,
             itemBuilder: (context, index) {
-              return bubbleBuilder(
-                context,
-                index,
-                state.visibleMessages[index],
+              return Container(
+                key: ValueKey(state.visibleMessages[index].id),
+                // Unique key to remember each message state
+                child: bubbleBuilder(
+                  context,
+                  index,
+                  state.visibleMessages[index],
+                ),
               );
             },
           ),

@@ -33,6 +33,10 @@ class ChatBotBubble extends StatelessWidget {
       delay: Duration(
         milliseconds: delayAnimationDuration.inMilliseconds * index,
       ),
+      fadingDuration: Duration(
+        milliseconds: delayAnimationDuration.inMilliseconds * index,
+      ),
+      slidingBeginOffset: Offset.zero,
       child: Container(
         margin: isUserMessage ? decoration.userMargin : decoration.botMargin,
         width: double.infinity,
