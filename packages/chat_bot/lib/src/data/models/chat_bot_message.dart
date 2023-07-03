@@ -12,6 +12,7 @@ part 'chat_bot_message_type.dart';
 
 abstract class ChatBotMessage {
   final int id;
+  final int index;
   final ChatBotMessageType type;
   final ChatBotMessageSender sender;
   final String key;
@@ -23,6 +24,7 @@ abstract class ChatBotMessage {
 
   const ChatBotMessage({
     required this.id,
+    required this.index,
     required this.type,
     required this.sender,
     required this.key,

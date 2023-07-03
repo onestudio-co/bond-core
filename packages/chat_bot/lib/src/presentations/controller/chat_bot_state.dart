@@ -18,6 +18,7 @@ class ChatBotState {
   List<ChatBotMessage> get visibleMessages => messages
       .expand((element) => element)
       .where((element) => allowedMessage.contains(element.key))
+      .sortedBy<num>((element) => element.index)
       .toList();
 
   bool get visibleTextInput =>

@@ -1,3 +1,7 @@
+## 0.0.1+14
+
+* sort chat bot messages by index.
+
 ## 0.0.1+13
 
 * refactor title and text in ChatBotMessage model for Fixing ChatBotDefaultMessageView
