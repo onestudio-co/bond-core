@@ -1,3 +1,12 @@
+## 0.0.1+12
+
+* implement appendMessage method
+* remove chatViewPadding from ChatBotBubbleDecoration, instead pass padding directly to ChatBotView
+* update ChatBotMessageType code, return SizedBox.shrink when message.type ==
+  ChatBotMessageType.userInput()
+
+* provide default values activeTextInput & visibleTextInput from ChatBotState.
+
 ## 0.0.1+11
 
 * provide default values activeTextInput & visibleTextInput from ChatBotState.
