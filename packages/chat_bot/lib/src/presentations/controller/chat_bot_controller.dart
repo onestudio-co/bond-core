@@ -42,7 +42,7 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
     }
   }
 
-  Future<void> appendMessage(ChatBotMessage message) async {
+  void appendMessage(ChatBotMessage message) async {
     _updateState(_state.copyWith(
       messages: [
         ..._state.messages,
@@ -50,16 +50,21 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
       ],
     ));
     messageController.clear();
+    await _scrollToBottom();
+  }
+
+  void updateAllowedMessage(List<String> allowedMessageKey) async {
+    _updateState(_state.copyWith(allowedMessage: allowedMessageKey));
+    await _scrollToBottom();
+  }
+
+  Future<void> _scrollToBottom() async {
     await Future.delayed(const Duration(milliseconds: 400));
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
-  }
-
-  void updateAllowedMessage(List<String> allowedMessageKey) {
-    _updateState(_state.copyWith(allowedMessage: allowedMessageKey));
   }
 
   void dispose() {
