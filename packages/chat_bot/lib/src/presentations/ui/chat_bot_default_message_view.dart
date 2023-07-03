@@ -13,7 +13,7 @@ class ChatBotDefaultMessageView extends StatelessWidget {
   final ChatBotMessage message;
   final ChatBotBubbleDecoration decoration;
 
-  bool get _haveTitle => message.text != null && message.text!.isNotEmpty;
+  bool get _haveTitle => message.title != null && message.title!.isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,12 @@ class ChatBotDefaultMessageView extends StatelessWidget {
       children: [
         if (_haveTitle)
           Text(
-            message.text ?? '',
+            message.title ?? '',
             style: decoration.botTitleTextStyle,
           ),
         if (_haveTitle) const SizedBox(height: 12),
         Text(
-          message.content ?? '',
+          message.text ?? '',
           textWidthBasis: TextWidthBasis.longestLine,
           style: message.type == ChatBotMessageSender.user
               ? decoration.userTextStyle
