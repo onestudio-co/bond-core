@@ -1,3 +1,7 @@
+## 0.0.1+17
+
+* introduce new mixin ChatBotMessageHasDelay to manage delay foreach message.
+
 ## 0.0.1+16
 
 * try to improve delayed animation.

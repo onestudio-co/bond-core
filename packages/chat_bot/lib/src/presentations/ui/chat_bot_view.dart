@@ -41,14 +41,10 @@ class ChatBotView extends StatelessWidget {
             controller: controller.scrollController,
             itemCount: state.visibleMessages.length,
             itemBuilder: (context, index) {
-              return Container(
-                key: ValueKey(state.visibleMessages[index].id),
-                // Unique key to remember each message state
-                child: bubbleBuilder(
-                  context,
-                  index,
-                  state.visibleMessages[index],
-                ),
+              return bubbleBuilder(
+                context,
+                index,
+                state.visibleMessages[index],
               );
             },
           ),

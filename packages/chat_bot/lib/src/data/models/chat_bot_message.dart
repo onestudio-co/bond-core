@@ -10,6 +10,8 @@ part 'chat_bot_message_meta.dart';
 
 part 'chat_bot_message_type.dart';
 
+part 'chat_bot_message_has_delay.dart';
+
 abstract class ChatBotMessage {
   final int id;
   final int index;
