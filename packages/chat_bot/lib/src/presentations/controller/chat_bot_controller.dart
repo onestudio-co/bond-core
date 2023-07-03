@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../data/data_source/chat_bot_data_source.dart';
 import '../../data/models/chat_bot_message.dart';
@@ -40,6 +40,22 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
+  }
+
+  Future<void> appendMessage(ChatBotMessage message) async {
+    _updateState(_state.copyWith(
+      messages: [
+        ..._state.messages,
+        [message]
+      ],
+    ));
+    messageController.clear();
+    await Future.delayed(const Duration(milliseconds: 400));
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) {
