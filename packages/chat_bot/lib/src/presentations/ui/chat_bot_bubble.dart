@@ -20,6 +20,9 @@ class ChatBotBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (message.type == ChatBotMessageType.userInput()) {
+      return SizedBox.shrink();
+    }
     final isUserMessage = message.sender == ChatBotMessageSender.user;
     final bubbleDecoration =
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
