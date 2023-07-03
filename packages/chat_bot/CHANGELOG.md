@@ -1,3 +1,7 @@
+## 0.0.1+16
+
+* try to improve delayed animation.
+
 ## 0.0.1+15
 
 * scroll to bottom when 'updateAllowedMessage' method called.
