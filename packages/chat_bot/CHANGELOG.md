@@ -1,3 +1,7 @@
+## 0.0.1+13
+
+* refactor title and text in ChatBotMessage model for Fixing ChatBotDefaultMessageView
+
 ## 0.0.1+12
 
 * implement appendMessage method
