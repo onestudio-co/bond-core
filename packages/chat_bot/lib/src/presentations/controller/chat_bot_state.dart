@@ -20,9 +20,10 @@ class ChatBotState {
       .where((element) => allowedMessage.contains(element.key))
       .toList();
 
-  bool get visibleTextInput => visibleMessages.last.meta.visible;
+  bool get visibleTextInput =>
+      visibleMessages.lastOrNull?.meta.visible ?? false;
 
-  bool get activeTextInput => visibleMessages.last.meta.active;
+  bool get activeTextInput => visibleMessages.lastOrNull?.meta.active ?? false;
 
   ChatBotState copyWith({
     List<List<ChatBotMessage>>? messages,

@@ -1,3 +1,7 @@
+## 0.0.1+11
+
+* provide default values activeTextInput & visibleTextInput from ChatBotState.
+
 ## 0.0.1+10
 
 * fix ChatBotView itemCount read from state.visibleMessages.
