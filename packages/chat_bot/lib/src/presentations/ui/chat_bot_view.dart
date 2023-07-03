@@ -17,7 +17,7 @@ class ChatBotView extends StatelessWidget {
   final ChatBotBubble Function(BuildContext, int, ChatBotMessage) bubbleBuilder;
   final Widget typingIndicator;
   final Widget inputView;
-  final ChatBotBubbleDecoration decoration;
+  final EdgeInsets padding;
 
   const ChatBotView({
     Key? key,
@@ -26,7 +26,7 @@ class ChatBotView extends StatelessWidget {
     required this.typingIndicator,
     required this.inputView,
     required this.state,
-    required this.decoration,
+    required this.padding,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class ChatBotView extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.builder(
-            padding: decoration.chatViewPadding,
+            padding: padding,
             controller: controller.scrollController,
             itemCount: state.visibleMessages.length,
             itemBuilder: (context, index) {
