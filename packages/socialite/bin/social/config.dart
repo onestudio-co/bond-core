@@ -16,7 +16,7 @@ class Config {
       var googleObject = object['google'];
       var clientId = googleObject['clientId'];
       var redirectUrl = googleObject['redirectUrl'];
-      var scopes = List.of(googleObject['scopes']).map((e) => "${e}").toList();
+      var scopes = List.of(googleObject['scopes']).map((e) => '${e}').toList();
       google = GoogleConfig(clientId, redirectUrl, scopes);
     }
 
@@ -24,7 +24,7 @@ class Config {
       var appleObject = object['apple'];
       var clientId = appleObject['clientId'];
       var redirectUrl = appleObject['redirectUrl'];
-      var scopes = List.of(appleObject['scopes']).map((e) => "${e}").toList();
+      var scopes = List.of(appleObject['scopes']).map((e) => '${e}').toList();
       apple = AppleConfig(clientId, redirectUrl, scopes);
     }
 

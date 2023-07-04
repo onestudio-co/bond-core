@@ -15,10 +15,10 @@ extension FileExtention on File {
         .map(utf8.decode)
         .transform(const LineSplitter())
         .toList();
-    Map<int, String> map = {};
+    var map = <int, String>{};
 
     var i = 0;
-    for (var line in lines) {
+    for (final line in lines) {
       map[i] = line;
       i += 1;
     }
@@ -26,7 +26,7 @@ extension FileExtention on File {
   }
 
   Future<List<SearchResult>> search(String word) async {
-    List<SearchResult> result = [];
+    var result = <SearchResult>[];
     (await linesIndexed()).forEach((index, value) {
       if (value.contains(word)) {
         result.add(SearchResult(index, value));

@@ -1,13 +1,12 @@
-name: bond_core
-description: Bond Core Foundational Library for the Flutter Bond framework.
-version: 0.0.1+2
+name: bond_socialite
+description:  A Flutter package for easy integration of social logins like Google and Apple, providing a uniform interface, automation tools, and ready-to-use buttons.
+version: 0.0.1+1
 homepage: https://github.com/onestudio-co/flutter-bond
 
 environment:
   sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  get_it: ^7.2.0
-
+  dependency_manipulator: ^0.0.6
+  file_based_transaction_manager: ^0.0.3
+  args: ^2.2.2

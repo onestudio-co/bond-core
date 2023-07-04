@@ -21,14 +21,14 @@ import 'util/console.dart';
  */
 
 Map<String, String> getParams(List<String> commandArgs) {
-  Map<String, String> params = {};
+  var params = <String, String>{};
 
-  for (var arg in commandArgs) {
-    var delimiter = arg.contains(" ") ? " " : "=";
+  for (final arg in commandArgs) {
+    var delimiter = arg.contains(' ') ? ' ' : '=';
     var parts = arg.split(delimiter);
 
     if (parts.length == 1) {
-      params[parts[0].replaceAll("--", "")] = "";
+      params[parts[0].replaceAll('--', '')] = '';
       continue;
     }
     if (parts.length != 2) {
@@ -37,7 +37,7 @@ Map<String, String> getParams(List<String> commandArgs) {
     if (parts[0] == '') {
       continue;
     }
-    var key = parts[0].replaceAll("--", "");
+    var key = parts[0].replaceAll('--', '');
     var value = parts[1];
     params[key] = value;
   }
@@ -52,58 +52,58 @@ void main(List<String> args) async {
   var isValidProject = await check();
 
   if (!isValidProject) {
-    printError("Please, Check you are working on Flutter project");
+    printError('Please, Check you are working on Flutter project');
     return;
   }
 
   final manager = SocialManager();
   final parser = ArgParser();
 
-  parser.addFlag("last");
-  parser.addFlag("debug");
-  parser.addOption("id");
+  parser.addFlag('last');
+  parser.addFlag('debug');
+  parser.addOption('id');
 
-  parser.addCommand("help");
-  parser.addCommand("check");
-  parser.addCommand("generate");
-  parser.addCommand("history");
-  parser.addCommand("rollback");
-  parser.addCommand("clear");
+  parser.addCommand('help');
+  parser.addCommand('check');
+  parser.addCommand('generate');
+  parser.addCommand('history');
+  parser.addCommand('rollback');
+  parser.addCommand('clear');
 
   final results = parser.parse(args);
   var params = getParams(results.command?.arguments ?? []);
   try {
-    var command = results.command?.name ?? "";
+    var command = results.command?.name ?? '';
 
     switch (command) {
       case 'clear':
         transactionManager.close(session);
-        printSuccess("Clear history successfully");
+        printSuccess('Clear history successfully');
         break;
       case 'help':
         printSuccess('Usage: bond_socialite <command>');
         break;
 
       case 'rollback':
-        var isLast = params.containsKey("last");
+        var isLast = params.containsKey('last');
 
         if (isLast) {
           var sessionId = (await transactionManager.history()).last.title;
           await transactionManager.rollbackById(sessionId);
           await manager.rollback();
-          printSuccess("Rollback successfully");
+          printSuccess('Rollback successfully');
 
           break;
         }
 
         if (!params.containsKey('id') || params['id'] == '') {
-          print("please pass transaction id into --id=12345 flag");
+          print('please pass transaction id into --id=12345 flag');
           return;
         }
-        await transactionManager.rollbackById(params['id'] ?? "");
+        await transactionManager.rollbackById(params['id'] ?? '');
         await manager.rollback();
 
-        printSuccess("Rollback successfully");
+        printSuccess('Rollback successfully');
         break;
       case 'generate':
         await generate(manager);
@@ -117,20 +117,20 @@ void main(List<String> args) async {
         break;
     }
   } catch (e, stack) {
-    printError("\n\nError on Execution: ${e}\n\n");
-    printBlue("Rollback starting");
+    printError('\n\nError on Execution: ${e}\n\n');
+    printBlue('Rollback starting');
 
     try {
       transactionManager.rollback(session);
       transactionManager.close(session);
-      printSuccess("Rollback successfully");
+      printSuccess('Rollback successfully');
     } catch (e) {
-      printError("Error on rollback: ${e}");
+      printError('Error on rollback: ${e}');
     }
 
-    if (params.containsKey("debug")) {
-      printError("\n\nBond Stacktrace: \n\n");
-      print("$stack");
+    if (params.containsKey('debug')) {
+      printError('\n\nBond Stacktrace: \n\n');
+      print('$stack');
     }
   }
 }
@@ -140,15 +140,15 @@ Future<bool> check() async {
   var pubspecFile = File('$currentPath/pubspec.yaml');
   var configFile = File('$currentPath/socialite_config.json');
 
-  bool isPubspecExists = await pubspecFile.exists();
+  var isPubspecExists = await pubspecFile.exists();
   if (!isPubspecExists) {
-    printError("Your Project not configured well, not flutter project");
+    printError('Your Project not configured well, not flutter project');
     return false;
   }
-  bool isConfigExists = await configFile.exists();
+  var isConfigExists = await configFile.exists();
   if (!isConfigExists) {
     printError(
-        "Your Project not configured well, socialite_config.json is missing");
+        'Your Project not configured well, socialite_config.json is missing');
     return false;
   }
   return true;
@@ -156,8 +156,8 @@ Future<bool> check() async {
 
 Future<void> history() async {
   var historyList = await transactionManager.history();
-  for (var value in historyList) {
-    printWarning("ID: ${value.title}  Date: ${value.date}");
+  for (final value in historyList) {
+    printWarning('ID: ${value.title}  Date: ${value.date}');
   }
 }
 
@@ -166,10 +166,10 @@ Future<void> generate(SocialManager manager) async {
     return;
   }
 
-  var content = File("${Directory.current.path}/socialite_config.json")
+  var content = File('${Directory.current.path}/socialite_config.json')
       .readAsStringSync();
 
-  Config config = Config.parse(content);
+  var config = Config.parse(content);
 
   if (config.google != null) {
     manager.addPlatform(GoogleProvider(config.google!));
