@@ -1,4 +1,41 @@
-include: package:flutter_lints/flutter.yaml
+linter:
+  rules:
+    # Errors
+    - avoid_relative_lib_imports
+    - avoid_types_as_parameter_names
+    - literal_only_boolean_expressions
+    - no_adjacent_strings_in_list
+    - valid_regexps
+    - only_throw_errors
+    - avoid_returning_null_for_future
+    - avoid_returning_null_for_void
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    # Style
+    - avoid_double_and_int_checks
+    - avoid_renaming_method_parameters
+    - avoid_returning_this
+    - prefer_adjacent_string_concatenation
+    - prefer_collection_literals
+    - prefer_conditional_assignment
+    - prefer_contains
+    - prefer_final_in_for_each
+    - prefer_for_elements_to_map_fromIterable
+    - prefer_is_not_empty
+    - prefer_iterable_whereType
+    - prefer_single_quotes
+    - unnecessary_this
+    - use_full_hex_values_for_flutter_colors
+    - use_rethrow_when_possible
+    - curly_braces_in_flow_control_structures
+    - omit_local_variable_types
+    - prefer_interpolation_to_compose_strings
+    - prefer_null_aware_operators
+    - unnecessary_null_in_if_null_operators
+
+    # Performance
+    - avoid_function_literals_in_foreach_calls
+    - avoid_unnecessary_containers
+
+    # Pub
+    - always_declare_return_types
+    - prefer_relative_imports
