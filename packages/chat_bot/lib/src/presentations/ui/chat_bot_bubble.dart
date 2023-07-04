@@ -26,9 +26,8 @@ class ChatBotBubble extends StatelessWidget {
     final isUserMessage = message.sender == ChatBotMessageSender.user;
     final bubbleDecoration =
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
-    final chatBotMessageDelay = message is ChatBotMessageHasDelay
-        ? (message as ChatBotMessageHasDelay).delay
-        : Duration.zero;
+    final chatMessagePadding = _getPadding(message);
+    final chatBotMessageDelay = _getDelay(message);
     return DelayedDisplay(
       delay: chatBotMessageDelay,
       fadingDuration: chatBotMessageDelay,
@@ -47,7 +46,7 @@ class ChatBotBubble extends StatelessWidget {
                 maxWidth: decoration.maxWidth,
                 minWidth: decoration.minWidth,
               ),
-              padding: decoration.padding,
+              padding: chatMessagePadding,
               decoration: BoxDecoration(
                 color: bubbleDecoration.color,
                 borderRadius: bubbleDecoration.borderRadius,
@@ -75,5 +74,19 @@ class ChatBotBubble extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Duration _getDelay(ChatBotMessage message) {
+    if (message is ChatBotMessageHasDelay) {
+      return message.delay;
+    }
+    return Duration.zero;
+  }
+
+  EdgeInsets _getPadding(ChatBotMessage message) {
+    if (message is ChatBotMessageHasPadding) {
+      return message.padding[message.type] ?? decoration.padding;
+    }
+    return decoration.padding;
   }
 }

@@ -1,16 +1,19 @@
 import 'package:bond_network/bond_network.dart';
+import 'package:flutter/widgets.dart';
 
 part 'chat_bot_message_convertible.dart';
+
+part 'chat_bot_message_has_delay.dart';
+
+part 'chat_bot_message_has_padding.dart';
+
+part 'chat_bot_message_meta.dart';
 
 part 'chat_bot_message_option.dart';
 
 part 'chat_bot_message_sender.dart';
 
-part 'chat_bot_message_meta.dart';
-
 part 'chat_bot_message_type.dart';
-
-part 'chat_bot_message_has_delay.dart';
 
 abstract class ChatBotMessage {
   final int id;

@@ -1,3 +1,7 @@
+## 0.0.1+19
+
+* introduce new mixin ChatBotMessageHasPadding to manage padding foreach message.
+
 ## 0.0.1+18
 
 * remove 'PageStorageKey('chat_bot')'.
