@@ -37,29 +37,32 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
           .groupListsBy((element) => element.key)
           .values
           .toList();
-      _updateState(_state.copyWith(messages: chatBotMessages, loading: false));
+      _updateState(_state.copyWith(loading: false));
+      _state = _state.copyWith(messages: chatBotMessages);
+      listKey.currentState?.insertAllItems(0, _state.visibleMessages.length);
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
   }
 
   void appendMessage(ChatBotMessage message) async {
-    _updateState(_state.copyWith(
+    _state = _state.copyWith(
       messages: [
         ..._state.messages,
         [message]
       ],
-    ));
+    );
+    listKey.currentState?.insertItem(_state.visibleMessages.length - 1);
     messageController.clear();
     await _scrollToBottom();
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
     final visibleMessage = _state.visibleMessages;
-    _updateState(_state.copyWith(allowedMessage: [
+    _state = _state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
       ...allowedMessageKey,
-    ]));
+    ]);
     final newVisibleMessage = _state.visibleMessages;
 
     // Create sets from lists
@@ -68,25 +71,10 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
 
     // Find new messages
     final addedMessages = newMessagesSet.difference(oldMessagesSet).toList();
-
     for (final message in addedMessages) {
       final index = newVisibleMessage.indexOf(message);
       listKey.currentState?.insertItem(index);
     }
-
-    // Find removed messages
-    final removedMessages = oldMessagesSet.difference(newMessagesSet).toList();
-
-    for (final message in removedMessages) {
-      final index = visibleMessage.indexOf(message);
-      listKey.currentState?.removeItem(
-        index,
-        (context, animation) => SizedBox(),
-      );
-    }
-
-    print('Added messages: $addedMessages');
-    print('Removed messages: $removedMessages');
     await _scrollToBottom();
   }
 
