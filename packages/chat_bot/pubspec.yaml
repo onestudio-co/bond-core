@@ -1,6 +1,6 @@
 name: bond_chat_bot
 description: A flexible, customizable Flutter chat bot package for diverse message types.
-version: 0.0.1+21
+version: 0.0.1+23
 homepage: https://github.com/onestudio-co/flutter-bond
 
 environment:

@@ -10,7 +10,7 @@ part 'chat_bot_bubble_decoration.dart';
 
 part 'chat_bot_message_builder.dart';
 
-class ChatBotView extends StatelessWidget {
+class ChatBotView extends StatefulWidget {
   final ChatBotController controller;
   final ChatBotState state;
   final ChatBotBubble Function(BuildContext, int, ChatBotMessage) bubbleBuilder;
@@ -29,33 +29,68 @@ class ChatBotView extends StatelessWidget {
   });
 
   @override
+  State<ChatBotView> createState() => _ChatBotViewState();
+}
+
+class _ChatBotViewState extends State<ChatBotView> {
+  final _listKey = GlobalKey<AnimatedListState>();
+
+  @override
+  void initState() {
+    widget.controller.addListener(_onStateChanged);
+    super.initState();
+  }
+
+  void dispose() {
+    widget.controller.removeListener(_onStateChanged);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
           child: AnimatedList(
-            key: controller.listKey,
-            padding: padding,
-            controller: controller.scrollController,
-            initialItemCount: state.visibleMessages.length,
+            key: _listKey,
+            padding: widget.padding,
+            controller: widget.controller.scrollController,
+            initialItemCount: widget.state.visibleMessages.length,
             itemBuilder: (context, index, animation) {
-              return bubbleBuilder(
-                context,
-                index,
-                state.visibleMessages[index],
+              return FadeTransition(
+                opacity: animation,
+                child: widget.bubbleBuilder(
+                  context,
+                  index,
+                  widget.state.visibleMessages[index],
+                ),
               );
             },
           ),
         ),
-        if (state.loading) typingIndicator,
+        if (widget.state.loading) widget.typingIndicator,
         Visibility(
-          visible: state.visibleTextInput,
+          visible: widget.state.visibleTextInput,
           child: AbsorbPointer(
-            absorbing: !(state.activeTextInput),
-            child: inputView,
+            absorbing: !(widget.state.activeTextInput),
+            child: widget.inputView,
           ),
         ),
       ],
     );
+  }
+
+  void _onStateChanged(
+      ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
+    final currentLength = newChatBotState.visibleMessages.length;
+    final previousLength = oldChatBotState.visibleMessages.length;
+    if (currentLength > previousLength) {
+      final numAdded = currentLength - previousLength;
+      for (var i = 0; i < numAdded; i++) {
+        await Future.delayed(const Duration(milliseconds: 600));
+        _listKey.currentState!.insertItem(previousLength + i);
+      }
+      await widget.controller.scrollToBottom();
+    }
   }
 }

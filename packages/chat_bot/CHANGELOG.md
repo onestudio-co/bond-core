@@ -1,3 +1,7 @@
+## 0.0.1+23
+
+* remove listKey.currentState?.insertAllItems(0, _state.visibleMessages.length) not message until user detect allowed messages.
+
 ## 0.0.1+21
 
 * 'ChatBotController' will not call _update state on messages array change.

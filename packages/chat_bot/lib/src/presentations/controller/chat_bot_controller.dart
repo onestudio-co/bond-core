@@ -6,10 +6,12 @@ import '../../data/models/chat_bot_message.dart';
 
 part 'chat_bot_state.dart';
 
+typedef ChatBotControllerListener = Function(ChatBotState, ChatBotState);
+
 class ChatBotController<T extends ChatBotMessageConvertible> {
   final int chatBotId;
   final ChatDataSource<T> chatService;
-  Function(ChatBotState)? onStateChanged;
+  final List<ChatBotControllerListener> _listeners = [];
 
   ChatBotController({required this.chatBotId, required this.chatService}) {
     loadMessages(chatBotId);
@@ -17,7 +19,6 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
 
   final messageController = TextEditingController();
   final scrollController = ScrollController();
-  final listKey = GlobalKey<AnimatedListState>();
 
   ChatBotState _state = ChatBotState.initial();
 
@@ -37,49 +38,32 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
           .groupListsBy((element) => element.key)
           .values
           .toList();
-      _updateState(_state.copyWith(loading: false));
-      _state = _state.copyWith(messages: chatBotMessages);
-      listKey.currentState?.insertAllItems(0, _state.visibleMessages.length);
+      _updateState(_state.copyWith(loading: false, messages: chatBotMessages));
     } catch (e) {
       _updateState(_state.copyWith(error: e.toString(), loading: false));
     }
   }
 
   void appendMessage(ChatBotMessage message) async {
-    _state = _state.copyWith(
+    _updateState(_state.copyWith(
       messages: [
         ..._state.messages,
         [message]
       ],
-    );
-    listKey.currentState?.insertItem(_state.visibleMessages.length - 1);
+    ));
     messageController.clear();
-    await _scrollToBottom();
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
-    final visibleMessage = _state.visibleMessages;
-    _state = _state.copyWith(allowedMessage: [
+    _updateState(_state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
       ...allowedMessageKey,
-    ]);
-    final newVisibleMessage = _state.visibleMessages;
-
-    // Create sets from lists
-    final oldMessagesSet = visibleMessage.toSet();
-    final newMessagesSet = newVisibleMessage.toSet();
-
-    // Find new messages
-    final addedMessages = newMessagesSet.difference(oldMessagesSet).toList();
-    for (final message in addedMessages) {
-      final index = newVisibleMessage.indexOf(message);
-      listKey.currentState?.insertItem(index);
-    }
-    await _scrollToBottom();
+    ]));
+    await scrollToBottom();
   }
 
-  Future<void> _scrollToBottom() async {
-    await Future.delayed(const Duration(milliseconds: 350));
+  Future<void> scrollToBottom() async {
+    await Future.delayed(const Duration(milliseconds: 50));
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 300),
@@ -93,7 +77,18 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
   }
 
   void _updateState(ChatBotState newState) {
+    final oldState = _state;
     _state = newState;
-    onStateChanged?.call(_state);
+    for (final listener in _listeners) {
+      listener(oldState, newState);
+    }
+  }
+
+  void addListener(ChatBotControllerListener listener) {
+    _listeners.add(listener);
+  }
+
+  void removeListener(ChatBotControllerListener listener) {
+    _listeners.remove(listener);
   }
 }
