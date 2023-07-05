@@ -1,3 +1,7 @@
+## 0.0.1+21
+
+* 'ChatBotController' will not call _update state on messages array change.
+
 ## 0.0.1+20
 
 * default text align is right for 'ChatBotDefaultMessageView'.
