@@ -15,8 +15,9 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
     loadMessages(chatBotId);
   }
 
-  final TextEditingController messageController = TextEditingController();
-  final ScrollController scrollController = ScrollController();
+  final messageController = TextEditingController();
+  final scrollController = ScrollController();
+  final listKey = GlobalKey<AnimatedListState>();
 
   ChatBotState _state = ChatBotState.initial();
 
@@ -54,15 +55,43 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
+    final visibleMessage = _state.visibleMessages;
     _updateState(_state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
       ...allowedMessageKey,
     ]));
+    final newVisibleMessage = _state.visibleMessages;
+
+    // Create sets from lists
+    final oldMessagesSet = visibleMessage.toSet();
+    final newMessagesSet = newVisibleMessage.toSet();
+
+    // Find new messages
+    final addedMessages = newMessagesSet.difference(oldMessagesSet).toList();
+
+    for (final message in addedMessages) {
+      final index = newVisibleMessage.indexOf(message);
+      listKey.currentState?.insertItem(index);
+    }
+
+    // Find removed messages
+    final removedMessages = oldMessagesSet.difference(newMessagesSet).toList();
+
+    for (final message in removedMessages) {
+      final index = visibleMessage.indexOf(message);
+      listKey.currentState?.removeItem(
+        index,
+        (context, animation) => SizedBox(),
+      );
+    }
+
+    print('Added messages: $addedMessages');
+    print('Removed messages: $removedMessages');
     await _scrollToBottom();
   }
 
   Future<void> _scrollToBottom() async {
-    await Future.delayed(const Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 350));
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 300),

@@ -18,7 +18,7 @@ class ChatBotView extends StatelessWidget {
   final Widget inputView;
   final EdgeInsets padding;
 
-  const ChatBotView({
+  ChatBotView({
     Key? key,
     required this.controller,
     required this.bubbleBuilder,
@@ -26,18 +26,19 @@ class ChatBotView extends StatelessWidget {
     required this.inputView,
     required this.state,
     required this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          child: ListView.builder(
+          child: AnimatedList(
+            key: controller.listKey,
             padding: padding,
             controller: controller.scrollController,
-            itemCount: state.visibleMessages.length,
-            itemBuilder: (context, index) {
+            initialItemCount: state.visibleMessages.length,
+            itemBuilder: (context, index, animation) {
               return bubbleBuilder(
                 context,
                 index,
