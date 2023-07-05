@@ -3,8 +3,6 @@ import 'package:flutter/widgets.dart';
 
 part 'chat_bot_message_convertible.dart';
 
-part 'chat_bot_message_has_delay.dart';
-
 part 'chat_bot_message_has_padding.dart';
 
 part 'chat_bot_message_meta.dart';

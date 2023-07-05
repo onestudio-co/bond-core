@@ -1,4 +1,3 @@
-import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../data/models/chat_bot_message.dart';

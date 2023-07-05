@@ -27,60 +27,47 @@ class ChatBotBubble extends StatelessWidget {
     final bubbleDecoration =
         isUserMessage ? decoration.userDecoration : decoration.botDecoration;
     final chatMessagePadding = _getPadding(message);
-    final chatBotMessageDelay = _getDelay(message);
-    return DelayedDisplay(
-      delay: chatBotMessageDelay,
-      fadingDuration: chatBotMessageDelay,
-      slidingBeginOffset: Offset.zero,
-      child: Container(
-        margin: isUserMessage ? decoration.userMargin : decoration.botMargin,
-        width: double.infinity,
-        alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              constraints: BoxConstraints(
-                maxWidth: decoration.maxWidth,
-                minWidth: decoration.minWidth,
-              ),
-              padding: chatMessagePadding,
-              decoration: BoxDecoration(
-                color: bubbleDecoration.color,
-                borderRadius: bubbleDecoration.borderRadius,
-              ),
-              child: chatMessageBuilder.build(message) ??
-                  ChatBotDefaultMessageView(
-                    message: message,
-                    decoration: decoration,
-                  ),
+    return Container(
+      margin: isUserMessage ? decoration.userMargin : decoration.botMargin,
+      width: double.infinity,
+      alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: decoration.maxWidth,
+              minWidth: decoration.minWidth,
             ),
-            Visibility(
-                visible: !_hasTrailing,
-                child: const SizedBox(
-                  width: 28,
-                )),
-            Visibility(
-              visible: _hasTrailing,
-              child: const SizedBox(width: 4),
+            padding: chatMessagePadding,
+            decoration: BoxDecoration(
+              color: bubbleDecoration.color,
+              borderRadius: bubbleDecoration.borderRadius,
             ),
-            Visibility(
-              visible: _hasTrailing,
-              child: trailing ?? SizedBox.shrink(),
-            )
-          ],
-        ),
+            child: chatMessageBuilder.build(message) ??
+                ChatBotDefaultMessageView(
+                  message: message,
+                  decoration: decoration,
+                ),
+          ),
+          Visibility(
+              visible: !_hasTrailing,
+              child: const SizedBox(
+                width: 28,
+              )),
+          Visibility(
+            visible: _hasTrailing,
+            child: const SizedBox(width: 4),
+          ),
+          Visibility(
+            visible: _hasTrailing,
+            child: trailing ?? SizedBox.shrink(),
+          )
+        ],
       ),
     );
-  }
-
-  Duration _getDelay(ChatBotMessage message) {
-    if (message is ChatBotMessageHasDelay) {
-      return message.delay;
-    }
-    return Duration.zero;
   }
 
   EdgeInsets _getPadding(ChatBotMessage message) {
