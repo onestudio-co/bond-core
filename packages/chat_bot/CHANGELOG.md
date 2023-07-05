@@ -1,3 +1,9 @@
+## 0.0.1+20
+
+* default text align is right for 'ChatBotDefaultMessageView'.
+* remove 'delayed_display' dependency, and 'ChatBotMessageHasDelay' mixin.
+* AnimatedList experiment.
+
 ## 0.0.1+19
 
 * introduce new mixin ChatBotMessageHasPadding to manage padding foreach message.
