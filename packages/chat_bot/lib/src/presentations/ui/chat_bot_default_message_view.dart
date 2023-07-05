@@ -29,7 +29,7 @@ class ChatBotDefaultMessageView extends StatelessWidget {
         if (_haveTitle) const SizedBox(height: 12),
         Text(
           message.text ?? '',
-          textWidthBasis: TextWidthBasis.longestLine,
+          textAlign: TextAlign.start,
           style: message.type == ChatBotMessageSender.user
               ? decoration.userTextStyle
               : decoration.botTextStyle,
