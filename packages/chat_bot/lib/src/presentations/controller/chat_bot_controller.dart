@@ -75,6 +75,7 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
       _updateState(_state.copyWith(showInputView: showInputView));
       focusNode.requestFocus();
     } else {
+      _updateState(_state.copyWith(showInputView: showInputView));
       await scrollToBottom();
     }
   }
