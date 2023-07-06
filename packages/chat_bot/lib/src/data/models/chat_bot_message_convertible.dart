@@ -1,5 +1,5 @@
 part of 'chat_bot_message.dart';
 
-mixin ChatBotMessageConvertible on Model {
-  ChatBotMessage toChatBotMessage();
+mixin ChatBotMessageConvertible<G extends ChatBotMessage> on Model {
+  G toChatBotMessage();
 }

@@ -8,9 +8,11 @@ part 'chat_bot_state.dart';
 
 const Duration kMessageAppearDuration = Duration(milliseconds: 800);
 
-typedef ChatBotControllerListener = Function(ChatBotState, ChatBotState);
+typedef ChatBotControllerListener<G extends ChatBotMessage> = Function(
+    ChatBotState<G>, ChatBotState<G>);
 
-class ChatBotController<T extends ChatBotMessageConvertible> {
+class ChatBotController<T extends ChatBotMessageConvertible<G>,
+    G extends ChatBotMessage> {
   final int chatBotId;
   final ChatDataSource<T> chatService;
   final List<ChatBotControllerListener> _listeners = [];
@@ -24,7 +26,7 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
   final scrollController = ScrollController();
   final focusNode = FocusNode();
 
-  ChatBotState _state = ChatBotState.initial();
+  ChatBotState<G> _state = ChatBotState<G>.initial();
 
   Future<void> loadMessages(int chatBotId) async {
     _updateState(_state.copyWith(loading: true));
@@ -48,7 +50,7 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
     }
   }
 
-  void appendMessage(ChatBotMessage message) async {
+  void appendMessage(G message) async {
     _updateState(_state.copyWith(
       messages: [
         ..._state.messages,
@@ -96,7 +98,7 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
     focusNode.dispose();
   }
 
-  void _updateState(ChatBotState newState) {
+  void _updateState(ChatBotState<G> newState) {
     final oldState = _state;
     _state = newState;
     for (final listener in _listeners) {
