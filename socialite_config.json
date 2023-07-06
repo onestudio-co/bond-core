@@ -1,0 +1,10 @@
+{
+  "google": {
+    "clientId": "Abc",
+    "redirectUrl": "https://www.google.com/",
+    "scopes": [
+      "a",
+      "b"
+    ]
+  }
+}
