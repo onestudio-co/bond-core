@@ -70,11 +70,8 @@ class _ChatBotViewState extends State<ChatBotView> {
         ),
         if (widget.state.loading) widget.typingIndicator,
         Visibility(
-          visible: widget.state.visibleTextInput,
-          child: AbsorbPointer(
-            absorbing: !(widget.state.activeTextInput),
-            child: widget.inputView,
-          ),
+          visible: widget.state.showInputView,
+          child: widget.inputView,
         ),
       ],
     );
@@ -87,7 +84,7 @@ class _ChatBotViewState extends State<ChatBotView> {
     if (currentLength > previousLength) {
       final numAdded = currentLength - previousLength;
       for (var i = 0; i < numAdded; i++) {
-        await Future.delayed(const Duration(milliseconds: 600));
+        await Future.delayed(kMessageAppearDuration);
         _listKey.currentState!.insertItem(previousLength + i);
       }
       await widget.controller.scrollToBottom();

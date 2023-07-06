@@ -6,6 +6,8 @@ import '../../data/models/chat_bot_message.dart';
 
 part 'chat_bot_state.dart';
 
+const Duration kMessageAppearDuration = Duration(milliseconds: 800);
+
 typedef ChatBotControllerListener = Function(ChatBotState, ChatBotState);
 
 class ChatBotController<T extends ChatBotMessageConvertible> {
@@ -15,10 +17,12 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
 
   ChatBotController({required this.chatBotId, required this.chatService}) {
     loadMessages(chatBotId);
+    focusNode.addListener(_onFocusChanged);
   }
 
   final messageController = TextEditingController();
   final scrollController = ScrollController();
+  final focusNode = FocusNode();
 
   ChatBotState _state = ChatBotState.initial();
 
@@ -55,11 +59,24 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
+    final oldChatBotState = _state;
+    final previousLength = oldChatBotState.visibleMessages.length;
     _updateState(_state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
       ...allowedMessageKey,
     ]));
-    await scrollToBottom();
+    final newChatBotState = _state;
+    final currentLength = newChatBotState.visibleMessages.length;
+    final showInputView =
+        _state.visibleMessages.lastOrNull?.meta.visible ?? false;
+    if (showInputView) {
+      final numAdded = currentLength - previousLength;
+      await Future.delayed(kMessageAppearDuration * numAdded);
+      _updateState(_state.copyWith(showInputView: showInputView));
+      focusNode.requestFocus();
+    } else {
+      await scrollToBottom();
+    }
   }
 
   Future<void> scrollToBottom() async {
@@ -74,6 +91,8 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
   void dispose() {
     messageController.dispose();
     scrollController.dispose();
+    focusNode.removeListener(_onFocusChanged);
+    focusNode.dispose();
   }
 
   void _updateState(ChatBotState newState) {
@@ -90,5 +109,12 @@ class ChatBotController<T extends ChatBotMessageConvertible> {
 
   void removeListener(ChatBotControllerListener listener) {
     _listeners.remove(listener);
+  }
+
+  void _onFocusChanged() async {
+    if (focusNode.hasFocus) {
+      await Future.delayed(Duration(milliseconds: 300));
+      await scrollToBottom();
+    }
   }
 }
