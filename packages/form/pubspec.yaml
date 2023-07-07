@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   meta: ^1.8.0
-  riverpod: ^2.3.6
   intl: ^0.18.0
 
   bond_core: ^0.0.1+2

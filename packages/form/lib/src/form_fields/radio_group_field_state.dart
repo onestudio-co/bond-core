@@ -1,7 +1,5 @@
 import '../../bond_form.dart';
 
-import 'radio_button_field_state.dart';
-
 class RadioGroupFieldState<T> extends FormFieldState<T> {
   final List<RadioButtonFieldState<T>> radioButtons;
 
