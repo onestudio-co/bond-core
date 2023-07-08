@@ -13,3 +13,7 @@ dependencies:
   intl: ^0.18.0
 
   bond_core: ^0.0.1+2
+
+
+dev_dependencies:
+  intl_translation: ^0.18.2

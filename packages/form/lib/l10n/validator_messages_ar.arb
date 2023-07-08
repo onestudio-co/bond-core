@@ -250,5 +250,40 @@
       "fieldName": {
       }
     }
+  },
+  "maxSelectedValidationMessage": "لا يمكنك تحديد أكثر من {max} خيارات لـ {fieldName}.",
+  "@maxSelectedValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي لا يمكنك تحديد أكثر من عدد معين من الخيارات",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "max": {
+      }
+    }
+  },
+  "minSelectedValidationMessage": "يجب عليك تحديد {min} خيارات لـ {fieldName}.",
+  "@minSelectedValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب عليك تحديد عدد معين من الخيارات",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "min": {
+      }
+    }
+  },
+  "rangeSelectedValidationMessage": "يجب عليك تحديد بين {min} و {max} خيارات لـ {fieldName}.",
+  "@rangeSelectedValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب عليك تحديد عدد معين من الخيارات",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "min": {
+      },
+      "max": {
+      }
+    }
   }
 }

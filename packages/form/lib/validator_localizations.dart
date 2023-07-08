@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:intl/intl.dart';
 
-import 'validator_messages_all.dart';
+import 'l10n/validator_messages_all_locales.dart';
+
+/// run this command to generate the validator_messages_all.dart file:
+// flutter pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/validator_localizations.dart lib/l10n/validator_messages_*.arb
 
 class ValidatorLocalizations {
   ValidatorLocalizations(this.localeName);
@@ -275,6 +278,39 @@ class ValidatorLocalizations {
       name: 'regexValidationMessage',
       desc: 'Validation message for a field that must match a regex pattern',
       args: [fieldName],
+      locale: localeName,
+    );
+  }
+
+  String maxSelectedValidationMessage(String fieldName, int max) {
+    return Intl.message(
+      'You may only select $max $fieldName.',
+      name: 'maxSelectedValidationMessage',
+      desc:
+          'Validation message for a field that must have a maximum number of selected values',
+      args: [fieldName, max],
+      locale: localeName,
+    );
+  }
+
+  String minSelectedValidationMessage(String fieldName, int min) {
+    return Intl.message(
+      'You must select at least $min $fieldName.',
+      name: 'minSelectedValidationMessage',
+      desc:
+          'Validation message for a field that must have a minimum number of selected values',
+      args: [fieldName, min],
+      locale: localeName,
+    );
+  }
+
+  String rangeSelectedValidationMessage(String fieldName, int min, int max) {
+    return Intl.message(
+      'You must select between $min and $max $fieldName.',
+      name: 'rangeSelectedValidationMessage',
+      desc:
+          'Validation message for a field that must have a range of selected values',
+      args: [fieldName, min, max],
       locale: localeName,
     );
   }

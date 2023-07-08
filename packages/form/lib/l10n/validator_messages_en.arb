@@ -250,5 +250,40 @@
       "fieldName": {
       }
     }
+  },
+  "maxSelectedValidationMessage": "You may only select {max} {fieldName}.",
+  "@maxSelectedValidationMessage": {
+    "description": "Validation message for a field that must have a maximum number of selected values",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "max": {
+      }
+    }
+  },
+  "minSelectedValidationMessage": "You must select at least {min} {fieldName}.",
+  "@minSelectedValidationMessage": {
+    "description": "Validation message for a field that must have a minimum number of selected values",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "min": {
+      }
+    }
+  },
+  "rangeSelectedValidationMessage": "You must select between {min} and {max} {fieldName}.",
+  "@rangeSelectedValidationMessage": {
+    "description": "Validation message for a field that must have a range of selected values",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "min": {
+      },
+      "max": {
+      }
+    }
   }
 }

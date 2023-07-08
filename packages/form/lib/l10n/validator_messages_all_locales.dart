@@ -18,6 +18,7 @@ import 'validator_messages_en.dart' as messages_en;
 import 'validator_messages_ar.dart' as messages_ar;
 
 typedef Future<dynamic> LibraryLoader();
+
 Map<String, LibraryLoader> _deferredLibraries = {
   'en': () => Future.value(null),
   'ar': () => Future.value(null),
@@ -63,3 +64,4 @@ MessageLookupByLibrary? _findGeneratedMessagesFor(String locale) {
   if (actualLocale == null) return null;
   return _findExact(actualLocale);
 }
+

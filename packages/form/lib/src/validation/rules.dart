@@ -1,4 +1,4 @@
-library validation_Rule;
+library validation_rules;
 
 import 'package:bond_form/bond_form.dart';
 
@@ -26,6 +26,9 @@ export 'rules/required_if.dart';
 export 'rules/same.dart';
 export 'rules/size.dart';
 export 'rules/url.dart';
+export 'rules/min_selected.dart';
+export 'rules/max_selected.dart';
+export 'rules/range_selected.dart';
 
 export 'validation_rule.dart';
 
@@ -111,4 +114,16 @@ class Rules {
       Size(size, message: message);
 
   static ValidationRule<String> url({String? message}) => Url(message: message);
+
+  static ValidationRule<Iterable<T>?> minSelected<T>(int min,
+          {String? message}) =>
+      MinSelected<T>(min, message: message);
+
+  static ValidationRule<Iterable<T>?> maxSelected<T>(int min,
+          {String? message}) =>
+      MaxSelected<T>(min, message: message);
+
+  static ValidationRule<Iterable<T>?> rangeSelected<T>(
+          {required int min, required int max, String? message}) =>
+      RangeSelected<T>(min, max, message: message);
 }
