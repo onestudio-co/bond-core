@@ -13,6 +13,8 @@ part 'chat_bot_message_sender.dart';
 
 part 'chat_bot_message_type.dart';
 
+part 'chat_bot_message_rule.dart';
+
 abstract class ChatBotMessage {
   final int id;
   final int index;
@@ -23,6 +25,7 @@ abstract class ChatBotMessage {
   final String? title;
   final String? icon;
   final ChatBotMessageMeta meta;
+  final ChatBotMessageRule? rules;
   final List<ChatBotMessageOption> options;
 
   const ChatBotMessage({
@@ -34,6 +37,7 @@ abstract class ChatBotMessage {
     this.title,
     this.text,
     this.icon,
+    this.rules ,
     this.meta = const ChatBotMessageMeta.defaults(),
     this.options = const [],
   });
