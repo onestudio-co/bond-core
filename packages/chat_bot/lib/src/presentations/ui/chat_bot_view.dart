@@ -68,7 +68,7 @@ class _ChatBotViewState extends State<ChatBotView> {
             },
           ),
         ),
-       widget.typingIndicator,
+        widget.typingIndicator,
         Visibility(
           visible: widget.state.showInputView,
           child: widget.inputView,
