@@ -131,7 +131,7 @@ class ValidatorLocalizations {
     );
   }
 
-  String digitsBetweenValidationMessage(String fieldName, int min, int max) {
+  String digitsBetweenValidationMessage(String fieldName, num min, num max) {
     return Intl.message(
       '$fieldName must have a length between $min and $max.',
       name: 'digitsBetweenValidationMessage',
@@ -152,7 +152,7 @@ class ValidatorLocalizations {
     );
   }
 
-  String betweenValidationMessage(String fieldName, int min, int max) {
+  String betweenValidationMessage(String fieldName, num min, num max) {
     return Intl.message(
       '$fieldName must have a size between $min and $max.',
       name: 'betweenValidationMessage',

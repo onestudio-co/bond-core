@@ -2,15 +2,15 @@ import 'package:meta/meta.dart' show nonVirtual;
 import '../../bond_form.dart';
 
 abstract class FormFieldState<T> {
-  T value;
+  T? value;
   String? error;
   String label;
-  List<ValidationRule<T>> rules;
+  List<ValidationRule<T?>> rules;
   bool validateOnUpdate;
   bool touched;
 
   FormFieldState({
-    required this.value,
+    this.value,
     this.error,
     required this.label,
     this.touched = false,

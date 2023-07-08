@@ -1,4 +1,5 @@
-import '../../../bond_form.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
+import 'package:bond_form/src/form_fields/form_field_state.dart';
 
 class AlphaDash extends ValidationRule<String> {
   AlphaDash({String? message}) : super(message);

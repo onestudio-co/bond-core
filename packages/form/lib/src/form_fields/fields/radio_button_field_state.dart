@@ -1,4 +1,4 @@
-import '../../bond_form.dart';
+import 'package:bond_form/src/form_fields/form_field_state.dart';
 
 class RadioButtonFieldState<T> extends FormFieldState<T> {
   RadioButtonFieldState(

@@ -1,6 +1,7 @@
-import '../../../bond_form.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
+import 'package:bond_form/src/form_fields/form_field_state.dart';
 
-class Same extends ValidationRule<String> {
+class Same<T> extends ValidationRule<T> {
   final String otherField;
 
   Same(this.otherField, {String? message}) : super(message);
@@ -10,7 +11,7 @@ class Same extends ValidationRule<String> {
       l10n.sameValidationMessage(fieldName, otherField);
 
   @override
-  bool validate(String value, Map<String, FormFieldState> fields) {
+  bool validate(T value, Map<String, FormFieldState> fields) {
     if (!fields.containsKey(otherField)) {
       throw ArgumentError('Field $otherField does not exist');
     }

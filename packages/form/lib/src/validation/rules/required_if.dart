@@ -1,6 +1,7 @@
-import '../../../bond_form.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
+import 'package:bond_form/src/form_fields/form_field_state.dart';
 
-class RequiredIf extends ValidationRule<String> {
+class RequiredIf<T> extends ValidationRule<T?> {
   final String? otherFieldName;
   final dynamic expectedValue;
   final bool Function()? condition;
@@ -20,13 +21,22 @@ class RequiredIf extends ValidationRule<String> {
       l10n.requiredValidationMessage(fieldName);
 
   @override
-  bool validate(String? value, Map<String, FormFieldState> fields) {
+  bool validate(T? value, Map<String, FormFieldState> fields) {
+    var requiredConditionFulfilled = false;
+
     if (condition != null) {
-      if (condition!()) {
-        return value != null && value.isNotEmpty;
-      }
+      requiredConditionFulfilled = condition!();
     } else if (fields[otherFieldName!]?.value == expectedValue) {
-      return value != null && value.isNotEmpty;
+      requiredConditionFulfilled = true;
+    }
+    if (requiredConditionFulfilled) {
+      if (value is String) {
+        return value.isNotEmpty;
+      } else if (value is List) {
+        return value.isNotEmpty;
+      } else {
+        return value != null;
+      }
     }
     return true;
   }

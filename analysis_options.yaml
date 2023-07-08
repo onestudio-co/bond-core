@@ -38,4 +38,3 @@ linter:
 
     # Pub
     - always_declare_return_types
-    - prefer_relative_imports

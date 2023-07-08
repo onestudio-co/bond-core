@@ -1,6 +1,7 @@
-import '../../../bond_form.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
+import 'package:bond_form/src/form_fields/form_field_state.dart';
 
-class Required extends ValidationRule<String> {
+class Required<T> extends ValidationRule<T?> {
   Required({String? message}) : super(message);
 
   @override
@@ -8,7 +9,13 @@ class Required extends ValidationRule<String> {
       l10n.requiredValidationMessage(fieldName);
 
   @override
-  bool validate(String value, Map<String, FormFieldState> fields) {
-    return value.isNotEmpty;
+  bool validate(T? value, Map<String, FormFieldState> fields) {
+    if (value is String) {
+      return value.isNotEmpty;
+    }
+    if (value is List) {
+      return value.isNotEmpty;
+    }
+    return value != null;
   }
 }

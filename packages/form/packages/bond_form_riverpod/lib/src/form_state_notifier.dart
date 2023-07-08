@@ -49,7 +49,7 @@ abstract class FormStateNotifier extends Notifier<FormState> {
       final error = field.validate(_fields);
       if (error != null) {
         allValid = false;
-        field.error = '$fieldName $error'; // Set the error of the field
+        field.error = error; // Set the error of the field
         if (state.stopOnFirstError) {
           break;
         }
