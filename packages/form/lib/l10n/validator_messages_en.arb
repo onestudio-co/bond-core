@@ -307,5 +307,23 @@
       "before": {
       }
     }
+  },
+  "isTrueValidationMessage": "The field $fieldName must be checked.",
+  "@isTrueValidationMessage": {
+    "description": "Validation message for a field that must be checked",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
+  },
+  "isFalseValidationMessage": "The field $fieldName must be unchecked.",
+  "@isFalseValidationMessage": {
+    "description": "Validation message for a field that must be unchecked",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
   }
 }

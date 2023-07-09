@@ -336,4 +336,24 @@ class ValidatorLocalizations {
       locale: localeName,
     );
   }
+
+  String isTrueValidationMessage(String fieldName) {
+    return Intl.message(
+      'The field $fieldName must be checked.',
+      name: 'isTrueValidationMessage',
+      desc: 'Validation message for a field that must be checked',
+      args: [fieldName],
+      locale: localeName,
+    );
+  }
+
+  String isFalseValidationMessage(String fieldName) {
+    return Intl.message(
+      'The field $fieldName must be unchecked.',
+      name: 'isFalseValidationMessage',
+      desc: 'Validation message for a field that must be unchecked',
+      args: [fieldName],
+      locale: localeName,
+    );
+  }
 }

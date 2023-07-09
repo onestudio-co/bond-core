@@ -307,5 +307,23 @@
       "before": {
       }
     }
+  },
+  "isTrueValidationMessage": "{fieldName} يجب أن يكون محددا.",
+  "@isTrueValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون صحيحا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
+  },
+  "isFalseValidationMessage": "{fieldName} يجب أن يكون  غير محدد.",
+  "@isFalseValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون خاطئا",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
   }
 }

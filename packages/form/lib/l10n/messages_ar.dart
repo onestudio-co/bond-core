@@ -53,33 +53,37 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m15(fieldName) => "${fieldName} يجب أن يكون عددا صحيحا.";
 
-  static m16(fieldName, length) => "لا يجب أن يتجاوز ${fieldName} ${length} حروف.";
+  static m16(fieldName) => "${fieldName} يجب أن يكون  غير محدد.";
 
-  static m17(fieldName, max) => "لا يمكنك تحديد أكثر من ${max} خيارات لـ ${fieldName}.";
+  static m17(fieldName) => "${fieldName} يجب أن يكون محددا.";
 
-  static m18(fieldName, value) => "${fieldName} يجب أن يكون لديه قيمة عليا ${value}.";
+  static m18(fieldName, length) => "لا يجب أن يتجاوز ${fieldName} ${length} حروف.";
 
-  static m19(fieldName, length) => "يجب أن يكون ${fieldName} على الأقل ${length} حروف.";
+  static m19(fieldName, max) => "لا يمكنك تحديد أكثر من ${max} خيارات لـ ${fieldName}.";
 
-  static m20(fieldName, min) => "يجب عليك تحديد ${min} خيارات لـ ${fieldName}.";
+  static m20(fieldName, value) => "${fieldName} يجب أن يكون لديه قيمة عليا ${value}.";
 
-  static m21(fieldName, value) => "${fieldName} يجب أن يكون لديه قيمة دنيا ${value}.";
+  static m21(fieldName, length) => "يجب أن يكون ${fieldName} على الأقل ${length} حروف.";
 
-  static m22(fieldName) => "${fieldName} يجب أن لا يكون ضمن القائمة المعطاة.";
+  static m22(fieldName, min) => "يجب عليك تحديد ${min} خيارات لـ ${fieldName}.";
 
-  static m23(fieldName) => "${fieldName} يجب أن يكون رقميا.";
+  static m23(fieldName, value) => "${fieldName} يجب أن يكون لديه قيمة دنيا ${value}.";
 
-  static m24(fieldName, min, max) => "يجب عليك تحديد بين ${min} و ${max} خيارات لـ ${fieldName}.";
+  static m24(fieldName) => "${fieldName} يجب أن لا يكون ضمن القائمة المعطاة.";
 
-  static m25(fieldName) => "${fieldName} يجب أن يطابق النمط المحدد.";
+  static m25(fieldName) => "${fieldName} يجب أن يكون رقميا.";
 
-  static m26(fieldName) => "${fieldName} مطلوب.";
+  static m26(fieldName, min, max) => "يجب عليك تحديد بين ${min} و ${max} خيارات لـ ${fieldName}.";
 
-  static m27(fieldName, field) => "${fieldName} يجب أن يكون له نفس القيمة كـ ${field}.";
+  static m27(fieldName) => "${fieldName} يجب أن يطابق النمط المحدد.";
 
-  static m28(fieldName, value) => "${fieldName} يجب أن يكون حجمه ${value}.";
+  static m28(fieldName) => "${fieldName} مطلوب.";
 
-  static m29(fieldName) => "${fieldName} يجب أن يكون عنوان URL صالح.";
+  static m29(fieldName, field) => "${fieldName} يجب أن يكون له نفس القيمة كـ ${field}.";
+
+  static m30(fieldName, value) => "${fieldName} يجب أن يكون حجمه ${value}.";
+
+  static m31(fieldName) => "${fieldName} يجب أن يكون عنوان URL صالح.";
 
   @override
   final Map<String, dynamic> messages = _notInlinedMessages(_notInlinedMessages);
@@ -101,19 +105,21 @@ class MessageLookup extends MessageLookupByLibrary {
     'emailValidationMessage': m13,
     'inValuesValidationMessage': m14,
     'integerValidationMessage': m15,
-    'maxLengthValidationMessage': m16,
-    'maxSelectedValidationMessage': m17,
-    'maxValueValidationMessage': m18,
-    'minLengthValidationMessage': m19,
-    'minSelectedValidationMessage': m20,
-    'minValueValidationMessage': m21,
-    'notInValuesValidationMessage': m22,
-    'numericValidationMessage': m23,
-    'rangeSelectedValidationMessage': m24,
-    'regexValidationMessage': m25,
-    'requiredValidationMessage': m26,
-    'sameValidationMessage': m27,
-    'sizeValidationMessage': m28,
-    'urlValidationMessage': m29
+    'isFalseValidationMessage': m16,
+    'isTrueValidationMessage': m17,
+    'maxLengthValidationMessage': m18,
+    'maxSelectedValidationMessage': m19,
+    'maxValueValidationMessage': m20,
+    'minLengthValidationMessage': m21,
+    'minSelectedValidationMessage': m22,
+    'minValueValidationMessage': m23,
+    'notInValuesValidationMessage': m24,
+    'numericValidationMessage': m25,
+    'rangeSelectedValidationMessage': m26,
+    'regexValidationMessage': m27,
+    'requiredValidationMessage': m28,
+    'sameValidationMessage': m29,
+    'sizeValidationMessage': m30,
+    'urlValidationMessage': m31
   };
 }

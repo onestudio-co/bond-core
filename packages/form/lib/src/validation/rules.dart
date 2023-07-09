@@ -31,6 +31,8 @@ export 'rules/max_selected.dart';
 export 'rules/range_selected.dart';
 export 'rules/date_before.dart';
 export 'rules/date_after.dart';
+export 'rules/is_true.dart';
+export 'rules/is_false.dart';
 
 export 'validation_rule.dart';
 
@@ -143,4 +145,10 @@ class Rules {
   static ValidationRule<DateTime?> dateAfterFromString(String date,
           {String? format, String? message}) =>
       DateAfter.fromString(date, format: format, message: message);
+
+  static ValidationRule<bool> isTrue({String? message}) =>
+      IsTrue(message: message);
+
+  static ValidationRule<bool> isFalse({String? message}) =>
+      IsFalse(message: message);
 }
