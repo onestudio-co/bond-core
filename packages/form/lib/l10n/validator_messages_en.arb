@@ -285,5 +285,27 @@
       "max": {
       }
     }
+  },
+  "dateAfterValidationMessage": "{fieldName} must be after {after}.",
+  "@dateAfterValidationMessage": {
+    "description": "Validation message for a date field that must be after another date",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "after": {
+      }
+    }
+  },
+  "dateBeforeValidationMessage": "{fieldName} must be before {before}.",
+  "@dateBeforeValidationMessage": {
+    "description": "Validation message for a date field that must be before another date",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "before": {
+      }
+    }
   }
 }

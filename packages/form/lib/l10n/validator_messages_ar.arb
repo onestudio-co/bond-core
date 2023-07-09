@@ -285,5 +285,27 @@
       "max": {
       }
     }
+  },
+  "dateAfterValidationMessage": "{fieldName} يجب أن يكون تاريخا بعد {after}.",
+  "@dateAfterValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون تاريخا بعد تاريخ معين",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "after": {
+      }
+    }
+  },
+  "dateBeforeValidationMessage": "{fieldName} يجب أن يكون تاريخا قبل {before}.",
+  "@dateBeforeValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون تاريخا قبل تاريخ معين",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "before": {
+      }
+    }
   }
 }

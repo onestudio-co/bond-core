@@ -29,6 +29,8 @@ export 'rules/url.dart';
 export 'rules/min_selected.dart';
 export 'rules/max_selected.dart';
 export 'rules/range_selected.dart';
+export 'rules/date_before.dart';
+export 'rules/date_after.dart';
 
 export 'validation_rule.dart';
 
@@ -126,4 +128,19 @@ class Rules {
   static ValidationRule<Iterable<T>?> rangeSelected<T>(
           {required int min, required int max, String? message}) =>
       RangeSelected<T>(min, max, message: message);
+
+  static ValidationRule<DateTime> dateBefore(DateTime date,
+          {String? message}) =>
+      DateBefore(date, message: message);
+
+  static ValidationRule<DateTime> dateAfter(DateTime date, {String? message}) =>
+      DateBefore(date, message: message);
+
+  static ValidationRule<DateTime?> dateBeforeFromString(String date,
+          {String? format, String? message}) =>
+      DateBefore.fromString(date, format: format, message: message);
+
+  static ValidationRule<DateTime?> dateAfterFromString(String date,
+          {String? format, String? message}) =>
+      DateAfter.fromString(date, format: format, message: message);
 }

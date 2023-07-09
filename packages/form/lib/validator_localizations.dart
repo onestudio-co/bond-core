@@ -314,4 +314,26 @@ class ValidatorLocalizations {
       locale: localeName,
     );
   }
+
+  String dateAfterValidationMessage(String fieldName, String after) {
+    return Intl.message(
+      '$fieldName must be after $after.',
+      name: 'dateAfterValidationMessage',
+      desc:
+          'Validation message for a date field that must be after another date',
+      args: [fieldName, after],
+      locale: localeName,
+    );
+  }
+
+  String dateBeforeValidationMessage(String fieldName, String before) {
+    return Intl.message(
+      '$fieldName must be before $before.',
+      name: 'dateBeforeValidationMessage',
+      desc:
+          'Validation message for a date field that must be before another date',
+      args: [fieldName, before],
+      locale: localeName,
+    );
+  }
 }
