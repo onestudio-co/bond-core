@@ -1,5 +1,5 @@
+import 'package:bond_form/src/validation/rules.dart';
 import 'package:meta/meta.dart' show nonVirtual;
-import '../../bond_form.dart';
 
 abstract class FormFieldState<T> {
   T? value;

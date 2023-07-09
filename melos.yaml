@@ -2,6 +2,7 @@ name: bond_core
 
 packages:
   - packages/*
+  - packages/*/packages/*
 
 scripts:
   analyze:

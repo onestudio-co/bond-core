@@ -8,48 +8,46 @@ export 'rules/alpha_num.dart';
 export 'rules/between.dart';
 export 'rules/boolean.dart';
 export 'rules/date.dart';
+export 'rules/date_after.dart';
+export 'rules/date_before.dart';
 export 'rules/different.dart';
 export 'rules/digits.dart';
 export 'rules/digits_between.dart';
 export 'rules/email.dart';
 export 'rules/in_list.dart';
 export 'rules/integer.dart';
+export 'rules/is_false.dart';
+export 'rules/is_true.dart';
 export 'rules/max_length.dart';
+export 'rules/max_selected.dart';
 export 'rules/max_value.dart';
 export 'rules/min_length.dart';
+export 'rules/min_selected.dart';
 export 'rules/min_value.dart';
 export 'rules/not_in_list.dart';
 export 'rules/numeric.dart';
+export 'rules/range_selected.dart';
 export 'rules/regex.dart';
 export 'rules/required.dart';
 export 'rules/required_if.dart';
 export 'rules/same.dart';
 export 'rules/size.dart';
 export 'rules/url.dart';
-export 'rules/min_selected.dart';
-export 'rules/max_selected.dart';
-export 'rules/range_selected.dart';
-export 'rules/date_before.dart';
-export 'rules/date_after.dart';
-export 'rules/is_true.dart';
-export 'rules/is_false.dart';
-
 export 'validation_rule.dart';
 
 class Rules {
-  static ValidationRule<T?> required<T>({String? message}) =>
+  static ValidationRule<T> required<T>({String? message}) =>
       Required<T>(message: message);
 
-  static ValidationRule<T?> requiredIf<T>(
-          {String? otherFieldName,
-          dynamic expectedValue,
-          bool Function()? condition,
-          String? message}) =>
-      RequiredIf<T>(otherFieldName,
-          expectedValue: expectedValue, message: message);
+  static ValidationRule<T> requiredIf<T>(String? otherFieldName,
+          {dynamic equalTo, String? message}) =>
+      RequiredIf<T>(otherFieldName, equalTo: equalTo, message: message);
 
-  static ValidationRule<T?> different<T>(String otherField,
+  static ValidationRule<T> requiredIfCondition<T>(bool Function()? condition,
           {String? message}) =>
+      RequiredIf.condition(condition, message: message);
+
+  static ValidationRule<T> different<T>(String otherField, {String? message}) =>
       Different<T>(otherField, message: message);
 
   static ValidationRule<String> alpha({String? message}) =>
