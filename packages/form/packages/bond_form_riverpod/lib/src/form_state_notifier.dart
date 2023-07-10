@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:bond_form/bond_form.dart';
 import 'package:riverpod/riverpod.dart';
 
-abstract class FormStateNotifier extends Notifier<FormState> {
+abstract class FormStateNotifier extends Notifier<BondFormState> {
   final Map<String, FormFieldState> _fields;
   final bool _stopOnFirstError;
 
@@ -12,7 +14,7 @@ abstract class FormStateNotifier extends Notifier<FormState> {
         _fields = fields;
 
   @override
-  FormState build() => FormState(
+  BondFormState build() => BondFormState(
         fields: _fields,
         stopOnFirstError: _stopOnFirstError,
       );
@@ -42,7 +44,7 @@ abstract class FormStateNotifier extends Notifier<FormState> {
     state = state.copyWith(fields: Map.from(_fields));
   }
 
-  bool validateAll() {
+  bool get _allValid {
     var allValid = true;
     for (final fieldName in _fields.keys) {
       final field = get(fieldName);
@@ -58,5 +60,15 @@ abstract class FormStateNotifier extends Notifier<FormState> {
     return allValid;
   }
 
-  Future<void> submit();
+  Future<void> submit() => _onSubmit();
+
+  Future<void> onSubmit();
+
+  Future<void> _onSubmit() {
+    if (_allValid) {
+      return onSubmit();
+    }
+    log('Form is not on valid state ${_fields.values.map((e) => e.error).join('\n')}');
+    return Future.value();
+  }
 }

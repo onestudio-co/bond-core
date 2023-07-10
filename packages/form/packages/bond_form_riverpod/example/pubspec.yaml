@@ -1,0 +1,25 @@
+name: form_example
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_riverpod: ^2.3.6
+  bond_form:
+    path: ../bond_form
+  bond_form_riverpod:
+    path: bond_form_riverpod
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
