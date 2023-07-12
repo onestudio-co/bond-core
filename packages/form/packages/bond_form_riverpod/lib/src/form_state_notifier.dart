@@ -3,27 +3,26 @@ import 'dart:developer';
 import 'package:bond_form/bond_form.dart';
 import 'package:riverpod/riverpod.dart';
 
-abstract class FormStateNotifier extends Notifier<BondFormState> {
-  final Map<String, FormFieldState> _fields;
-  final bool _stopOnFirstError;
+abstract class FormStateNotifier<Success, Failure extends Error>
+    extends Notifier<BondFormState<Success, Failure>> {
+  final bool stopOnFirstError;
 
   FormStateNotifier({
     required Map<String, FormFieldState> fields,
-    bool stopOnFirstError = false,
-  })  : _stopOnFirstError = stopOnFirstError,
-        _fields = fields;
+    this.stopOnFirstError = false,
+  }) {
+    state = BondFormState<Success, Failure>(fields: fields);
+  }
 
   @override
-  BondFormState build() => BondFormState(
-        fields: _fields,
-        stopOnFirstError: _stopOnFirstError,
-      );
+  BondFormState<Success, Failure> build() =>
+      BondFormState<Success, Failure>(fields: state.fields);
 
   FormFieldState<T> get<T>(String fieldName) {
-    if (!_fields.containsKey(fieldName)) {
+    if (!state.fields.containsKey(fieldName)) {
       throw ArgumentError('No field found with name $fieldName');
     }
-    return _fields[fieldName] as FormFieldState<T>;
+    return state.fields[fieldName] as FormFieldState<T>;
   }
 
   FormFieldState operator [](String fieldName) => get(fieldName);
@@ -38,21 +37,21 @@ abstract class FormStateNotifier extends Notifier<BondFormState> {
     field.touched =
         true; // The field is being interacted with, so update `touched`
     if (field.validateOnUpdate && field.touched) {
-      field.error = field.validate(_fields);
+      field.error = field.validate(state.fields);
     }
-    _fields[fieldName] = field;
-    state = state.copyWith(fields: Map.from(_fields));
+    state.fields[fieldName] = field;
+    state = state.copyWith(fields: Map.from(state.fields));
   }
 
   bool get _allValid {
     var allValid = true;
-    for (final fieldName in _fields.keys) {
+    for (final fieldName in state.fields.keys) {
       final field = get(fieldName);
-      final error = field.validate(_fields);
+      final error = field.validate(state.fields);
       if (error != null) {
         allValid = false;
         field.error = error; // Set the error of the field
-        if (state.stopOnFirstError) {
+        if (stopOnFirstError) {
           break;
         }
       }
@@ -68,7 +67,7 @@ abstract class FormStateNotifier extends Notifier<BondFormState> {
     if (_allValid) {
       return onSubmit();
     }
-    log('Form is not on valid state ${_fields.values.map((e) => e.error).join('\n')}');
+    log('Form is not on valid state ${state.fields.values.map((e) => e.error).join('\n')}');
     return Future.value();
   }
 }
