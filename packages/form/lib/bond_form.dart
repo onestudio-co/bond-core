@@ -2,9 +2,9 @@ library form;
 
 import 'bond_form.dart';
 
-export 'src/form_fields/form_field_state.dart';
-export 'src/form_state.dart';
+export 'src/bond_form_state.dart';
 export 'src/form_fields.dart';
+export 'src/form_fields/form_field_state.dart';
 export 'src/validation/rules.dart';
 
 enum PizzaTopping {

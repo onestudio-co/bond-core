@@ -5,7 +5,14 @@ import 'package:bond_form_riverpod/bond_form_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginFormNotifier extends FormStateNotifier {
+class SuccessResponse {}
+
+class FailureResponse extends Error {}
+
+typedef LoginFormState = BondFormState<SuccessResponse, FailureResponse>;
+
+class LoginFormNotifier
+    extends FormStateNotifier<SuccessResponse, FailureResponse> {
   LoginFormNotifier()
       : super(
           fields: {
@@ -63,7 +70,6 @@ class LoginForm extends ConsumerWidget {
             // Password field
             TextField(
               onChanged: (value) => form['password'].value = value,
-              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: form['password'].label,
                 errorText: form['password'].error,
@@ -83,10 +89,12 @@ class LoginForm extends ConsumerWidget {
     );
   }
 
-  void _onFormChange(BondFormState? previous, BondFormState next) {}
+  void _onFormChange(LoginFormState? previous, LoginFormState next) {
+
+  }
 }
 
 // Create a provider for the form state notifier
-final loginFormProvider = NotifierProvider<LoginFormNotifier, BondFormState>(
+final loginFormProvider = NotifierProvider<LoginFormNotifier, LoginFormState>(
   () => LoginFormNotifier(),
 );
