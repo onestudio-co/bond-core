@@ -4,6 +4,7 @@ class ChatBotState<G extends ChatBotMessage> {
   final List<List<G>> messages;
   final bool loading;
   final List<String> allowedMessage;
+  final List<G> removedMessages;
   final String? error;
   final bool showInputView;
 
@@ -11,6 +12,7 @@ class ChatBotState<G extends ChatBotMessage> {
     this.messages = const [],
     this.loading = false,
     this.allowedMessage = const [],
+    this.removedMessages = const [],
     this.error,
     this.showInputView = false,
   });
@@ -27,6 +29,7 @@ class ChatBotState<G extends ChatBotMessage> {
     List<List<G>>? messages,
     bool? loading,
     List<String>? allowedMessage,
+    List<G>? removedMessages,
     String? error,
     bool? showInputView,
   }) {
@@ -34,6 +37,7 @@ class ChatBotState<G extends ChatBotMessage> {
       messages: messages ?? this.messages,
       loading: loading ?? this.loading,
       allowedMessage: allowedMessage ?? this.allowedMessage,
+      removedMessages: removedMessages ?? this.removedMessages,
       error: error ?? this.error,
       showInputView: showInputView ?? this.showInputView,
     );

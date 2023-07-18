@@ -83,7 +83,8 @@ class _ChatBotViewState extends State<ChatBotView> {
     if (currentLength > previousLength) {
       await _addMessages(previousLength, currentLength);
     } else if (currentLength < previousLength) {
-      await _removeMessages(previousLength, currentLength, oldChatBotState);
+      await _removeMessages(
+          previousLength, currentLength, oldChatBotState, newChatBotState);
     }
 
     await widget.controller.scrollToBottom();
@@ -98,17 +99,16 @@ class _ChatBotViewState extends State<ChatBotView> {
   }
 
   Future<void> _removeMessages(int previousLength, int currentLength,
-      ChatBotState oldChatBotState) async {
+      ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
     final numRemoved = previousLength - currentLength;
-    final removedMessages =
-        oldChatBotState.visibleMessages.sublist(currentLength, previousLength);
+    final removedMessages = newChatBotState.removedMessages;
 
     for (var i = 0; i < numRemoved; i++) {
       await Future.delayed(kMessageAppearDuration);
       _listKey.currentState!.removeItem(
         previousLength - i - 1,
-        (context, animation) => AnimatedContainer(
-          duration: kMessageAppearDuration,
+        (context, animation) => FadeTransition(
+          opacity: animation,
           child: widget.bubbleBuilder(
             context,
             previousLength - i - 1,
