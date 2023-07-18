@@ -82,14 +82,19 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   Future<void> removeAllowedMessage(List<String> keysToRemove) async {
-    // Remove messages with the given keys.
+    final removedMessages = _state.visibleMessages
+        .where((message) => keysToRemove.contains(message.key))
+        .toList();
+
     _updateState(
       _state.copyWith(
         allowedMessage: _state.allowedMessage
             .where((key) => !keysToRemove.contains(key))
             .toList(),
+        removedMessages: removedMessages,
       ),
     );
+
     await scrollToBottom();
   }
 
