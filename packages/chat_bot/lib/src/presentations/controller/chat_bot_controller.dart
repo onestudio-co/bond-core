@@ -58,6 +58,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       ],
     ));
     messageController.clear();
+    await scrollToBottom();
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
@@ -74,12 +75,38 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     if (showInputView) {
       final numAdded = currentLength - previousLength;
       await Future.delayed(kMessageAppearDuration * numAdded);
-      _updateState(_state.copyWith(showInputView: showInputView));
       focusNode.requestFocus();
-    } else {
-      _updateState(_state.copyWith(showInputView: showInputView));
-      await scrollToBottom();
     }
+    await scrollToBottom();
+    _updateState(_state.copyWith(showInputView: showInputView));
+  }
+
+  void removeAllowedMessage(List<String> keysToRemove) async {
+    final oldChatBotState = _state;
+    final previousLength = oldChatBotState.visibleMessages.length;
+
+    // Remove messages with the given keys.
+    _updateState(
+      _state.copyWith(
+        allowedMessage: _state.allowedMessage
+            .where((key) => !keysToRemove.contains(key))
+            .toList(),
+      ),
+    );
+
+    final newChatBotState = _state;
+    final currentLength = newChatBotState.visibleMessages.length;
+
+    final showInputView =
+        _state.visibleMessages.lastOrNull?.meta.visible ?? false;
+
+    if (showInputView) {
+      final numRemoved = previousLength - currentLength;
+      await Future.delayed(kMessageAppearDuration * numRemoved);
+      focusNode.requestFocus();
+    }
+    await scrollToBottom();
+    _updateState(_state.copyWith(showInputView: showInputView));
   }
 
   Future<void> scrollToBottom() async {
