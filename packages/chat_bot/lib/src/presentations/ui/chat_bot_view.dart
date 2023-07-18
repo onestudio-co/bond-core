@@ -5,9 +5,7 @@ import '../controller/chat_bot_controller.dart';
 import 'chat_bot_default_message_view.dart';
 
 part 'chat_bot_bubble.dart';
-
 part 'chat_bot_bubble_decoration.dart';
-
 part 'chat_bot_message_builder.dart';
 
 class ChatBotView extends StatefulWidget {
@@ -81,13 +79,42 @@ class _ChatBotViewState extends State<ChatBotView> {
       ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
     final currentLength = newChatBotState.visibleMessages.length;
     final previousLength = oldChatBotState.visibleMessages.length;
+
     if (currentLength > previousLength) {
-      final numAdded = currentLength - previousLength;
-      for (var i = 0; i < numAdded; i++) {
-        await Future.delayed(kMessageAppearDuration);
-        _listKey.currentState!.insertItem(previousLength + i);
-      }
-      await widget.controller.scrollToBottom();
+      await _addMessages(previousLength, currentLength);
+    } else if (currentLength < previousLength) {
+      await _removeMessages(previousLength, currentLength, oldChatBotState);
+    }
+
+    await widget.controller.scrollToBottom();
+  }
+
+  Future<void> _addMessages(int previousLength, int currentLength) async {
+    final numAdded = currentLength - previousLength;
+    for (var i = 0; i < numAdded; i++) {
+      await Future.delayed(kMessageAppearDuration);
+      _listKey.currentState!.insertItem(previousLength + i);
+    }
+  }
+
+  Future<void> _removeMessages(int previousLength, int currentLength,
+      ChatBotState oldChatBotState) async {
+    // When the number of visible messages decreases, remove items from the list
+    // in reverse order.
+    final numRemoved = previousLength - currentLength;
+    for (var i = 0; i < numRemoved; i++) {
+      await Future.delayed(kMessageAppearDuration);
+      _listKey.currentState!.removeItem(
+        previousLength - i - 1,
+        (context, animation) => FadeTransition(
+          opacity: animation,
+          child: widget.bubbleBuilder(
+            context,
+            previousLength - i - 1,
+            oldChatBotState.visibleMessages[previousLength - i - 1],
+          ),
+        ),
+      );
     }
   }
 }
