@@ -107,8 +107,8 @@ class _ChatBotViewState extends State<ChatBotView> {
       await Future.delayed(kMessageAppearDuration);
       _listKey.currentState!.removeItem(
         previousLength - i - 1,
-        (context, animation) => FadeTransition(
-          opacity: animation,
+        (context, animation) => AnimatedContainer(
+          duration: kMessageAppearDuration,
           child: widget.bubbleBuilder(
             context,
             previousLength - i - 1,

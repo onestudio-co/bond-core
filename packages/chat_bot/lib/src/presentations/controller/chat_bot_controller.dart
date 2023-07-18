@@ -61,7 +61,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     await scrollToBottom();
   }
 
-  Future<void> updateAllowedMessage(List<String> allowedMessageKey) async {
+  void updateAllowedMessage(List<String> allowedMessageKey) async {
     final oldChatBotState = _state;
     final previousLength = oldChatBotState.visibleMessages.length;
     _updateState(_state.copyWith(allowedMessage: [
@@ -81,7 +81,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     await scrollToBottom();
   }
 
-  Future<void> removeAllowedMessage(List<String> keysToRemove) async {
+  void removeAllowedMessage(List<String> keysToRemove) async {
     final removedMessages = _state.visibleMessages
         .where((message) => keysToRemove.contains(message.key))
         .toList();
