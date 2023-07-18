@@ -99,9 +99,10 @@ class _ChatBotViewState extends State<ChatBotView> {
 
   Future<void> _removeMessages(int previousLength, int currentLength,
       ChatBotState oldChatBotState) async {
-    // When the number of visible messages decreases, remove items from the list
-    // in reverse order.
     final numRemoved = previousLength - currentLength;
+    final removedMessages =
+        oldChatBotState.visibleMessages.sublist(currentLength, previousLength);
+
     for (var i = 0; i < numRemoved; i++) {
       await Future.delayed(kMessageAppearDuration);
       _listKey.currentState!.removeItem(
@@ -111,7 +112,7 @@ class _ChatBotViewState extends State<ChatBotView> {
           child: widget.bubbleBuilder(
             context,
             previousLength - i - 1,
-            oldChatBotState.visibleMessages[previousLength - i - 1],
+            removedMessages[i],
           ),
         ),
       );
