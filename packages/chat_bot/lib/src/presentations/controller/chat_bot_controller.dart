@@ -78,9 +78,10 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       focusNode.requestFocus();
     }
     _updateState(_state.copyWith(showInputView: showInputView));
+    await scrollToBottom();
   }
 
-  void removeAllowedMessage(List<String> keysToRemove) {
+  void removeAllowedMessage(List<String> keysToRemove) async {
     // Remove messages with the given keys.
     _updateState(
       _state.copyWith(
@@ -89,6 +90,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
             .toList(),
       ),
     );
+    await scrollToBottom();
   }
 
   Future<void> scrollToBottom() async {
