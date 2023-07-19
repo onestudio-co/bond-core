@@ -55,12 +55,12 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     }
   }
 
-  void appendMessage(G message) async {
+  Future<void> appendMessage(G message) async {
     final messageAddedBefore = _state.flatMessages
             .firstWhereOrNull((element) => element.key == message.key) !=
         null;
     if (messageAddedBefore) {
-      cloneMessage(message.key);
+      throw Exception('Message already added, use cloneMessage instead');
     } else {
       _updateState(_state.copyWith(
         messages: [
@@ -73,28 +73,31 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     }
   }
 
-  void cloneMessage(String messageKey) {
+  Future<void> cloneMessage(
+    String messageKey, {
+    required G transform(int index, String key),
+  }) async {
     final oldChatBotState = _state;
-    final message = oldChatBotState.flatMessages
-        .firstWhereOrNull((element) => element.key == messageKey);
+    final message = oldChatBotState.flatMessages.firstWhereOrNull(
+      (element) => element.key == messageKey,
+    );
     final messageAddedBefore = message != null;
     if (messageAddedBefore) {
-      final newIndex = oldChatBotState.visibleMessages.length;
+      final newIndex = oldChatBotState.flatMessages.length;
       final newKey = '${message.key}_${newIndex}';
-      final newMessage = message;
-      newMessage.index = newIndex;
-      newMessage.key = newKey;
       _state = _state.copyWith(
         messages: [
           ..._state.messages,
-          [newMessage]
+          [transform(newIndex, newKey)]
         ],
       );
-      updateAllowedMessage([newKey]);
+      await updateAllowedMessage([newKey]);
+    } else {
+      throw Exception('Message not found');
     }
   }
 
-  void updateAllowedMessage(List<String> allowedMessageKey) async {
+  Future<void> updateAllowedMessage(List<String> allowedMessageKey) async {
     final oldChatBotState = _state;
     final previousLength = oldChatBotState.visibleMessages.length;
     _updateState(_state.copyWith(allowedMessage: [

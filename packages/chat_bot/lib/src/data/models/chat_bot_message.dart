@@ -15,10 +15,10 @@ part 'chat_bot_message_type.dart';
 
 abstract class ChatBotMessage {
   final int id;
-  int index;
+  final int index;
   final ChatBotMessageType type;
   final ChatBotMessageSender sender;
-  String key;
+  final String key;
   final String? text;
   final String? title;
   final String? icon;
