@@ -79,14 +79,15 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
         .firstWhereOrNull((element) => element.key == messageKey);
     final messageAddedBefore = message != null;
     if (messageAddedBefore) {
-      final newIndex = oldChatBotState.visibleMessages.length + 1;
+      final newIndex = oldChatBotState.visibleMessages.length;
       final newKey = '${message.key}_${newIndex}';
-      message.index = newIndex;
-      message.key = newKey;
+      final newMessage = message;
+      newMessage.index = newIndex;
+      newMessage.key = newKey;
       _state = _state.copyWith(
         messages: [
           ..._state.messages,
-          [message]
+          [newMessage]
         ],
       );
       updateAllowedMessage([newKey]);
