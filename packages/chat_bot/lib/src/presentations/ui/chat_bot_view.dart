@@ -103,32 +103,32 @@ class _ChatBotViewState extends State<ChatBotView> {
 
   Future<void> _removeMessages(
       ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
-    final oldMessages = List.from(oldChatBotState.visibleMessages);
-    final newMessages = newChatBotState.visibleMessages;
-
-    final oldMessageIds = oldMessages.map((m) => m.id).toSet();
-    final newMessageIds = newMessages.map((m) => m.id).toSet();
-
-    final removedMessageIds = oldMessageIds.difference(newMessageIds);
-
-    for (final removedId in removedMessageIds) {
-      await Future.delayed(kMessageAppearDuration);
-      final indexToRemove = oldMessages.indexWhere((m) => m.id == removedId);
-      log('Removing message at index $indexToRemove');
-      if (indexToRemove != -1) {
-        _listKey.currentState!.removeItem(
-          indexToRemove,
-          (context, animation) => FadeTransition(
-            opacity: animation,
-            child: widget.bubbleBuilder(
-              context,
-              indexToRemove,
-              oldMessages[indexToRemove],
-            ),
-          ),
-        );
-        oldMessages.removeAt(indexToRemove);
-      }
-    }
+    // final oldMessages = List.from(oldChatBotState.visibleMessages);
+    // final newMessages = newChatBotState.visibleMessages;
+    //
+    // final oldMessageIds = oldMessages.map((m) => m.id).toSet();
+    // final newMessageIds = newMessages.map((m) => m.id).toSet();
+    //
+    // final removedMessageIds = oldMessageIds.difference(newMessageIds);
+    //
+    // for (final removedId in removedMessageIds) {
+    //   await Future.delayed(kMessageAppearDuration);
+    //   final indexToRemove = oldMessages.indexWhere((m) => m.id == removedId);
+    //   log('Removing message at index $indexToRemove');
+    //   if (indexToRemove != -1) {
+    //     _listKey.currentState!.removeItem(
+    //       indexToRemove,
+    //       (context, animation) => FadeTransition(
+    //         opacity: animation,
+    //         child: widget.bubbleBuilder(
+    //           context,
+    //           indexToRemove,
+    //           oldMessages[indexToRemove],
+    //         ),
+    //       ),
+    //     );
+    //     oldMessages.removeAt(indexToRemove);
+    //   }
+    // }
   }
 }

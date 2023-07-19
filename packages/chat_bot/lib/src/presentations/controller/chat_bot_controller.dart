@@ -107,11 +107,11 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   void removeAllowedMessage(List<String> keysToRemove) async {
-    _updateState(
-      _state.copyWith(
-        allowedMessage: _state.allowedMessage.whereNotIn(keysToRemove).toList(),
-      ),
-    );
+    // _updateState(
+    //   _state.copyWith(
+    //     allowedMessage: _state.allowedMessage.whereNotIn(keysToRemove).toList(),
+    //   ),
+    // );
     await scrollToBottom();
   }
 
