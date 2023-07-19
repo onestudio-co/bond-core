@@ -17,8 +17,9 @@ class ChatBotState<G extends ChatBotMessage> {
 
   factory ChatBotState.initial() => ChatBotState();
 
-  List<G> get visibleMessages => messages
-      .expand((element) => element)
+  List<G> get flatMessages => messages.expand((element) => element).toList();
+
+  List<G> get visibleMessages => flatMessages
       .where((element) => allowedMessage.contains(element.key))
       .sortedBy<num>((element) => element.index)
       .toList();

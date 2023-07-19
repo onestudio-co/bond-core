@@ -56,13 +56,36 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   void appendMessage(G message) async {
-    _updateState(_state.copyWith(
-      messages: [
-        ..._state.messages,
-        [message]
-      ],
-    ));
+    final oldChatBotState = _state;
+    final previousLength = oldChatBotState.visibleMessages.length;
+    final messageAddedBefore = oldChatBotState.flatMessages
+            .firstWhereOrNull((element) => element.key == message.key) !=
+        null;
+    if (messageAddedBefore) {
+      final newIndex = oldChatBotState.visibleMessages.length + 1;
+      final clonedMessage = message.copyWith(
+        index: newIndex,
+        key: '${message.key}_${newIndex}',
+      ) as G;
+      _state = _state.copyWith(
+        messages: [
+          ..._state.messages,
+          [clonedMessage]
+        ],
+      );
+      updateAllowedMessage(['${message.key}_${newIndex}']);
+    } else {
+      _updateState(_state.copyWith(
+        messages: [
+          ..._state.messages,
+          [message]
+        ],
+      ));
+    }
     messageController.clear();
+    final newChatBotState = _state;
+    final currentLength = newChatBotState.visibleMessages.length;
+    _checkInputView(currentLength, previousLength);
     await scrollToBottom();
   }
 
@@ -75,14 +98,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     ]));
     final newChatBotState = _state;
     final currentLength = newChatBotState.visibleMessages.length;
-    final showInputView =
-        _state.visibleMessages.lastOrNull?.meta.visible ?? false;
-    if (showInputView) {
-      final numAdded = currentLength - previousLength;
-      await Future.delayed(kMessageAppearDuration * numAdded);
-      focusNode.requestFocus();
-    }
-    _updateState(_state.copyWith(showInputView: showInputView));
+    await _checkInputView(currentLength, previousLength);
     await scrollToBottom();
   }
 
@@ -125,6 +141,17 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
 
   void removeListener(ChatBotControllerListener listener) {
     _listeners.remove(listener);
+  }
+
+  Future<void> _checkInputView(int currentLength, int previousLength) async {
+    final showInputView =
+        _state.visibleMessages.lastOrNull?.meta.visible ?? false;
+    if (showInputView) {
+      final numAdded = currentLength - previousLength;
+      await Future.delayed(kMessageAppearDuration * numAdded);
+      focusNode.requestFocus();
+    }
+    _updateState(_state.copyWith(showInputView: showInputView));
   }
 
   void _onFocusChanged() async {

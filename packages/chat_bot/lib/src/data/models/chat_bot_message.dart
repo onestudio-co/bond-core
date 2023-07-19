@@ -13,7 +13,7 @@ part 'chat_bot_message_sender.dart';
 
 part 'chat_bot_message_type.dart';
 
-abstract class ChatBotMessage {
+class ChatBotMessage {
   final int id;
   final int index;
   final ChatBotMessageType type;
@@ -37,4 +37,30 @@ abstract class ChatBotMessage {
     this.meta = const ChatBotMessageMeta.defaults(),
     this.options = const [],
   });
+
+  ChatBotMessage copyWith({
+    int? id,
+    int? index,
+    ChatBotMessageType? type,
+    ChatBotMessageSender? sender,
+    String? key,
+    String? text,
+    String? title,
+    String? icon,
+    ChatBotMessageMeta? meta,
+    List<ChatBotMessageOption>? options,
+  }) {
+    return ChatBotMessage(
+      id: id ?? this.id,
+      index: index ?? this.index,
+      type: type ?? this.type,
+      sender: sender ?? this.sender,
+      key: key ?? this.key,
+      text: text ?? this.text,
+      title: title ?? this.title,
+      icon: icon ?? this.icon,
+      meta: meta ?? this.meta,
+      options: options ?? this.options,
+    );
+  }
 }
