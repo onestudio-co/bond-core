@@ -56,24 +56,11 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   void appendMessage(G message) async {
-    final oldChatBotState = _state;
-    final previousLength = oldChatBotState.visibleMessages.length;
-    final messageAddedBefore = oldChatBotState.flatMessages
+    final messageAddedBefore = _state.flatMessages
             .firstWhereOrNull((element) => element.key == message.key) !=
         null;
     if (messageAddedBefore) {
-      final newIndex = oldChatBotState.visibleMessages.length + 1;
-      final clonedMessage = message.copyWith(
-        index: newIndex,
-        key: '${message.key}_${newIndex}',
-      ) as G;
-      _state = _state.copyWith(
-        messages: [
-          ..._state.messages,
-          [clonedMessage]
-        ],
-      );
-      updateAllowedMessage(['${message.key}_${newIndex}']);
+      cloneMessage(message.key);
     } else {
       _updateState(_state.copyWith(
         messages: [
@@ -81,12 +68,31 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
           [message]
         ],
       ));
+      messageController.clear();
+      await scrollToBottom();
     }
-    messageController.clear();
-    final newChatBotState = _state;
-    final currentLength = newChatBotState.visibleMessages.length;
-    _checkInputView(currentLength, previousLength);
-    await scrollToBottom();
+  }
+
+  void cloneMessage(String messageKey) {
+    final oldChatBotState = _state;
+    final message = oldChatBotState.flatMessages
+        .firstWhereOrNull((element) => element.key == messageKey);
+    final messageAddedBefore = message != null;
+    if (messageAddedBefore) {
+      final newIndex = oldChatBotState.visibleMessages.length + 1;
+      final newKey = '${message.key}_${newIndex}';
+      final clonedMessage = message.copyWith(
+        index: newIndex,
+        key: newKey,
+      ) as G;
+      _state = _state.copyWith(
+        messages: [
+          ..._state.messages,
+          [clonedMessage]
+        ],
+      );
+      updateAllowedMessage([newKey]);
+    }
   }
 
   void updateAllowedMessage(List<String> allowedMessageKey) async {
