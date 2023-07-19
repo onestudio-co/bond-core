@@ -75,7 +75,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
 
   Future<void> cloneMessage(
     String messageKey, {
-    required G transform(int index, String key),
+    required G transform(G message, int newIndex, String newKey),
   }) async {
     final oldChatBotState = _state;
     final message = oldChatBotState.flatMessages.firstWhereOrNull(
@@ -88,7 +88,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       _state = _state.copyWith(
         messages: [
           ..._state.messages,
-          [transform(newIndex, newKey)]
+          [transform(message, newIndex, newKey)]
         ],
       );
       await updateAllowedMessage([newKey]);
