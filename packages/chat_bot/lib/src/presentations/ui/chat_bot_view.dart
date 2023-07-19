@@ -5,7 +5,9 @@ import '../controller/chat_bot_controller.dart';
 import 'chat_bot_default_message_view.dart';
 
 part 'chat_bot_bubble.dart';
+
 part 'chat_bot_bubble_decoration.dart';
+
 part 'chat_bot_message_builder.dart';
 
 class ChatBotView extends StatefulWidget {
@@ -83,8 +85,7 @@ class _ChatBotViewState extends State<ChatBotView> {
     if (currentLength > previousLength) {
       await _addMessages(previousLength, currentLength);
     } else if (currentLength < previousLength) {
-      await _removeMessages(
-          previousLength, currentLength, oldChatBotState, newChatBotState);
+      await _removeMessages(oldChatBotState, newChatBotState);
     }
 
     await widget.controller.scrollToBottom();
@@ -98,24 +99,32 @@ class _ChatBotViewState extends State<ChatBotView> {
     }
   }
 
-  Future<void> _removeMessages(int previousLength, int currentLength,
+  Future<void> _removeMessages(
       ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
-    final numRemoved = previousLength - currentLength;
-    final removedMessages = newChatBotState.removedMessages;
+    final oldMessages = oldChatBotState.visibleMessages;
+    final newMessages = newChatBotState.visibleMessages;
 
-    for (var i = 0; i < numRemoved; i++) {
+    final oldMessageIds = oldMessages.map((m) => m.id).toSet();
+    final newMessageIds = newMessages.map((m) => m.id).toSet();
+
+    final removedMessageIds = oldMessageIds.difference(newMessageIds);
+
+    for (final removedId in removedMessageIds) {
       await Future.delayed(kMessageAppearDuration);
-      _listKey.currentState!.removeItem(
-        previousLength - i - 1,
-        (context, animation) => AnimatedContainer(
-          duration: kMessageAppearDuration,
-          child: widget.bubbleBuilder(
-            context,
-            previousLength - i - 1,
-            removedMessages[i],
+      final indexToRemove = oldMessages.indexWhere((m) => m.id == removedId);
+      if (indexToRemove != -1) {
+        _listKey.currentState!.removeItem(
+          indexToRemove,
+          (context, animation) => FadeTransition(
+            opacity: animation,
+            child: widget.bubbleBuilder(
+              context,
+              indexToRemove,
+              oldMessages[indexToRemove],
+            ),
           ),
-        ),
-      );
+        );
+      }
     }
   }
 }
