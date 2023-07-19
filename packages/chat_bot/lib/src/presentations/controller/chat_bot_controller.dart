@@ -81,14 +81,12 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     if (messageAddedBefore) {
       final newIndex = oldChatBotState.visibleMessages.length + 1;
       final newKey = '${message.key}_${newIndex}';
-      final clonedMessage = message.copyWith(
-        index: newIndex,
-        key: newKey,
-      ) as G;
+      message.index = newIndex;
+      message.key = newKey;
       _state = _state.copyWith(
         messages: [
           ..._state.messages,
-          [clonedMessage]
+          [message]
         ],
       );
       updateAllowedMessage([newKey]);
