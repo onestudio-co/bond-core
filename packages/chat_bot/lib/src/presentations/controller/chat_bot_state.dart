@@ -27,7 +27,6 @@ class ChatBotState<G extends ChatBotMessage> {
     List<List<G>>? messages,
     bool? loading,
     List<String>? allowedMessage,
-    List<G>? removedMessages,
     String? error,
     bool? showInputView,
   }) {

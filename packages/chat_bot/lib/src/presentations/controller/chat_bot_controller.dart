@@ -11,6 +11,11 @@ const Duration kMessageAppearDuration = Duration(milliseconds: 800);
 typedef ChatBotControllerListener<G extends ChatBotMessage> = Function(
     ChatBotState<G>, ChatBotState<G>);
 
+extension ListCondition<T> on Iterable<T> {
+  Iterable<T> whereNotIn(Iterable<T> list) =>
+      where((element) => !list.contains(element));
+}
+
 class ChatBotController<T extends ChatBotMessageConvertible<G>,
     G extends ChatBotMessage> {
   final int chatBotId;
@@ -82,19 +87,11 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   void removeAllowedMessage(List<String> keysToRemove) async {
-    final removedMessages = _state.visibleMessages
-        .where((message) => keysToRemove.contains(message.key))
-        .toList();
-
     _updateState(
       _state.copyWith(
-        allowedMessage: _state.allowedMessage
-            .where((key) => !keysToRemove.contains(key))
-            .toList(),
-        removedMessages: removedMessages,
+        allowedMessage: _state.allowedMessage.whereNotIn(keysToRemove).toList(),
       ),
     );
-
     await scrollToBottom();
   }
 

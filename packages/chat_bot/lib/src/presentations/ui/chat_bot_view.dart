@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/widgets.dart';
 
 import '../../data/models/chat_bot_message.dart';
@@ -101,7 +103,7 @@ class _ChatBotViewState extends State<ChatBotView> {
 
   Future<void> _removeMessages(
       ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
-    final oldMessages = oldChatBotState.visibleMessages;
+    final oldMessages = List.from(oldChatBotState.visibleMessages);
     final newMessages = newChatBotState.visibleMessages;
 
     final oldMessageIds = oldMessages.map((m) => m.id).toSet();
@@ -112,6 +114,7 @@ class _ChatBotViewState extends State<ChatBotView> {
     for (final removedId in removedMessageIds) {
       await Future.delayed(kMessageAppearDuration);
       final indexToRemove = oldMessages.indexWhere((m) => m.id == removedId);
+      log('Removing message at index $indexToRemove');
       if (indexToRemove != -1) {
         _listKey.currentState!.removeItem(
           indexToRemove,
@@ -124,6 +127,7 @@ class _ChatBotViewState extends State<ChatBotView> {
             ),
           ),
         );
+        oldMessages.removeAt(indexToRemove);
       }
     }
   }
