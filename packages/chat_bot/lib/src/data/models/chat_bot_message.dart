@@ -37,4 +37,6 @@ abstract class ChatBotMessage {
     this.meta = const ChatBotMessageMeta.defaults(),
     this.options = const [],
   });
+
+  String get originalKey => key.replaceAll(RegExp(r'_retry_\d+'), '');
 }
