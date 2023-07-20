@@ -6,6 +6,7 @@ class ChatBotState<G extends ChatBotMessage> {
   final List<String> allowedMessage;
   final String? error;
   final bool showInputView;
+  final int retryCount;
 
   ChatBotState({
     this.messages = const [],
@@ -13,6 +14,7 @@ class ChatBotState<G extends ChatBotMessage> {
     this.allowedMessage = const [],
     this.error,
     this.showInputView = false,
+    this.retryCount = 0, // 0 means no retry
   });
 
   factory ChatBotState.initial() => ChatBotState();
@@ -30,6 +32,7 @@ class ChatBotState<G extends ChatBotMessage> {
     List<String>? allowedMessage,
     String? error,
     bool? showInputView,
+    int? retryCount,
   }) {
     return ChatBotState<G>(
       messages: messages ?? this.messages,
@@ -37,6 +40,7 @@ class ChatBotState<G extends ChatBotMessage> {
       allowedMessage: allowedMessage ?? this.allowedMessage,
       error: error ?? this.error,
       showInputView: showInputView ?? this.showInputView,
+      retryCount: retryCount ?? this.retryCount,
     );
   }
 }

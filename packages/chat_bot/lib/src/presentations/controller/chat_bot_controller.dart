@@ -11,6 +11,12 @@ const Duration kMessageAppearDuration = Duration(milliseconds: 800);
 typedef ChatBotControllerListener<G extends ChatBotMessage> = Function(
     ChatBotState<G>, ChatBotState<G>);
 
+typedef TransformMessage<G extends ChatBotMessage> = G Function(
+  G message,
+  int newIndex,
+  String newKey,
+);
+
 extension ListCondition<T> on Iterable<T> {
   Iterable<T> whereNotIn(Iterable<T> list) =>
       where((element) => !list.contains(element));
@@ -21,8 +27,13 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   final int chatBotId;
   final ChatDataSource<T> chatService;
   final List<ChatBotControllerListener> _listeners = [];
+  final TransformMessage<G> transform;
 
-  ChatBotController({required this.chatBotId, required this.chatService}) {
+  ChatBotController({
+    required this.chatBotId,
+    required this.chatService,
+    required this.transform,
+  }) {
     loadMessages(chatBotId);
     focusNode.addListener(_onFocusChanged);
   }
@@ -46,6 +57,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
           .map((e) => e.data)
           .expand((element) => element)
           .map((e) => e.toChatBotMessage())
+          .map((e) => transform(e, e.index, '${e.key}_retry_${0}'))
           .groupListsBy((element) => element.key)
           .values
           .toList();
@@ -56,54 +68,62 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   Future<void> appendMessage(G message) async {
-    final messageAddedBefore = _state.flatMessages
-            .firstWhereOrNull((element) => element.key == message.key) !=
-        null;
-    if (messageAddedBefore) {
-      throw Exception('Message already added, use cloneMessage instead');
-    } else {
-      _updateState(_state.copyWith(
-        messages: [
-          ..._state.messages,
-          [message]
-        ],
-      ));
-      messageController.clear();
-      await scrollToBottom();
-    }
+    _updateState(_state.copyWith(
+      messages: [
+        ..._state.messages,
+        [message]
+      ],
+    ));
+    messageController.clear();
+    await scrollToBottom();
   }
 
-  Future<void> cloneMessage(
-    String messageKey, {
-    required G transform(G message, int newIndex, String newKey),
-  }) async {
-    final oldChatBotState = _state;
-    final message = oldChatBotState.flatMessages.firstWhereOrNull(
-      (element) => element.key == messageKey,
-    );
-    final messageAddedBefore = message != null;
-    if (messageAddedBefore) {
-      final newIndex = oldChatBotState.flatMessages.length;
-      final newKey = '${message.key}_${newIndex}';
-      _state = _state.copyWith(
-        messages: [
-          ..._state.messages,
-          [transform(message, newIndex, newKey)]
-        ],
-      );
-      await updateAllowedMessage([newKey]);
-    } else {
-      throw Exception('Message not found');
-    }
+  Future<void> resetFlow(String messageKey) async {
+    final newRetryCount = _state.retryCount + 1;
+    _state = _state.copyWith(retryCount: newRetryCount);
+
+    final newFlowIndex = _state.flatMessages.length;
+
+    final allMessages = _state.flatMessages;
+    final newAllMessages = allMessages
+        .mapIndexed(
+          (index, element) => transform(
+            element,
+            newFlowIndex + index,
+            '${element.key}_retry_${newRetryCount}',
+          ),
+        )
+        .toList();
+
+    allMessages.addAll(newAllMessages);
+
+    final chatBotMessages = allMessages
+        .groupListsBy(
+          (element) => element.key,
+        )
+        .values
+        .toList();
+
+    _state = _state.copyWith(messages: chatBotMessages);
+
+    await updateAllowedMessage([messageKey]);
   }
 
   Future<void> updateAllowedMessage(List<String> allowedMessageKey) async {
     final oldChatBotState = _state;
     final previousLength = oldChatBotState.visibleMessages.length;
+
+    final retryCount = oldChatBotState.retryCount;
+
+    final mAllowedMessageKey = allowedMessageKey.map(
+      (key) => '${key}_retry_${retryCount}',
+    );
+
     _updateState(_state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
-      ...allowedMessageKey,
+      ...mAllowedMessageKey,
     ]));
+
     final newChatBotState = _state;
     final currentLength = newChatBotState.visibleMessages.length;
     await _checkInputView(currentLength, previousLength);
