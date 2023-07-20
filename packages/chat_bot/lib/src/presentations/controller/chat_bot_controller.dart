@@ -72,7 +72,10 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     _updateState(_state.copyWith(
       messages: [
         ..._state.messages,
-        [transform(message, message.index, '${message.originalKey}_retry_$newRetryCount')]
+        [
+          transform(message, message.index,
+              '${message.originalKey}_retry_$newRetryCount')
+        ]
       ],
     ));
     messageController.clear();
@@ -180,7 +183,9 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       await Future.delayed(kMessageAppearDuration * numAdded);
       focusNode.requestFocus();
     }
-    _updateState(_state.copyWith(showInputView: showInputView));
+    if (_state.showInputView != showInputView) {
+      _updateState(_state.copyWith(showInputView: showInputView));
+    }
   }
 
   void _onFocusChanged() async {
