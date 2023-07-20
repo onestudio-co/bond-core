@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
@@ -100,6 +102,8 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
         .toList();
 
     allMessages.addAll(newAllMessages);
+    
+    log('allMessages: ${allMessages.map((e) => e.key + e.originalKey)}');
 
     final chatBotMessages = allMessages
         .groupListsBy(
