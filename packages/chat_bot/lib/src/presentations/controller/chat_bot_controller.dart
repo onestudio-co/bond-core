@@ -68,16 +68,16 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
   }
 
   Future<void> appendMessage(G message) async {
-    final newRetryCount = _state.retryCount;
-    _updateState(_state.copyWith(
+    final retryCount = _state.retryCount;
+    _state = _state.copyWith(
       messages: [
         ..._state.messages,
         [
           transform(message, message.index,
-              '${message.originalKey}_retry_$newRetryCount')
+              '${message.originalKey}_retry_$retryCount')
         ]
       ],
-    ));
+    );
     messageController.clear();
     await scrollToBottom();
   }
