@@ -53,20 +53,26 @@ class _ChatBotViewState extends State<ChatBotView> {
     return Column(
       children: [
         Expanded(
-          child: AnimatedList(
-            key: _listKey,
+          child: ListView.builder(
+            // key: _listKey,
             padding: widget.padding,
             controller: widget.controller.scrollController,
-            initialItemCount: widget.state.visibleMessages.length,
-            itemBuilder: (context, index, animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: widget.bubbleBuilder(
-                  context,
-                  index,
-                  widget.state.visibleMessages[index],
-                ),
+            itemCount: widget.state.visibleMessages.length,
+            // initialItemCount: widget.state.visibleMessages.length,
+            itemBuilder: (context, index) {
+              return widget.bubbleBuilder(
+                context,
+                index,
+                widget.state.visibleMessages[index],
               );
+              // return FadeTransition(
+              //   opacity: animation,
+              //   child: widget.bubbleBuilder(
+              //     context,
+              //     index,
+              //     widget.state.visibleMessages[index],
+              //   ),
+              // );
             },
           ),
         ),
@@ -81,15 +87,15 @@ class _ChatBotViewState extends State<ChatBotView> {
 
   void _onStateChanged(
       ChatBotState oldChatBotState, ChatBotState newChatBotState) async {
-    final currentLength = newChatBotState.visibleMessages.length;
-    final previousLength = oldChatBotState.visibleMessages.length;
-
-    if (currentLength > previousLength) {
-      await _addMessages(previousLength, currentLength);
-    } else if (currentLength < previousLength) {
-      await _removeMessages(oldChatBotState, newChatBotState);
-    }
-
+    // final currentLength = newChatBotState.visibleMessages.length;
+    // final previousLength = oldChatBotState.visibleMessages.length;
+    //
+    // if (currentLength > previousLength) {
+    //   await _addMessages(previousLength, currentLength);
+    // } else if (currentLength < previousLength) {
+    //   await _removeMessages(oldChatBotState, newChatBotState);
+    // }
+    //
     await widget.controller.scrollToBottom();
   }
 
