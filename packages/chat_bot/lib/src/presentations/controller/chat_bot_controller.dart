@@ -71,7 +71,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     _updateState(_state.copyWith(
       messages: [
         ..._state.messages,
-        [message]
+        [transform(message, message.index, '${message.originalKey}_retry_${0}')]
       ],
     ));
     messageController.clear();
@@ -90,7 +90,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
           (index, element) => transform(
             element,
             newFlowIndex + index,
-            '${element.key}_retry_${newRetryCount}',
+            '${element.originalKey}_retry_${newRetryCount}',
           ),
         )
         .toList();
