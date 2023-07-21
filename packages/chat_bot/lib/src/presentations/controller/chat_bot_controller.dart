@@ -160,6 +160,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     // Identify new visible messages and insert into AnimatedList
     for (var i = 0; i < newVisibleMessages.length; i++) {
       if (!oldChatBotState.visibleMessages.contains(newVisibleMessages[i])) {
+        await Future.delayed(kMessageAppearDuration);
         listKey.currentState?.insertItem(i);
       }
     }
