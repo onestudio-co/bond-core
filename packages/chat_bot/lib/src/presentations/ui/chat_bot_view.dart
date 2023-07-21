@@ -35,20 +35,26 @@ class ChatBotView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: AnimatedList(
+          child: ListView.builder(
             key: controller.listKey,
             padding: padding,
             controller: controller.scrollController,
-            initialItemCount: state.visibleMessages.length,
-            itemBuilder: (context, index, animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: bubbleBuilder(
-                  context,
-                  index,
-                  state.visibleMessages[index],
-                ),
+            // initialItemCount: state.visibleMessages.length,
+            itemCount: state.visibleMessages.length,
+            itemBuilder: (context, index) {
+              return bubbleBuilder(
+                context,
+                index,
+                state.visibleMessages[index],
               );
+              // return FadeTransition(
+              //   opacity: animation,
+              //   child: bubbleBuilder(
+              //     context,
+              //     index,
+              //     state.visibleMessages[index],
+              //   ),
+              // );
             },
           ),
         ),
