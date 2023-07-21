@@ -91,7 +91,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     final newRetryCount = _state.retryCount + 1;
     _state = _state.copyWith(retryCount: newRetryCount);
 
-    final newFlowIndex = _state.visibleMessages.length;
+    final newFlowIndex = _state.flatMessages.length;
 
     final allMessages = _state.flatMessages;
     final newAllMessages = allMessages
