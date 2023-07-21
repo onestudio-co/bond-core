@@ -59,6 +59,8 @@ class _ChatBotViewState extends State<ChatBotView> {
             controller: widget.controller.scrollController,
             initialItemCount: widget.state.visibleMessages.length,
             itemBuilder: (context, index, animation) {
+              log('DEBUG LOG - index: $index,'
+                  ' itemsCount: ${widget.state.visibleMessages.length}'); // Add this line to debug
               return FadeTransition(
                 opacity: animation,
                 child: widget.bubbleBuilder(
@@ -97,8 +99,7 @@ class _ChatBotViewState extends State<ChatBotView> {
     for (var i = 0; i < numAdded; i++) {
       log('DEBUG LOG - previousLength: $previousLength,'
           ' currentLength: $currentLength,'
-          ' i: $i,'
-          ' itemsCount: ${widget.state.visibleMessages.length}'); // Add this line to debug
+          ' i: $i,'); // Add this line to debug
       await Future.delayed(kMessageAppearDuration);
       try {
         _listKey.currentState!.insertItem(previousLength + i);
