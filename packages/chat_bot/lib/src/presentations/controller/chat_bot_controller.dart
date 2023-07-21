@@ -147,6 +147,11 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       }
     }
 
+    _updateState(_state.copyWith(allowedMessage: [
+      ..._state.allowedMessage,
+      ...mAllowedMessageKey,
+    ]));
+
     final newChatBotState = _state;
     final currentLength = newChatBotState.visibleMessages.length;
 
@@ -158,11 +163,6 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
         listKey.currentState?.insertItem(i);
       }
     }
-
-    _updateState(_state.copyWith(allowedMessage: [
-      ..._state.allowedMessage,
-      ...mAllowedMessageKey,
-    ]));
 
     await _checkInputView(currentLength, previousLength);
     await scrollToBottom();
