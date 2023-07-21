@@ -46,6 +46,8 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
 
   ChatBotState<G> _state = ChatBotState<G>.initial();
 
+  final listKey = GlobalKey<AnimatedListState>();
+
   Future<void> loadMessages(int chatBotId) async {
     _updateState(_state.copyWith(loading: true));
     try {
@@ -83,6 +85,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
         ]
       ],
     );
+    listKey.currentState?.insertItem(_state.visibleMessages.length - 1);
     messageController.clear();
     await scrollToBottom();
   }
@@ -151,16 +154,40 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
 
     final newChatBotState = _state;
     final currentLength = newChatBotState.visibleMessages.length;
+
+    final newVisibleMessages = _state.visibleMessages;
+
+    // Identify new visible messages and insert into AnimatedList
+    for (var i = 0; i < newVisibleMessages.length; i++) {
+      if (!oldChatBotState.visibleMessages.contains(newVisibleMessages[i])) {
+        listKey.currentState?.insertItem(i);
+      }
+    }
+
     await _checkInputView(currentLength, previousLength);
     await scrollToBottom();
   }
 
   void removeAllowedMessage(List<String> keysToRemove) async {
-    // _updateState(
-    //   _state.copyWith(
-    //     allowedMessage: _state.allowedMessage.whereNotIn(keysToRemove).toList(),
-    //   ),
-    // );
+    final oldVisibleMessages = List.from(_state.visibleMessages);
+    _updateState(
+      _state.copyWith(
+        allowedMessage: _state.allowedMessage.whereNotIn(keysToRemove).toList(),
+      ),
+    );
+
+    final newVisibleMessages = _state.visibleMessages;
+
+    // Identify removed messages and remove from AnimatedList
+    for (var i = oldVisibleMessages.length - 1; i >= 0; i--) {
+      if (!newVisibleMessages.contains(oldVisibleMessages[i])) {
+        listKey.currentState?.removeItem(
+          i,
+          (context, animation) => SizeTransition(sizeFactor: animation),
+        );
+      }
+    }
+
     await scrollToBottom();
   }
 
