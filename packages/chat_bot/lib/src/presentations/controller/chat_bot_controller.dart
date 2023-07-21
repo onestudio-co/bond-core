@@ -59,7 +59,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
           .map((e) => e.data)
           .expand((element) => element)
           .map((e) => e.toChatBotMessage())
-          .map((e) => transform(e, e.index, '${e.key}_retry_${0}'))
+          .map((e) => transform(e, e.index, _retryKey(e.key, 0)))
           .groupListsBy((element) => element.key)
           .values
           .toList();
@@ -75,8 +75,11 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       messages: [
         ..._state.messages,
         [
-          transform(message, message.index,
-              '${message.originalKey}_retry_$retryCount')
+          transform(
+            message,
+            message.index,
+            _retryKey(message.originalKey, retryCount),
+          )
         ]
       ],
     );
@@ -93,17 +96,12 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     final allMessages = _state.flatMessages;
     final newAllMessages = allMessages
         .mapIndexed(
-          (index, element) => transform(
-            element,
-            newFlowIndex + index,
-            '${element.originalKey}_retry_${newRetryCount}',
-          ),
+          (index, element) => transform(element, newFlowIndex + index,
+              _retryKey(element.originalKey, newRetryCount)),
         )
         .toList();
 
     allMessages.addAll(newAllMessages);
-    
-    log('allMessages: ${allMessages.map((e) => e.key + e.originalKey)}');
 
     final chatBotMessages = allMessages
         .groupListsBy(
@@ -124,7 +122,7 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     final retryCount = oldChatBotState.retryCount;
 
     final mAllowedMessageKey = allowedMessageKey.map(
-      (key) => '${key}_retry_${retryCount}',
+      (key) => _retryKey(key, retryCount),
     );
 
     _updateState(_state.copyWith(allowedMessage: [
@@ -198,4 +196,6 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       await scrollToBottom();
     }
   }
+
+  String _retryKey(String key, int retryCount) => '${key}_x_retry_${retryCount}';
 }
