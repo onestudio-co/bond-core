@@ -91,14 +91,14 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     final newRetryCount = _state.retryCount + 1;
     _state = _state.copyWith(retryCount: newRetryCount);
 
-    final newFlowIndex = _state.flatMessages.length;
+    final newFlowIndex = _state.flatMessages.last.index;
 
     final allMessages = _state.flatMessages;
     final newAllMessages = allMessages
-        .mapIndexed(
-          (index, element) => transform(
+        .map(
+          (element) => transform(
             element,
-            newFlowIndex + index,
+            newFlowIndex + element.index,
             _retryKey(
               element.originalKey,
               newRetryCount,
