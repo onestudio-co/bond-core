@@ -91,13 +91,19 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     final newRetryCount = _state.retryCount + 1;
     _state = _state.copyWith(retryCount: newRetryCount);
 
-    final newFlowIndex = _state.flatMessages.length;
+    final newFlowIndex = _state.visibleMessages.length;
 
     final allMessages = _state.flatMessages;
     final newAllMessages = allMessages
         .mapIndexed(
-          (index, element) => transform(element, newFlowIndex + index,
-              _retryKey(element.originalKey, newRetryCount)),
+          (index, element) => transform(
+            element,
+            newFlowIndex + index,
+            _retryKey(
+              element.originalKey,
+              newRetryCount,
+            ),
+          ),
         )
         .toList();
 
@@ -197,5 +203,6 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
     }
   }
 
-  String _retryKey(String key, int retryCount) => '${key}_x_retry_${retryCount}';
+  String _retryKey(String key, int retryCount) =>
+      '${key}_x_retry_${retryCount}';
 }
