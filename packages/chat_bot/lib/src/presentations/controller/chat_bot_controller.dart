@@ -134,6 +134,16 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       (key) => _retryKey(key, retryCount),
     );
 
+    final flatMessages = _state.flatMessages;
+
+    // Check if all allowedMessageKey items are in flatMessages
+    for (final key in mAllowedMessageKey) {
+      if (!flatMessages.any((message) => message.key == key)) {
+        log('Key $key not found in flatMessages');
+        return;
+      }
+    }
+
     _updateState(_state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
       ...mAllowedMessageKey,

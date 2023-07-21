@@ -98,7 +98,8 @@ class _ChatBotViewState extends State<ChatBotView> {
     for (var i = 0; i < numAdded; i++) {
       log('DEBUG LOG - previousLength: $previousLength,'
           ' currentLength: $currentLength,'
-          ' i: ${previousLength + i},'); // Add this line to debug
+          ' i: ${previousLength + i},'
+          ' '); // Add this line to debug
       // await Future.delayed(kMessageAppearDuration);
       try {
         _listKey.currentState!.insertItem(previousLength + i);
