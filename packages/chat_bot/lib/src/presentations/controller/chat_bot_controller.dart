@@ -134,6 +134,9 @@ class ChatBotController<T extends ChatBotMessageConvertible<G>,
       (key) => _retryKey(key, retryCount),
     );
 
+    log('mAllowedMessageKey '
+        '${mAllowedMessageKey}');
+
     _updateState(_state.copyWith(allowedMessage: [
       ..._state.allowedMessage,
       ...mAllowedMessageKey,
