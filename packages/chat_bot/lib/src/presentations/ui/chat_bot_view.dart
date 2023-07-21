@@ -94,13 +94,8 @@ class _ChatBotViewState extends State<ChatBotView> {
 
   Future<void> _addMessages(int previousLength, int currentLength) async {
     final numAdded = currentLength - previousLength;
-    log('DEBUG LOG - numAdded: $numAdded'); // Add this line to debug
     for (var i = 0; i < numAdded; i++) {
-      log('DEBUG LOG - previousLength: $previousLength,'
-          ' currentLength: $currentLength,'
-          ' i: ${previousLength + i},'
-          ' '); // Add this line to debug
-      // await Future.delayed(kMessageAppearDuration);
+      await Future.delayed(kMessageAppearDuration);
       try {
         _listKey.currentState!.insertItem(previousLength + i);
       } catch (e, stackTrace) {
