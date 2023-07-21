@@ -100,7 +100,11 @@ class _ChatBotViewState extends State<ChatBotView> {
           ' i: $i,'
           ' itemsCount: ${widget.state.visibleMessages.length}'); // Add this line to debug
       await Future.delayed(kMessageAppearDuration);
-      _listKey.currentState!.insertItem(previousLength + i);
+      try {
+        _listKey.currentState!.insertItem(previousLength + i);
+      } catch (e, stackTrace) {
+        log('Error: $e', stackTrace: stackTrace);
+      }
     }
   }
 
