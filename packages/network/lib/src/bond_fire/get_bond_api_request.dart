@@ -49,8 +49,9 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
             rethrow;
           }
         case CachePolicy.networkOnly:
+          return await super.execute();
         case CachePolicy.cacheThenNetwork:
-          return await _executeAndCache();
+          return await _executeCacheThenNetwork().first;
       }
     } else {
       return super.execute();
