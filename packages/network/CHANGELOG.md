@@ -1,5 +1,9 @@
 ## 0.0.1+4
 
+* fix caching when select cacheThenNetwork policy
+
+## 0.0.1+4
+
 * update bond_cache dependency.
 * update bond_core dependency.
 
