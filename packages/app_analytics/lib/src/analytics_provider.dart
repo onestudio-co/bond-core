@@ -13,61 +13,61 @@ abstract class AnalyticsProvider {
   void _log(AnalyticsEvent event) {
     switch (event.systemEventType) {
       case SystemEvents.beginTutorial:
-        logBeginTutorial();
+        logBeginTutorial(event);
         break;
       case SystemEvents.completeTutorial:
-        logCompleteTutorial();
+        logCompleteTutorial(event);
         break;
       case SystemEvents.signedUp:
-        logSignedUp(event as UserSignedUp);
+        logSignedUp(event, event as UserSignedUp);
         break;
       case SystemEvents.signedIn:
-        logSignedIn(event as UserSignedIn);
+        logSignedIn(event, event as UserSignedIn);
         break;
       case SystemEvents.signedOut:
-        logSignedOut(event as UserSignedOut);
+        logSignedOut(event, event as UserSignedOut);
         break;
       case SystemEvents.updateProfile:
-        updateProfile(event as UserUpdateProfile);
+        updateProfile(event, event as UserUpdateProfile);
         break;
       case SystemEvents.viewItemList:
-        logViewItemList(event as UserViewedItemList);
+        logViewItemList(event, event as UserViewedItemList);
         break;
       case SystemEvents.viewItem:
-        logViewItem(event as UserViewItem);
+        logViewItem(event, event as UserViewItem);
         break;
       case SystemEvents.selectItem:
-        logSelectItem(event as UserSelectItem);
+        logSelectItem(event, event as UserSelectItem);
         break;
       case SystemEvents.viewPromotion:
-        logViewPromotion(event as UserViewPromotion);
+        logViewPromotion(event, event as UserViewPromotion);
         break;
       case SystemEvents.selectPromotion:
-        logSelectPromotion(event as UserSelectPromotion);
+        logSelectPromotion(event, event as UserSelectPromotion);
         break;
       case SystemEvents.addToCart:
-        logAddToCart(event as UserAddedToCart);
+        logAddToCart(event, event as UserAddedToCart);
         break;
       case SystemEvents.removeFromCart:
-        logRemoveFromCart(event as UserRemovedFromCart);
+        logRemoveFromCart(event, event as UserRemovedFromCart);
         break;
       case SystemEvents.beginCheckout:
-        logBeginCheckout(event as UserBeginCheckout);
+        logBeginCheckout(event, event as UserBeginCheckout);
         break;
       case SystemEvents.madePurchase:
-        logMadePurchase(event as UserMadePurchase);
+        logMadePurchase(event, event as UserMadePurchase);
         break;
       case SystemEvents.refundOrder:
-        logRefundOrder(event as UserRefundOrder);
+        logRefundOrder(event, event as UserRefundOrder);
         break;
       case SystemEvents.shareContent:
-        logShareContent(event as UserShareContent);
+        logShareContent(event, event as UserShareContent);
         break;
       case SystemEvents.search:
-        logSearch(event as UserSearch);
+        logSearch(event, event as UserSearch);
         break;
       case SystemEvents.viewSearchResults:
-        logViewSearchResults(event as UserViewSearchResult);
+        logViewSearchResults(event, event as UserViewSearchResult);
         break;
       case SystemEvents.unknown:
         logEvent(event);
@@ -85,79 +85,79 @@ abstract class AnalyticsProvider {
     throw UnimplementedError('Set current screen not implemented');
   }
 
-  void logBeginTutorial() {
+  void logBeginTutorial(AnalyticsEvent event) {
     throw UnimplementedError('Begin tutorial not implemented');
   }
 
-  void logCompleteTutorial() {
+  void logCompleteTutorial(AnalyticsEvent event) {
     throw UnimplementedError('Complete tutorial not implemented');
   }
 
-  void logSignedUp(UserSignedUp event) {
+  void logSignedUp(AnalyticsEvent event, UserSignedUp data) {
     throw UnimplementedError('Signed up not implemented');
   }
 
-  void logSignedIn(UserSignedIn event) {
+  void logSignedIn(AnalyticsEvent event, UserSignedIn data) {
     throw UnimplementedError('Signed in not implemented');
   }
 
-  void logSignedOut(UserSignedOut event) {
+  void logSignedOut(AnalyticsEvent event, UserSignedOut data) {
     throw UnimplementedError('Signed out not implemented');
   }
 
-  void updateProfile(UserUpdateProfile event) {
+  void updateProfile(AnalyticsEvent event, UserUpdateProfile data) {
     throw UnimplementedError('Update profile not implemented');
   }
 
-  void logViewItemList(UserViewedItemList event) {
+  void logViewItemList(AnalyticsEvent event, UserViewedItemList data) {
     throw UnimplementedError('View item list not implemented');
   }
 
-  void logViewItem(UserViewItem event) {
+  void logViewItem(AnalyticsEvent event, UserViewItem data) {
     throw UnimplementedError('View item not implemented');
   }
 
-  void logSelectItem(UserSelectItem event) {
+  void logSelectItem(AnalyticsEvent event, UserSelectItem data) {
     throw UnimplementedError('Select item not implemented');
   }
 
-  void logViewPromotion(UserViewPromotion event) {
+  void logViewPromotion(AnalyticsEvent event, UserViewPromotion data) {
     throw UnimplementedError('View promotion not implemented');
   }
 
-  void logSelectPromotion(UserSelectPromotion event) {
+  void logSelectPromotion(AnalyticsEvent event, UserSelectPromotion data) {
     throw UnimplementedError('Select promotion not implemented');
   }
 
-  void logAddToCart(UserAddedToCart event) {
+  void logAddToCart(AnalyticsEvent event, UserAddedToCart data) {
     throw UnimplementedError('Add to cart not implemented');
   }
 
-  void logRemoveFromCart(UserRemovedFromCart event) {
+  void logRemoveFromCart(AnalyticsEvent event, UserRemovedFromCart data) {
     throw UnimplementedError('Remove from cart not implemented');
   }
 
-  void logBeginCheckout(UserBeginCheckout event) {
+  void logBeginCheckout(AnalyticsEvent event, UserBeginCheckout data) {
     throw UnimplementedError('Begin checkout not implemented');
   }
 
-  void logMadePurchase(UserMadePurchase event) {
+  void logMadePurchase(AnalyticsEvent event, UserMadePurchase data) {
     throw UnimplementedError('Made purchase not implemented');
   }
 
-  void logRefundOrder(UserRefundOrder event) {
+  void logRefundOrder(AnalyticsEvent event, UserRefundOrder data) {
     throw UnimplementedError('Refund order not implemented');
   }
 
-  void logShareContent(UserShareContent event) {
+  void logShareContent(AnalyticsEvent event, UserShareContent data) {
     throw UnimplementedError('Share not implemented');
   }
 
-  void logSearch(UserSearch event) {
+  void logSearch(AnalyticsEvent event, UserSearch data) {
     throw UnimplementedError('Search not implemented');
   }
 
-  void logViewSearchResults(UserViewSearchResult event) {
+  void logViewSearchResults(AnalyticsEvent event, UserViewSearchResult data) {
     throw UnimplementedError('View search results not implemented');
   }
 }
