@@ -1,25 +1,57 @@
-name: form_example
-description: A new Flutter project.
-
+name: example
+description: Bond project.
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=2.18.0 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
+
+  # Bond packages
+  bond_core: ^0.0.1+1
+  bond_form: ^0.0.1
+
+  get_it: ^7.2.0
+
+  # state management
   flutter_riverpod: ^2.3.6
-  bond_form:
-    path: ../bond_form
-  bond_form_riverpod:
-    path: bond_form_riverpod
+  hooks_riverpod: ^2.2.0
+  flutter_hooks: ^0.18.5+1
+
+  # navigation
+  auto_route: ^5.0.4
+
+  # utils
+  flutter_native_splash: ^2.2.8
+
+  # platforms packages
+  universal_platform: ^1.0.0+1
+  shared_preferences: ^2.0.15
+  flutter_secure_storage: ^8.0.0
+  package_info_plus: ^4.0.2
+  flutter_local_notifications: ^9.3.3
+  in_app_review: ^2.0.6
+  share_plus: ^7.0.2
+
+  # localization
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.2
+  auto_route_generator: ^5.0.3
 
 flutter:
   uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
