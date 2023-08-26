@@ -1,4 +1,4 @@
-import 'package:bond_network/src/helpers/double_converter.dart';
+import 'package:bond_network/bond_network.dart';
 import 'package:test/test.dart';
 
 void main() {

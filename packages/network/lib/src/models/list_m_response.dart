@@ -1,9 +1,9 @@
 import 'package:bond_core/bond_core.dart';
+import 'package:bond_network/src/converters.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'model.dart';
-import 'response_converter.dart';
 
 part 'list_m_response.g.dart';
 

@@ -1,3 +1,4 @@
+import 'package:bond_network/src/converters.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -5,7 +6,6 @@ import 'package:bond_core/bond_core.dart';
 import 'links.dart';
 import 'meta.dart';
 import 'model.dart';
-import 'response_converter.dart';
 
 part 'list_response.g.dart';
 

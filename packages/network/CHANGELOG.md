@@ -1,3 +1,7 @@
+## 0.0.2+1
+
+* Export `DoubleConverter` to `BondNetwork`'s `converters` list.
+
 ## 0.0.2
 
 * Introduced `DoubleConverter` class to handle flexible JSON field types.
