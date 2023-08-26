@@ -1,39 +1,52 @@
-import 'dart:developer';
-
 import 'package:json_annotation/json_annotation.dart';
 
 /// A custom [JsonConverter] that converts a JSON value to [double].
 /// Supports [String], [int], and [double] types from JSON.
-class DoubleConverter implements JsonConverter<double, dynamic> {
-  final double defaultValue;
+class DoubleConverter implements JsonConverter<double?, dynamic> {
+  final double? defaultValue;
 
   /// Creates a [DoubleConverter] with an optional [defaultValue].
   /// The [defaultValue] is returned when the conversion fails.
-  const DoubleConverter({this.defaultValue = 0.0});
+  const DoubleConverter({this.defaultValue = 0});
 
   @override
-  double fromJson(dynamic value) {
-    try {
-      if (value == null) {
-        return defaultValue;
-      } else if (value is int) {
-        return value.toDouble();
-      } else if (value is double) {
-        return value;
-      } else if (value is String) {
-        return double.parse(value);
-      } else {
-        throw Exception('Invalid value type. Supported types are String, int, and double.');
-      }
-    } catch (e) {
-      log(
-        'Warning: value $value of type ${value.runtimeType} could not be converted to double.',
-        name: 'DoubleConverter',
-      );
-      return defaultValue;
+  double? fromJson(dynamic value) {
+    if (defaultValue == null) {
+      return NullableDoubleConverter().fromJson(value);
     }
+    return RequiredDoubleConverter(defaultValue: defaultValue!).fromJson(value);
   }
 
   @override
-  dynamic toJson(double object) => object;
+  dynamic toJson(double? object) => object;
+}
+
+/// A custom [JsonConverter] that converts a JSON value to nullable [double].
+/// Supports [String], [int], and nullable [double] types from JSON.
+class NullableDoubleConverter implements JsonConverter<double?, dynamic> {
+  /// Creates a [NullableDoubleConverter].
+  const NullableDoubleConverter();
+
+  @override
+  double? fromJson(dynamic value) => double.tryParse(value.toString());
+
+  @override
+  dynamic toJson(double? object) => object;
+}
+
+/// A custom [JsonConverter] that converts a JSON value to [double].
+/// Supports [String], [int], and [double] types from JSON.
+class RequiredDoubleConverter implements JsonConverter<double, dynamic> {
+  final double defaultValue;
+
+  /// Creates a [RequiredDoubleConverter] with an optional [defaultValue].
+  /// The [defaultValue] is returned when the conversion fails.
+  const RequiredDoubleConverter({this.defaultValue = 0});
+
+  @override
+  double fromJson(dynamic value) =>
+      double.tryParse(value.toString()) ?? defaultValue;
+
+  @override
+  dynamic toJson(double? object) => object;
 }

@@ -5,6 +5,11 @@ void main() {
   final converter = DoubleConverter();
 
   group('DoubleConverter', () {
+    test('should return null when default value is null', () {
+      final converter = DoubleConverter(defaultValue: null);
+      expect(converter.fromJson(''), null);
+    });
+
     test('should return double when input is int', () {
       expect(converter.fromJson(2), 2.0);
     });
