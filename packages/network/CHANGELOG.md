@@ -1,3 +1,11 @@
+## 0.0.2
+
+* Introduced `DoubleConverter` class to handle flexible JSON field types.
+    - Converts incoming JSON values to `double`.
+    - Supports `String`, `int`, and `double` as input types.
+    - Provides a default value fallback in case of conversion failure.
+    - Enhanced logging within `DoubleConverter` for better debugging.
+
 ## 0.0.1+5
 
 * fix caching when select cacheThenNetwork policy

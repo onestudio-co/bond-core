@@ -1,6 +1,6 @@
 name: bond_network
 description: Network is a Bond package provides a convenient way to handle API response.
-version: 0.0.1+5
+version: 0.0.2
 homepage: https://github.com/onestudio-co/flutter-bond
 
 environment:
@@ -20,3 +20,6 @@ dependencies:
 
   bond_core: ^0.0.1+2
   bond_cache: ^0.0.1+2
+
+dev_dependencies:
+  test: ^1.24.6

@@ -1,0 +1,34 @@
+import 'package:bond_network/src/helpers/double_converter.dart';
+import 'package:test/test.dart';
+
+void main() {
+  final converter = DoubleConverter();
+
+  group('DoubleConverter', () {
+    test('should return double when input is int', () {
+      expect(converter.fromJson(2), 2.0);
+    });
+
+    test('should return double when input is double', () {
+      expect(converter.fromJson(2.0), 2.0);
+    });
+
+    test('should return double when input is String', () {
+      expect(converter.fromJson('2'), 2.0);
+      expect(converter.fromJson('2.0'), 2.0);
+    });
+
+    test('should return default value when input is invalid String', () {
+      expect(converter.fromJson('invalid'), 0.0);
+    });
+
+    test('should return default value when input is null', () {
+      expect(converter.fromJson(null), 0.0);
+    });
+
+    test('should return default value when input is other types', () {
+      expect(converter.fromJson([]), 0.0);
+      expect(converter.fromJson({}), 0.0);
+    });
+  });
+}
