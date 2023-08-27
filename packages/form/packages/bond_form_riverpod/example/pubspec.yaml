@@ -15,7 +15,7 @@ dependencies:
   # Bond packages
   bond_core: ^0.0.1+1
   bond_form: ^0.0.1
-
+  bond_cache: ^0.0.1+2
 
   get_it: ^7.2.0
 
@@ -29,6 +29,10 @@ dependencies:
 
   # utils
   flutter_native_splash: ^2.2.8
+  modal_bottom_sheet:
+    git:
+      url: https://github.com/danReynolds/modal_bottom_sheet.git
+      path: modal_bottom_sheet
 
   # platforms packages
   universal_platform: ^1.0.0+1
