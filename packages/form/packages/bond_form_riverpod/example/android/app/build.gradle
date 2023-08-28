@@ -28,10 +28,6 @@ if (keystorePropertiesFile.exists()) {
 }
 
 apply plugin: 'com.android.application'
-// START: FlutterFire Configuration
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
-// END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
@@ -63,11 +59,11 @@ android {
     productFlavors {
         production {
             dimension "app"
-            resValue "string", "app_name","example"
+            resValue "string", "app_name", "example"
         }
         staging {
             dimension "app"
-          resValue "string", "app_name","example"d"
+            resValue "string", "app_name", "example-staging"
             versionNameSuffix "-staging"
             applicationIdSuffix ".staging"
 

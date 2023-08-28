@@ -32,7 +32,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0013333FD23DBE2F77D2DC3B /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/production/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		039C918882F433ED4D9EF0C2 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CF7DAB06F3FD41683668C7D /* Pods-Runner.debug production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug production.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug production.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
@@ -43,7 +42,6 @@
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
-		804BF7A29B219C74C6822B05 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/staging/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		940C3ACEB05C33E242FB6827 /* Pods-Runner.debug staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug staging.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug staging.xcconfig"; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
@@ -81,14 +79,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		35A595E786ABF86B1F97BA85 /* production */ = {
-			isa = PBXGroup;
-			children = (
-				0013333FD23DBE2F77D2DC3B /* GoogleService-Info.plist */,
-			);
-			name = production;
-			sourceTree = "<group>";
-		};
 		7EA60064EF298870531B94BB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,8 +114,6 @@
 				97C146EF1CF9000F007C117D /* Products */,
 				7EA60064EF298870531B94BB /* Pods */,
 				2FC7981B96B806828837C9F5 /* Frameworks */,
-				35A595E786ABF86B1F97BA85 /* production */,
-				B81774AE19DD72415B502FE2 /* staging */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,14 +142,6 @@
 			path = Runner;
 			sourceTree = "<group>";
 		};
-		B81774AE19DD72415B502FE2 /* staging */ = {
-			isa = PBXGroup;
-			children = (
-				804BF7A29B219C74C6822B05 /* GoogleService-Info.plist */,
-			);
-			name = staging;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -177,8 +157,6 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				B2E1DEFB356F429718EFBCD5 /* [CP] Embed Pods Frameworks */,
-				3DE9A47A2926EDD1005A25AE /* [firebase_crashlytics] Crashlytics Upload Symbols */,
-				7EDA430A83078B2BD467A70F /* google service info run phase */,
 			);
 			buildRules = (
 			);
@@ -195,7 +173,7 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
@@ -254,42 +232,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
-		};
-		3DE9A47A2926EDD1005A25AE /* [firebase_crashlytics] Crashlytics Upload Symbols */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[firebase_crashlytics] Crashlytics Upload Symbols";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nGOOGLE_SERVICE_INFO_PLIST=\"${PROJECT_DIR}/Runner/${FLAVOR}/GoogleService-Info.plist\"\n\nFIREBASE_APPLE_APP_ID=$(/usr/libexec/PlistBuddy -c \"Print :GOOGLE_APP_ID\" \"$GOOGLE_SERVICE_INFO_PLIST\")\n\necho \"FIREBASE_APPLE_APP_ID $FIREBASE_APPLE_APP_ID!\"\n\n$PODS_ROOT/FirebaseCrashlytics/upload-symbols --build-phase --validate -ai $FIREBASE_APPLE_APP_ID\n$PODS_ROOT/FirebaseCrashlytics/upload-symbols --build-phase -ai $FIREBASE_APPLE_APP_ID\n";
-		};
-		7EDA430A83078B2BD467A70F /* google service info run phase */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "google service info run phase";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_INFO_PLIST_FROM=\"${PROJECT_DIR}/Runner/${FLAVOR}/GoogleService-Info.plist\"\nBUILD_APP_DIR=\"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"\nGOOGLE_SERVICE_INFO_PLIST_TO=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\"\ncp \"${GOOGLE_SERVICE_INFO_PLIST_FROM}\" \"${GOOGLE_SERVICE_INFO_PLIST_TO}\"\n";
 		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
