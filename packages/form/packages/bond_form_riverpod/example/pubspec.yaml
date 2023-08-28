@@ -16,6 +16,8 @@ dependencies:
   bond_core: ^0.0.1+1
   bond_form: ^0.0.1
   bond_cache: ^0.0.1+2
+  bond_form_riverpod:
+    path: '../../bond_form_riverpod'
 
   get_it: ^7.2.0
 
@@ -29,19 +31,10 @@ dependencies:
 
   # utils
   flutter_native_splash: ^2.2.8
-  modal_bottom_sheet:
-    git:
-      url: https://github.com/danReynolds/modal_bottom_sheet.git
-      path: modal_bottom_sheet
 
   # platforms packages
-  universal_platform: ^1.0.0+1
   shared_preferences: ^2.0.15
   flutter_secure_storage: ^8.0.0
-  package_info_plus: ^4.0.2
-  flutter_local_notifications: ^9.3.3
-  in_app_review: ^2.0.6
-  share_plus: ^7.0.2
 
   # localization
   intl: ^0.18.0
