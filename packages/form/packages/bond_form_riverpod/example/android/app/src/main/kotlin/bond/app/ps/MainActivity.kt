@@ -1,4 +1,4 @@
-package ps.app.bond
+package bond.app.ps
 
 import io.flutter.embedding.android.FlutterActivity
 
