@@ -24,3 +24,5 @@ abstract class RunTasks {
 
   void onError(Object error, StackTrace stack);
 }
+
+final appKey = GlobalKey();
