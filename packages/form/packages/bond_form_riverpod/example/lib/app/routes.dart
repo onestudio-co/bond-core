@@ -5,7 +5,7 @@ final routes = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const LoginPage(),
+      builder: (context, state) => const LoginFormPage(),
     ),
   ],
 );
