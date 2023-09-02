@@ -11,7 +11,7 @@ abstract class FormStateNotifier<Success, Failure extends Error>
     required Map<String, FormFieldState> fields,
     this.stopOnFirstError = false,
   }) {
-    state = BondFormState<Success, Failure>(fields: fields);
+    // state = BondFormState<Success, Failure>(fields: fields);
   }
 
   @override
