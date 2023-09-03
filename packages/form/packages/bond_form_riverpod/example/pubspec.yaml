@@ -16,7 +16,6 @@ dependencies:
   # Bond packages
   bond_core: ^0.0.1+1
   bond_form: ^0.0.1
-  bond_cache: ^0.0.1+2
   bond_form_riverpod:
     path: ../../bond_form_riverpod
 
@@ -29,18 +28,15 @@ dependencies:
   flutter_riverpod: ^2.3.6
 
 
-  # platforms packages
-  shared_preferences: ^2.0.15
-  flutter_secure_storage: ^8.0.0
-
   # localization
   intl: ^0.18.0
+
+  stack_trace: ^1.11.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.1
-  build_runner: ^2.3.2
 
 flutter:
   uses-material-design: true

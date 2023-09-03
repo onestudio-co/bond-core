@@ -38,6 +38,19 @@ class BondFormState<Success, Failure extends Error> {
     return _failure!;
   }
 
+  FormFieldState<T> get<T>(String fieldName) {
+    if (!fields.containsKey(fieldName)) {
+      throw ArgumentError('No field found with name $fieldName');
+    }
+    return fields[fieldName] as FormFieldState<T>;
+  }
+
+  String label<T>(String fieldName) => get<T>(fieldName).label;
+
+  String? error<T>(String fieldName) => get<T>(fieldName).error;
+
+  FormFieldState operator [](String fieldName) => get(fieldName);
+
   BondFormState<Success, Failure> copyWith({
     Map<String, FormFieldState>? fields,
     BondFormStateStatus? status,
