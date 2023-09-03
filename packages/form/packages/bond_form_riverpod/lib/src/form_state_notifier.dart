@@ -7,53 +7,43 @@ abstract class FormStateNotifier<Success, Failure extends Error>
     extends Notifier<BondFormState<Success, Failure>> {
   final bool stopOnFirstError;
 
+  Map<String, FormFieldState> fields();
+
   FormStateNotifier({
-    required Map<String, FormFieldState> fields,
     this.stopOnFirstError = false,
-  }) {
-    // state = BondFormState<Success, Failure>(fields: fields);
-  }
+  });
 
   @override
   BondFormState<Success, Failure> build() =>
-      BondFormState<Success, Failure>(fields: state.fields);
-
-  FormFieldState<T> get<T>(String fieldName) {
-    if (!state.fields.containsKey(fieldName)) {
-      throw ArgumentError('No field found with name $fieldName');
-    }
-    return state.fields[fieldName] as FormFieldState<T>;
-  }
-
-  FormFieldState operator [](String fieldName) => get(fieldName);
-
-  String label<T>(String fieldName) => get<T>(fieldName).label;
-
-  String? error<T>(String fieldName) => get<T>(fieldName).error;
+      BondFormState<Success, Failure>(fields: fields());
 
   void update<T>(String fieldName, T value) {
-    var field = get<T>(fieldName);
+    var field = state.get<T?>(fieldName);
     field.value = value;
-    field.touched =
-        true; // The field is being interacted with, so update `touched`
-    if (field.validateOnUpdate && field.touched) {
-      field.error = field.validate(state.fields);
-    }
+    field.touched = true; // The field is being interacted with, so update `touched`
     state.fields[fieldName] = field;
-    state = state.copyWith(fields: Map.from(state.fields));
+    final status = _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+    state = state.copyWith(
+      fields: Map.from(state.fields),
+      status: status,
+    );
   }
 
   bool get _allValid {
     var allValid = true;
     for (final fieldName in state.fields.keys) {
-      final field = get(fieldName);
+      final field = state.get(fieldName);
       final error = field.validate(state.fields);
       if (error != null) {
         allValid = false;
-        field.error = error; // Set the error of the field
+        if (field.validateOnUpdate && field.touched) {
+          field.error = field.validate(state.fields);
+        }
         if (stopOnFirstError) {
           break;
         }
+      } else {
+        field.error = null;
       }
     }
     return allValid;
@@ -61,13 +51,36 @@ abstract class FormStateNotifier<Success, Failure extends Error>
 
   Future<void> submit() => _onSubmit();
 
-  Future<void> onSubmit();
+  Future<Success> onSubmit();
 
-  Future<void> _onSubmit() {
+  Future<void> _onSubmit() async {
     if (_allValid) {
-      return onSubmit();
+      state = state.copyWith(
+        fields: Map.from(state.fields),
+        status: BondFormStateStatus.submitting,
+      );
+      try {
+        final result = await onSubmit();
+        state = state.copyWith(
+          status: BondFormStateStatus.submitted,
+          success: result,
+        );
+      } catch (e) {
+        state = state.copyWith(
+          status: BondFormStateStatus.failed,
+          failure: e as Failure,
+        );
+      }
+    } else {
+      state = state.copyWith(
+        fields: Map.from(state.fields),
+        status: BondFormStateStatus.invalid,
+      );
+      final errors = state.fields.values
+          .where((element) => element.error != null)
+          .map((e) => '*${e.error}*')
+          .join('\n');
+      log('Form is not on valid state\n$errors');
     }
-    log('Form is not on valid state ${state.fields.values.map((e) => e.error).join('\n')}');
-    return Future.value();
   }
 }
