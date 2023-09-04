@@ -3,21 +3,25 @@ import 'package:riverpod/riverpod.dart';
 
 import 'dart:async';
 
-/// A class to manage form state, extending a notifier to notify its subscribers
-/// of changes, and using the FormController mixin for form operations.
+/// `AutoDisposeFormStateNotifier` is an abstract class that manages the form state.
+/// It extends `AutoDisposeNotifier` to automatically manage resources and it uses
+/// the `FormController` mixin to provide functionalities related to form management.
 ///
-/// Type Parameters:
-///   - [Success]: The data type that represents the result of a successful form submission.
-///   - [Failure]: The error type that extends [Error] representing the failure cases of form submission.
-abstract class FormStateNotifier<Success, Failure extends Error>
-    extends Notifier<BondFormState<Success, Failure>>
+/// This class is intended to be used as the foundation for creating form-based
+/// state management solutions that need automatic resource cleanup.
+///
+///  Type Parameters:
+/// - [Success]: The type that will represent successful form submission.
+/// - [Failure]: The type that extends [Error] to represent failure in form submission.
+abstract class AutoDisposeFormStateNotifier<Success, Failure extends Error>
+    extends AutoDisposeNotifier<BondFormState<Success, Failure>>
     with FormController<Success, Failure> {
 
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 
   /// Constructor for FormStateNotifier, defaults to not stopping at the first error.
-  FormStateNotifier({
+  AutoDisposeFormStateNotifier({
     this.stopOnFirstError = false,
   });
 

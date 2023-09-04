@@ -5,7 +5,7 @@ import 'package:bond_form_riverpod/bond_form_riverpod.dart';
 import 'package:example/features/auth/data/errors/account_not_found_error.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginFormController extends FormStateNotifier<String, Error> {
+class LoginFormController extends AutoDisposeFormStateNotifier<String, Error> {
   @override
   Map<String, FormFieldState> fields() => {
         'email': TextFieldState(
@@ -40,7 +40,7 @@ class LoginFormController extends FormStateNotifier<String, Error> {
   }
 }
 
-final loginProvider =
-    NotifierProvider<LoginFormController, BondFormState<String, Error>>(
+final loginProvider = NotifierProvider.autoDispose<LoginFormController,
+    BondFormState<String, Error>>(
   LoginFormController.new,
 );
