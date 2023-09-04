@@ -1,3 +1,8 @@
+## 0.0.1+4
+
+* write public API has dartdoc comments
+* fix dart analysis issues
+
 ## 0.0.1+3
 
 * add necessary imports to bond form
