@@ -35,118 +35,260 @@ export 'rules/size.dart';
 export 'rules/url.dart';
 export 'validation_rule.dart';
 
+/// A utility class that provides convenient methods to create instances of
+/// various validation rules.
 class Rules {
+  /// Creates a [Required] validation rule.
+  ///
+  /// This rule checks if a value is required and can optionally include a custom
+  /// validation message.
   static ValidationRule<T> required<T>({String? message}) =>
       Required<T>(message: message);
 
+  /// Creates a [RequiredIf] validation rule.
+  ///
+  /// This rule checks if a value is required based on a condition where the value
+  /// of another field is equal to [equalTo]. It can include a custom validation message.
   static ValidationRule<T> requiredIf<T>(String? otherFieldName,
-          {dynamic equalTo, String? message}) =>
+      {dynamic equalTo, String? message}) =>
       RequiredIf<T>(otherFieldName, equalTo: equalTo, message: message);
 
+  /// Creates a [RequiredIf] validation rule based on a condition.
+  ///
+  /// This rule checks if a value is required based on a provided condition function.
+  /// It can include a custom validation message.
   static ValidationRule<T> requiredIfCondition<T>(bool Function()? condition,
-          {String? message}) =>
+      {String? message}) =>
       RequiredIf.condition(condition, message: message);
 
+  /// Creates a [Different] validation rule.
+  ///
+  /// This rule checks if a value is different from another field's value.
+  /// It can include a custom validation message.
   static ValidationRule<T> different<T>(String otherField, {String? message}) =>
       Different<T>(otherField, message: message);
 
+  /// Creates an [Alpha] validation rule.
+  ///
+  /// This rule checks if a string contains only alphabetic characters.
+  /// It can include a custom validation message.
   static ValidationRule<String> alpha({String? message}) =>
       Alpha(message: message);
 
+  /// Creates an [AlphaDash] validation rule.
+  ///
+  /// This rule checks if a string contains only alphabetic, dash, or underscore characters.
+  /// It can include a custom validation message.
   static ValidationRule<String> alphaDash({String? message}) =>
       AlphaDash(message: message);
 
+  /// Creates an [AlphaNum] validation rule.
+  ///
+  /// This rule checks if a string contains only alphanumeric characters.
+  /// It can include a custom validation message.
   static ValidationRule<String> alphaNum({String? message}) =>
       AlphaNum(message: message);
 
+  /// Creates a [Between] validation rule.
+  ///
+  /// This rule checks if a string's length is between [min] and [max] (inclusive).
+  /// It can include a custom validation message.
   static ValidationRule<String> between(
-          {required num min, required num max, String? message}) =>
+      {required num min, required num max, String? message}) =>
       Between(min, max, message: message);
 
+  /// Creates a [Boolean] validation rule.
+  ///
+  /// This rule checks if a string represents a boolean value ("true" or "false").
+  /// It can include a custom validation message.
   static ValidationRule<String> boolean({String? message}) =>
       Boolean(message: message);
 
+  /// Creates a [Date] validation rule.
+  ///
+  /// This rule checks if a string can be parsed as a valid date.
+  /// It can include a custom validation message.
   static ValidationRule<String> date({String? message}) =>
       Date(message: message);
 
+  /// Creates a [Digits] validation rule.
+  ///
+  /// This rule checks if a string contains exactly [digitLength] digits.
+  /// It can include a custom validation message.
   static ValidationRule<String> digits(
-          {required int digitLength, String? message}) =>
+      {required int digitLength, String? message}) =>
       Digits(digitLength, message: message);
 
+  /// Creates a [DigitsBetween] validation rule.
+  ///
+  /// This rule checks if a string contains between [min] and [max] digits (inclusive).
+  /// It can include a custom validation message.
   static ValidationRule<String> digitsBetween(
-          {required num min, required num max, String? message}) =>
+      {required num min, required num max, String? message}) =>
       DigitsBetween(min, max, message: message);
 
+  /// Creates an [Email] validation rule.
+  ///
+  /// This rule checks if a string is a valid email address.
+  /// It can include a custom validation message.
   static ValidationRule<String> email({String? message}) =>
       Email(message: message);
 
+  /// Creates an [InList] validation rule.
+  ///
+  /// This rule checks if a value is in the list of [validValues].
+  /// It can include a custom validation message.
   static ValidationRule<T> inList<T>(List<T> validValues, {String? message}) =>
       InList(validValues, message: message);
 
+  /// Creates an [Integer] validation rule.
+  ///
+  /// This rule checks if a string can be parsed as an integer.
+  /// It can include a custom validation message.
   static ValidationRule<String> integer({String? message}) =>
       Integer(message: message);
 
+  /// Creates a [MaxLength] validation rule.
+  ///
+  /// This rule checks if a string's length is less than or equal to [max].
+  /// It can include a custom validation message.
   static ValidationRule<String> maxLength(int max, {String? message}) =>
       MaxLength(max, message: message);
 
+  /// Creates a [MaxValue] validation rule.
+  ///
+  /// This rule checks if a numeric value is less than or equal to [max].
+  /// It can include a custom validation message.
   static ValidationRule<num> maxValue(int max, {String? message}) =>
       MaxValue(max, message: message);
 
+  /// Creates a [MinLength] validation rule.
+  ///
+  /// This rule checks if a string's length is greater than or equal to [min].
+  /// It can include a custom validation message.
   static ValidationRule<String> minLength(int min, {String? message}) =>
       MinLength(min, message: message);
 
+  /// Creates a [MinValue] validation rule.
+  ///
+  /// This rule checks if a numeric value is greater than or equal to [min].
+  /// It can include a custom validation message.
   static ValidationRule<num> minValue(int min, {String? message}) =>
       MinValue(min, message: message);
 
+  /// Creates a [NotInList] validation rule.
+  ///
+  /// This rule checks if a value is not in the list of [invalidValues].
+  /// It can include a custom validation message.
   static ValidationRule<T> notInList<T>(List<T> invalidValues,
-          {String? message}) =>
+      {String? message}) =>
       NotInList(invalidValues, message: message);
 
+  /// Creates a [Numeric] validation rule.
+  ///
+  /// This rule checks if a string can be parsed as a numeric value.
+  /// It can include a custom validation message.
   static ValidationRule<String> numeric({String? message}) =>
       Numeric(message: message);
 
+  /// Creates a [Regex] validation rule.
+  ///
+  /// This rule checks if a string matches the specified [regex].
+  /// It can include a custom validation message.
   static ValidationRule<String> regex(RegExp regex, {String? message}) =>
       Regex(regex, message: message);
 
+  /// Creates a [Same] validation rule.
+  ///
+  /// This rule checks if a value is the same as another field's value.
+  /// It can include a custom validation message.
   static ValidationRule<T> same<T>(
-          {required String otherField, String? message}) =>
+      {required String otherField, String? message}) =>
       Same(otherField, message: message);
 
+  /// Creates a [Size] validation rule.
+  ///
+  /// This rule checks if a string's length is equal to [size].
+  /// It can include a custom validation message.
   static ValidationRule<String> size(int size, {String? message}) =>
       Size(size, message: message);
 
+  /// Creates a [Url] validation rule.
+  ///
+  /// This rule checks if a string is a valid URL.
+  /// It can include a custom validation message.
   static ValidationRule<String> url({String? message}) => Url(message: message);
 
+  /// Creates a [MinSelected] validation rule.
+  ///
+  /// This rule checks if the number of selected items in an iterable is greater
+  /// than or equal to [min].
+  /// It can include a custom validation message.
   static ValidationRule<Iterable<T>?> minSelected<T>(int min,
-          {String? message}) =>
+      {String? message}) =>
       MinSelected<T>(min, message: message);
 
+  /// Creates a [MaxSelected] validation rule.
+  ///
+  /// This rule checks if the number of selected items in an iterable is less
+  /// than or equal to [max].
+  /// It can include a custom validation message.
   static ValidationRule<Iterable<T>?> maxSelected<T>(int min,
-          {String? message}) =>
+      {String? message}) =>
       MaxSelected<T>(min, message: message);
 
+  /// Creates a [RangeSelected] validation rule.
+  ///
+  /// This rule checks if the number of selected items in an iterable is within
+  /// the range of [min] to [max] (inclusive).
+  /// It can include a custom validation message.
   static ValidationRule<Iterable<T>?> rangeSelected<T>(
-          {required int min, required int max, String? message}) =>
+      {required int min, required int max, String? message}) =>
       RangeSelected<T>(min, max, message: message);
 
+  /// Creates a [DateBefore] validation rule.
+  ///
+  /// This rule checks if a date is before a specified [date].
+  /// It can include a custom validation message.
   static ValidationRule<DateTime> dateBefore(DateTime date,
-          {String? message}) =>
+      {String? message}) =>
       DateBefore(date, message: message);
 
+  /// Creates a [DateAfter] validation rule.
+  ///
+  /// This rule checks if a date is after a specified [date].
+  /// It can include a custom validation message.
   static ValidationRule<DateTime> dateAfter(DateTime date, {String? message}) =>
       DateBefore(date, message: message);
 
+  /// Creates a [DateBefore] validation rule from a string date representation.
+  ///
+  /// This rule checks if a date is before a specified date represented as a string.
+  /// It can include a custom validation message.
   static ValidationRule<DateTime?> dateBeforeFromString(String date,
-          {String? format, String? message}) =>
+      {String? format, String? message}) =>
       DateBefore.fromString(date, format: format, message: message);
 
+  /// Creates a [DateAfter] validation rule from a string date representation.
+  ///
+  /// This rule checks if a date is after a specified date represented as a string.
+  /// It can include a custom validation message.
   static ValidationRule<DateTime?> dateAfterFromString(String date,
-          {String? format, String? message}) =>
+      {String? format, String? message}) =>
       DateAfter.fromString(date, format: format, message: message);
 
+  /// Creates an [IsTrue] validation rule.
+  ///
+  /// This rule checks if a boolean value is true.
+  /// It can include a custom validation message.
   static ValidationRule<bool> isTrue({String? message}) =>
       IsTrue(message: message);
 
+  /// Creates an [IsFalse] validation rule.
+  ///
+  /// This rule checks if a boolean value is false.
+  /// It can include a custom validation message.
   static ValidationRule<bool> isFalse({String? message}) =>
       IsFalse(message: message);
 }
+
