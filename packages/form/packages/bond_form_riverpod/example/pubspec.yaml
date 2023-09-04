@@ -4,14 +4,13 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-
-
 
   # Bond packages
   bond_core: ^0.0.1+1
@@ -26,7 +25,6 @@ dependencies:
 
   # state management
   flutter_riverpod: ^2.3.6
-
 
   # localization
   intl: ^0.18.0
