@@ -1,7 +1,5 @@
-# melos_managed_dependency_overrides: bond_cache,bond_core,bond_form,bond_form_riverpod
+# melos_managed_dependency_overrides: bond_core,bond_form,bond_form_riverpod
 dependency_overrides:
-  bond_cache:
-    path: ../../../../cache
   bond_core:
     path: ../../../../core
   bond_form:

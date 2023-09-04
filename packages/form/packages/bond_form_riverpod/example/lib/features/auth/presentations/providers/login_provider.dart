@@ -34,7 +34,7 @@ class LoginFormController extends FormStateNotifier<String, Error> {
     log('email: $email, password: $password');
     await Future.delayed(const Duration(seconds: 1));
     if (email != 'salahnahed@icloud.com') {
-     // throw AccountNotFoundError();
+      throw AccountNotFoundError();
     }
     return 'Success';
   }
