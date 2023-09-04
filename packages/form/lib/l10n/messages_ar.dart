@@ -10,7 +10,6 @@
 // ignore_for_file:unused_import, file_names
 // ignore_for_file:always_declare_return_types
 
-
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
