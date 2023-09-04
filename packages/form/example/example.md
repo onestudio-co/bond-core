@@ -1,4 +1,4 @@
-Basic usage:
+## Basic usage:
 
 ```dart
 final loginForm = FormStateNotifier<String, Error>(
