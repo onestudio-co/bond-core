@@ -70,22 +70,25 @@ class LoginPage extends ConsumerWidget {
     BondFormState<String, Error>? previous,
     BondFormState<String, Error> next,
   ) {
-    if (previous == null || next.status != previous.status) {
-      if (next.status == BondFormStateStatus.failed) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(next.failure.toString()),
-            backgroundColor: Colors.red,
-          ),
-        );
-      } else if (next.status == BondFormStateStatus.submitted) {
+    switch (next.status) {
+      case BondFormStateStatus.submitted:
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Submitted'),
             backgroundColor: Colors.green,
           ),
         );
-      }
+        break;
+      case BondFormStateStatus.failed:
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(next.failure.toString()),
+            backgroundColor: Colors.red,
+          ),
+        );
+        break;
+      default:
+        break;
     }
   }
 }
