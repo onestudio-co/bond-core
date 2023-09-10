@@ -2,6 +2,7 @@ import 'package:bond_form/bond_form.dart';
 import 'package:example/features/auth/presentations/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -78,6 +79,7 @@ class LoginPage extends ConsumerWidget {
             backgroundColor: Colors.green,
           ),
         );
+        context.go('/pizza');
         break;
       case BondFormStateStatus.failed:
         ScaffoldMessenger.of(context).showSnackBar(
