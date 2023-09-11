@@ -29,12 +29,14 @@ mixin FormController<Success, Failure extends Error> {
   /// Parameters:
   ///   - [fieldName]: The name of the field to update.
   ///   - [value]: The new value for the field.
-  void update<T extends FormFieldState<G>, G>(String fieldName, T value, G g) {
-    var field = state.get<T, G>(fieldName);
-    field.value = value as G?;
-    field.touched = true;
+  void update<T>(String fieldName, T value) {
+    var field = state.get<T?>(fieldName);
+    field.value = value;
+    field.touched =
+    true; // The field is being interacted with, so update `touched`
     state.fields[fieldName] = field;
-    final status = _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+    final status =
+    _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: status,

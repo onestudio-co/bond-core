@@ -51,8 +51,7 @@ class BondFormState<Success, Failure extends Error> {
   /// Throws a [StateError] if the form is not in the [BondFormStateStatus.submitted] state.
   Success get success {
     if (_success == null || status != BondFormStateStatus.submitted) {
-      throw StateError(
-          'Accessing success while form not successfully submitted');
+      throw StateError('Accessing success while form not successfully submitted');
     }
     return _success!;
   }
@@ -70,20 +69,18 @@ class BondFormState<Success, Failure extends Error> {
   /// Gets the state of a form field by its [fieldName].
   ///
   /// Throws an [ArgumentError] if no field with the specified [fieldName] is found.
-  T get<T extends FormFieldState<G>, G>(String fieldName) {
+  FormFieldState<T> get<T>(String fieldName) {
     if (!fields.containsKey(fieldName)) {
       throw ArgumentError('No field found with name $fieldName');
     }
-    return fields[fieldName] as T;
+    return fields[fieldName] as FormFieldState<T>;
   }
 
   /// Gets the label for a form field by its [fieldName].
-  String label<T extends FormFieldState<G>, G>(String fieldName) =>
-      get<T, G>(fieldName).label;
+  String label<T>(String fieldName) => get<T>(fieldName).label;
 
   /// Gets the error message for a form field by its [fieldName].
-  String? error<T extends FormFieldState<G>, G>(String fieldName) =>
-      get<T, G>(fieldName).error;
+  String? error<T>(String fieldName) => get<T>(fieldName).error;
 
   /// Allows accessing the state of a form field using subscript operator.
   FormFieldState operator [](String fieldName) => get(fieldName);
@@ -103,3 +100,4 @@ class BondFormState<Success, Failure extends Error> {
     );
   }
 }
+
