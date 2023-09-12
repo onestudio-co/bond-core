@@ -9,6 +9,7 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final formController = ref.read(loginProvider.notifier);
     final formState = ref.watch(loginProvider);
     ref.listen(
       loginProvider,
@@ -22,8 +23,7 @@ class LoginPage extends ConsumerWidget {
           children: [
             TextFormField(
               keyboardType: TextInputType.emailAddress,
-              onChanged: (value) =>
-                  ref.read(loginProvider.notifier).update('email', value),
+              onChanged: (value) => formController.updateText('email', value),
               decoration: InputDecoration(
                 labelText: formState.label('email'),
                 errorText: formState.error('email'),
@@ -35,8 +35,7 @@ class LoginPage extends ConsumerWidget {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
-              onChanged: (value) =>
-                  ref.read(loginProvider.notifier).update('password', value),
+              onChanged: (value) => formController.updateText('password', value),
               decoration: InputDecoration(
                 labelText: formState.label('password'),
                 errorText: formState.error('password'),

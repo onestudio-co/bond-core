@@ -4,6 +4,16 @@ import 'package:bond_form/bond_form.dart';
 import 'package:bond_form_riverpod/bond_form_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+/// Enumeration representing various pizza toppings.
+enum PizzaTopping {
+  mushrooms,
+  pepperoni,
+  cheese,
+  onions,
+  tomatoes,
+  salami,
+}
+
 class PizzaOrderFormController
     extends AutoDisposeFormStateNotifier<String, Error> {
   @override
@@ -35,12 +45,12 @@ class PizzaOrderFormController
             Rules.required(),
           ],
         ),
-        'toppings': CheckboxGroupFieldState(
+        'toppings': CheckboxGroupFieldState<PizzaTopping>(
           [
             CheckboxFieldState(PizzaTopping.mushrooms, label: 'Mushrooms'),
-            CheckboxFieldState(PizzaTopping.pepperoni, label: 'Onions'),
-            CheckboxFieldState(PizzaTopping.pepperoni, label: 'Tomatoes'),
-            CheckboxFieldState(PizzaTopping.pepperoni, label: 'Salami'),
+            CheckboxFieldState(PizzaTopping.onions, label: 'Onions'),
+            CheckboxFieldState(PizzaTopping.tomatoes, label: 'Tomatoes'),
+            CheckboxFieldState(PizzaTopping.salami, label: 'Salami'),
             CheckboxFieldState(PizzaTopping.pepperoni, label: 'Pepperoni'),
           ],
           label: 'Choose your toppings',
