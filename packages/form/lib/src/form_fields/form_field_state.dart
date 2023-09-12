@@ -57,4 +57,3 @@ class FormFieldState<T> {
     return null;
   }
 }
-

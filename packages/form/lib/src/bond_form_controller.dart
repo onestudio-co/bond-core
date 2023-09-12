@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:bond_form/bond_form.dart';
 
-
 /// A mixin to manage the state and logic of a form.
 ///
 /// The mixin defines methods for updating fields, validating the form,
@@ -29,14 +28,13 @@ mixin FormController<Success, Failure extends Error> {
   /// Parameters:
   ///   - [fieldName]: The name of the field to update.
   ///   - [value]: The new value for the field.
-  void update<T>(String fieldName, T value) {
-    var field = state.get<T?>(fieldName);
+  void update<T extends FormFieldState<G>, G>(String fieldName, G value) {
+    var field = state.get<T, G>(fieldName);
     field.value = value;
-    field.touched =
-    true; // The field is being interacted with, so update `touched`
+    field.touched = true;
     state.fields[fieldName] = field;
     final status =
-    _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+        _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: status,
