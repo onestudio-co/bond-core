@@ -325,5 +325,14 @@
       "fieldName": {
       }
     }
+  },
+  "phoneNumberValidationMessage": "{fieldName} يجب أن يكون رقم هاتف صالح.",
+  "@phoneNumberValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون رقم هاتف صالح",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
   }
 }

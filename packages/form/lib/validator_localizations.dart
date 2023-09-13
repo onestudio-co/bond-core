@@ -5,6 +5,9 @@ import 'l10n/validator_messages_all_locales.dart';
 /// A class for handling validation-related localizations.
 ///
 /// This class provides localized validation error messages for various validation rules.
+///
+/// run this command to generate the validator_messages_all.dart file:
+/// dart run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/validator_localizations.dart lib/l10n/validator_messages_*.arb
 class ValidatorLocalizations {
   /// Creates a new [ValidatorLocalizations] instance for the specified locale.
   ///
@@ -164,7 +167,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must be numeric and have a length of exactly $value.',
       name: 'digitsValidationMessage',
-      desc: 'Validation message for a field that should be numeric and have a specific length',
+      desc:
+          'Validation message for a field that should be numeric and have a specific length',
       args: [fieldName, value],
       locale: localeName,
     );
@@ -177,7 +181,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must have a length between $min and $max.',
       name: 'digitsBetweenValidationMessage',
-      desc: 'Validation message for a field that should have a length between two values',
+      desc:
+          'Validation message for a field that should have a length between two values',
       args: [fieldName, min, max],
       locale: localeName,
     );
@@ -203,7 +208,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must have a size between $min and $max.',
       name: 'betweenValidationMessage',
-      desc: 'Validation message for a field that should have a size between two values',
+      desc:
+          'Validation message for a field that should have a size between two values',
       args: [fieldName, min, max],
       locale: localeName,
     );
@@ -255,7 +261,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must be in the format $format.',
       name: 'dateFormatValidationMessage',
-      desc: 'Validation message for a field that should comply with a specific format',
+      desc:
+          'Validation message for a field that should comply with a specific format',
       args: [fieldName, format],
       locale: localeName,
     );
@@ -268,7 +275,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must have a different value from $field.',
       name: 'differentValidationMessage',
-      desc: 'Validation message for a field that should be different from another field',
+      desc:
+          'Validation message for a field that should be different from another field',
       args: [fieldName, field],
       locale: localeName,
     );
@@ -281,7 +289,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must have the same value as $field.',
       name: 'sameValidationMessage',
-      desc: 'Validation message for a field that should have the same value as another field',
+      desc:
+          'Validation message for a field that should have the same value as another field',
       args: [fieldName, field],
       locale: localeName,
     );
@@ -294,7 +303,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must contain only alphabetic characters.',
       name: 'alphaValidationMessage',
-      desc: 'Validation message for a field that should contain only alphabetic characters',
+      desc:
+          'Validation message for a field that should contain only alphabetic characters',
       args: [fieldName],
       locale: localeName,
     );
@@ -307,7 +317,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName may only contain alphanumeric characters, dashes, and underscores.',
       name: 'alphaDashValidationMessage',
-      desc: 'Validation message for a field that may only contain alphanumeric characters, dashes, and underscores',
+      desc:
+          'Validation message for a field that may only contain alphanumeric characters, dashes, and underscores',
       args: [fieldName],
       locale: localeName,
     );
@@ -320,7 +331,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must only contain alphanumeric characters.',
       name: 'alphaNumValidationMessage',
-      desc: 'Validation message for a field that must only contain alphanumeric characters',
+      desc:
+          'Validation message for a field that must only contain alphanumeric characters',
       args: [fieldName],
       locale: localeName,
     );
@@ -359,7 +371,8 @@ class ValidatorLocalizations {
     return Intl.message(
       'You may only select $max $fieldName.',
       name: 'maxSelectedValidationMessage',
-      desc: 'Validation message for a field that must have a maximum number of selected values',
+      desc:
+          'Validation message for a field that must have a maximum number of selected values',
       args: [fieldName, max],
       locale: localeName,
     );
@@ -372,7 +385,8 @@ class ValidatorLocalizations {
     return Intl.message(
       'You must select at least $min $fieldName.',
       name: 'minSelectedValidationMessage',
-      desc: 'Validation message for a field that must have a minimum number of selected values',
+      desc:
+          'Validation message for a field that must have a minimum number of selected values',
       args: [fieldName, min],
       locale: localeName,
     );
@@ -385,7 +399,8 @@ class ValidatorLocalizations {
     return Intl.message(
       'You must select between $min and $max $fieldName.',
       name: 'rangeSelectedValidationMessage',
-      desc: 'Validation message for a field that must have a range of selected values',
+      desc:
+          'Validation message for a field that must have a range of selected values',
       args: [fieldName, min, max],
       locale: localeName,
     );
@@ -398,7 +413,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must be after $after.',
       name: 'dateAfterValidationMessage',
-      desc: 'Validation message for a date field that must be after another date',
+      desc:
+          'Validation message for a date field that must be after another date',
       args: [fieldName, after],
       locale: localeName,
     );
@@ -411,7 +427,8 @@ class ValidatorLocalizations {
     return Intl.message(
       '$fieldName must be before $before.',
       name: 'dateBeforeValidationMessage',
-      desc: 'Validation message for a date field that must be before another date',
+      desc:
+          'Validation message for a date field that must be before another date',
       args: [fieldName, before],
       locale: localeName,
     );
@@ -438,6 +455,18 @@ class ValidatorLocalizations {
       'The field $fieldName must be unchecked.',
       name: 'isFalseValidationMessage',
       desc: 'Validation message for a field that must be unchecked',
+      args: [fieldName],
+      locale: localeName,
+    );
+  }
+
+  /// Generates a validation error message for a field that must be a valid phone number.
+  /// This message indicates that the field [fieldName] must be a valid phone number.
+  String phoneNumberValidationMessage(String fieldName) {
+    return Intl.message(
+      '$fieldName must be a valid phone number.',
+      name: 'phoneNumberValidationMessage',
+      desc: 'Validation message for a field that must be a valid phone number',
       args: [fieldName],
       locale: localeName,
     );
