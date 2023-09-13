@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m24(fieldName) => "${fieldName} يجب أن يكون عنوان URL صالح.";
 
+  static m25(fieldName, value) => "${fieldName} يجب أن يكون رقم هاتف صالح.";
+
   @override
   final Map<String, dynamic> messages =
       _notInlinedMessages(_notInlinedMessages);
@@ -113,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         'requiredValidationMessage': m21,
         'sameValidationMessage': m22,
         'sizeValidationMessage': m23,
-        'urlValidationMessage': m24
+        'urlValidationMessage': m24,
+        'phoneNumberValidationMessage': m25,
       };
 }

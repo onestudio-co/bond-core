@@ -308,7 +308,7 @@
       }
     }
   },
-  "isTrueValidationMessage": "The field $fieldName must be checked.",
+  "isTrueValidationMessage": "The field {fieldName} must be checked.",
   "@isTrueValidationMessage": {
     "description": "Validation message for a field that must be checked",
     "type": "text",
@@ -317,9 +317,18 @@
       }
     }
   },
-  "isFalseValidationMessage": "The field $fieldName must be unchecked.",
+  "isFalseValidationMessage": "The field {fieldName} must be unchecked.",
   "@isFalseValidationMessage": {
     "description": "Validation message for a field that must be unchecked",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      }
+    }
+  },
+  "phoneNumberValidationMessage": "{fieldName} must be a valid phone number.",
+  "@phoneNumberValidationMessage": {
+    "description": "Validation message for a field that must be a valid phone number",
     "type": "text",
     "placeholders": {
       "fieldName": {
