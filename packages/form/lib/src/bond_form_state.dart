@@ -70,11 +70,25 @@ class BondFormState<Success, Failure extends Error> {
   /// Gets the state of a form field by its [fieldName].
   ///
   /// Throws an [ArgumentError] if no field with the specified [fieldName] is found.
-  FormFieldState<G> get<T extends FormFieldState<G>, G>(String fieldName) {
+  /// Provides a detailed error message in case of type mismatch, including a debugging tip.
+  T get<T extends FormFieldState<G>, G>(String fieldName) {
     if (!fields.containsKey(fieldName)) {
       throw ArgumentError('No field found with name $fieldName');
     }
-    return fields[fieldName] as T;
+    final field = fields[fieldName];
+    if (field is T) {
+      return field;
+    } else {
+      throw ArgumentError(
+          'Type mismatch for field "$fieldName".\n\n'
+              'Expected: $T\n\n'
+              'Actual: ${field.runtimeType}\n\n'
+              'Debugging Tip:\n\n'
+              'If you have declared the field as ${field.runtimeType}, make sure to specify the generic type.\n\n'
+              'For example, if the actual type is "RadioGroupFieldState<dynamic>", you might need to change it to '
+              '"RadioGroupFieldState<bool>" in the field definition.\n\n'
+      );
+    }
   }
 
   /// Gets the label for a form field by its [fieldName].
