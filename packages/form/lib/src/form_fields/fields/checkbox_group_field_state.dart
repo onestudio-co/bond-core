@@ -7,7 +7,7 @@ import 'checkbox_field_state.dart';
 ///
 /// A checkbox group form field extends the [FormFieldState] class, providing
 /// a way to manage the state of multiple checkboxes within a group.
-class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>?> {
+class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>> {
   /// The list of individual checkbox field states within the group.
   final List<CheckboxFieldState<T>> checkboxes;
 
@@ -18,9 +18,9 @@ class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>?> {
   /// - [value]: The initial value of the checkbox group (default is `null`).
   /// - [rules]: The list of validation rules to apply to the checkbox group field (default is an empty list).
   CheckboxGroupFieldState(
-      this.checkboxes, {
-        required String label,
-        Set<T>? value,
-        List<ValidationRule<Set<T>?>> rules = const [],
-      }) : super(value: value, label: label, rules: rules);
+    this.checkboxes, {
+    required String label,
+    Set<T>? value,
+    List<ValidationRule<Set<T>?>> rules = const [],
+  }) : super(value: value, label: label, rules: rules);
 }

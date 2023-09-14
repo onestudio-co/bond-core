@@ -17,8 +17,8 @@ class BondApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate,
       ],
-      locale: const Locale('ar'),
-      supportedLocales: const [Locale('ar'), Locale('en')],
+      locale: const Locale('en'),
+      supportedLocales: const [Locale('en')],
       debugShowCheckedModeBanner: true,
       themeMode: ThemeMode.system,
     );

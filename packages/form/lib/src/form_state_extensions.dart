@@ -61,6 +61,10 @@ extension XBondFormState on BondFormState {
   ///   /// Throws:
   /// - [ArgumentError] if no field with [fieldName] exists.
   List<CheckboxFieldState<T>> checkboxesOf<T>(String fieldName) {
+    if (T == dynamic) {
+      throw ArgumentError(
+          'The generic type T must be specified for checkboxesOf<T>.');
+    }
     return get<CheckboxGroupFieldState<T>, Set<T>?>(fieldName).checkboxes;
   }
 
@@ -78,8 +82,8 @@ extension XBondFormState on BondFormState {
   /// ```dart
   /// final selectedToppings = formState.checkboxValues<PizzaTopping>('toppings');
   /// ```
-  Set<T>? checkboxValues<T>(String fieldName) {
-    return get<CheckboxGroupFieldState<T>, Set<T>?>(fieldName).value;
+  Set<T> checkboxValues<T>(String fieldName) {
+    return get<CheckboxGroupFieldState<T>, Set<T>>(fieldName).value ?? {};
   }
 
   /// Fetches the first selected value for checkboxes associated with a given field name.
@@ -96,6 +100,24 @@ extension XBondFormState on BondFormState {
   /// final firstTopping = formState.checkboxValue<PizzaTopping>('toppings');
   /// ```
   T? checkboxValue<T>(String fieldName) {
-    return checkboxValues<T>(fieldName)?.firstOrNull;
+    return checkboxValues<T>(fieldName).firstOrNull;
+  }
+
+  /// Checks if a specific checkbox value is selected in the checkbox group.
+  ///
+  /// Takes the `fieldName` of the checkbox group and the `value` of the specific checkbox
+  /// as parameters. Returns `true` if the checkbox with the given `value` is selected,
+  /// otherwise returns `false`.
+  ///
+  /// - [fieldName]: The name of the checkbox group field.
+  /// - [value]: The value of the specific checkbox to be checked.
+  ///
+  /// ```
+  /// final isSelected = checkboxSelected('toppings', Toppings.mushrooms);
+  /// ```
+  ///
+  /// This will return `true` if the "Mushrooms" checkbox is selected in the "toppings" group.
+  bool checkboxSelected<T>(String fieldName, T value) {
+    return checkboxValues<T>(fieldName).contains(value);
   }
 }
