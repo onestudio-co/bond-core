@@ -231,18 +231,18 @@ class Rules {
   /// This rule checks if the number of selected items in an iterable is greater
   /// than or equal to [min].
   /// It can include a custom validation message.
-  static ValidationRule<Iterable<T>?> minSelected<T>(int min,
+  static ValidationRule<T?> minSelected<T extends Iterable<G>, G>(int min,
           {String? message}) =>
-      MinSelected<T>(min, message: message);
+      MinSelected<T, G>(min, message: message);
 
   /// Creates a [MaxSelected] validation rule.
   ///
   /// This rule checks if the number of selected items in an iterable is less
   /// than or equal to [max].
   /// It can include a custom validation message.
-  static ValidationRule<Iterable<T>?> maxSelected<T>(int min,
+  static ValidationRule<T?> maxSelected<T extends Iterable<G>, G>(int min,
           {String? message}) =>
-      MaxSelected<T>(min, message: message);
+      MaxSelected<T, G>(min, message: message);
 
   /// Creates a [RangeSelected] validation rule.
   ///
