@@ -38,14 +38,18 @@ extension XFormController on FormController {
   /// If `null`, the checkbox will be treated as not selected.
   ///
   /// This method automatically updates the state of the checkbox group field.
-  void toggleCheckboxValue<T>(String fieldName, T value, bool? selected) {
-    var currentValues = state.checkboxValues<T>(fieldName) ?? {};
+  void toggleCheckboxValue<T>(String fieldName, T? value, bool? selected) {
+    var currentValues = state.checkboxValues<T>(fieldName);
+    if (value == null) {
+      return;
+    }
     if (selected ?? false) {
       currentValues.add(value);
     } else {
       currentValues.remove(value);
     }
-    _updateCheckboxGroup(fieldName, currentValues);
+
+    _updateCheckboxGroup<T>(fieldName, currentValues);
   }
 
   /// Updates a [DateFieldState] with a given [value].

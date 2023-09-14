@@ -23,55 +23,127 @@ class PizzaOrderPage extends ConsumerWidget {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Name TextField
+              // Customer Name
               TextFormField(
-                onChanged: (value) => controller.updateText('name', value),
+                onChanged: (value) =>
+                    controller.updateText('customerName', value),
                 decoration: InputDecoration(
-                  labelText: formState.label('name'),
-                  errorText: formState.error('name'),
+                  labelText: formState.label('customerName'),
+                  errorText: formState.error('customerName'),
                 ),
               ),
               const SizedBox(height: 16),
 
-              // Size RadioButtons
-              Text(formState.label('size')),
-              for (var radioButton in formState.radioButtonsOf<String>('size'))
+              // Phone Number
+              TextFormField(
+                onChanged: (value) =>
+                    controller.updateText('phoneNumber', value),
+                decoration: InputDecoration(
+                  labelText: formState.label('phoneNumber'),
+                  errorText: formState.error('phoneNumber'),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Pizza Size
+              Text(
+                formState.label('pizzaSize'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              for (final radioButton
+                  in formState.radioButtonsOf<PizzaSize>('pizzaSize'))
                 ListTile(
                   title: Text(radioButton.label),
-                  leading: Radio<String>.adaptive(
-                    value: radioButton.value ?? '',
-                    groupValue: formState.radioGroupValue<String>('size'),
+                  leading: Radio<PizzaSize>(
+                    value: radioButton.value ?? PizzaSize.small,
+                    groupValue:
+                        formState.radioGroupValue<PizzaSize>('pizzaSize'),
                     onChanged: (value) =>
-                        controller.updateRadioGroup('size', value),
+                        controller.updateRadioGroup('pizzaSize', value),
                   ),
                 ),
 
-              // Toppings CheckBoxes
-              Text(formState.label('toppings')),
-              for (var checkbox
-                  in formState.checkboxesOf<PizzaTopping>('toppings'))
-                CheckboxListTile.adaptive(
+              // Crust Type
+              Text(
+                formState.label('crustType'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              for (final radioButton
+                  in formState.radioButtonsOf<CrustType>('crustType'))
+                ListTile(
+                  title: Text(radioButton.label),
+                  leading: Radio<CrustType>(
+                    value: radioButton.value ?? CrustType.thin,
+                    groupValue:
+                        formState.radioGroupValue<CrustType>('crustType'),
+                    onChanged: (value) =>
+                        controller.updateRadioGroup('crustType', value),
+                  ),
+                ),
+
+              // Toppings
+              Text(
+                formState.label('toppings'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              for (final checkbox
+                  in formState.checkboxesOf<Toppings>('toppings'))
+                CheckboxListTile(
                   title: Text(checkbox.label),
-                  value: checkbox.value ==
-                      formState.checkboxValue<PizzaTopping>('toppings'),
+                  value: formState.checkboxSelected('toppings', checkbox.value),
                   onChanged: (value) => controller.toggleCheckboxValue(
                       'toppings', checkbox.value, value),
                 ),
 
-              // Delivery RadioButtons
-              Text(formState.label('delivery')),
-              for (var radioButton
-                  in formState.radioButtonsOf<bool>('delivery'))
+              // Include Sides
+              Text(
+                formState.label('includeSides'),
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              for (final radioButton
+                  in formState.radioButtonsOf<bool>('includeSides'))
                 ListTile(
                   title: Text(radioButton.label),
-                  leading: Radio<bool>.adaptive(
+                  leading: Radio<bool>(
                     value: radioButton.value ?? false,
-                    groupValue: formState.radioGroupValue<bool>('delivery'),
+                    groupValue: formState.radioGroupValue<bool>('includeSides'),
                     onChanged: (value) =>
-                        controller.updateRadioGroup('delivery', value),
+                        controller.updateRadioGroup('includeSides', value),
                   ),
                 ),
+
+              // Special Instructions
+              TextFormField(
+                onChanged: (value) =>
+                    controller.updateText('specialInstructions', value),
+                decoration: InputDecoration(
+                  labelText: formState.label('specialInstructions'),
+                  errorText: formState.error('specialInstructions'),
+                ),
+              ),
+
+              const SizedBox(height: 16),
+              if (formState.status == BondFormStateStatus.submitting)
+                const CircularProgressIndicator()
+              else
+                SizedBox(
+                  width: double.infinity,
+                  child: MaterialButton(
+                    onPressed: controller.submit,
+                    height: 48,
+                    color: formState.status == BondFormStateStatus.invalid
+                        ? Colors.red
+                        : Colors.blueAccent,
+                    child: const Text(
+                      'Create Order',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
             ],
           ),
         ),

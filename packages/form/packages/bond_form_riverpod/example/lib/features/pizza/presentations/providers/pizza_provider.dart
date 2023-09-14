@@ -4,77 +4,91 @@ import 'package:bond_form/bond_form.dart';
 import 'package:bond_form_riverpod/bond_form_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// Enumeration representing various pizza toppings.
-enum PizzaTopping {
+enum PizzaSize { small, medium, large }
+
+enum CrustType { thin, original, deepDish }
+
+enum Toppings {
   mushrooms,
   pepperoni,
-  cheese,
   onions,
-  tomatoes,
-  salami,
+  sausage,
+  bacon,
+  extraCheese,
+  blackOlives
 }
 
 class PizzaOrderFormController
     extends AutoDisposeFormStateNotifier<String, Error> {
   @override
   Map<String, FormFieldState> fields() => {
-        'name': TextFieldState(
+        'customerName': TextFieldState(
           null,
-          label: 'Name',
+          label: 'Your Name',
           rules: [
             Rules.required(),
           ],
         ),
-        'size': RadioGroupFieldState<String>(
-          [
-            RadioButtonFieldState(
-              'L',
-              label: 'Large',
-            ),
-            RadioButtonFieldState(
-              'M',
-              label: 'Medium',
-            ),
-            RadioButtonFieldState(
-              'S',
-              label: 'Small',
-            ),
+        'phoneNumber': TextFieldState(
+          null,
+          label: 'Phone Number',
+          rules: [
+            Rules.required(),
+            Rules.phoneNumber(),
           ],
-          label: 'Size',
+        ),
+        'pizzaSize': RadioGroupFieldState<PizzaSize>(
+          [
+            RadioButtonFieldState(PizzaSize.small, label: 'Small'),
+            RadioButtonFieldState(PizzaSize.medium, label: 'Medium'),
+            RadioButtonFieldState(PizzaSize.large, label: 'Large'),
+          ],
+          label: 'Pizza Size',
           rules: [
             Rules.required(),
           ],
         ),
-        'toppings': CheckboxGroupFieldState<PizzaTopping>(
+        'crustType': RadioGroupFieldState<CrustType>(
           [
-            CheckboxFieldState(PizzaTopping.mushrooms, label: 'Mushrooms'),
-            CheckboxFieldState(PizzaTopping.onions, label: 'Onions'),
-            CheckboxFieldState(PizzaTopping.tomatoes, label: 'Tomatoes'),
-            CheckboxFieldState(PizzaTopping.salami, label: 'Salami'),
-            CheckboxFieldState(PizzaTopping.pepperoni, label: 'Pepperoni'),
+            RadioButtonFieldState(CrustType.thin, label: 'Thin Crust'),
+            RadioButtonFieldState(CrustType.original, label: 'Original'),
+            RadioButtonFieldState(CrustType.deepDish, label: 'Deep Dish'),
           ],
-          label: 'Choose your toppings',
+          label: 'Crust Type',
           rules: [
-            // Rules.minSelected(1),
-            // Rules.maxSelected(3),
             Rules.required(),
           ],
         ),
-        'delivery': RadioGroupFieldState(
+        'toppings': CheckboxGroupFieldState<Toppings>(
           [
-            RadioButtonFieldState(
-              true,
-              label: 'Yes',
-            ),
-            RadioButtonFieldState(
-              false,
-              label: 'No',
-            ),
+            CheckboxFieldState(Toppings.mushrooms, label: 'Mushrooms'),
+            CheckboxFieldState(Toppings.pepperoni, label: 'Pepperoni'),
+            CheckboxFieldState(Toppings.onions, label: 'Onions'),
+            CheckboxFieldState(Toppings.sausage, label: 'Sausage'),
+            CheckboxFieldState(Toppings.bacon, label: 'Bacon'),
+            CheckboxFieldState(Toppings.extraCheese, label: 'Extra Cheese'),
+            CheckboxFieldState(Toppings.blackOlives, label: 'Black Olives'),
           ],
-          label: 'Delivery',
+          label: 'Select Toppings',
+          rules: [
+            Rules.minSelected(1),
+            Rules.maxSelected(5),
+          ],
+        ),
+        'includeSides': RadioGroupFieldState<bool>(
+          [
+            RadioButtonFieldState(true, label: 'Yes'),
+            RadioButtonFieldState(false, label: 'No'),
+          ],
+          label: 'Include Sides?',
           rules: [
             Rules.required(),
           ],
+        ),
+        'specialInstructions': TextFieldState(
+          null,
+          label: 'Special Instructions',
+          rules: [],
         ),
       };
 
