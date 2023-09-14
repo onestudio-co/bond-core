@@ -6,7 +6,7 @@ import 'package:bond_form/src/form_fields/form_field_state.dart';
 ///
 /// This rule validates that the number of selected items in the input iterable
 /// meets the specified minimum requirement.
-class MinSelected<T> extends ValidationRule<Iterable<T>?> {
+class MinSelected<T extends Iterable<G>, G> extends ValidationRule<T?> {
   /// The minimum required number of selected items.
   final int min;
 
@@ -22,7 +22,7 @@ class MinSelected<T> extends ValidationRule<Iterable<T>?> {
       l10n.minSelectedValidationMessage(fieldName, min);
 
   @override
-  bool validate(Iterable<T>? value, Map<String, FormFieldState> fields) {
+  bool validate(T? value, Map<String, FormFieldState> fields) {
     return value != null && value.length >= min;
   }
 }
