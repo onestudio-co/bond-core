@@ -88,8 +88,7 @@ class PizzaOrderPage extends ConsumerWidget {
                 formState.label('toppings'),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              for (final checkbox
-                  in formState.checkboxesOf<Toppings>('toppings'))
+              for (final checkbox in formState.checkboxesOf('toppings'))
                 CheckboxListTile(
                   title: Text(checkbox.label),
                   value: formState.checkboxSelected('toppings', checkbox.value),
