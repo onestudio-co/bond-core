@@ -2,6 +2,16 @@ import 'package:bond_form/bond_form.dart';
 
 /// Extension methods for [BondFormState] providing convenience operations.
 extension XBondFormState on BondFormState {
+  /// Retrieves the value of a text field for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of a text field.
+  ///
+  /// - Parameter [fieldName]: The name of the text field to fetch.
+  /// - Returns: The current value of the text field as a `String`, or `null` if not set.
+  String? textFieldValue(String fieldName) {
+    return get<TextFieldState, String?>(fieldName).value;
+  }
+
   /// Retrieves a list of [RadioButtonFieldState] for a specified [fieldName].
   ///
   /// This method simplifies fetching radio button states for the given [fieldName].
@@ -29,12 +39,7 @@ extension XBondFormState on BondFormState {
   ///
   /// - Parameter [fieldName]: The name of the field to fetch.
   /// - Returns: A list of [CheckboxFieldState] instances.
-  /// - Throws: [ArgumentError] if the field doesn't exist.
   List<CheckboxFieldState<T>> checkboxesOf<T>(String fieldName) {
-    if (T == dynamic) {
-      throw ArgumentError(
-          'The generic type T must be specified for checkboxesOf<T>.');
-    }
     return get<CheckboxGroupFieldState<T>, Set<T>?>(fieldName).checkboxes;
   }
 

@@ -18,6 +18,9 @@ enum Toppings {
   blackOlives
 }
 
+// //users
+// FormGroupFiled -> ksa_users
+
 class PizzaOrderFormController
     extends AutoDisposeFormStateNotifier<String, Error> {
   @override
@@ -94,13 +97,37 @@ class PizzaOrderFormController
 
   @override
   Future<String> onSubmit() async {
-    final name = state.get('name').value;
-    final pizzaType = state.get('pizza_type').value;
-    final toppings = state.get('toppings').value;
-    final delivery = state.get('delivery').value;
-    log('name: $name, pizzaType: $pizzaType,toppings: $toppings, delivery: $delivery');
-    await Future.delayed(const Duration(seconds: 1));
-    return 'Pizza Order Successful';
+    final customerName = state.textFieldValue('customerName');
+    final phoneNumber = state.textFieldValue('phoneNumber');
+    final pizzaSize =
+        state.radioGroupValue<PizzaSize>('pizzaSize');
+    final crustType =
+        state.radioGroupValue<CrustType>('crustType');
+    final toppings = state
+        .checkboxValues<Toppings>('toppings')
+        .map((e) => e.toString())
+        .join(', ');
+    final includeSides =
+        state.radioGroupValue<bool>('includeSides') == true ? 'Yes' : 'No';
+    final specialInstructions =
+        state.textFieldValue('specialInstructions') ?? 'None';
+
+    // Normally, you'd send these values to an API or a database here.
+    // For demonstration, we'll just return a summary string.
+    return Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        return '''
+        Customer Name: $customerName
+        Phone Number: $phoneNumber
+        Pizza Size: $pizzaSize
+        Crust Type: $crustType
+        Toppings: $toppings
+        Include Sides: $includeSides
+        Special Instructions: $specialInstructions
+      ''';
+      },
+    );
   }
 }
 
