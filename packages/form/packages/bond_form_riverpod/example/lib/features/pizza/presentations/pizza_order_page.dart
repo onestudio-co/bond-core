@@ -52,14 +52,12 @@ class PizzaOrderPage extends ConsumerWidget {
                 formState.label('pizzaSize'),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              for (final radioButton
-                  in formState.radioButtonsOf<PizzaSize>('pizzaSize'))
+              for (final radioButton in formState.radioButtonsOf('pizzaSize'))
                 ListTile(
                   title: Text(radioButton.label),
-                  leading: Radio<PizzaSize>(
-                    value: radioButton.value ?? PizzaSize.small,
-                    groupValue:
-                        formState.radioGroupValue<PizzaSize>('pizzaSize'),
+                  leading: Radio(
+                    value: radioButton.value,
+                    groupValue: formState.radioGroupValue('pizzaSize'),
                     onChanged: (value) =>
                         controller.updateRadioGroup('pizzaSize', value),
                   ),
@@ -70,14 +68,12 @@ class PizzaOrderPage extends ConsumerWidget {
                 formState.label('crustType'),
                 style: Theme.of(context).textTheme.titleSmall,
               ),
-              for (final radioButton
-                  in formState.radioButtonsOf<CrustType>('crustType'))
+              for (final radioButton in formState.radioButtonsOf('crustType'))
                 ListTile(
                   title: Text(radioButton.label),
-                  leading: Radio<CrustType>(
-                    value: radioButton.value ?? CrustType.thin,
-                    groupValue:
-                        formState.radioGroupValue<CrustType>('crustType'),
+                  leading: Radio(
+                    value: radioButton.value,
+                    groupValue: formState.radioGroupValue('crustType'),
                     onChanged: (value) =>
                         controller.updateRadioGroup('crustType', value),
                   ),
@@ -92,8 +88,11 @@ class PizzaOrderPage extends ConsumerWidget {
                 CheckboxListTile(
                   title: Text(checkbox.label),
                   value: formState.checkboxSelected('toppings', checkbox.value),
-                  onChanged: (value) => controller.toggleCheckboxValue(
-                      'toppings', checkbox.value, value),
+                  onChanged: (selected) => controller.toggleCheckbox<Toppings>(
+                    'toppings',
+                    value: checkbox.value,
+                    selected: selected,
+                  ),
                 ),
 
               // Include Sides
@@ -102,12 +101,12 @@ class PizzaOrderPage extends ConsumerWidget {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               for (final radioButton
-                  in formState.radioButtonsOf<bool>('includeSides'))
+                  in formState.radioButtonsOf('includeSides'))
                 ListTile(
                   title: Text(radioButton.label),
-                  leading: Radio<bool>(
-                    value: radioButton.value ?? false,
-                    groupValue: formState.radioGroupValue<bool>('includeSides'),
+                  leading: Radio(
+                    value: radioButton.value,
+                    groupValue: formState.radioGroupValue('includeSides'),
                     onChanged: (value) =>
                         controller.updateRadioGroup('includeSides', value),
                   ),
