@@ -22,7 +22,12 @@ extension XFormController on FormController {
   ///
   /// - [fieldName]: The name of the checkbox group field to update.
   /// - [value]: The new value for the checkbox group field.
-  void _updateCheckboxGroup<T>(String fieldName, Set<T>? value) {
+  /// throws [ArgumentError] if the generic type T is not specified.
+  void updateCheckboxGroup<T>(String fieldName, Set<T>? value) {
+    if (T == Object) {
+      throw ArgumentError(
+          'The generic type T must be specified for updateCheckboxGroup<T>.');
+    }
     update<CheckboxGroupFieldState<T>, Set<T>?>(fieldName, value);
   }
 
@@ -38,7 +43,7 @@ extension XFormController on FormController {
   /// If `null`, the checkbox will be treated as not selected.
   ///
   /// This method automatically updates the state of the checkbox group field.
-  void toggleCheckboxValue<T>(String fieldName, T? value, bool? selected) {
+  void toggleCheckbox<T>(String fieldName, {T? value, bool? selected}) {
     var currentValues = state.checkboxValues<T>(fieldName);
     if (value == null) {
       return;
@@ -48,8 +53,7 @@ extension XFormController on FormController {
     } else {
       currentValues.remove(value);
     }
-
-    _updateCheckboxGroup<T>(fieldName, currentValues);
+    updateCheckboxGroup<T>(fieldName, currentValues);
   }
 
   /// Updates a [DateFieldState] with a given [value].
