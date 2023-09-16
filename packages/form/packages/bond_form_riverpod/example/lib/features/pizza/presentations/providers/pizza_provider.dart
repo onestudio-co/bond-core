@@ -18,9 +18,6 @@ enum Toppings {
   blackOlives
 }
 
-// //users
-// FormGroupFiled -> ksa_users
-
 class PizzaOrderFormController
     extends AutoDisposeFormStateNotifier<String, Error> {
   // bond create form widget -- PizzaOrderFormController
@@ -129,9 +126,6 @@ class PizzaOrderFormController
       },
     );
   }
-
-  T get<T extends FormFieldState<G>, G>(String fieldName) =>
-      state.get(fieldName);
 }
 
 final pizzaOrderProvider = NotifierProvider.autoDispose<
