@@ -23,6 +23,8 @@ enum Toppings {
 
 class PizzaOrderFormController
     extends AutoDisposeFormStateNotifier<String, Error> {
+  // bond create form widget -- PizzaOrderFormController
+
   @override
   Map<String, FormFieldState> fields() => {
         'customerName': TextFieldState(
@@ -99,10 +101,8 @@ class PizzaOrderFormController
   Future<String> onSubmit() async {
     final customerName = state.textFieldValue('customerName');
     final phoneNumber = state.textFieldValue('phoneNumber');
-    final pizzaSize =
-        state.radioGroupValue<PizzaSize>('pizzaSize');
-    final crustType =
-        state.radioGroupValue<CrustType>('crustType');
+    final pizzaSize = state.radioGroupValue<PizzaSize>('pizzaSize');
+    final crustType = state.radioGroupValue<CrustType>('crustType');
     final toppings = state
         .checkboxValues<Toppings>('toppings')
         .map((e) => e.toString())
@@ -129,6 +129,9 @@ class PizzaOrderFormController
       },
     );
   }
+
+  T get<T extends FormFieldState<G>, G>(String fieldName) =>
+      state.get(fieldName);
 }
 
 final pizzaOrderProvider = NotifierProvider.autoDispose<

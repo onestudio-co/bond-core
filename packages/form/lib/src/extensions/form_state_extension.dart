@@ -2,6 +2,17 @@ import 'package:bond_form/bond_form.dart';
 
 /// Extension methods for [BondFormState] providing convenience operations.
 extension XBondFormState on BondFormState {
+  /// Retrieves the [TextFieldState] for a given text field.
+  ///
+  /// This method simplifies fetching the state of a text field with a specified [fieldName].
+  ///
+  /// - Parameter [fieldName]: The name of the text field for which the state is to be fetched.
+  /// - Returns: The [TextFieldState] corresponding to the given [fieldName].
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  TextFieldState textField(String fieldName) {
+    return get<TextFieldState, String?>(fieldName);
+  }
+
   /// Retrieves the value of a text field for a specified [fieldName].
   ///
   /// This method simplifies fetching the current value of a text field.
