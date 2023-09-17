@@ -18,8 +18,6 @@ Bond comprises multiple packages that can be integrated as per the requirements 
 
 6. [bond_notifications](https://pub.dev/packages/bond_notifications) - A flexible package for effective notification handling.
 
-7. [bond_chat_bot](https://pub.dev/packages/bond_chat_bot) - An interactive package for integrating chatbot capabilities into your app.
-
 ## Getting Started: Integrating Bond Into Your Project
 
 To add any Bond package to your Flutter project:
