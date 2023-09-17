@@ -30,33 +30,31 @@ mixin FormController<Success, Failure extends Error> {
   ///   - [value]: The new value for the field.
   void update<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
-    field.value = value;
-    field.touched = true;
-    state.fields[fieldName] = field;
-    final status =
-        _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+    state.fields[fieldName] = field.copyWith(
+      value: value,
+      touched: true,
+    );
+    final error = field.validate(state.fields);
+    state.fields[fieldName] = field.copyWith(error: error);
+    // final status =
+    //     _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     state = state.copyWith(
       fields: Map.from(state.fields),
-      status: status,
+      status: BondFormStateStatus.invalid,
     );
   }
 
   /// A private getter to check if all fields in the form are valid.
   bool get _allValid {
     var allValid = true;
-    for (final fieldName in state.fields.keys) {
-      final field = state.get(fieldName);
+    for (final fieldEntry in state.fields.entries) {
+      final field = fieldEntry.value;
       final error = field.validate(state.fields);
       if (error != null) {
         allValid = false;
-        if (field.validateOnUpdate && field.touched) {
-          field.error = field.validate(state.fields);
-        }
         if (stopOnFirstError) {
           break;
         }
-      } else {
-        field.error = null;
       }
     }
     return allValid;
@@ -77,8 +75,7 @@ mixin FormController<Success, Failure extends Error> {
   Future<void> _onSubmit() async {
     for (final fieldName in state.fields.keys) {
       final field = state.get(fieldName);
-      field.touched = true;
-      state.fields[fieldName] = field;
+      state.fields[fieldName] = field.copyWith(touched: true);
     }
     if (_allValid) {
       state = state.copyWith(
@@ -98,6 +95,11 @@ mixin FormController<Success, Failure extends Error> {
         );
       }
     } else {
+      for (final fieldEntry in state.fields.entries) {
+        final field = fieldEntry.value;
+        final error = field.validate(state.fields);
+        state.fields[fieldEntry.key] = field.copyWith(error: error);
+      }
       state = state.copyWith(
         fields: Map.from(state.fields),
         status: BondFormStateStatus.invalid,

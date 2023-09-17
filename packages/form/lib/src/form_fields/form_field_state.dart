@@ -6,24 +6,24 @@ import 'package:meta/meta.dart' show nonVirtual;
 /// A form field can have a generic type `T` for its value.
 /// such as the current value, error message, label, validation rules, and
 /// whether it has been touched or should validate on updates.
-class FormFieldState<T> {
+abstract class FormFieldState<T> {
   /// The current value of the form field.
-  T? value;
+  final T value;
 
   /// The error message associated with the form field, if any.
-  String? error;
+  final String? error;
 
   /// The label or name of the form field.
-  String label;
+  final String label;
 
   /// The list of validation rules to apply to the form field.
-  List<ValidationRule<T?>> rules;
+  final List<ValidationRule<T>> rules;
 
   /// Indicates whether validation should occur when the form field is updated.
-  bool validateOnUpdate;
+  final bool validateOnUpdate;
 
   /// Indicates whether the form field has been touched (interacted with) by the user.
-  bool touched;
+  final bool touched;
 
   /// Creates a new instance of [FormFieldState].
   ///
@@ -34,7 +34,7 @@ class FormFieldState<T> {
   /// - [validateOnUpdate]: Indicates whether validation should occur on updates (default is `true`).
   /// - [rules]: The list of validation rules to apply to the form field (default is an empty list).
   FormFieldState({
-    this.value,
+    required this.value,
     this.error,
     required this.label,
     this.touched = false,
@@ -56,4 +56,14 @@ class FormFieldState<T> {
     }
     return null;
   }
+
+  /// Creates a copy of the form field state with the specified changes.
+  FormFieldState<T> copyWith({
+    T? value,
+    String? error,
+    String? label,
+    bool? touched,
+    bool? validateOnUpdate,
+    List<ValidationRule<T>>? rules,
+  });
 }

@@ -16,9 +16,33 @@ class DropDownFieldState<T> extends FormFieldState<T> {
   /// - [label]: The label or name of the dropdown form field (required).
   /// - [rules]: The list of validation rules to apply to the dropdown field (default is an empty list).
   DropDownFieldState(
-      T value, {
-        required this.items,
-        required String label,
-        List<ValidationRule<T>> rules = const [],
-      }) : super(value: value, label: label, rules: rules);
+    T value, {
+    required this.items,
+    required String label,
+    String? error,
+    List<ValidationRule<T>> rules = const [],
+  }) : super(
+          value: value,
+          label: label,
+          error: error,
+          rules: rules,
+        );
+
+  @override
+  DropDownFieldState<T> copyWith({
+    T? value,
+    String? error,
+    String? label,
+    bool? touched,
+    bool? validateOnUpdate,
+    List<ValidationRule<T>>? rules,
+  }) {
+    return DropDownFieldState<T>(
+      value ?? this.value,
+      items: items,
+      label: label ?? this.label,
+      rules: rules ?? this.rules,
+      error: error ?? this.error,
+    );
+  }
 }

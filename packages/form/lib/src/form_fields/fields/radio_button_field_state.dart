@@ -1,4 +1,5 @@
 import 'package:bond_form/src/form_fields/form_field_state.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
 
 /// Represents the state of a radio button form field.
 ///
@@ -10,7 +11,22 @@ class RadioButtonFieldState<T> extends FormFieldState<T> {
   /// - [value]: The initial value of the radio button field.
   /// - [label]: The label or name of the radio button form field (required).
   RadioButtonFieldState(
-      T value, {
-        required String label,
-      }) : super(value: value, label: label, rules: []);
+    T value, {
+    required String label,
+  }) : super(value: value, label: label, rules: []);
+
+  @override
+  RadioButtonFieldState<T> copyWith({
+    T? value,
+    String? error,
+    String? label,
+    bool? touched,
+    bool? validateOnUpdate,
+    List<ValidationRule<T>>? rules,
+  }) {
+    return RadioButtonFieldState<T>(
+      value ?? this.value,
+      label: label ?? this.label,
+    );
+  }
 }

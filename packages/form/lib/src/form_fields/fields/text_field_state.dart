@@ -14,16 +14,37 @@ class TextFieldState extends FormFieldState<String?> {
   /// - [validateOnUpdate]: Indicates whether validation should occur on updates (default is `true`).
   /// - [touched]: Indicates whether the field has been touched (interacted with) by the user (default is `false`).
   TextFieldState(
-      String? value, {
-        required String label,
-        List<ValidationRule<String?>> rules = const [],
-        bool validateOnUpdate = true,
-        bool touched = false,
-      }) : super(
-    value: value,
-    label: label,
-    rules: rules,
-    validateOnUpdate: validateOnUpdate,
-    touched: touched,
-  );
+    String? value, {
+    required String label,
+    String? error,
+    List<ValidationRule<String?>> rules = const [],
+    bool validateOnUpdate = true,
+    bool touched = false,
+  }) : super(
+          value: value,
+          error: error,
+          label: label,
+          rules: rules,
+          validateOnUpdate: validateOnUpdate,
+          touched: touched,
+        );
+
+  @override
+  TextFieldState copyWith({
+    String? value,
+    String? error,
+    String? label,
+    bool? touched,
+    bool? validateOnUpdate,
+    List<ValidationRule<String?>>? rules,
+  }) {
+    return TextFieldState(
+      value ?? this.value,
+      error: error ?? this.error,
+      label: label ?? this.label,
+      touched: touched ?? this.touched,
+      validateOnUpdate: validateOnUpdate ?? this.validateOnUpdate,
+      rules: rules ?? this.rules,
+    );
+  }
 }

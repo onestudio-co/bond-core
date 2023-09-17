@@ -12,8 +12,31 @@ class CheckboxFieldState<T> extends FormFieldState<T?> {
   /// - [label]: The label or name of the checkbox form field (required).
   /// - [rules]: The list of validation rules to apply to the checkbox field (default is an empty list).
   CheckboxFieldState(
-      T? value, {
-        required String label,
-        List<ValidationRule<T?>> rules = const [],
-      }) : super(value: value, label: label, rules: rules);
+    T? value, {
+    required String label,
+    String? error,
+    List<ValidationRule<T?>> rules = const [],
+  }) : super(
+          value: value,
+          label: label,
+          error: error,
+          rules: rules,
+        );
+
+  @override
+  CheckboxFieldState<T> copyWith({
+    T? value,
+    String? error,
+    String? label,
+    bool? touched,
+    bool? validateOnUpdate,
+    List<ValidationRule<T?>>? rules,
+  }) {
+    return CheckboxFieldState<T>(
+      value ?? this.value,
+      error: error ?? this.error,
+      label: label ?? this.label,
+      rules: rules ?? this.rules,
+    );
+  }
 }

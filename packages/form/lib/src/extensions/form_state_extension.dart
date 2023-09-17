@@ -61,7 +61,7 @@ extension XBondFormState on BondFormState {
   /// - Parameter [fieldName]: The name of the field to fetch.
   /// - Returns: A set containing the selected values.
   Set<T> checkboxValues<T>(String fieldName) {
-    return get<CheckboxGroupFieldState<T>, Set<T>>(fieldName).value ?? {};
+    return get<CheckboxGroupFieldState<T>, Set<T>>(fieldName).value;
   }
 
   /// Retrieves the first selected value of a checkbox group for a specified [fieldName].

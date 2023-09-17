@@ -12,8 +12,31 @@ class DateFieldState extends FormFieldState<DateTime?> {
   /// - [label]: The label or name of the date input form field (required).
   /// - [rules]: The list of validation rules to apply to the date field (default is an empty list).
   DateFieldState(
-      DateTime? value, {
-        required String label,
-        List<ValidationRule<DateTime?>> rules = const [],
-      }) : super(value: value, label: label, rules: rules);
+    DateTime? value, {
+    required String label,
+    String? error,
+    List<ValidationRule<DateTime?>> rules = const [],
+  }) : super(
+          value: value,
+          label: label,
+          error: error,
+          rules: rules,
+        );
+
+  @override
+  DateFieldState copyWith({
+    DateTime? value,
+    String? error,
+    String? label,
+    bool? touched,
+    bool? validateOnUpdate,
+    List<ValidationRule<DateTime?>>? rules,
+  }) {
+    return DateFieldState(
+      value ?? this.value,
+      error: error ?? this.error,
+      label: label ?? this.label,
+      rules: rules ?? this.rules,
+    );
+  }
 }

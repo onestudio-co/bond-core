@@ -6,7 +6,7 @@ import 'package:bond_form/src/form_fields/form_field_state.dart';
 ///
 /// This rule validates that the number of selected items in the input iterable
 /// does not exceed the specified maximum limit.
-class MaxSelected<T extends Iterable<G>, G> extends ValidationRule<T?> {
+class MaxSelected<T extends Iterable<G>, G> extends ValidationRule<T> {
   /// The maximum allowed number of selected items.
   final int max;
 
