@@ -4,7 +4,7 @@ version: 0.0.2+1
 homepage: https://github.com/onestudio-co/flutter-bond
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -14,8 +14,6 @@ dependencies:
   json_annotation: ^4.7.0
   json_serializable: ^6.5.4
   meta: ^1.8.0
-  shared_preferences: ^2.1.2
-  package_info_plus: ^4.0.2
   faker: ^2.0.0
 
   bond_core: ^0.0.1+2
