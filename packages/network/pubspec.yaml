@@ -13,6 +13,7 @@ dependencies:
   equatable: ^2.0.5
   json_annotation: ^4.7.0
   json_serializable: ^6.5.4
+  package_info_plus: ^4.1.0
   meta: ^1.8.0
   faker: ^2.0.0
 
