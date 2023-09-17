@@ -5,11 +5,11 @@ part 'meta.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Meta {
   const Meta({
-    required this.from,
-    required this.lastPage,
-    required this.path,
-    required this.perPage,
-    required this.to,
+    this.from,
+    this.lastPage,
+    this.path,
+    this.perPage,
+    this.to,
     this.message,
   });
 
