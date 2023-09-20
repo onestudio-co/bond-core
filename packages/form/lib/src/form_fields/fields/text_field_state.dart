@@ -47,4 +47,16 @@ class TextFieldState extends FormFieldState<String?> {
       rules: rules ?? this.rules,
     );
   }
+
+  @override
+  TextFieldState updateError(String? error) {
+    return TextFieldState(
+      value,
+      error: error,
+      label: label,
+      rules: rules,
+      touched: touched,
+      validateOnUpdate: validateOnUpdate,
+    );
+  }
 }

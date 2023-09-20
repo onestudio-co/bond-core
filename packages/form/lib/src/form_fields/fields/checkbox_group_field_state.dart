@@ -42,4 +42,15 @@ class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>> {
       rules: rules ?? this.rules,
     );
   }
+
+  @override
+  CheckboxGroupFieldState<T> updateError(String? error) {
+    return CheckboxGroupFieldState<T>(
+      checkboxes,
+      value: value,
+      error: error,
+      label: label,
+      rules: rules,
+    );
+  }
 }

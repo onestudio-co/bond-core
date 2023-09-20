@@ -27,12 +27,12 @@ abstract class FormFieldState<T> {
 
   /// Creates a new instance of [FormFieldState].
   ///
-  /// - [value]: The initial value of the form field.
-  /// - [error]: An optional error message initially associated with the field.
-  /// - [label]: The label or name of the form field (required).
-  /// - [touched]: Indicates whether the field has been touched (default is `false`).
-  /// - [validateOnUpdate]: Indicates whether validation should occur on updates (default is `true`).
-  /// - [rules]: The list of validation rules to apply to the form field (default is an empty list).
+  /// - [value] The initial value of the form field.
+  /// - [error] An optional error message initially associated with the field.
+  /// - [label] The label or name of the form field (required).
+  /// - [touched] Indicates whether the field has been touched (default is `false`).
+  /// - [validateOnUpdate] Indicates whether validation should occur on updates (default is `true`).
+  /// - [rules] The list of validation rules to apply to the form field (default is an empty list).
   FormFieldState({
     required this.value,
     this.error,
@@ -44,7 +44,7 @@ abstract class FormFieldState<T> {
 
   /// Validates the form field against its validation rules.
   ///
-  /// - [fields]: A map of form field states for cross-field validation.
+  /// - [fields] A map of form field states for cross-field validation.
   ///
   /// Returns an error message if validation fails, otherwise returns `null`.
   @nonVirtual
@@ -57,7 +57,20 @@ abstract class FormFieldState<T> {
     return null;
   }
 
-  /// Creates a copy of the form field state with the specified changes.
+  /// Creates a new [FormFieldState] object by copying the existing state
+  /// and replacing the specified fields with new values.
+  ///
+  /// This method returns a new object that has the same state as the current
+  /// object, except with the updated fields.
+  ///
+  /// [value] The new value for the form field.
+  /// [error] The new error string for the form field.
+  /// [label] The new label string for the form field.
+  /// [touched] The new boolean value indicating whether the field has been touched.
+  /// [validateOnUpdate] The new boolean value to indicate whether to validate on update.
+  /// [rules] The new list of [ValidationRule] objects for the form field.
+  ///
+  /// Returns a new [FormFieldState] object with updated fields.
   FormFieldState<T> copyWith({
     T? value,
     String? error,
@@ -66,4 +79,15 @@ abstract class FormFieldState<T> {
     bool? validateOnUpdate,
     List<ValidationRule<T>>? rules,
   });
+
+  /// Updates the `error` field for the [FormFieldState].
+  ///
+  /// This method is used to explicitly set or clear the error message associated
+  /// with the form field. It accepts a nullable string, allowing you to either set
+  /// an error message or clear any existing message.
+  ///
+  /// [error] The new error message string. Pass `null` to clear any existing error.
+  ///
+  /// Returns a new [FormFieldState] object with an updated error field.
+  FormFieldState<T> updateError(String? error) => copyWith(error: error);
 }

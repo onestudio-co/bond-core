@@ -39,4 +39,14 @@ class DateFieldState extends FormFieldState<DateTime?> {
       rules: rules ?? this.rules,
     );
   }
+
+  @override
+  DateFieldState updateError(String? error) {
+    return DateFieldState(
+      value,
+      error: error,
+      label: label,
+      rules: rules,
+    );
+  }
 }

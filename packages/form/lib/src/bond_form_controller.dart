@@ -34,13 +34,11 @@ mixin FormController<Success, Failure extends Error> {
       value: value,
       touched: true,
     );
-    final error = field.validate(state.fields);
-    state.fields[fieldName] = field.copyWith(error: error);
-    // final status =
-    //     _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+    final status =
+        _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     state = state.copyWith(
       fields: Map.from(state.fields),
-      status: BondFormStateStatus.invalid,
+      status: status,
     );
   }
 
@@ -52,9 +50,14 @@ mixin FormController<Success, Failure extends Error> {
       final error = field.validate(state.fields);
       if (error != null) {
         allValid = false;
+        if (field.touched) {
+          state.fields[fieldEntry.key] = field.updateError(error);
+        }
         if (stopOnFirstError) {
           break;
         }
+      } else {
+        state.fields[fieldEntry.key] = field.updateError(null);
       }
     }
     return allValid;
@@ -98,7 +101,7 @@ mixin FormController<Success, Failure extends Error> {
       for (final fieldEntry in state.fields.entries) {
         final field = fieldEntry.value;
         final error = field.validate(state.fields);
-        state.fields[fieldEntry.key] = field.copyWith(error: error);
+        state.fields[fieldEntry.key] = field.updateError(error);
       }
       state = state.copyWith(
         fields: Map.from(state.fields),

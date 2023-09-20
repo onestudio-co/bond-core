@@ -39,4 +39,14 @@ class CheckboxFieldState<T> extends FormFieldState<T?> {
       rules: rules ?? this.rules,
     );
   }
+
+  @override
+  CheckboxFieldState<T> updateError(String? error) {
+    return CheckboxFieldState<T>(
+      value,
+      error: error,
+      label: label,
+      rules: rules,
+    );
+  }
 }

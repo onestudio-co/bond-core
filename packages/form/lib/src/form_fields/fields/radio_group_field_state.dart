@@ -44,4 +44,15 @@ class RadioGroupFieldState<T> extends FormFieldState<T?> {
       rules: rules ?? this.rules,
     );
   }
+
+  @override
+  RadioGroupFieldState<T> updateError(String? error) {
+    return RadioGroupFieldState<T>(
+      radioButtons,
+      value: value,
+      error: error,
+      label: label,
+      rules: rules,
+    );
+  }
 }

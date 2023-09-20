@@ -45,4 +45,15 @@ class DropDownFieldState<T> extends FormFieldState<T> {
       error: error ?? this.error,
     );
   }
+
+  @override
+  DropDownFieldState<T> updateError(String? error) {
+    return DropDownFieldState<T>(
+      value,
+      items: items,
+      label: label,
+      rules: rules,
+      error: error,
+    );
+  }
 }
