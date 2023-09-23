@@ -21,9 +21,9 @@ class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>> {
     this.checkboxes, {
     required String label,
     String? error,
-    Set<T> value = const {},
+    Set<T>? value,
     List<ValidationRule<Set<T>>> rules = const [],
-  }) : super(value: value, label: label, error: error, rules: rules);
+  }) : super(value: value ?? <T>{}, label: label, error: error, rules: rules);
 
   @override
   CheckboxGroupFieldState<T> copyWith({

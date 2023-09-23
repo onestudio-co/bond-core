@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bond_form/bond_form.dart';
 
 /// Extension methods for [FormController] for more type-safe updates.
@@ -44,7 +46,7 @@ extension XFormController on FormController {
   ///
   /// This method automatically updates the state of the checkbox group field.
   void toggleCheckbox<T>(String fieldName, {T? value, bool? selected}) {
-    var currentValues = state.checkboxValues<T>(fieldName);
+    final currentValues = state.checkboxValues<T>(fieldName);
     if (value == null) {
       return;
     }

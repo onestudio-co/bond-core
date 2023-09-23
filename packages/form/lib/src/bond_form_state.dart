@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'form_fields/form_field_state.dart';
 
 /// Represents the different states a [BondFormState] can be in.
@@ -79,15 +81,13 @@ class BondFormState<Success, Failure extends Error> {
     if (field is T) {
       return field;
     } else {
-      throw ArgumentError(
-          'Type mismatch for field "$fieldName".\n\n'
-              'Expected: $T\n\n'
-              'Actual: ${field.runtimeType}\n\n'
-              'Debugging Tip:\n\n'
-              'If you have declared the field as ${field.runtimeType}, make sure to specify the generic type.\n\n'
-              'For example, if the actual type is "RadioGroupFieldState<dynamic>", you might need to change it to '
-              '"RadioGroupFieldState<bool>" in the field definition.\n\n'
-      );
+      throw ArgumentError('Type mismatch for field "$fieldName".\n\n'
+          'Expected: $T\n\n'
+          'Actual: ${field.runtimeType}\n\n'
+          'Debugging Tip:\n\n'
+          'If you have declared the field as ${field.runtimeType}, make sure to specify the generic type.\n\n'
+          'For example, if the actual type is "RadioGroupFieldState<dynamic>", you might need to change it to '
+          '"RadioGroupFieldState<bool>" in the field definition.\n\n');
     }
   }
 

@@ -51,7 +51,7 @@ extension XBondFormState on BondFormState {
   /// - Parameter [fieldName]: The name of the field to fetch.
   /// - Returns: A list of [CheckboxFieldState] instances.
   List<CheckboxFieldState<T>> checkboxesOf<T>(String fieldName) {
-    return get<CheckboxGroupFieldState<T>, Set<T>?>(fieldName).checkboxes;
+    return get<CheckboxGroupFieldState<T>, Set<T>>(fieldName).checkboxes;
   }
 
   /// Retrieves the selected values of a checkbox group for a specified [fieldName].
