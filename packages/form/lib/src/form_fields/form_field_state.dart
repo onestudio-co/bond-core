@@ -90,4 +90,25 @@ abstract class FormFieldState<T> {
   ///
   /// Returns a new [FormFieldState] object with an updated error field.
   FormFieldState<T> updateError(String? error) => copyWith(error: error);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FormFieldState &&
+          runtimeType == other.runtimeType &&
+          value == other.value &&
+          error == other.error &&
+          label == other.label &&
+          rules == other.rules &&
+          validateOnUpdate == other.validateOnUpdate &&
+          touched == other.touched;
+
+  @override
+  int get hashCode =>
+      value.hashCode ^
+      error.hashCode ^
+      label.hashCode ^
+      rules.hashCode ^
+      validateOnUpdate.hashCode ^
+      touched.hashCode;
 }
