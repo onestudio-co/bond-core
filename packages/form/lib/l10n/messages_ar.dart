@@ -14,38 +14,47 @@ import 'package:intl/message_lookup_by_library.dart';
 
 final messages = MessageLookup();
 
-typedef String? MessageIfAbsent(
-    String? messageStr, List<Object>? args);
+typedef String? MessageIfAbsent(String? messageStr, List<Object>? args);
 
 class MessageLookup extends MessageLookupByLibrary {
   @override
   String get localeName => 'ar';
 
-  static m0(fieldName) => "${fieldName} قد يحتوي فقط على أحرف أبجدية رقمية، شرطات، وشرطات سفلية.";
+  static m0(fieldName) =>
+      "${fieldName} قد يحتوي فقط على أحرف أبجدية رقمية، شرطات، وشرطات سفلية.";
 
-  static m1(fieldName) => "${fieldName} يجب أن يحتوي فقط على أحرف أبجدية رقمية.";
+  static m1(fieldName) =>
+      "${fieldName} يجب أن يحتوي فقط على أحرف أبجدية رقمية.";
 
   static m2(fieldName) => "${fieldName} يجب أن يحتوي فقط على أحرف أبجدية.";
 
-  static m3(fieldName, min, max) => "${fieldName} يجب أن يكون حجمه بين ${min} و${max}.";
+  static m3(fieldName, min, max) =>
+      "${fieldName} يجب أن يكون حجمه بين ${min} و${max}.";
 
-  static m4(fieldName) => "${fieldName} يجب أن يكون منطقيا (true, false, 1, 0, \'1\', \'0\').";
+  static m4(fieldName) =>
+      "${fieldName} يجب أن يكون منطقيا (true, false, 1, 0, \'1\', \'0\').";
 
   static m5(fieldName) => "لا يتطابق تأكيد ${fieldName}.";
 
-  static m6(fieldName, after) => "${fieldName} يجب أن يكون تاريخا بعد ${after}.";
+  static m6(fieldName, after) =>
+      "${fieldName} يجب أن يكون تاريخا بعد ${after}.";
 
-  static m7(fieldName, before) => "${fieldName} يجب أن يكون تاريخا قبل ${before}.";
+  static m7(fieldName, before) =>
+      "${fieldName} يجب أن يكون تاريخا قبل ${before}.";
 
-  static m8(fieldName, format) => "${fieldName} يجب أن يتوافق مع النسق ${format}.";
+  static m8(fieldName, format) =>
+      "${fieldName} يجب أن يتوافق مع النسق ${format}.";
 
   static m9(fieldName) => "${fieldName} يجب أن يكون تاريخا صحيحا.";
 
-  static m10(fieldName, field) => "${fieldName} يجب أن يكون له قيمة مختلفة عن ${field}.";
+  static m10(fieldName, field) =>
+      "${fieldName} يجب أن يكون له قيمة مختلفة عن ${field}.";
 
-  static m11(fieldName, min, max) => "${fieldName} يجب أن يكون طوله بين ${min} و${max}.";
+  static m11(fieldName, min, max) =>
+      "${fieldName} يجب أن يكون طوله بين ${min} و${max}.";
 
-  static m12(fieldName, value) => "${fieldName} يجب أن يكون رقميا وأن يكون طوله بالضبط ${value}.";
+  static m12(fieldName, value) =>
+      "${fieldName} يجب أن يكون رقميا وأن يكون طوله بالضبط ${value}.";
 
   static m13(fieldName) => "${fieldName} يجب أن يكون عنوان بريد إلكتروني صالح.";
 
@@ -57,17 +66,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m17(fieldName) => "${fieldName} يجب أن يكون محددا.";
 
-  static m18(fieldName, length) => "لا يجب أن يتجاوز ${fieldName} ${length} حروف.";
+  static m18(fieldName, length) =>
+      "لا يجب أن يتجاوز ${fieldName} ${length} حروف.";
 
-  static m19(fieldName, max) => "لا يمكنك تحديد أكثر من ${max} خيارات لـ ${fieldName}.";
+  static m19(fieldName, max) =>
+      "لا يمكنك تحديد أكثر من ${max} خيارات لـ ${fieldName}.";
 
-  static m20(fieldName, value) => "${fieldName} يجب أن يكون لديه قيمة عليا ${value}.";
+  static m20(fieldName, value) =>
+      "${fieldName} يجب أن يكون لديه قيمة عليا ${value}.";
 
-  static m21(fieldName, length) => "يجب أن يكون ${fieldName} على الأقل ${length} حروف.";
+  static m21(fieldName, length) =>
+      "يجب أن يكون ${fieldName} على الأقل ${length} حروف.";
 
   static m22(fieldName, min) => "يجب عليك تحديد ${min} خيارات لـ ${fieldName}.";
 
-  static m23(fieldName, value) => "${fieldName} يجب أن يكون لديه قيمة دنيا ${value}.";
+  static m23(fieldName, value) =>
+      "${fieldName} يجب أن يكون لديه قيمة دنيا ${value}.";
 
   static m24(fieldName) => "${fieldName} يجب أن لا يكون ضمن القائمة المعطاة.";
 
@@ -75,54 +89,57 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m26(fieldName) => "${fieldName} يجب أن يكون رقم هاتف صالح.";
 
-  static m27(fieldName, min, max) => "يجب عليك تحديد بين ${min} و ${max} خيارات لـ ${fieldName}.";
+  static m27(fieldName, min, max) =>
+      "يجب عليك تحديد بين ${min} و ${max} خيارات لـ ${fieldName}.";
 
   static m28(fieldName) => "${fieldName} يجب أن يطابق النمط المحدد.";
 
   static m29(fieldName) => "${fieldName} مطلوب.";
 
-  static m30(fieldName, field) => "${fieldName} يجب أن يكون له نفس القيمة كـ ${field}.";
+  static m30(fieldName, field) =>
+      "${fieldName} يجب أن يكون له نفس القيمة كـ ${field}.";
 
   static m31(fieldName, value) => "${fieldName} يجب أن يكون حجمه ${value}.";
 
   static m32(fieldName) => "${fieldName} يجب أن يكون عنوان URL صالح.";
 
   @override
-  final Map<String, dynamic> messages = _notInlinedMessages(_notInlinedMessages);
+  final Map<String, dynamic> messages =
+      _notInlinedMessages(_notInlinedMessages);
 
   static Map<String, dynamic> _notInlinedMessages(_) => {
-      'alphaDashValidationMessage': m0,
-    'alphaNumValidationMessage': m1,
-    'alphaValidationMessage': m2,
-    'betweenValidationMessage': m3,
-    'booleanValidationMessage': m4,
-    'confirmedValidationMessage': m5,
-    'dateAfterValidationMessage': m6,
-    'dateBeforeValidationMessage': m7,
-    'dateFormatValidationMessage': m8,
-    'dateValidationMessage': m9,
-    'differentValidationMessage': m10,
-    'digitsBetweenValidationMessage': m11,
-    'digitsValidationMessage': m12,
-    'emailValidationMessage': m13,
-    'inValuesValidationMessage': m14,
-    'integerValidationMessage': m15,
-    'isFalseValidationMessage': m16,
-    'isTrueValidationMessage': m17,
-    'maxLengthValidationMessage': m18,
-    'maxSelectedValidationMessage': m19,
-    'maxValueValidationMessage': m20,
-    'minLengthValidationMessage': m21,
-    'minSelectedValidationMessage': m22,
-    'minValueValidationMessage': m23,
-    'notInValuesValidationMessage': m24,
-    'numericValidationMessage': m25,
-    'phoneNumberValidationMessage': m26,
-    'rangeSelectedValidationMessage': m27,
-    'regexValidationMessage': m28,
-    'requiredValidationMessage': m29,
-    'sameValidationMessage': m30,
-    'sizeValidationMessage': m31,
-    'urlValidationMessage': m32
-  };
+        'alphaDashValidationMessage': m0,
+        'alphaNumValidationMessage': m1,
+        'alphaValidationMessage': m2,
+        'betweenValidationMessage': m3,
+        'booleanValidationMessage': m4,
+        'confirmedValidationMessage': m5,
+        'dateAfterValidationMessage': m6,
+        'dateBeforeValidationMessage': m7,
+        'dateFormatValidationMessage': m8,
+        'dateValidationMessage': m9,
+        'differentValidationMessage': m10,
+        'digitsBetweenValidationMessage': m11,
+        'digitsValidationMessage': m12,
+        'emailValidationMessage': m13,
+        'inValuesValidationMessage': m14,
+        'integerValidationMessage': m15,
+        'isFalseValidationMessage': m16,
+        'isTrueValidationMessage': m17,
+        'maxLengthValidationMessage': m18,
+        'maxSelectedValidationMessage': m19,
+        'maxValueValidationMessage': m20,
+        'minLengthValidationMessage': m21,
+        'minSelectedValidationMessage': m22,
+        'minValueValidationMessage': m23,
+        'notInValuesValidationMessage': m24,
+        'numericValidationMessage': m25,
+        'phoneNumberValidationMessage': m26,
+        'rangeSelectedValidationMessage': m27,
+        'regexValidationMessage': m28,
+        'requiredValidationMessage': m29,
+        'sameValidationMessage': m30,
+        'sizeValidationMessage': m31,
+        'urlValidationMessage': m32
+      };
 }

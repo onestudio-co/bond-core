@@ -20,4 +20,3 @@ class Integer extends ValidationRule<String> {
     return int.tryParse(value) != null;
   }
 }
-

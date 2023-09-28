@@ -12,7 +12,6 @@ import 'dart:async';
 abstract class FormStateNotifier<Success, Failure extends Error>
     extends Notifier<BondFormState<Success, Failure>>
     with FormController<Success, Failure> {
-
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 
@@ -41,4 +40,3 @@ abstract class FormStateNotifier<Success, Failure extends Error>
   @override
   Future<Success> onSubmit();
 }
-

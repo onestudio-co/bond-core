@@ -24,4 +24,3 @@ class MaxLength extends ValidationRule<String> {
     return value.length <= max;
   }
 }
-

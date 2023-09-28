@@ -7,7 +7,7 @@ import 'package:bond_core/bond_core.dart';
 class AppServiceProvider extends ServiceProvider {
   @override
   Future<void> register(GetIt it) async {
-
-    it.registerSingletonAsync(() => ValidatorLocalizations.load(const Locale('ar', 'EG')));
+    it.registerSingletonAsync(
+        () => ValidatorLocalizations.load(const Locale('ar', 'EG')));
   }
 }

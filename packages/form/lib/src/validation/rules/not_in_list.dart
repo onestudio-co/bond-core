@@ -24,4 +24,3 @@ class NotInList<T> extends ValidationRule<T> {
     return !invalidValues.contains(value);
   }
 }
-

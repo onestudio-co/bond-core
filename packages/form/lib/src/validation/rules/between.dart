@@ -29,4 +29,3 @@ class Between extends ValidationRule<String> {
     return value.length >= min && value.length <= max;
   }
 }
-

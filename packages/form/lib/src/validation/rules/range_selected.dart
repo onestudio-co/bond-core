@@ -30,4 +30,3 @@ class RangeSelected<T> extends ValidationRule<Iterable<T>?> {
     return value != null && value.length >= min && value.length <= max;
   }
 }
-

@@ -20,4 +20,3 @@ class IsTrue extends ValidationRule<bool> {
     return value;
   }
 }
-

@@ -16,7 +16,6 @@ import 'dart:async';
 abstract class AutoDisposeFormStateNotifier<Success, Failure extends Error>
     extends AutoDisposeNotifier<BondFormState<Success, Failure>>
     with FormController<Success, Failure> {
-
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 
@@ -45,4 +44,3 @@ abstract class AutoDisposeFormStateNotifier<Success, Failure extends Error>
   @override
   Future<Success> onSubmit();
 }
-

@@ -35,7 +35,8 @@ class LoginPage extends ConsumerWidget {
             ),
             TextFormField(
               keyboardType: TextInputType.text,
-              onChanged: (value) => formController.updateText('password', value),
+              onChanged: (value) =>
+                  formController.updateText('password', value),
               decoration: InputDecoration(
                 labelText: formState.label('password'),
                 errorText: formState.error('password'),
