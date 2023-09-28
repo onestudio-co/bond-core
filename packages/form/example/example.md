@@ -2,16 +2,21 @@
 
 ```dart
 final loginForm = FormStateNotifier<String, Error>(
-fields: {
-'email': TextFieldState(null, label: 'Email'),
-'password': TextFieldState(null, label: 'Password'),
-},
+  fields: {
+    'email': TextFieldState(null, label: 'Email'),
+    'password': TextFieldState(null, label: 'Password'),
+  },
 );
 
-// Updating a form field
-loginForm.update('email', 'johndoe@gmail.com');
+// Update the form fields
+loginForm.updateText('email', 'johndoe@gmail.com');
+loginForm.updateText('password', 'password123');
 
-// Submitting the form
+// Print the updated values
+print('Email value: ${loginForm.textFieldValue('email')}');
+print('Password value: ${loginForm.textFieldValue('password')}');
+
+// Let's assume we want to submit the form now
 loginForm.submit();
 ```
 
