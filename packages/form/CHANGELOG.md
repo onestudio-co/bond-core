@@ -1,3 +1,7 @@
+## 0.0.1+6
+
+* fix validation localized message not rendered as excepted
+
 ## 0.0.1+5
 
 * extract mixin FormController contains common form logic
