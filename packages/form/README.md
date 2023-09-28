@@ -21,7 +21,7 @@ To use `form_bond`, simply add it as a dependency in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  form_bond: 0.0.1+3
+  form_bond: ^0.0.1
 ```
 
 Basic usage:
@@ -34,10 +34,15 @@ final loginForm = FormStateNotifier<String, Error>(
   },
 );
 
-// Updating a form field
-loginForm.update('email', 'johndoe@gmail.com');
+// Update the form fields
+loginForm.updateText('email', 'johndoe@gmail.com');
+loginForm.updateText('password', 'password123');
 
-// Submitting the form
+// Print the updated values
+print('Email value: ${loginForm.textFieldValue('email')}');
+print('Password value: ${loginForm.textFieldValue('password')}');
+
+// Let's assume we want to submit the form now
 loginForm.submit();
 ```
 
