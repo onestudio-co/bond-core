@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:intl/intl.dart';
-import 'l10n/validator_messages_all_locales.dart';
+import 'l10n/messages_all_locales.dart';
 
 /// A class for handling validation-related localizations.
 ///
