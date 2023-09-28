@@ -36,4 +36,3 @@ class DateBefore extends ValidationRule<DateTime> {
     return value.isBefore(date);
   }
 }
-

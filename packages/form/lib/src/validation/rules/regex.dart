@@ -24,4 +24,3 @@ class Regex extends ValidationRule<String> {
     return regex.hasMatch(value);
   }
 }
-

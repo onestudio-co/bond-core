@@ -33,4 +33,3 @@ class DateAfter extends ValidationRule<DateTime> {
     return value.isAfter(date);
   }
 }
-

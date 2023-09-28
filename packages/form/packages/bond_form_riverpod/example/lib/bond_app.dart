@@ -9,7 +9,7 @@ class BondApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp.router(
+    return MaterialApp.router(
       routerConfig: routes,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
