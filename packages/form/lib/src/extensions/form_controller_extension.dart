@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bond_form/bond_form.dart';
 
 /// Extension methods for [FormController] for more type-safe updates.
