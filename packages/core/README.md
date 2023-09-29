@@ -35,9 +35,6 @@ Bond Core offers a comprehensive set of utilities and integrations designed to s
 
 This is just a glimpse of what Bond Core offers. Dive into the package and explore the extensive features that can expedite your Flutter development.
 
-If `bond_core` is a dependency for all other `bond` packages and will be automatically added when any of the other `bond` packages are included, then you're right; it might not be necessary for developers to manually add it to their `pubspec.yaml` file.
-
-You could mention this in the installation section to provide clarity. Here's how you could update that section:
 
 ## Installation
 
