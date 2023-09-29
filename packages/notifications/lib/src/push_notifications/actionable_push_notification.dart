@@ -11,7 +11,7 @@ mixin ActionablePushNotification on PushNotification {
 mixin ActionableNotification on NotificationProvider {
   void onNotificationTapped(NotificationData data) {
     final featureProviders =
-        providers.whereType<PushNotificationServiceProviderMixin>();
+        appProviders.whereType<PushNotificationServiceProviderMixin>();
     for (final featureProvider in featureProviders) {
       featureProvider.handlePushNotificationAction(data);
     }
