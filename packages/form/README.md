@@ -13,7 +13,8 @@ or a complex, multi-step registration process.
 # Table of Contents
 
 - [Features](#features)
-- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
@@ -27,7 +28,7 @@ or a complex, multi-step registration process.
 - Support for async form submission
 - Easily extensible
 
-## Quick Start
+## Installation
 
 To use `bond_form`, simply add it as a dependency in your `pubspec.yaml`:
 
@@ -35,28 +36,52 @@ To use `bond_form`, simply add it as a dependency in your `pubspec.yaml`:
 dependencies:
   bond_form: ^0.0.1
 ```
+if you want to use the riverpod integration, add the following dependency:
+```yaml
+dependencies:
+  bond_form_riverpod: ^0.0.1
+```
+and no need to add the bond_form dependency, it will be added automatically.
 
-Basic usage:
+## Usage:
 
 ```dart
 
-final loginForm = FormStateNotifier<String, Error>(
+final loginForm = BondFormState<String, Error>(
   fields: {
-    'email': TextFieldState(null, label: 'Email'),
-    'password': TextFieldState(null, label: 'Password'),
+    'email': TextFieldState(
+      null,
+      label: 'Email',
+      rules: [
+        Rules.required(),
+        Rules.email(),
+      ],
+    ),
+    'password': TextFieldState(
+      null,
+      label: 'Password',
+      rules: [
+        Rules.required(),
+        Rules.minLength(8),
+      ],
+    ),
   },
 );
 
-// Update the form fields
-loginForm.updateText('email','johndoe@gmail.com');
-loginForm.updateText('password', 'password123');
+final loginController = LogiFormController();
+
+void main() {
+  // Update the form fields
+  loginController.updateText('email', 'salahnahed@icloud.com');
+  loginController.updateText('password', 'password123');
 
 // Print the updated values
-print('Email value: ${loginForm.textFieldValue('email')}');
-print('Password value: ${loginForm.textFieldValue('password')}');
+  print('Email value: ${loginForm.textFieldValue('email')}');
+  print('Password value: ${loginForm.textFieldValue('password')}');
 
 // Let's assume we want to submit the form now
-loginForm.submit();
+  loginController.submit();
+}
 ```
 
 ## Documentation
