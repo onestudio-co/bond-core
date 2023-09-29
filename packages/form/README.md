@@ -29,11 +29,11 @@ or a complex, multi-step registration process.
 
 ## Quick Start
 
-To use `form_bond`, simply add it as a dependency in your `pubspec.yaml`:
+To use `bond_form`, simply add it as a dependency in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  form_bond: ^0.0.1
+  bond_form: ^0.0.1
 ```
 
 Basic usage:
@@ -48,14 +48,8 @@ final loginForm = FormStateNotifier<String, Error>(
 );
 
 // Update the form fields
-loginForm.updateText
-('email
-'
-,
-'
-johndoe@gmail.com
-'
-);loginForm.updateText('password', 'password123');
+loginForm.updateText('email','johndoe@gmail.com');
+loginForm.updateText('password', 'password123');
 
 // Print the updated values
 print('Email value: ${loginForm.textFieldValue('email')}');

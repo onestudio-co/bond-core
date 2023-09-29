@@ -1,9 +1,13 @@
+## 0.0.1+9
+
+* fix typo on readme.md file
+
 ## 0.0.1+8
 
 * update readme.md files
 * fix dart analysis issues
 
-* ## 0.0.1+7
+## 0.0.1+7
 
 * update example.md and readme.md files
 
