@@ -39,7 +39,7 @@ class PushNotificationsProviders extends NotificationProvider
   void onNotification(Map<String, dynamic> data) {
     log('onNotification: $data');
     final featureProviders =
-        providers.whereType<PushNotificationServiceProviderMixin>();
+        appProviders.whereType<PushNotificationServiceProviderMixin>();
     for (final featureProvider in featureProviders) {
       featureProvider.handlePushNotification(data);
     }
