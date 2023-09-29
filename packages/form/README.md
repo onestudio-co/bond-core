@@ -1,10 +1,22 @@
-# Form Bond
+# Bond Form
 
-## Introduction
+The `bond_form` package provides a robust and flexible solution to manage form state in Flutter applications. It
+introduces several classes and utilities that simplify the process of validation, submission, and error handling in
+forms.
 
-The `form_bond` package provides a robust and flexible solution to manage form state in Flutter applications. It introduces several classes and utilities that simplify the process of validation, submission, and error handling in forms.
+This package is ideal for anyone looking to streamline their form management logic, whether it's for a simple login form
+or a complex, multi-step registration process.
 
-This package is ideal for anyone looking to streamline their form management logic, whether it's for a simple login form or a complex, multi-step registration process.
+[![Pub Version](https://img.shields.io/pub/v/bond_core)](https://pub.dev/packages/bond_form)
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
+
+# Table of Contents
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
@@ -27,6 +39,7 @@ dependencies:
 Basic usage:
 
 ```dart
+
 final loginForm = FormStateNotifier<String, Error>(
   fields: {
     'email': TextFieldState(null, label: 'Email'),
@@ -35,8 +48,14 @@ final loginForm = FormStateNotifier<String, Error>(
 );
 
 // Update the form fields
-loginForm.updateText('email', 'johndoe@gmail.com');
-loginForm.updateText('password', 'password123');
+loginForm.updateText
+('email
+'
+,
+'
+johndoe@gmail.com
+'
+);loginForm.updateText('password', 'password123');
 
 // Print the updated values
 print('Email value: ${loginForm.textFieldValue('email')}');
@@ -48,7 +67,16 @@ loginForm.submit();
 
 ## Documentation
 
-For a comprehensive guide on how to use `form_bond`, please refer to the full documentation available in the `bond_docs` repository under the `forms.md` file.
+For a comprehensive guide on how to use `form_bond`, please refer to the full documentation available in the `bond_docs`
+repository under the `forms.md` file.
 
 [Read Full Documentation Here](https://github.com/onestudio-co/bond-docs/blob/main/forms.md)
 
+## Contributing
+
+Contributions are welcome! However, we currently do not have a set guideline for contributions. If you're interested in
+contributing, please feel free to open a pull request or issue, and we'll be happy to discuss and review your changes.
+
+## License
+
+Bond Core is licensed under the [MIT License](LICENSE).
