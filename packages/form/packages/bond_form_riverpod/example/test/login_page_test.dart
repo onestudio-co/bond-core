@@ -1,6 +1,5 @@
 import 'package:bond_core/bond_core.dart';
 import 'package:bond_form/validator_localizations.dart';
-import 'package:example/app/injection_container.dart';
 import 'package:example/features/auth/presentations/login_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,7 +11,6 @@ void main() {
     'Should display error messages for email and password when the form is invalid and the login button is tapped',
     (WidgetTester tester) async {
       // Initialize the app if needed (e.g., mock dependencies, set up localization, etc.)
-      await init();
 
       // Build the LoginForm widget wrapped with required parent widgets
       await tester.pumpWidget(
