@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 
-
 /// provide helper methods related to the on-screen keyboard.
 extension KeyboardContext on BuildContext {
   /// Hides the currently open on-screen keyboard, if any.

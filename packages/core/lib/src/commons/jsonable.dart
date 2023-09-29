@@ -5,7 +5,6 @@ import 'dart:convert';
 /// Classes that include this mixin must implement [toJson] method,
 /// which converts the object to a JSON-compatible map.
 mixin Jsonable {
-
   /// Converts the object to a JSON-compatible map.
   ///
   /// Implement this method in classes that use this mixin
