@@ -10,7 +10,6 @@ class RunAppTasks extends RunTasks {
 
   @override
   Future<void> beforeRun(WidgetsBinding widgetsBinding) async {
-
     FlutterError.demangleStackTrace = (StackTrace stack) {
       if (stack is stack_trace.Trace) return stack.vmTrace;
       if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;

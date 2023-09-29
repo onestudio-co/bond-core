@@ -1,7 +1,11 @@
-## 0.0.1+7
+## 0.0.1+8
+
+* update readme.md files
+* fix dart analysis issues
+
+* ## 0.0.1+7
 
 * update example.md and readme.md files
-
 
 ## 0.0.1+6
 
