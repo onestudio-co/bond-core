@@ -1,13 +1,17 @@
+## 0.0.3+1
+
+* Update `bond_core` dependency.
+
 ## 0.0.3
 
 - Introduced `XListResponse` extension for `ListResponse` objects.
-  - New `merge` method to combine two `ListResponse` instances into a single instance.
-    - Merges the `data` arrays.
-    - Takes `meta` and `links` from the second `ListResponse`.
-  - Use Cases:
-    1. Combine paginated responses.
-    2. Aggregate data from different sources.
-    3. Update existing `ListResponse` with new data while preserving `meta` and `links`.
+    - New `merge` method to combine two `ListResponse` instances into a single instance.
+        - Merges the `data` arrays.
+        - Takes `meta` and `links` from the second `ListResponse`.
+    - Use Cases:
+        1. Combine paginated responses.
+        2. Aggregate data from different sources.
+        3. Update existing `ListResponse` with new data while preserving `meta` and `links`.
 
 ## 0.0.2+1
 
