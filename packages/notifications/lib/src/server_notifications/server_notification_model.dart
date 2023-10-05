@@ -15,6 +15,7 @@ class ServerNotificationModel extends Model {
   @JsonKey(name: 'authable_id')
   final int? authableId;
   final String code;
+  final String title;
   final String body;
   @JsonKey(defaultValue: {})
   final Map<String, dynamic> data;
@@ -32,6 +33,7 @@ class ServerNotificationModel extends Model {
     required this.uuid,
     required this.code,
     required this.body,
+    required this.title,
     this.senderName,
     this.senderImage,
     required this.notifiableType,
@@ -58,6 +60,7 @@ class ServerNotificationModel extends Model {
     int? authableId,
     String? code,
     String? body,
+    String? title,
     Map<String, dynamic>? data,
     String? senderName,
     String? senderImage,
@@ -73,6 +76,7 @@ class ServerNotificationModel extends Model {
       code: code ?? this.code,
       body: body ?? this.body,
       data: data ?? this.data,
+      title: title ?? this.title,
       senderName: senderName ?? this.senderName,
       senderImage: senderImage ?? this.senderImage,
       readAt: readAt ?? this.readAt,
@@ -94,6 +98,7 @@ class ServerNotificationModel extends Model {
         senderImage,
         readAt,
         createdAt,
+        title
       ];
 }
 
