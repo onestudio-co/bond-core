@@ -1,3 +1,9 @@
+## 0.0.1+5
+
+* add `title` property to `ServerNotificationModel` class.
+* update bond_network dependency.
+* update bond_core dependency.
+
 ## 0.0.1+4
 
 * update bond_network dependency.
