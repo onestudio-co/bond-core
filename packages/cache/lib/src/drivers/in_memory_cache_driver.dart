@@ -1,63 +1,31 @@
-import 'dart:convert';
+import '../cache/cache_driver.dart';
 
-import 'cache_driver.dart';
-import 'package:bond_core/bond_core.dart';
-
-class InMemoryCacheDriver implements CacheDriver {
+class InMemoryCacheDriver extends CacheDriver {
   final Map<String, String> _cache = {};
 
   @override
-  Future<bool> flush() {
+  String? retrieve(String key) {
+    return _cache[key];
+  }
+
+  @override
+  Future<bool> store(String key, String data) async {
+    _cache[key] = data;
+    return true;
+  }
+
+  @override
+  Future<bool> flush() async {
     _cache.clear();
-    return Future.value(true);
+    return true;
   }
 
   @override
-  Future<bool> forget(String key) {
+  Future<bool> forget(String key) async {
     _cache.remove(key);
-    return Future.value(true);
+    return true;
   }
 
   @override
-  CacheDriverReturnType<T> get<T>(String key,
-      {defaultValue, FromJsonFactory? factory}) {
-    if (!_cache.containsKey(key)) {
-      return Future.value(_handleDefaultValue(defaultValue));
-    } else {
-      final jsonCache = jsonDecode(_cache[key]!);
-      final cache = CacheData.fromJson(jsonCache);
-      if (cache.isValid) {
-        return Future.value(factory == null ? cache.data : factory(cache.data));
-      }
-      _cache.remove(key);
-      return _handleDefaultValue(defaultValue);
-    }
-  }
-
-  @override
-  Future<bool> has(String key) => Future.value(_cache.containsKey(key));
-
-  @override
-  Future<bool> put(String key, value, [Duration? expiredAfter]) {
-    final cache = CacheData(
-      data: value,
-      expiredAt: expiredAfter == null ? null : DateTime.now().add(expiredAfter),
-    );
-    if (value is Jsonable) {
-      value = jsonEncode(value.toJson());
-    } else if (value is List<Jsonable>) {
-      value = jsonEncode(value.map((e) => e.toJson()).toList());
-    }
-    final stringCache = jsonEncode(cache.toJson());
-    _cache[key] = stringCache;
-    return Future.value(true);
-  }
-
-  CacheDriverReturnType<T> _handleDefaultValue<T>(dynamic defaultValue) {
-    if (defaultValue is Function) {
-      return Future.value(defaultValue());
-    } else {
-      return Future.value(defaultValue);
-    }
-  }
+  bool has(String key) => _cache.containsKey(key);
 }

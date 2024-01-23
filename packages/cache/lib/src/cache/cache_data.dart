@@ -1,25 +1,18 @@
-typedef CacheDriverReturnType<T> = Future<T>;
-typedef CacheDriverFunctionType<T> = Future<T> Function();
-typedef FromJsonFactory<T> = T Function(Map<String, dynamic> json);
+part of 'cache_driver.dart';
 
-abstract class CacheDriver {
-  CacheDriverReturnType<T> get<T>(String key,
-      {dynamic defaultValue, FromJsonFactory? factory});
-  Future<bool> has(String key);
-  Future<bool> put(String key, dynamic value, [Duration? expiredAfter]);
-  Future<bool> forget(String key);
-  Future<bool> flush();
-}
-
+/// Represents data to be cached along with its expiration information.
 class CacheData {
-  final dynamic data;
+  final Map<String, dynamic> data;
   final DateTime? expiredAt;
 
+  /// Constructs a [CacheData] instance with the provided [data] and [expiredAt] timestamp.
   CacheData({required this.data, required this.expiredAt});
 
+  /// Checks if the cached data is still valid based on the [expiredAt] timestamp.
   bool get isValid =>
       expiredAt == null ? true : DateTime.now().isBefore(expiredAt!);
 
+  /// Constructs a [CacheData] instance from a JSON representation.
   factory CacheData.fromJson(Map<String, dynamic> json) => CacheData(
         data: json['data'],
         expiredAt: json['expiredAt'] == null
@@ -29,6 +22,7 @@ class CacheData {
               ),
       );
 
+  /// Converts the [CacheData] instance to a JSON representation.
   Map<String, dynamic> toJson() => {
         'data': data,
         'expiredAt': expiredAt?.millisecondsSinceEpoch,
