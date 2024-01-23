@@ -4,10 +4,10 @@ import 'package:bond_cache/src/helpers/common_cache_helper.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:test/test.dart';
 
-import 'helpers/fake_jsonable.dart';
-import 'helpers/mock_service_provider.dart';
-import 'helpers/not_registered_model.dart';
-import 'helpers/registered_model.dart';
+import '../common/fake_jsonable.dart';
+import '../common/mock_service_provider.dart';
+import '../common/not_registered_model.dart';
+import '../common/registered_model.dart';
 
 void main() {
   group('convertToCacheValue', () {
