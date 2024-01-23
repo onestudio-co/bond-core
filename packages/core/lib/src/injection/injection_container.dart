@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+
 import 'service_provider.dart';
 
 /// A singleton instance of the `GetIt` service locator.
