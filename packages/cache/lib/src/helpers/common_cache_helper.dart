@@ -134,7 +134,7 @@ class CommonCacheHelper {
 
     if (cachedValue is Map<String, dynamic>) {
       if (fromJsonFactory != null) {
-        return fromJsonFactory!(cachedValue);
+        return fromJsonFactory(cachedValue);
       }
       for (final provider in appProviders.whereType<ResponseDecoding>()) {
         final model = provider.responseConvert<T>(cachedValue);

@@ -68,9 +68,20 @@ void main() {
     });
 
     test('Check for unsupported type', () {
+      final value = DateTime.now();
       expect(
-        () => CommonCacheHelper.convertToCacheValue(DateTime.now()),
-        throwsA(isA<ArgumentError>()),
+        () => CommonCacheHelper.convertToCacheValue(value),
+        throwsA(
+          isA<ArgumentError>().having(
+            (e) => e.message,
+            'message',
+            equals(
+              'Unsupported type or value: $value. '
+              '[value] type must be Jsonable, List<>, '
+              'a primitive type, or List<primitive type>.',
+            ),
+          ),
+        ),
       );
     });
   });
@@ -151,10 +162,28 @@ void main() {
         () => CommonCacheHelper.checkCachedData<NotRegisteredModel>(json),
         throwsA(
           isA<ArgumentError>().having(
-              (e) => e.message,
-              'message',
-              contains(
-                  'No ResponseDecoding provider found for type NotRegisteredModel')),
+            (e) => e.message,
+            'message',
+            contains(
+                'No ResponseDecoding provider found for type NotRegisteredModel'),
+          ),
+        ),
+      );
+    });
+
+    test('Check for unsupported type', () {
+      final data = DateTime.now();
+
+      expect(
+        () => CommonCacheHelper.checkCachedData<DateTime>(data),
+        throwsA(
+          isA<ArgumentError>().having(
+            (e) => e.message,
+            'message',
+            equals(
+              'Unhandled case for type DateTime and cached value: $data',
+            ),
+          ),
         ),
       );
     });
