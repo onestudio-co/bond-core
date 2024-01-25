@@ -2,7 +2,7 @@ part of 'cache_driver.dart';
 
 /// Represents data to be cached along with its expiration information.
 class CacheData {
-  final Map<String, dynamic> data;
+  final dynamic data;
   final DateTime? expiredAt;
 
   /// Constructs a [CacheData] instance with the provided [data] and [expiredAt] timestamp.

@@ -210,7 +210,7 @@ void main() {
         throwsA(isA<ArgumentError>().having(
           (e) => e.message,
           'message',
-          contains(
+          equals(
               'defaultValue must be of type int or a function returning int'),
         )),
       );

@@ -18,6 +18,7 @@ abstract class CacheDriver {
   ///   - [key] The key associated with the cached data.
   ///   - [defaultValue] The default value or function returning the value.
   /// - Returns: The cached data of type [T] or the default value if not found or invalid.
+  /// - Throws: arguments to the function
   T get<T>(String key, {dynamic defaultValue, Factory<T>? fromJsonFactory}) {
     if (!has(key)) {
       return CommonCacheHelper.checkDefaultValue<T>(defaultValue);
@@ -26,14 +27,24 @@ abstract class CacheDriver {
     if (cachedData == null) {
       return CommonCacheHelper.checkDefaultValue<T>(defaultValue);
     }
-    final json = jsonDecode(cachedData);
-    final cachedObject = CacheData.fromJson(json);
-    if (cachedObject.isValid) {
-      final result = CommonCacheHelper.checkCachedData<T>(cachedObject);
-      return result;
-    } else {
-      forget(key);
-      return CommonCacheHelper.checkDefaultValue<T>(defaultValue);
+    try {
+      final json = jsonDecode(cachedData);
+      final cachedObject = CacheData.fromJson(json);
+      if (cachedObject.isValid) {
+        final result = CommonCacheHelper.checkCachedData<T>(
+          cachedObject.data,
+          fromJsonFactory: fromJsonFactory,
+        );
+        return result;
+      } else {
+        forget(key);
+        return CommonCacheHelper.checkDefaultValue<T>(defaultValue);
+      }
+    } catch (error) {
+      if (error is FormatException) {
+        throw FormatException('Could not decode: $cachedData');
+      }
+      rethrow;
     }
   }
 
