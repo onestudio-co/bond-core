@@ -12,59 +12,112 @@ import '../common/registered_model.dart';
 void main() {
   group('convertToCacheValue', () {
     test('Check for CustomObject', () {
-      final jsonable = CustomObject();
-      final result = CommonCacheHelper.convertToCacheValue(jsonable);
-      expect(result, equals(jsonEncode(jsonable)));
+      final value = CustomObject();
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for List<CustomObject>', () {
-      final list = [CustomObject(), CustomObject()];
-      final result = CommonCacheHelper.convertToCacheValue(list);
-      expect(result, equals(jsonEncode(list)));
+      final value = [CustomObject(), CustomObject()];
+      final result = CommonCacheHelper.convertToCacheValue(value);
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for int', () {
-      final result = CommonCacheHelper.convertToCacheValue(42);
-      expect(result, equals('42'));
+      final value = 42;
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for double', () {
-      final result = CommonCacheHelper.convertToCacheValue(42.0);
-      expect(result, equals('42.0'));
+      final value = 42.0;
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for String', () {
-      final result = CommonCacheHelper.convertToCacheValue('hello');
-      expect(result, equals('"hello"'));
+      final value = 'hello';
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for bool', () {
-      final result = CommonCacheHelper.convertToCacheValue(true);
-      expect(result, equals('true'));
+      final value = true;
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for List<int>', () {
-      final list = [1, 2, 3];
-      final result = CommonCacheHelper.convertToCacheValue(list);
-      expect(result, equals(jsonEncode(list)));
+      final value = [1, 2, 3];
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for List<double>', () {
-      final list = [1.1, 2.2, 3.3];
-      final result = CommonCacheHelper.convertToCacheValue(list);
-      expect(result, equals(jsonEncode(list)));
+      final value =  [1.1, 2.2, 3.3];
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for List<String>', () {
-      final list = ['one', 'two', 'three'];
-      final result = CommonCacheHelper.convertToCacheValue(list);
-      expect(result, equals(jsonEncode(list)));
+      final value =  ['one', 'two', 'three'];
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for List<bool>', () {
-      final list = [true, false, true];
-      final result = CommonCacheHelper.convertToCacheValue(list);
-      expect(result, equals(jsonEncode(list)));
+      final value = [true, false, true];
+      final result = CommonCacheHelper.convertToCacheValue(value);
+
+      final expectedData = {
+        'data': jsonDecode(jsonEncode(value)),
+        'expiredAt': null
+      };
+      expect(result, equals(expectedData));
     });
 
     test('Check for unsupported type', () {

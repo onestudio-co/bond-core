@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bond_cache/src/helpers/common_cache_helper.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
@@ -10,58 +11,40 @@ import '../common/not_registered_model.dart';
 import '../common/registered_model.dart';
 import 'mock_cache_driver.dart';
 
+part 'cache_driver_test_helpers.dart';
+
 void main() {
   group('CacheDriver', () {
-    late MockCacheDriver mockDriver;
-
-    final mockedServiceProvider = MockServiceProvider();
-
     setUp(() {
-      appProviders.add(mockedServiceProvider);
-      mockDriver = MockCacheDriver();
+      appProviders.add(_mockedServiceProvider);
+      _mockDriver = MockCacheDriver();
     });
 
     tearDown(() => appProviders.clear());
 
     group('get', () {
       group('default value', () {
-        test('returns defaultValue when key exist but with null value', () {
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(null);
-
-          final result = mockDriver.get<int>('existing_key', defaultValue: 42);
-
-          expect(result, equals(42));
+        test('returns defaultValue when key exists but with null value', () {
+          _testGetWithDefaultValue<int>(defaultValue: 42, value: null);
         });
 
         test('returns defaultValue when key does not exist', () {
-          when(mockDriver.has(any)).thenReturn(false);
-
-          final result =
-              mockDriver.get<int>('nonexistent_key', defaultValue: 42);
-
-          expect(result, equals(42));
+          _testGetWithDefaultValue<int>(defaultValue: 42, value: null);
         });
 
         test('returns defaultValue when key exists but is invalid', () {
-          final cachedData = '{"data": 42, "expiredAt": 1000}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-          when(mockDriver.forget('existing_key')).thenAnswer(
-            (_) => Future.value(true),
+          _testGetWithDefaultValue<int>(
+            defaultValue: 0,
+            value: 42,
+            isInvalid: true,
           );
-
-          final result = mockDriver.get<int>('existing_key', defaultValue: 0);
-
-          expect(result, equals(0));
-          verify(mockDriver.forget('existing_key')).called(1);
         });
 
         test('returns defaultValue from function', () {
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(null);
+          when(_mockDriver.has(any)).thenReturn(true);
+          when(_mockDriver.retrieve(any)).thenReturn(null);
 
-          final result = mockDriver.get<int>(
+          final result = _mockDriver.get<int>(
             'existing_key',
             defaultValue: () => 42,
           );
@@ -70,9 +53,9 @@ void main() {
         });
 
         test('throws ArgumentError for incorrect default value type', () {
-          when(mockDriver.has(any)).thenReturn(false);
+          when(_mockDriver.has(any)).thenReturn(false);
           expect(
-            () => mockDriver.get<int>('not_existing_key', defaultValue: '42'),
+            () => _mockDriver.get<int>('not_existing_key', defaultValue: '42'),
             throwsA(isA<ArgumentError>().having(
               (e) => e.message,
               'message',
@@ -85,93 +68,48 @@ void main() {
 
       group('primitive types', () {
         test('returns cached int value when key exists and is valid', () {
-          final data = 42;
-          final cachedData = '{"data": $data, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-
-          final result = mockDriver.get<int>('existing_key', defaultValue: 0);
-
-          expect(result, equals(data));
+          _testGet<int>(42, defaultValue: 0);
         });
 
         test('returns cached double value when key exists and is valid', () {
-          final data = 42.0;
-          final cachedData = '{"data": $data, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-
-          final result =
-              mockDriver.get<double>('existing_key', defaultValue: 0.0);
-
-          expect(result, equals(data));
+          _testGet<double>(42.0, defaultValue: 0.0);
         });
 
         test('returns cached bool value when key exists and is valid', () {
-          final data = true;
-          final cachedData = '{"data": $data, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-
-          final result =
-              mockDriver.get<bool>('existing_key', defaultValue: false);
-
-          expect(result, equals(data));
+          _testGet<bool>(true, defaultValue: false);
         });
 
         test('returns cached String value when key exists and is valid', () {
-          final data = 'SÜẞ';
-          final cachedData = '{"data": "$data", "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-
-          final result =
-              mockDriver.get<String>('existing_key', defaultValue: '');
-
-          expect(result, equals(data));
+          _testGet<String>('SÜẞ', defaultValue: null);
         });
       });
 
       group('custom types', () {
         test('returns cached registered type when key exists and is valid', () {
           final json = {'data': 'SÜẞ'};
-          final encodedJson = jsonEncode(json);
           final data = RegisteredModel.fromJson(json);
-          final cachedData = '{"data": $encodedJson, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-
-          final result = mockDriver.get<RegisteredModel>('existing_key');
-
-          expect(result, equals(data));
+          _testGet<RegisteredModel>(data, defaultValue: null);
         });
 
         test('returns cached provided type when key exists and is valid', () {
           final json = {'data': 'SÜẞ'};
-          final encodedJson = jsonEncode(json);
           final data = NotRegisteredModel.fromJson(json);
-          final cachedData = '{"data": $encodedJson, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-
-          final result = mockDriver.get<NotRegisteredModel>(
-            'existing_key',
+          _testGet<NotRegisteredModel>(
+            data,
+            defaultValue: null,
             fromJsonFactory: NotRegisteredModel.fromJson,
           );
-
-          expect(result, equals(data));
         });
 
         test('throws an argument error exception for unregistered cached type',
             () {
           final json = {'data': 'SÜẞ'};
-          final encodedJson = jsonEncode(json);
-          final cachedData = '{"data": $encodedJson, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
+          final cachedData = {'data': json, 'expiredAt': null};
+          when(_mockDriver.has(any)).thenReturn(true);
+          when(_mockDriver.retrieve(any)).thenReturn(cachedData);
 
           expect(
-            () => mockDriver.get<NotRegisteredModel>('existing_key'),
+            () => _mockDriver.get<NotRegisteredModel>('existing_key'),
             throwsA(
               isA<ArgumentError>().having(
                   (e) => e.message,
@@ -181,100 +119,28 @@ void main() {
             ),
           );
         });
-
-        test('throws a format exception for unsupported type', () {
-          final data = DateTime.timestamp();
-          final cachedData = '{"data": ${data.toString()}, "expiredAt": null}';
-          when(mockDriver.has(any)).thenReturn(true);
-          when(mockDriver.retrieve(any)).thenReturn(cachedData);
-          expect(
-            () => mockDriver.get<DateTime>('existing_key'),
-            throwsA(
-              isA<FormatException>().having(
-                (e) => e.message,
-                'message',
-                equals('Could not decode: $cachedData'),
-              ),
-            ),
-          );
-        });
       });
     });
 
     group('put ', () {
       test('returns true when storing int value', () async {
-        final key = 'key';
-        final data = 42;
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.put<int>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPut<int>(42);
       });
 
       test('returns true when storing double value', () async {
-        final key = 'key';
-        final data = 42.0;
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.put<double>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPut<double>(42.0);
       });
 
       test('returns true when storing bool value', () async {
-        final key = 'key';
-        final data = true;
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.put<bool>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPut<bool>(true);
       });
 
       test('returns true when storing String value', () async {
-        final key = 'key';
-        final data = 'SÜẞ';
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.put<String>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPut<String>('SÜẞ');
       });
 
-      test('returns true when storing Jsonable value', () async {
-        final key = 'key';
-        final data = CustomObject();
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.put<CustomObject>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+      test('returns true when storing Custom Object value', () async {
+        await _testPut<CustomObject>(CustomObject());
       });
 
       test('throws Argument Error when storing Unsupported type', () async {
@@ -282,87 +148,32 @@ void main() {
         final data = DateTime.timestamp();
 
         expect(
-          () async => await mockDriver.put<DateTime>(key, data),
+          () async => await _mockDriver.put<DateTime>(key, data),
           throwsA(isA<ArgumentError>()),
         );
-        verifyNever(mockDriver.store(key, any));
+        verifyNever(_mockDriver.store(key, any));
       });
     });
 
     group('put all', () {
       test('returns true when storing List<int> value', () async {
-        final key = 'key';
-        final data = [42, 44];
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.putAll<int>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPutAll<int>([42, 44]);
       });
 
       test('returns true when storing List<double> value', () async {
-        final key = 'key';
-        final data = [42.0, 44.0];
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.putAll<double>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPutAll<double>([42.0, 44.0]);
       });
 
-      test('returns true when storing List<double> value', () async {
-        final key = 'key';
-        final data = [true, false];
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.putAll<bool>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+      test('returns true when storing List<bool> value', () async {
+        await _testPutAll<bool>([true, false]);
       });
 
       test('returns true when storing List<String> value', () async {
-        final key = 'key';
-        final data = ['SÜẞ', 'One'];
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.putAll<String>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        await _testPutAll<String>(['SÜẞ', 'One']);
       });
 
-      test('returns true when storing List<Jsonable> value', () async {
-        final key = 'key';
-        final data = [CustomObject(), CustomObject()];
-        final encodedData = jsonEncode(data);
-
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
-
-        final result = await mockDriver.putAll<CustomObject>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+      test('returns true when storing List<CustomObject> value', () async {
+        await _testPutAll<CustomObject>([CustomObject(), CustomObject()]);
       });
 
       test('throws Argument Error when storing Unsupported type', () async {
@@ -370,10 +181,10 @@ void main() {
         final data = [DateTime.timestamp(), DateTime.now()];
 
         expect(
-          () async => await mockDriver.putAll<DateTime>(key, data),
+          () async => await _mockDriver.putAll<DateTime>(key, data),
           throwsA(isA<ArgumentError>()),
         );
-        verifyNever(mockDriver.store(key, any));
+        verifyNever(_mockDriver.store(key, any));
       });
     });
   });

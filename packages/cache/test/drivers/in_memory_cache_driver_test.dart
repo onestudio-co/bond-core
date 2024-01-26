@@ -15,7 +15,7 @@ void main() {
 
     test('store and retrieve data', () async {
       final key = 'test_key';
-      final data = 'test_data';
+      final data = {'data': 'test_data', 'expiredAt': null};
 
       await cacheDriver.store(key, data);
       final retrievedData = cacheDriver.retrieve(key);
@@ -25,7 +25,7 @@ void main() {
 
     test('flush clears all data', () async {
       final key = 'test_key';
-      final data = 'test_data';
+      final data = {'data': 'test_data', 'expiredAt': null};
 
       await cacheDriver.store(key, data);
       await cacheDriver.flush();
@@ -35,7 +35,7 @@ void main() {
 
     test('forget removes data for a key', () async {
       final key = 'test_key';
-      final data = 'test_data';
+      final data = {'data': 'test_data', 'expiredAt': null};
 
       await cacheDriver.store(key, data);
       await cacheDriver.forget(key);
@@ -45,7 +45,9 @@ void main() {
 
     test('has returns true for existing key', () {
       final key = 'test_key';
-      cacheDriver.store(key, 'test_data');
+      final data = {'data': 'test_data', 'expiredAt': null};
+
+      cacheDriver.store(key, data);
 
       expect(cacheDriver.has(key), isTrue);
     });

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:bond_cache/src/helpers/common_cache_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../cache/cache_driver.dart';
@@ -8,11 +11,17 @@ class SharedPreferencesCacheDriver extends CacheDriver {
   SharedPreferencesCacheDriver(this._sharedPreferences);
 
   @override
-  String? retrieve(String key) => _sharedPreferences.getString(key);
+  Json? retrieve(String key) {
+    final value = _sharedPreferences.getString(key);
+    if (value != null) {
+      return jsonDecode(value);
+    }
+    return null;
+  }
 
   @override
-  Future<bool> store(String key, String data) async =>
-      _sharedPreferences.setString(key, data);
+  Future<bool> store(String key, Json data) async =>
+      _sharedPreferences.setString(key, jsonEncode(data));
 
   @override
   bool has(String key) => _sharedPreferences.containsKey(key);

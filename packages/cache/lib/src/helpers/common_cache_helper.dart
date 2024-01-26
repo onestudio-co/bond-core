@@ -85,15 +85,22 @@ class CommonCacheHelper {
   /// - Parameters:
   ///   - [value] The value to convert.
   ///   - [expiredAfter] The duration for which the cached data is valid.
-  /// - Returns: The string representation of the value.
+  /// - Returns: The Map representation of the value including the expiration date.
   /// - Throws: An [ArgumentError] if [value] is of an unsupported type.
   /// Usage:
   /// ```dart
   /// var result = CommonCacheHelper.convertToCacheValue(myValue);
   /// ```
-  static String convertToCacheValue<T>(T value, [Duration? expiredAfter]) {
+  static Json convertToCacheValue<T>(T value,
+      [Duration? expiredAfter]) {
     try {
-      return jsonEncode(value);
+      final decodedValue = jsonDecode(jsonEncode(value));
+      final data = {
+        'data': decodedValue,
+        'expiredAt':
+            expiredAfter == null ? null : DateTime.now().add(expiredAfter)
+      };
+      return data;
     } catch (_) {
       throw ArgumentError(
         'Unsupported type of value: $value. '
