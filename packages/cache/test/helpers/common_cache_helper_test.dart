@@ -4,23 +4,23 @@ import 'package:bond_cache/src/helpers/common_cache_helper.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:test/test.dart';
 
-import '../common/fake_jsonable.dart';
+import '../common/custom_object.dart';
 import '../common/mock_service_provider.dart';
 import '../common/not_registered_model.dart';
 import '../common/registered_model.dart';
 
 void main() {
   group('convertToCacheValue', () {
-    test('Check for Jsonable', () {
-      final jsonable = FakeJsonable();
+    test('Check for CustomObject', () {
+      final jsonable = CustomObject();
       final result = CommonCacheHelper.convertToCacheValue(jsonable);
-      expect(result, equals(jsonEncode(jsonable.toJson())));
+      expect(result, equals(jsonEncode(jsonable)));
     });
 
-    test('Check for List<Jsonable>', () {
-      final list = [FakeJsonable(), FakeJsonable()];
+    test('Check for List<CustomObject>', () {
+      final list = [CustomObject(), CustomObject()];
       final result = CommonCacheHelper.convertToCacheValue(list);
-      expect(result, equals(jsonEncode(list.map((e) => e.toJson()).toList())));
+      expect(result, equals(jsonEncode(list)));
     });
 
     test('Check for int', () {
@@ -76,9 +76,8 @@ void main() {
             (e) => e.message,
             'message',
             equals(
-              'Unsupported type or value: $value. '
-              '[value] type must be Jsonable, List<>, '
-              'a primitive type, or List<primitive type>.',
+              'Unsupported type of value: $value. '
+              'Tip: for custom object type must be implement the toJson() method.',
             ),
           ),
         ),
