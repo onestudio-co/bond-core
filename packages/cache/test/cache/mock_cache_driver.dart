@@ -1,4 +1,5 @@
 import 'package:bond_cache/bond_cache.dart';
+import 'package:bond_cache/src/helpers/common_cache_helper.dart';
 import 'package:mockito/mockito.dart';
 
 class MockCacheDriver extends CacheDriver with Mock {
@@ -9,12 +10,12 @@ class MockCacheDriver extends CacheDriver with Mock {
       );
 
   @override
-  String? retrieve(String? key) => super.noSuchMethod(
+  Json? retrieve(String? key) => super.noSuchMethod(
         Invocation.method(#retrieve, [key]),
       );
 
   @override
-  Future<bool> store(String? key, String? data) => super.noSuchMethod(
+  Future<bool> store(String? key, Json? data) => super.noSuchMethod(
         Invocation.method(#store, [key, data]),
         returnValue: Future.value(false),
       );
