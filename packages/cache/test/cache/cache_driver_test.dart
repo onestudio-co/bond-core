@@ -350,6 +350,21 @@ void main() {
         verify(mockDriver.store(key, encodedData)).called(1);
       });
 
+      test('returns true when storing List<Jsonable> value', () async {
+        final key = 'key';
+        final data = [FakeJsonable(), FakeJsonable()];
+        final encodedData = jsonEncode(data);
+
+        when(mockDriver.store(key, encodedData)).thenAnswer(
+          (_) => Future.value(true),
+        );
+
+        final result = await mockDriver.putAll<FakeJsonable>(key, data);
+
+        expect(result, isTrue);
+        verify(mockDriver.store(key, encodedData)).called(1);
+      });
+
       test('throws Argument Error when storing Unsupported type', () async {
         final key = 'key';
         final data = [DateTime.timestamp(), DateTime.now()];
