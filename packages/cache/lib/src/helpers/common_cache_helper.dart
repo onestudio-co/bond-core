@@ -84,23 +84,21 @@ class CommonCacheHelper {
   ///
   /// - Parameters:
   ///   - [value] The value to convert.
+  ///   - [expiredAfter] The duration for which the cached data is valid.
   /// - Returns: The string representation of the value.
   /// - Throws: An [ArgumentError] if [value] is of an unsupported type.
   /// Usage:
   /// ```dart
   /// var result = CommonCacheHelper.convertToCacheValue(myValue);
   /// ```
-  static String convertToCacheValue<T>(T value) {
-    if (value is Jsonable) {
-      return jsonEncode(value.toJson());
-    } else if (value is List<Jsonable>) {
-      return jsonEncode(value.map((e) => e.toJson()).toList());
-    } else if (value?.primitive ?? false) {
+  static String convertToCacheValue<T>(T value, [Duration? expiredAfter]) {
+    try {
       return jsonEncode(value);
-    } else {
-      throw ArgumentError('Unsupported type or value: $value. '
-          '[value] type must be Jsonable, List<>, '
-          'a primitive type, or List<primitive type>.');
+    } catch (_) {
+      throw ArgumentError(
+        'Unsupported type of value: $value. '
+        'Tip: for custom object type must be implement the toJson() method.',
+      );
     }
   }
 

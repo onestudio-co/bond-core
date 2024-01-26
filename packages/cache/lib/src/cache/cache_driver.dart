@@ -75,7 +75,7 @@ abstract class CacheDriver {
   /// - returns: A [Future] that completes with a [bool] indicating the success of the operation.
   /// - Throws: [ArgumentError] if the value type is not supported.
   Future<bool> putAll<T>(String key, List<T> value, [Duration? expiredAfter]) =>
-      put<List<T>>(key, value);
+      put<List<T>>(key, value, expiredAfter);
 
   /// Checks if the cache contains data associated with the specified [key].
   ///
