@@ -201,20 +201,68 @@ void main() {
     });
 
     group('put ', () {
-      test('stores correct value', () async {
-        final key = 'key';
-        final data = 42;
-        final encodedData = jsonEncode(data);
+      group('primitive types', () {
+        test('stores correct int value', () async {
+          final key = 'key';
+          final data = 42;
+          final encodedData = jsonEncode(data);
 
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
-        );
+          when(mockDriver.store(key, encodedData)).thenAnswer(
+            (_) => Future.value(true),
+          );
 
-        final result = await mockDriver.put<int>(key, 42);
+          final result = await mockDriver.put<int>(key, data);
 
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+          expect(result, isTrue);
+          verify(mockDriver.store(key, encodedData)).called(1);
+        });
+
+        test('stores correct double value', () async {
+          final key = 'key';
+          final data = 42.0;
+          final encodedData = jsonEncode(data);
+
+          when(mockDriver.store(key, encodedData)).thenAnswer(
+            (_) => Future.value(true),
+          );
+
+          final result = await mockDriver.put<double>(key, data);
+
+          expect(result, isTrue);
+          verify(mockDriver.store(key, encodedData)).called(1);
+        });
+        test('stores correct bool value', () async {
+          final key = 'key';
+          final data = true;
+          final encodedData = jsonEncode(data);
+
+          when(mockDriver.store(key, encodedData)).thenAnswer(
+            (_) => Future.value(true),
+          );
+
+          final result = await mockDriver.put<bool>(key, data);
+
+          expect(result, isTrue);
+          verify(mockDriver.store(key, encodedData)).called(1);
+        });
+
+        test('stores correct String value', () async {
+          final key = 'key';
+          final data = 'SÜẞ';
+          final encodedData = jsonEncode(data);
+
+          when(mockDriver.store(key, encodedData)).thenAnswer(
+            (_) => Future.value(true),
+          );
+
+          final result = await mockDriver.put<String>(key, data);
+
+          expect(result, isTrue);
+          verify(mockDriver.store(key, encodedData)).called(1);
+        });
       });
+
+
     });
   });
 }
