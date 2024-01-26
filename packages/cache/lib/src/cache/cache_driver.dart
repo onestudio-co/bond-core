@@ -18,7 +18,9 @@ abstract class CacheDriver {
   ///   - [key] The key associated with the cached data.
   ///   - [defaultValue] The default value or function returning the value.
   /// - Returns: The cached data of type [T] or the default value if not found or invalid.
-  /// - Throws: arguments to the function
+  /// - Throws:
+  ///   - [ArgumentError] if the value type is not supported.
+  ///   - [FormatException] if the could not be decoded.
   T get<T>(String key, {dynamic defaultValue, Factory<T>? fromJsonFactory}) {
     if (!has(key)) {
       return CommonCacheHelper.checkDefaultValue<T>(defaultValue);
@@ -58,10 +60,22 @@ abstract class CacheDriver {
   ///   - [value] The value to be stored in the cache.
   ///   - [expiredAfter] The duration for which the cached data is valid.
   /// - Returns: A [Future] that completes with a [bool] indicating the success of the operation.
+  /// - Throws: [ArgumentError] if the value type is not supported.
   Future<bool> put<T>(String key, T value, [Duration? expiredAfter]) {
     final result = CommonCacheHelper.convertToCacheValue(value);
     return store(key, result);
   }
+
+  /// Convenience method to store a list of items of type [T] in the cache.
+  /// This is equivalent to calling [put] with the type [List<T>].
+  /// - Parameter key: The key associated with the
+  ///   - [key] The key associated with the cached data.
+  ///   - [value] The value to be stored in the cache.
+  ///   - [expiredAfter] The duration for which the cached data is valid.
+  /// - returns: A [Future] that completes with a [bool] indicating the success of the operation.
+  /// - Throws: [ArgumentError] if the value type is not supported.
+  Future<bool> putAll<T>(String key, List<T> value, [Duration? expiredAfter]) =>
+      put<List<T>>(key, value);
 
   /// Checks if the cache contains data associated with the specified [key].
   ///

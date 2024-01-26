@@ -272,5 +272,78 @@ void main() {
         verifyNever(mockDriver.store(key, any));
       });
     });
+
+    group('put all', () {
+      test('returns true when storing List<int> value', () async {
+        final key = 'key';
+        final data = [42, 44];
+        final encodedData = jsonEncode(data);
+
+        when(mockDriver.store(key, encodedData)).thenAnswer(
+          (_) => Future.value(true),
+        );
+
+        final result = await mockDriver.putAll<int>(key, data);
+
+        expect(result, isTrue);
+        verify(mockDriver.store(key, encodedData)).called(1);
+      });
+
+      test('returns true when storing List<double> value', () async {
+        final key = 'key';
+        final data = [42.0, 44.0];
+        final encodedData = jsonEncode(data);
+
+        when(mockDriver.store(key, encodedData)).thenAnswer(
+          (_) => Future.value(true),
+        );
+
+        final result = await mockDriver.putAll<double>(key, data);
+
+        expect(result, isTrue);
+        verify(mockDriver.store(key, encodedData)).called(1);
+      });
+
+      test('returns true when storing List<double> value', () async {
+        final key = 'key';
+        final data = [true, false];
+        final encodedData = jsonEncode(data);
+
+        when(mockDriver.store(key, encodedData)).thenAnswer(
+          (_) => Future.value(true),
+        );
+
+        final result = await mockDriver.putAll<bool>(key, data);
+
+        expect(result, isTrue);
+        verify(mockDriver.store(key, encodedData)).called(1);
+      });
+
+      test('returns true when storing List<String> value', () async {
+        final key = 'key';
+        final data = ['SÜẞ', 'One'];
+        final encodedData = jsonEncode(data);
+
+        when(mockDriver.store(key, encodedData)).thenAnswer(
+          (_) => Future.value(true),
+        );
+
+        final result = await mockDriver.putAll<String>(key, data);
+
+        expect(result, isTrue);
+        verify(mockDriver.store(key, encodedData)).called(1);
+      });
+
+      test('throws Argument Error when storing Unsupported type', () async {
+        final key = 'key';
+        final data = [DateTime.timestamp(), DateTime.now()];
+
+        expect(
+          () async => await mockDriver.putAll<DateTime>(key, data),
+          throwsA(isA<ArgumentError>()),
+        );
+        verifyNever(mockDriver.store(key, any));
+      });
+    });
   });
 }
