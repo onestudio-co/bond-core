@@ -4,7 +4,6 @@ import 'package:bond_core/bond_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import '../common/fake_jsonable.dart';
 import '../common/mock_service_provider.dart';
 import '../common/not_registered_model.dart';
 import '../common/registered_model.dart';
@@ -261,19 +260,15 @@ void main() {
         verify(mockDriver.store(key, encodedData)).called(1);
       });
 
-      test('stores correct Jsonable value', () async {
+      test('store throws argument error for unsupported type', () async {
         final key = 'key';
-        final data = FakeJsonable();
-        final encodedData = jsonEncode(data);
+        final data = DateTime.timestamp();
 
-        when(mockDriver.store(key, encodedData)).thenAnswer(
-          (_) => Future.value(true),
+        expect(
+          () async => await mockDriver.put<DateTime>(key, data),
+          throwsA(isA<ArgumentError>()),
         );
-
-        final result = await mockDriver.put<FakeJsonable>(key, data);
-
-        expect(result, isTrue);
-        verify(mockDriver.store(key, encodedData)).called(1);
+        verifyNever(mockDriver.store(key, any));
       });
     });
   });
