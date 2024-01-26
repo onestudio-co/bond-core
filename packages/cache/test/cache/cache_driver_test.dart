@@ -4,6 +4,7 @@ import 'package:bond_core/bond_core.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import '../common/fake_jsonable.dart';
 import '../common/mock_service_provider.dart';
 import '../common/not_registered_model.dart';
 import '../common/registered_model.dart';
@@ -256,6 +257,21 @@ void main() {
         );
 
         final result = await mockDriver.put<String>(key, data);
+
+        expect(result, isTrue);
+        verify(mockDriver.store(key, encodedData)).called(1);
+      });
+
+      test('returns true when storing Jsonable value', () async {
+        final key = 'key';
+        final data = FakeJsonable();
+        final encodedData = jsonEncode(data);
+
+        when(mockDriver.store(key, encodedData)).thenAnswer(
+          (_) => Future.value(true),
+        );
+
+        final result = await mockDriver.put<FakeJsonable>(key, data);
 
         expect(result, isTrue);
         verify(mockDriver.store(key, encodedData)).called(1);
