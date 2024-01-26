@@ -201,7 +201,7 @@ void main() {
     });
 
     group('put ', () {
-      test('stores correct int value', () async {
+      test('returns true when storing int value', () async {
         final key = 'key';
         final data = 42;
         final encodedData = jsonEncode(data);
@@ -216,7 +216,7 @@ void main() {
         verify(mockDriver.store(key, encodedData)).called(1);
       });
 
-      test('stores correct double value', () async {
+      test('returns true when storing double value', () async {
         final key = 'key';
         final data = 42.0;
         final encodedData = jsonEncode(data);
@@ -230,7 +230,8 @@ void main() {
         expect(result, isTrue);
         verify(mockDriver.store(key, encodedData)).called(1);
       });
-      test('stores correct bool value', () async {
+
+      test('returns true when storing bool value', () async {
         final key = 'key';
         final data = true;
         final encodedData = jsonEncode(data);
@@ -245,7 +246,7 @@ void main() {
         verify(mockDriver.store(key, encodedData)).called(1);
       });
 
-      test('stores correct String value', () async {
+      test('returns true when storing String value', () async {
         final key = 'key';
         final data = 'SÜẞ';
         final encodedData = jsonEncode(data);
@@ -260,7 +261,7 @@ void main() {
         verify(mockDriver.store(key, encodedData)).called(1);
       });
 
-      test('store throws argument error for unsupported type', () async {
+      test('throws Argument Error when storing Unsupported type', () async {
         final key = 'key';
         final data = DateTime.timestamp();
 
