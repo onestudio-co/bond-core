@@ -23,29 +23,6 @@ typedef Json = Map<String, dynamic>;
 /// ```
 typedef Factory<T> = T Function(Map<String, dynamic>);
 
-/// An extension providing a `primitive` property for checking if an object is a primitive type.
-///
-/// This extension adds a `primitive` property to all objects, allowing you to easily check
-/// whether an object is of a primitive type (int, double, String, bool, or lists of these types).
-/// It can be used to determine if an object is suitable for caching purposes.
-///
-/// Usage:
-/// ```dart
-/// var isPrimitive = myObject.primitive;
-/// ```
-extension xDynamic on Object {
-  bool get primitive {
-    return this is int ||
-        this is double ||
-        this is String ||
-        this is bool ||
-        this is List<int> ||
-        this is List<double> ||
-        this is List<String> ||
-        this is List<bool>;
-  }
-}
-
 /// An extension on the [Type] class providing utility methods for type checks.
 /// Checks whether the type is a primitive type or a list of primitive types.
 ///
@@ -91,8 +68,7 @@ class CommonCacheHelper {
   /// ```dart
   /// var result = CommonCacheHelper.convertToCacheValue(myValue);
   /// ```
-  static Json convertToCacheValue<T>(T value,
-      [Duration? expiredAfter]) {
+  static Json convertToCacheValue<T>(T value, [Duration? expiredAfter]) {
     try {
       final decodedValue = jsonDecode(jsonEncode(value));
       final data = {
@@ -168,6 +144,73 @@ class CommonCacheHelper {
     // Throw an error if T is not a primitive type and provider.responseConvert returns null
     throw ArgumentError(
         'Unhandled case for type $T and cached value: $cachedValue');
+  }
+
+  /// Converts a list of cached data to a list of type [T].
+  ///
+  /// This method checks if [T] is a primitive type (int, double, String, bool, DateTime),
+  /// a custom object with a provided [fromJsonFactory], or a custom object using
+  /// registered providers implementing [ResponseDecoding].
+  ///
+  /// If [fromJsonFactory] is provided, it is used to convert each item in the list
+  /// to an instance of type [T]. If [fromJsonFactory] is not provided, it looks for
+  /// registered providers implementing [ResponseDecoding] to perform the conversion.
+  ///
+  /// If [T] is a primitive type, the method casts the list items to type [T].
+  ///
+  /// - Parameters:
+  ///   - [cachedList] The list of cached data to be converted.
+  ///   - [fromJsonFactory] A factory function for converting each item in the list
+  ///                        to an instance of type [T].
+  /// - Returns: A list of type [T] representing the converted cached data.
+  /// - Throws: An [ArgumentError] if no suitable conversion method is found for type [T].
+  ///
+  /// Usage:
+  /// ```dart
+  /// List<MyModel> convertedList = CommonCacheHelper.convertList<MyModel>(cachedList);
+  /// ```
+  static List<T> convertList<T>(
+    List<dynamic> cachedList, {
+    Factory<T>? fromJsonFactory,
+  }) {
+    // Check if T is a primitive type
+    if (T.primitive) {
+      return cachedList.cast<T>().toList();
+    }
+
+    // Check if T is a custom object
+    if (fromJsonFactory != null) {
+      return cachedList.map((item) => fromJsonFactory(item)).toList();
+    }
+
+    // Check if T is a custom object using providers
+    for (final provider in appProviders.whereType<ResponseDecoding>()) {
+      final models = cachedList
+          .map((item) => provider.responseConvert<T>(item))
+          .whereType<T>()
+          .toList();
+      if (models.isNotEmpty) {
+        return models;
+      }
+    }
+
+    // Throw an error if T is not a primitive type and fromJsonFactory is not provided
+    throw ArgumentError(
+      'No ResponseDecoding provider found for type $T. '
+      'Make sure to register a class that implements ResponseDecoding '
+      'and provides a responseConvert method for type $T. '
+      'To register a ResponseDecoding provider, you can do the following:\n\n'
+      'class MyServiceProvider extends ServiceProvider with ResponseDecoding {\n'
+      '  @override\n'
+      '  T? responseConvert<T>(Map<String, dynamic> json) {\n'
+      '    if (T == $T) {\n'
+      '      return $T.fromJson(json) as T;\n'
+      '    }\n'
+      '    // Add other model conversions as needed...\n'
+      '    return null;\n'
+      '  }\n'
+      '}\n',
+    );
   }
 
   /// Checks and retrieves the default value of type [T].

@@ -38,6 +38,31 @@ abstract class CacheDriver {
     }
   }
 
+  List<T> getAll<T>(
+    String key, {
+    dynamic defaultValue,
+    Factory<T>? fromJsonFactory,
+  }) {
+    if (!has(key)) {
+      return CommonCacheHelper.checkDefaultValue<List<T>>(defaultValue);
+    }
+    final cachedData = retrieve(key);
+    if (cachedData == null) {
+      return CommonCacheHelper.checkDefaultValue<List<T>>(defaultValue);
+    }
+    final cachedObject = CacheData.fromJson(cachedData);
+    if (cachedObject.isValid) {
+      final result = CommonCacheHelper.convertList<T>(
+        cachedObject.data,
+        fromJsonFactory: fromJsonFactory,
+      );
+      return result;
+    } else {
+      forget(key);
+      return CommonCacheHelper.checkDefaultValue<List<T>>(defaultValue);
+    }
+  }
+
   /// Stores the provided value of type [T] in the cache associated with the specified [key].
   ///
   /// Optionally, an expiration duration can be provided to set the validity period

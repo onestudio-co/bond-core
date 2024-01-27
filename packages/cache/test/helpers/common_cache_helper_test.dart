@@ -88,7 +88,7 @@ void main() {
     });
 
     test('Check for List<double>', () {
-      final value =  [1.1, 2.2, 3.3];
+      final value = [1.1, 2.2, 3.3];
       final result = CommonCacheHelper.convertToCacheValue(value);
 
       final expectedData = {
@@ -99,7 +99,7 @@ void main() {
     });
 
     test('Check for List<String>', () {
-      final value =  ['one', 'two', 'three'];
+      final value = ['one', 'two', 'three'];
       final result = CommonCacheHelper.convertToCacheValue(value);
 
       final expectedData = {
@@ -150,20 +150,9 @@ void main() {
       expect(result, equals(42));
     });
 
-    test('Check for list of int type', () {
-      final result = CommonCacheHelper.checkCachedData<List<int>>([42, 45]);
-      expect(result, equals([42, 45]));
-    });
-
     test('Check for double type', () {
       final result = CommonCacheHelper.checkCachedData<double>(42.1);
       expect(result, equals(42.1));
-    });
-
-    test('Check for list of double type', () {
-      final result =
-          CommonCacheHelper.checkCachedData<List<double>>([42.1, 45.2]);
-      expect(result, equals([42.1, 45.2]));
     });
 
     test('Check for bool type', () {
@@ -171,21 +160,9 @@ void main() {
       expect(result, equals(true));
     });
 
-    test('Check for list of bool type', () {
-      final result =
-          CommonCacheHelper.checkCachedData<List<bool>>([true, false]);
-      expect(result, equals([true, false]));
-    });
-
     test('Check for String type', () {
       final result = CommonCacheHelper.checkCachedData<String>('SÜẞ');
       expect(result, equals('SÜẞ'));
-    });
-
-    test('Check for list of String type', () {
-      final result =
-          CommonCacheHelper.checkCachedData<List<String>>(['SÜẞ', 'NB']);
-      expect(result, equals(['SÜẞ', 'NB']));
     });
 
     test('Check for provided factory', () {
@@ -238,6 +215,79 @@ void main() {
           ),
         ),
       );
+    });
+
+    group('Checking for List', () {
+      test('Check for List<int> type', () {
+        final result = CommonCacheHelper.convertList<int>([42, 45]);
+        expect(result, equals([42, 45]));
+      });
+
+      test('Check for List<double> type', () {
+        final result = CommonCacheHelper.convertList<double>([42.1, 45.2]);
+        expect(result, equals([42.1, 45.2]));
+      });
+
+      test('Check for List<bool> type', () {
+        final result = CommonCacheHelper.convertList<bool>([true, false]);
+        expect(result, equals([true, false]));
+      });
+
+      test('Check for List<String> type', () {
+        final result = CommonCacheHelper.convertList<String>(['SÜẞ', 'NB']);
+        expect(result, equals(['SÜẞ', 'NB']));
+      });
+
+      test('Check for List of registered type', () {
+        final cachedValue = [
+          {'data': 'NB'},
+          {'data': 'SÜẞ'},
+        ];
+        final expectedResult = [
+          RegisteredModel.data('NB'),
+          RegisteredModel.data('SÜẞ'),
+        ];
+        final result = CommonCacheHelper.convertList<RegisteredModel>(
+          cachedValue,
+        );
+        expect(result, equals(expectedResult));
+      });
+
+      test('Check for List of provided factory', () {
+        final cachedValue = [
+          {'data': 'NB'},
+          {'data': 'SÜẞ'},
+        ];
+        final expectedResult = [
+          NotRegisteredModel.data('NB'),
+          NotRegisteredModel.data('SÜẞ'),
+        ];
+        final result = CommonCacheHelper.convertList<NotRegisteredModel>(
+          cachedValue,
+          fromJsonFactory: NotRegisteredModel.fromJson,
+        );
+        expect(result, equals(expectedResult));
+      });
+
+      test(
+          'throws exception if custom type is not registered and no factory provided',
+          () {
+        final cachedValue = [
+          {'data': 'NB'},
+          {'data': 'SÜẞ'},
+        ];
+        expect(
+          () => CommonCacheHelper.convertList<NotRegisteredModel>(cachedValue),
+          throwsA(
+            isA<ArgumentError>().having(
+              (e) => e.message,
+              'message',
+              contains(
+                  'No ResponseDecoding provider found for type NotRegisteredModel'),
+            ),
+          ),
+        );
+      });
     });
   });
 

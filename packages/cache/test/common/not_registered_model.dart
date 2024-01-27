@@ -3,6 +3,8 @@ class NotRegisteredModel {
 
   NotRegisteredModel._(this.data);
 
+  factory NotRegisteredModel.data(String data) => NotRegisteredModel._(data);
+
   factory NotRegisteredModel.fromJson(Map<String, dynamic> json) {
     return NotRegisteredModel._(json['data']);
   }

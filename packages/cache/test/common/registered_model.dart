@@ -3,6 +3,8 @@ class RegisteredModel {
 
   RegisteredModel._(this.data);
 
+  factory RegisteredModel.data(String data) => RegisteredModel._(data);
+
   factory RegisteredModel.fromJson(Map<String, dynamic> json) {
     return RegisteredModel._(json['data']);
   }
