@@ -38,6 +38,19 @@ abstract class CacheDriver {
     }
   }
 
+  /// Retrieves a list of cached data associated with the specified [key].
+  ///
+  /// If the cache does not contain the specified key, it returns the
+  /// [defaultValue], if provided; otherwise, it returns the default value for
+  /// type [List<T>]. If the cached data is invalid or an error occurs during decoding,
+  /// it removes the key from the cache and returns the default value.
+  ///
+  /// - Parameters:
+  ///   - [key] The key associated with the cached data.
+  ///   - [defaultValue] The default value or function returning the value.
+  ///   - [fromJsonFactory] The factory function for deserialization of the list elements.
+  /// - Returns: The list of cached data of type [T] or the default value if not found or invalid.
+  /// - Throws: [ArgumentError] if the value type is not supported.
   List<T> getAll<T>(
     String key, {
     dynamic defaultValue,
