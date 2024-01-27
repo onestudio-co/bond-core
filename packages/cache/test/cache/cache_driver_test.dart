@@ -34,7 +34,7 @@ void main() {
 
         test('returns defaultValue when key exists but is invalid', () {
           _testGetWithDefaultValue<int>(
-            defaultValue: 0,
+            defaultValue: 3,
             value: 42,
             isInvalid: true,
           );
@@ -55,7 +55,7 @@ void main() {
         test('throws ArgumentError for incorrect default value type', () {
           when(_mockDriver.has(any)).thenReturn(false);
           expect(
-            () => _mockDriver.get<int>('not_existing_key', defaultValue: '42'),
+            () => _mockDriver.get<int>('key', defaultValue: '42'),
             throwsA(isA<ArgumentError>().having(
               (e) => e.message,
               'message',
@@ -109,7 +109,119 @@ void main() {
           when(_mockDriver.retrieve(any)).thenReturn(cachedData);
 
           expect(
-            () => _mockDriver.get<NotRegisteredModel>('existing_key'),
+            () => _mockDriver.get<NotRegisteredModel>('key'),
+            throwsA(
+              isA<ArgumentError>().having(
+                  (e) => e.message,
+                  'message',
+                  contains(
+                      'No ResponseDecoding provider found for type NotRegisteredModel')),
+            ),
+          );
+        });
+      });
+    });
+
+    group('get all', () {
+      group('default value', () {
+        test('returns defaultValue when key exists but with null value', () {
+          _testGetAllWithDefaultValue<int>(defaultValue: [42, 44], value: null);
+        });
+
+        test('returns defaultValue when key does not exist', () {
+          _testGetAllWithDefaultValue<int>(defaultValue: [42, 44], value: null);
+        });
+
+        test('returns defaultValue when key exists but is invalid', () {
+          _testGetAllWithDefaultValue<int>(
+            defaultValue: [1],
+            value: [42],
+            isInvalid: true,
+          );
+        });
+
+        test('returns defaultValue from function', () {
+          when(_mockDriver.has(any)).thenReturn(true);
+          when(_mockDriver.retrieve(any)).thenReturn(null);
+
+          final result = _mockDriver.getAll<int>(
+            'existing_key',
+            defaultValue: () => [42],
+          );
+
+          expect(result, equals([42]));
+        });
+
+        test('throws ArgumentError for incorrect default value type', () {
+          when(_mockDriver.has(any)).thenReturn(false);
+          expect(
+            () => _mockDriver.getAll<int>('key', defaultValue: ['42']),
+            throwsA(isA<ArgumentError>().having(
+              (e) => e.message,
+              'message',
+              equals(
+                  'defaultValue must be of type List<int> or a function returning List<int>'),
+            )),
+          );
+        });
+      });
+
+      group('primitive types', () {
+        test('returns cached int value when key exists and is valid', () {
+          _testGetAll<int>([42, 44], defaultValue: [0]);
+        });
+
+        test('returns cached double value when key exists and is valid', () {
+          _testGetAll<double>([42.0, 44.0], defaultValue: [0.0]);
+        });
+
+        test('returns cached bool value when key exists and is valid', () {
+          _testGetAll<bool>([true, false], defaultValue: [false]);
+        });
+
+        test('returns cached String value when key exists and is valid', () {
+          _testGetAll<String>(['SÜẞ', 'NB'], defaultValue: null);
+        });
+      });
+
+      group('custom types', () {
+        test('returns cached registered type when key exists and is valid', () {
+          final json = {'data': 'SÜẞ'};
+          final json2 = {'data': 'NB'};
+          final data = [
+            RegisteredModel.fromJson(json),
+            RegisteredModel.fromJson(json2),
+          ];
+          _testGetAll<RegisteredModel>(data, defaultValue: null);
+        });
+
+        test('returns cached provided type when key exists and is valid', () {
+          final json = {'data': 'SÜẞ'};
+          final json2 = {'data': 'NB'};
+          final data = [
+            NotRegisteredModel.fromJson(json),
+            NotRegisteredModel.fromJson(json2),
+          ];
+          _testGetAll<NotRegisteredModel>(
+            data,
+            defaultValue: null,
+            fromJsonFactory: NotRegisteredModel.fromJson,
+          );
+        });
+
+        test('throws an argument error exception for unregistered cached type',
+            () {
+          final json = {'data': 'SÜẞ'};
+          final json2 = {'data': 'NB'};
+          final cachedData = {
+            'data': [json, json2],
+            'expiredAt': null
+          };
+          when(_mockDriver.has(any)).thenReturn(true);
+          when(_mockDriver.retrieve(any)).thenReturn(cachedData);
+
+          expect(
+            () => _mockDriver.getAll<NotRegisteredModel>('key'),
             throwsA(
               isA<ArgumentError>().having(
                   (e) => e.message,
