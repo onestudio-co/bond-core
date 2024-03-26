@@ -1,5 +1,9 @@
 ## Changelog
 
+## 0.0.1+6
+
+* take providers list as a method argument on run method.
+
 ## 0.0.1+5
 
 * just format files using dart form command.
@@ -18,7 +22,8 @@
 
 #### How to Migrate:
 
-1. If you used `responseConvert<T>`, replace it with the `convertResponse<T>` method from the new `ResponseDecoding`
+1. If you used `responseConvert<T>`, replace it with the `convertResponse<T>` method from the
+   new `ResponseDecoding`
    mixin.
 
 ```dart
@@ -47,7 +52,8 @@ class MyServiceProvider extends ServiceProvider with ResponseDecoding {
     - `KeyboardContext`: Methods to control and check the keyboard state.
     - `InsetsContext`: Access media padding, status bar height, and bottom inset.
     - `LocalizationContext`: Access the current locale of the context.
-    - `MediaQueryContext`: Determine `screenHeight`, `screenWidth`, and if the device orientation is landscape.
+    - `MediaQueryContext`: Determine `screenHeight`, `screenWidth`, and if the device orientation is
+      landscape.
     - `DeviceTypeContext`: Determine if the device is a phone, tablet, or desktop.
     - `TextScaleContext`: Access text scale factors for accessibility settings.
     - `BrightnessContext`: Check if the device is in dark mode or light mode.
@@ -56,8 +62,10 @@ class MyServiceProvider extends ServiceProvider with ResponseDecoding {
 #### Updated
 
 - **App Initialization**:
-    - Introduced `RunTasks` class to streamline application start-up process. The usage has been refactored to use `run`
-      with `RunTasks` for initialization logic, including registering service providers and other pre and post-run
+    - Introduced `RunTasks` class to streamline application start-up process. The usage has been
+      refactored to use `run`
+      with `RunTasks` for initialization logic, including registering service providers and other
+      pre and post-run
       tasks.
         - Example:
           ```dart
