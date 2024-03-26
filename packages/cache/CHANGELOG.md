@@ -1,3 +1,7 @@
+## 0.0.2
+* no need to pass factory for custom object caching.
+* improve code quality & write tests.
+
 ## 0.0.1+2
 
 * update bond_core dependency.
