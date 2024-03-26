@@ -16,8 +16,8 @@ void run(
 }) {
   runZonedGuarded<Future<void>>(
     () async {
-      await init(providers);
       final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+      await init(providers);
 
       await tasks.beforeRun(widgetsBinding);
 

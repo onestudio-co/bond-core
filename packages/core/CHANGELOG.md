@@ -1,5 +1,9 @@
 ## Changelog
 
+## 0.0.1+7
+
+* call WidgetsFlutterBinding.ensureInitialized method before init the service providers.
+
 ## 0.0.1+6
 
 * take providers list as a method argument on run method.
