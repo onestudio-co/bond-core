@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 /// Usage:
 /// Assign this key to the `key` property of your root [MaterialApp] or [CupertinoApp]
 /// widget to enable bond packages to perform root-level operations.
-final GlobalKey appKey = GlobalKey();
+final GlobalKey<NavigatorState> appKey = GlobalKey<NavigatorState>();
 
 /// Provides access to the global root-level context of the application.
 ///

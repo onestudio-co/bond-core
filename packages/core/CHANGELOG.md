@@ -1,5 +1,9 @@
 ## Changelog
 
+## 0.0.1+8
+
+* appKey now from type GlobalKey<NavigatorState>.
+
 ## 0.0.1+7
 
 * call WidgetsFlutterBinding.ensureInitialized method before init the service providers.
