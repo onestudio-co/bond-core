@@ -34,6 +34,27 @@ class Cache {
         fromJsonFactory: fromJsonFactory,
       );
 
+  /// Retrieves a list of cached data associated with the specified [key].
+  /// - Parameter [key] The key associated with the cached data.
+  /// - Parameter [defaultValue] The default value or function returning the value.
+  /// - Parameter [fromJsonFactory] The factory function for deserialization of the list elements.
+  /// - Returns: The list of cached data of type [T] or the default value if not found or invalid.
+  /// - Throws: [ArgumentError] if the value type is not supported.
+  /// Usage:
+  /// ```dart
+  /// var settings = Cache.getAll<Setting>("settings");
+  /// ```
+  static List<T> getAll<T>(
+    String key, {
+    dynamic defaultValue,
+    Factory<T>? fromJsonFactory,
+  }) =>
+      cacheDriver.getAll<T>(
+        key,
+        defaultValue: defaultValue,
+        fromJsonFactory: fromJsonFactory,
+      );
+
   /// Checks if a value with the specified [key] exists in the cache.
   ///
   /// - Parameter [key] The unique identifier for the cached value.

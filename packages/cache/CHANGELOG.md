@@ -1,4 +1,9 @@
+## 0.0.2+1
+
+* add missing getAll methods.
+
 ## 0.0.2
+
 * no need to pass factory for custom object caching.
 * improve code quality & write tests.
 
