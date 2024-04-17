@@ -1,5 +1,7 @@
 import 'dart:ui';
+
 import 'package:intl/intl.dart';
+
 import 'l10n/messages_all_locales.dart';
 
 /// A class for handling validation-related localizations.
@@ -12,7 +14,7 @@ class ValidatorLocalizations {
   /// Creates a new [ValidatorLocalizations] instance for the specified locale.
   ///
   /// The [localeName] parameter specifies the name of the locale, e.g., 'en_US'.
-  ValidatorLocalizations(this.localeName);
+  ValidatorLocalizations._(this.localeName);
 
   /// Loads the [ValidatorLocalizations] instance for the given [locale].
   ///
@@ -24,7 +26,7 @@ class ValidatorLocalizations {
     final localeName = Intl.canonicalizedLocale(name);
 
     return initializeMessages(localeName).then((_) {
-      return ValidatorLocalizations(localeName);
+      return ValidatorLocalizations._(localeName);
     });
   }
 

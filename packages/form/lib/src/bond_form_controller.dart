@@ -42,6 +42,35 @@ mixin FormController<Success, Failure extends Error> {
     );
   }
 
+  /// Validates all fields in the form.
+  void validate() {
+    for (final fieldName in state.fields.keys) {
+      final field = state.get(fieldName);
+      state.fields[fieldName] = field.copyWith(touched: true);
+    }
+    if (_allValid) {
+      state = state.copyWith(
+        fields: Map.from(state.fields),
+        status: BondFormStateStatus.valid,
+      );
+    } else {
+      for (final fieldEntry in state.fields.entries) {
+        final field = fieldEntry.value;
+        final error = field.validate(state.fields);
+        state.fields[fieldEntry.key] = field.updateError(error);
+      }
+      state = state.copyWith(
+        fields: Map.from(state.fields),
+        status: BondFormStateStatus.invalid,
+      );
+      final errors = state.fields.values
+          .where((element) => element.error != null)
+          .map((e) => '*${e.error}*')
+          .join('\n');
+      log('Form is not on valid state\n$errors');
+    }
+  }
+
   /// A private getter to check if all fields in the form are valid.
   bool get _allValid {
     var allValid = true;

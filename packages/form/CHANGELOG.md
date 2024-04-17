@@ -1,3 +1,7 @@
+## 0.0.1+11
+
+* add validate method to `FormController` mixin 
+
 ## 0.0.1+10
 
 * update readme.md file to mention the riverpod integration
