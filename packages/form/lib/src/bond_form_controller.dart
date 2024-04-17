@@ -143,4 +143,13 @@ mixin FormController<Success, Failure extends Error> {
       log('Form is not on valid state\n$errors');
     }
   }
+
+  void clear() {
+    state = state.copyWith(
+      fields: Map.from(fields()),
+      status: BondFormStateStatus.pristine,
+      success: null,
+      failure: null,
+    );
+  }
 }

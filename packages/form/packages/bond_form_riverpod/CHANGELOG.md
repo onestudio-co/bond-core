@@ -1,3 +1,7 @@
+## 0.0.1+4
+
+* support FamilyFormStateNotifier and AutoDisposeFamilyFormStateNotifier.
+
 ## 0.0.1+3
 
 * update readme file.
