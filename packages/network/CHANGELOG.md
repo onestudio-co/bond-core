@@ -1,3 +1,7 @@
+## 0.0.4
+
+* add currentPage property to Meta class.
+
 ## 0.0.3+1
 
 * Update `bond_core` dependency.

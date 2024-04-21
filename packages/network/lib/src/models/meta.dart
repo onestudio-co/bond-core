@@ -5,6 +5,7 @@ part 'meta.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Meta {
   const Meta({
+    this.currentPage,
     this.from,
     this.lastPage,
     this.path,
@@ -13,6 +14,9 @@ class Meta {
     this.message,
   });
 
+  @JsonKey(name: 'current_page')
+  final int? currentPage;
+  @JsonKey(name: 'last_page')
   final int? from;
   @JsonKey(name: 'last_page')
   final int? lastPage;
