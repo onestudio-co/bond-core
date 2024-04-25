@@ -1,10 +1,14 @@
+## 0.0.1+13
+
+* add more helpers methods inside `BondFormState` extension
+
 ## 0.0.1+12
 
-* add clear method to `FormController` mixin 
+* add clear method to `FormController` mixin
 
 ## 0.0.1+11
 
-* add validate method to `FormController` mixin 
+* add validate method to `FormController` mixin
 
 ## 0.0.1+10
 
