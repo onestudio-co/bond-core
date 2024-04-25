@@ -1,5 +1,9 @@
 ## Changelog
 
+## 0.0.1+9
+
+* add new extensions to map a `Future` results.
+
 ## 0.0.1+8
 
 * appKey now from type GlobalKey<NavigatorState>.

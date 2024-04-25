@@ -24,6 +24,7 @@ Bond Core offers a comprehensive set of utilities and integrations designed to s
 - **Utility Extensions**:
     - **BuildContext Extensions**: Simplify common operations with context-aware extensions. Get media query details, theme attributes, show snack bars, and more.
     - **Responsive Layout Helpers**: Determine device type (phone, tablet, desktop), handle text scale factors, check brightness settings, and manage safe area insets to make your layouts adaptive.
+    - **Future Extensions**: Provides a methods to map the result of the future to a different type.
 
 - **App Initialization**: Use the `run` method with `RunTasks` for a streamlined app initialization process, ensuring services are registered before your app starts.
 
