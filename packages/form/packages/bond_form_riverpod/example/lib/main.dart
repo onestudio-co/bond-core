@@ -8,5 +8,6 @@ void main() => run(
       () => const ProviderScope(
         child: BondApp(),
       ),
-      RunAppTasks(appProviders),
+      tasks: RunAppTasks(),
+      providers: appProviders,
     );

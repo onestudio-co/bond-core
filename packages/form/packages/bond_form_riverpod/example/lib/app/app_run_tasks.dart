@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 
 class RunAppTasks extends RunTasks {
-  RunAppTasks(List<ServiceProvider> providers) : super(providers);
+  RunAppTasks() : super();
 
   @override
   Future<void> beforeRun(WidgetsBinding widgetsBinding) async {
