@@ -1,3 +1,7 @@
+## 0.0.1+15
+
+* add missing method 'updateAsyncDropDown' to `FormController` extension.
+
 ## 0.0.1+14
 
 * introduced the async drop down menu field state `AsyncDropDownFieldState`.
