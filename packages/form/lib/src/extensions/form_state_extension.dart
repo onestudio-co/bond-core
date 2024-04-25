@@ -117,7 +117,7 @@ extension XBondFormState on BondFormState {
   ///
   /// This method retrieves the state of the dropdown field identified by the provided [fieldName].
   ///
-  /// - Parameter [fieldName]: The name of the dropdown field to retrieve the state from.
+  /// - Parameter [fieldName] The name of the dropdown field to retrieve the state from.
   /// - Returns: The state of the dropdown field.
   /// - Throws: [ArgumentError] if the field doesn't exist.
   DropDownFieldState<T> dropDownField<T>(String fieldName) {
@@ -146,5 +146,40 @@ extension XBondFormState on BondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   T dropDownValue<T>(String fieldName) {
     return dropDownField<T>(fieldName).value;
+  }
+
+  /// Retrieves the state of the async dropdown field for a specified [fieldName].
+  ///
+  /// This method retrieves the state of the async dropdown field identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the async dropdown field to retrieve the state from.
+  /// - Returns: The state of the async dropdown field.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  AsyncDropDownFieldState<T> asyncDropDownField<T>(String fieldName) {
+    return get<AsyncDropDownFieldState<T>, T>(fieldName);
+  }
+
+  /// Retrieves the list of dropdown items for a specified [fieldName].
+  ///
+  /// This method retrieves the list of async dropdown items associated with the
+  /// async dropdown field identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the async dropdown field to retrieve items from.
+  /// - Returns: A list of [DropDownItemState] representing the items of the async dropdown field.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  Future<List<DropDownItemState<T>>> asyncDropDownItems<T>(String fieldName) {
+    return asyncDropDownField<T>(fieldName).items;
+  }
+
+  /// Retrieves the selected value of the async dropdown field for a specified [fieldName].
+  ///
+  /// This method retrieves the currently selected value of the async dropdown field
+  /// identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the async dropdown field to retrieve the value from.
+  /// - Returns: The selected value of the async dropdown field, or `null` if no value is selected.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  T asyncDropDownValue<T>(String fieldName) {
+    return asyncDropDownField<T>(fieldName).value;
   }
 }

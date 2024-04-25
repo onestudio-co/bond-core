@@ -1,5 +1,6 @@
 library form_fields;
 
+export 'form_fields/fields/async_drop_down_field_state.dart';
 export 'form_fields/fields/checkbox_field_state.dart';
 export 'form_fields/fields/checkbox_group_field_state.dart';
 export 'form_fields/fields/date_field_state.dart';
