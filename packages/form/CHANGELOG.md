@@ -1,6 +1,11 @@
+## 0.0.1+17
+
+* fix failure handling at the _onSubmit method.
+
 ## 0.0.1+16
 
-* introduce `HasValidationErrors` mixin to update form fields state with the errors that comes from an api.
+* introduce `HasValidationErrors` mixin to update form fields state with the errors that comes from
+  an api.
   services.
 
 ## 0.0.1+15

@@ -124,12 +124,11 @@ mixin FormController<Success, Failure extends Error> {
       } catch (error) {
         if (error is HasValidationErrors) {
           _updateValidationErrors(error.errors);
-        } else {
-          state = state.copyWith(
-            status: BondFormStateStatus.failed,
-            failure: error as Failure,
-          );
         }
+        state = state.copyWith(
+          status: BondFormStateStatus.failed,
+          failure: error as Failure,
+        );
       }
     } else {
       for (final fieldEntry in state.fields.entries) {
