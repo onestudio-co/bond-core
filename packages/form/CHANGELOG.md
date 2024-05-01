@@ -1,3 +1,8 @@
+## 0.0.1+16
+
+* introduce `HasValidationErrors` mixin to update form fields state with the errors that comes from an api.
+  services.
+
 ## 0.0.1+15
 
 * add missing method 'updateAsyncDropDown' to `FormController` extension.

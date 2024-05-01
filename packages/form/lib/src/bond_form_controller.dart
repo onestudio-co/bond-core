@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bond_form/bond_form.dart';
+import 'package:bond_form/src/validation/has_validation_errors.dart';
 
 /// A mixin to manage the state and logic of a form.
 ///
@@ -26,8 +27,8 @@ mixin FormController<Success, Failure extends Error> {
   /// Updates the field value and status.
   ///
   /// Parameters:
-  ///   - [fieldName]: The name of the field to update.
-  ///   - [value]: The new value for the field.
+  ///   - [fieldName] The name of the field to update.
+  ///   - [value] The new value for the field.
   void update<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
     state.fields[fieldName] = field.copyWith(
@@ -120,11 +121,15 @@ mixin FormController<Success, Failure extends Error> {
           status: BondFormStateStatus.submitted,
           success: result,
         );
-      } catch (e) {
-        state = state.copyWith(
-          status: BondFormStateStatus.failed,
-          failure: e as Failure,
-        );
+      } catch (error) {
+        if (error is HasValidationErrors) {
+          _updateValidationErrors(error.errors);
+        } else {
+          state = state.copyWith(
+            status: BondFormStateStatus.failed,
+            failure: error as Failure,
+          );
+        }
       }
     } else {
       for (final fieldEntry in state.fields.entries) {
@@ -144,6 +149,29 @@ mixin FormController<Success, Failure extends Error> {
     }
   }
 
+  /// Internal method to update validation errors for form fields.
+  ///
+  /// This method updates the validation errors for each form field based on the provided [errors] map.
+  /// It iterates through the fields, retrieves the corresponding error messages from the map,
+  /// and updates the error state of each field accordingly.
+  ///
+  /// - Parameter [errors] A map containing field names as keys and lists of error messages as values.
+  void _updateValidationErrors(Map<String, List<String>> errors) {
+    for (final fieldEntry in state.fields.entries) {
+      final field = fieldEntry.value;
+      final error = errors[fieldEntry.key]?.join('\n');
+      state.fields[fieldEntry.key] = field.updateError(error);
+    }
+    state = state.copyWith(
+      fields: Map.from(state.fields),
+      status: BondFormStateStatus.invalid,
+    );
+  }
+
+  /// Clears the form state and resets it to its initial pristine state.
+  ///
+  /// This method resets all form fields to their initial state, clears any success or failure information,
+  /// and sets the form status to 'pristine'.
   void clear() {
     state = state.copyWith(
       fields: Map.from(fields()),
