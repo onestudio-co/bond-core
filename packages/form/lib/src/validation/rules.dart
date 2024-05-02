@@ -288,13 +288,13 @@ class Rules {
   ///
   /// This rule checks if a boolean value is true.
   /// It can include a custom validation message.
-  static ValidationRule<bool> isTrue({String? message}) =>
+  static ValidationRule<bool?> isTrue({String? message}) =>
       IsTrue(message: message);
 
   /// Creates an [IsFalse] validation rule.
   ///
   /// This rule checks if a boolean value is false.
   /// It can include a custom validation message.
-  static ValidationRule<bool> isFalse({String? message}) =>
+  static ValidationRule<bool?> isFalse({String? message}) =>
       IsFalse(message: message);
 }

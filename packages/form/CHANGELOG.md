@@ -1,3 +1,6 @@
+## 0.0.1+20
+* fix `IsTrue` and `IsFalse` rules to deal with null value.
+
 ## 0.0.1+19
 
 * fix `Numeric` rule to deal with null value.
