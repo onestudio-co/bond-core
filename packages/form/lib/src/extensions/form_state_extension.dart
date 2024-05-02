@@ -57,6 +57,28 @@ extension XBondFormState on BondFormState {
     return radioGroup<T>(fieldName).value;
   }
 
+  /// Retrieves the state of the checkbox field for a specified [fieldName].
+  ///
+  /// This method retrieves the state of the checkbox field identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the checkbox field to retrieve the state from.
+  /// - Returns: The state of the checkbox field.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  CheckboxFieldState<bool> checkbox(String fieldName) {
+    return get<CheckboxFieldState<bool>, bool?>(fieldName);
+  }
+
+  /// Retrieves the value of a checkbox field for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of a checkbox.
+  ///
+  /// - Parameter [fieldName] The name of the field to fetch.
+  /// - Returns: The current value of the field or `null` if not set.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  bool checkboxValue<T>(String fieldName) {
+    return checkbox(fieldName).value ?? false;
+  }
+
   /// Retrieves the state of the checkbox group field for a specified [fieldName].
   ///
   /// This method retrieves the state of the checkbox group field identified by the provided [fieldName].
@@ -97,7 +119,7 @@ extension XBondFormState on BondFormState {
   /// - Parameter [fieldName] The name of the field to fetch.
   /// - Returns: The first selected value or `null` if none are selected.
   /// - Throws: [ArgumentError] if the field doesn't exist.
-  T? checkboxValue<T>(String fieldName) {
+  T? checkboxGroupValue<T>(String fieldName) {
     return checkboxValues<T>(fieldName).firstOrNull;
   }
 

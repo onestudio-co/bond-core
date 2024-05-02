@@ -14,8 +14,8 @@ extension XFormController on FormController {
   ///
   /// - [fieldName] The name of the checkbox field to update.
   /// - [value] The new value for the checkbox field.
-  void updateCheckbox<T>(String fieldName, T? value) {
-    update<CheckboxFieldState<T>, T?>(fieldName, value);
+  void updateCheckbox(String fieldName, bool? value) {
+    update<CheckboxFieldState<bool>, bool?>(fieldName, value);
   }
 
   /// Updates a [CheckboxGroupFieldState] with a given [value].
