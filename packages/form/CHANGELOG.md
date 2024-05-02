@@ -1,3 +1,12 @@
+## 0.0.1+19
+
+* fix `Numeric` rule to deal with null value.
+
+## 0.0.1+18
+
+* new extension methods support dealing with single bool checkbox field.
+* fix `AlphaNum` and `AlphaDash` rules to deal with null value.
+
 ## 0.0.1+17
 
 * fix failure handling at the _onSubmit method.
@@ -5,8 +14,7 @@
 ## 0.0.1+16
 
 * introduce `HasValidationErrors` mixin to update form fields state with the errors that comes from
-  an api.
-  services.
+  an api. services.
 
 ## 0.0.1+15
 

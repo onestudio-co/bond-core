@@ -195,7 +195,7 @@ class Rules {
   ///
   /// This rule checks if a string can be parsed as a numeric value.
   /// It can include a custom validation message.
-  static ValidationRule<String> numeric({String? message}) =>
+  static ValidationRule<String?> numeric({String? message}) =>
       Numeric(message: message);
 
   /// Creates a [Regex] validation rule.
