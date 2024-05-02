@@ -26,6 +26,7 @@ export 'rules/min_selected.dart';
 export 'rules/min_value.dart';
 export 'rules/not_in_list.dart';
 export 'rules/numeric.dart';
+export 'rules/phone_number.dart';
 export 'rules/range_selected.dart';
 export 'rules/regex.dart';
 export 'rules/required.dart';
@@ -33,7 +34,6 @@ export 'rules/required_if.dart';
 export 'rules/same.dart';
 export 'rules/size.dart';
 export 'rules/url.dart';
-export 'rules/phone_number.dart';
 export 'validation_rule.dart';
 
 /// A utility class that provides convenient methods to create instances of
@@ -80,14 +80,14 @@ class Rules {
   ///
   /// This rule checks if a string contains only alphabetic, dash, or underscore characters.
   /// It can include a custom validation message.
-  static ValidationRule<String> alphaDash({String? message}) =>
+  static ValidationRule<String?> alphaDash({String? message}) =>
       AlphaDash(message: message);
 
   /// Creates an [AlphaNum] validation rule.
   ///
   /// This rule checks if a string contains only alphanumeric characters.
   /// It can include a custom validation message.
-  static ValidationRule<String> alphaNum({String? message}) =>
+  static ValidationRule<String?> alphaNum({String? message}) =>
       AlphaNum(message: message);
 
   /// Creates a [Between] validation rule.
