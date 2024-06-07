@@ -1,3 +1,33 @@
+## 0.0.1+21
+* Added the `RequiredValues` class to ensure required form field values are not null.
+  - Methods added to `RequiredValues` class:
+    - `textFieldValue`: Ensures the value of a text field is not null.
+    - `radioGroupValue`: Ensures the value of a radio group field is not null.
+    - `checkboxGroupValue`: Ensures the first selected value of a checkbox group is not null.
+    - `dropDownValue`: Ensures the value of a dropdown field is not null.
+    - `asyncDropDownValue`: Ensures the value of an async dropdown field is not null.
+* Added the `required` extension method to `BondFormState`.
+  - Provides an instance of `RequiredValues` to ensure required field values are not null.
+* Updated the Dartdoc comments for `XBondFormState` extension.
+  - Provided clear and comprehensive documentation for all methods:
+    - `textFieldValue`: Retrieves the value of a text field.
+    - `radioGroupValue`: Retrieves the value of a radio group field.
+    - `checkboxGroupValue`: Retrieves the first selected value of a checkbox group.
+    - `dropDownValue`: Retrieves the value of a dropdown field.
+    - `asyncDropDownValue`: Retrieves the value of an async dropdown field.
+    - `required`: Returns an instance of `RequiredValues` to ensure required field values are not null.
+* Updated the Dartdoc comments for `XFormController` extension.
+  - Provided clear and comprehensive documentation for all methods:
+    - `updateText`: Updates a `TextFieldState` with a given value.
+    - `updateCheckbox`: Updates a `CheckboxFieldState` with a given value.
+    - `updateCheckboxGroup`: Updates a `CheckboxGroupFieldState` with a given value.
+    - `toggleCheckbox`: Toggles the value of a specific checkbox within a checkbox group.
+    - `updateDate`: Updates a `DateFieldState` with a given value.
+    - `updateDropDown`: Updates a `DropDownFieldState` with a given value.
+    - `updateAsyncDropDown`: Updates a `AsyncDropDownFieldState` with a given value.
+    - `updateRadioButton`: Updates a `RadioButtonFieldState` with a given value.
+    - `updateRadioGroup`: Updates a `RadioGroupFieldState` with a given value.
+
 ## 0.0.1+20
 * fix `IsTrue` and `IsFalse` rules to deal with null value.
 
