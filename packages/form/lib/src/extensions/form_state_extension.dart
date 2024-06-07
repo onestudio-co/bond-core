@@ -201,7 +201,7 @@ extension XBondFormState on BondFormState {
   /// - Parameter [fieldName] The name of the async dropdown field to retrieve the value from.
   /// - Returns: The selected value of the async dropdown field, or `null` if no value is selected.
   /// - Throws: [ArgumentError] if the field doesn't exist.
-  T asyncDropDownValue<T>(String fieldName) {
+  T? asyncDropDownValue<T>(String fieldName) {
     return asyncDropDownField<T>(fieldName).value;
   }
 }
