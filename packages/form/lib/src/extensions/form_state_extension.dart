@@ -166,7 +166,7 @@ extension XBondFormState on BondFormState {
   /// - Parameter [fieldName] The name of the dropdown field to retrieve the value from.
   /// - Returns: The selected value of the dropdown field, or `null` if no value is selected.
   /// - Throws: [ArgumentError] if the field doesn't exist.
-  T dropDownValue<T>(String fieldName) {
+  T? dropDownValue<T>(String fieldName) {
     return dropDownField<T>(fieldName).value;
   }
 
