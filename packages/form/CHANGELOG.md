@@ -1,3 +1,16 @@
+### Changelog
+
+## 0.0.1+22
+* Added `HiddenFieldState` class to manage the state of hidden form fields.
+  - `HiddenFieldState` provides a way to manage hidden input fields within a form.
+* Updated `BondFormState` with methods to handle hidden fields.
+  - `hiddenFieldValue`: Retrieves the value of a hidden field.
+  - `hiddenField`: Retrieves the state of a hidden field using a simplified `get` method.
+* Updated `RequiredValues` class to ensure hidden field values are not null.
+  - `hiddenFieldValue`: Ensures the value of a hidden field is not null.
+* Updated `FormController` with methods to update hidden field values.
+  - `updateHiddenField`: Updates a `HiddenFieldState` with a given value.
+
 ## 0.0.1+21
 * Added the `RequiredValues` class to ensure required form field values are not null.
   - Methods added to `RequiredValues` class:
