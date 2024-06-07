@@ -36,6 +36,8 @@ import 'required_values.dart';
 /// - [asyncDropDownItems]: Retrieves a list of async dropdown items.
 /// - [asyncDropDownValue]: Retrieves the value of an async dropdown field.
 /// - [required]: Returns an instance of `RequiredValues` to ensure required field values are not null.
+/// - [hiddenField]: Retrieves the state of a hidden field.
+/// - [hiddenFieldValue]: Retrieves the value of a hidden field.
 extension XBondFormState on BondFormState {
   /// Retrieves the [TextFieldState] for a given text field.
   ///
@@ -238,6 +240,26 @@ extension XBondFormState on BondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   T? asyncDropDownValue<T>(String fieldName) {
     return asyncDropDownField<T>(fieldName).value;
+  }
+
+  /// Retrieves the hidden field state for a specified [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the hidden field to fetch.
+  /// - Returns: The hidden field state.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  HiddenFieldState<T> hiddenField<T>(String fieldName) {
+    return get<HiddenFieldState<T>, T>(fieldName);
+  }
+
+  /// Retrieves the value of a hidden field for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of a hidden field.
+  ///
+  /// - Parameter [fieldName] The name of the hidden field to fetch.
+  /// - Returns: The current value of the hidden field as a `T`, or `null` if not set.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  T? hiddenFieldValue<T>(String fieldName) {
+    return hiddenField<T>(fieldName).value;
   }
 
   /// Retrieves the [RequiredValues] extension for the current form state.
