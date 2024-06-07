@@ -1,5 +1,7 @@
 import 'package:bond_form/bond_form.dart';
 
+import 'required_values.dart';
+
 /// Extension methods for [BondFormState] providing convenience operations.
 extension XBondFormState on BondFormState {
   /// Retrieves the [TextFieldState] for a given text field.
@@ -204,4 +206,7 @@ extension XBondFormState on BondFormState {
   T? asyncDropDownValue<T>(String fieldName) {
     return asyncDropDownField<T>(fieldName).value;
   }
+
+  /// Retrieves the [RequiredValues] extension for the current form state.
+  RequiredValues required() => RequiredValues(this);
 }
