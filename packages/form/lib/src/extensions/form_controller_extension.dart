@@ -1,6 +1,32 @@
 import 'package:bond_form/bond_form.dart';
 
-/// Extension methods for [FormController] for more type-safe updates.
+/// Extension methods for [FormController] providing more type-safe updates.
+///
+/// The `XFormController` extension adds methods to `FormController` to simplify
+/// updating the values of various form fields in a type-safe manner.
+///
+/// Example usage:
+/// ```dart
+/// // Update the value of a text field.
+/// controller.updateText('fieldName', 'new value');
+///
+/// // Update the value of a checkbox field.
+/// controller.updateCheckbox('fieldName', true);
+///
+/// // Toggle a value in a checkbox group.
+/// controller.toggleCheckbox('fieldName', value: 'value', selected: true);
+/// ```
+///
+/// Methods:
+/// - [updateText]: Updates a [TextFieldState] with a given value.
+/// - [updateCheckbox]: Updates a [CheckboxFieldState] with a given value.
+/// - [updateCheckboxGroup]: Updates a [CheckboxGroupFieldState] with a given value.
+/// - [toggleCheckbox]: Toggles the value of a specific checkbox within a checkbox group.
+/// - [updateDate]: Updates a [DateFieldState] with a given value.
+/// - [updateDropDown]: Updates a [DropDownFieldState] with a given value.
+/// - [updateAsyncDropDown]: Updates a [AsyncDropDownFieldState] with a given value.
+/// - [updateRadioButton]: Updates a [RadioButtonFieldState] with a given value.
+/// - [updateRadioGroup]: Updates a [RadioGroupFieldState] with a given value.
 extension XFormController on FormController {
   /// Updates a [TextFieldState] with a given [value].
   ///

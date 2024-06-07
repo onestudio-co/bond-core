@@ -3,6 +3,39 @@ import 'package:bond_form/bond_form.dart';
 import 'required_values.dart';
 
 /// Extension methods for [BondFormState] providing convenience operations.
+///
+/// The `XBondFormState` extension adds methods to `BondFormState` to simplify
+/// retrieving values from form fields. It also includes a method to ensure
+/// required field values are not null.
+///
+/// Example usage:
+/// ```dart
+/// // Retrieve a potentially null value from a text field.
+/// final phoneNumber = state.textFieldValue('phoneNumber');
+///
+/// // Retrieve a non-null value from a required text field.
+/// final requiredPhoneNumber = state.required().textFieldValue('phoneNumber');
+/// ```
+///
+/// Methods:
+/// - [textField]: Retrieves the state of a text field.
+/// - [textFieldValue]: Retrieves the value of a text field.
+/// - [radioGroup]: Retrieves the state of a radio group field.
+/// - [radioButtonsOf]: Retrieves a list of radio button states.
+/// - [radioGroupValue]: Retrieves the value of a radio group field.
+/// - [checkbox]: Retrieves the state of a checkbox field.
+/// - [checkboxValue]: Retrieves the value of a checkbox field.
+/// - [checkboxGroup]: Retrieves the state of a checkbox group field.
+/// - [checkboxesOf]: Retrieves a list of checkbox states.
+/// - [checkboxGroupValue]: Retrieves the first selected value of a checkbox group.
+/// - [checkboxSelected]: Checks if a specific value is selected within a checkbox group.
+/// - [dropDownField]: Retrieves the state of a dropdown field.
+/// - [dropDownItems]: Retrieves a list of dropdown items.
+/// - [dropDownValue]: Retrieves the value of a dropdown field.
+/// - [asyncDropDownField]: Retrieves the state of an async dropdown field.
+/// - [asyncDropDownItems]: Retrieves a list of async dropdown items.
+/// - [asyncDropDownValue]: Retrieves the value of an async dropdown field.
+/// - [required]: Returns an instance of `RequiredValues` to ensure required field values are not null.
 extension XBondFormState on BondFormState {
   /// Retrieves the [TextFieldState] for a given text field.
   ///
