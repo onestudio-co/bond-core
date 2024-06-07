@@ -23,6 +23,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [checkboxGroupValue]: Ensures the first selected value of a checkbox group is not null.
 /// - [dropDownValue]: Ensures the value of a dropdown field is not null.
 /// - [asyncDropDownValue]: Ensures the value of an async dropdown field is not null.
+/// - [hiddenFieldValue]: Ensures the value of a hidden field is not null.
 class RequiredValues {
   final BondFormState state;
 
@@ -87,6 +88,19 @@ class RequiredValues {
   /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
   T asyncDropDownValue<T>(String fieldName) {
     final value = state.asyncDropDownValue<T>(fieldName);
+    if (value == null) {
+      throw ArgumentError('Field $fieldName is required but its value is null');
+    }
+    return value;
+  }
+
+  /// Ensures the value of a hidden field is not null.
+  ///
+  /// - Parameter [fieldName]: The name of the hidden field to fetch.
+  /// - Returns: The current value of the hidden field as a non-null `T`.
+  /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
+  T hiddenFieldValue<T>(String fieldName) {
+    final value = state.hiddenFieldValue<T>(fieldName);
     if (value == null) {
       throw ArgumentError('Field $fieldName is required but its value is null');
     }
