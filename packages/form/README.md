@@ -7,7 +7,7 @@ forms.
 This package is ideal for anyone looking to streamline their form management logic, whether it's for a simple login form
 or a complex, multi-step registration process.
 
-[![Pub Version](https://img.shields.io/pub/v/bond_core)](https://pub.dev/packages/bond_form)
+[![Pub Version](https://img.shields.io/pub/v/bond_form)](https://pub.dev/packages/bond_form)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
 # Table of Contents
