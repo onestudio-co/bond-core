@@ -1,5 +1,9 @@
 ### Changelog
 
+## 0.0.1+23
+
+* `valid` New method on `BondFormState` to check a specific field validate.
+
 ## 0.0.1+22
 
 * Added `HiddenFieldState` class to manage the state of hidden form fields.
