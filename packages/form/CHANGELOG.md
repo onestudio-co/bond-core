@@ -1,5 +1,9 @@
 ### Changelog
 
+## 0.0.1+24
+
+* fix `valid` method logic.
+
 ## 0.0.1+23
 
 * `valid` New method on `BondFormState` to check a specific field validate.
