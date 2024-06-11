@@ -100,6 +100,10 @@ class BondFormState<Success, Failure extends Error> {
   /// Allows accessing the state of a form field using subscript operator.
   FormFieldState operator [](String fieldName) => get(fieldName);
 
+  /// Check the validity of a form field by its [fieldName].
+  bool valid<T extends FormFieldState<G>, G>(String fieldName) =>
+      get<T, G>(fieldName).validate(fields) != null;
+
   /// Creates a copy of this [BondFormState] with optional parameter overrides.
   BondFormState<Success, Failure> copyWith({
     Map<String, FormFieldState>? fields,
