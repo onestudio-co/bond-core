@@ -88,7 +88,7 @@ class PizzaOrderPage extends ConsumerWidget {
                 CheckboxListTile(
                   title: Text(checkbox.label),
                   value: formState.checkboxSelected('toppings', checkbox.value),
-                  onChanged: (selected) => controller.toggleCheckbox<Toppings>(
+                  onChanged: (selected) => controller.toggleCheckbox(
                     'toppings',
                     value: checkbox.value,
                     selected: selected,

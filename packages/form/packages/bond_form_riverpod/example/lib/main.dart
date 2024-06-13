@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app/app_run_tasks.dart';
 import 'bond_app.dart';
+import 'config/app.dart';
 
 void main() => run(
       () => const ProviderScope(
         child: BondApp(),
       ),
       tasks: RunAppTasks(),
-      providers: appProviders,
+      providers: providers,
     );

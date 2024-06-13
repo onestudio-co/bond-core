@@ -37,7 +37,8 @@ class PizzaOrderFormController
             Rules.phoneNumber(),
           ],
         ),
-        'pizzaSize': RadioGroupFieldState<PizzaSize>(
+        'pizzaSize': RadioGroupFieldState<PizzaSize?>(
+          value: null,
           [
             RadioButtonFieldState(PizzaSize.small, label: 'Small'),
             RadioButtonFieldState(PizzaSize.medium, label: 'Medium'),
@@ -48,7 +49,8 @@ class PizzaOrderFormController
             Rules.required(),
           ],
         ),
-        'crustType': RadioGroupFieldState<CrustType>(
+        'crustType': RadioGroupFieldState<CrustType?>(
+          value: null,
           [
             RadioButtonFieldState(CrustType.thin, label: 'Thin Crust'),
             RadioButtonFieldState(CrustType.original, label: 'Original'),
@@ -59,7 +61,7 @@ class PizzaOrderFormController
             Rules.required(),
           ],
         ),
-        'toppings': CheckboxGroupFieldState<Toppings>(
+        'toppings': CheckboxGroupFieldState<Toppings?>(
           [
             CheckboxFieldState(Toppings.mushrooms, label: 'Mushrooms'),
             CheckboxFieldState(Toppings.pepperoni, label: 'Pepperoni'),
@@ -75,7 +77,8 @@ class PizzaOrderFormController
             Rules.maxSelected(5),
           ],
         ),
-        'includeSides': RadioGroupFieldState<bool>(
+        'includeSides': RadioGroupFieldState<bool?>(
+          value: null,
           [
             RadioButtonFieldState(true, label: 'Yes'),
             RadioButtonFieldState(false, label: 'No'),
@@ -94,16 +97,18 @@ class PizzaOrderFormController
 
   @override
   Future<String> onSubmit() async {
-    final customerName = state.textFieldValue('customerName');
-    final phoneNumber = state.textFieldValue('phoneNumber');
-    final pizzaSize = state.radioGroupValue<PizzaSize>('pizzaSize');
-    final crustType = state.radioGroupValue<CrustType>('crustType');
+    // on summit called after the for validation is successful
+    // so we can access the values through required helper methods.
+    final customerName = state.required().textFieldValue('customerName');
+    final phoneNumber = state.required().textFieldValue('phoneNumber');
+    final pizzaSize = state.required().radioGroupValue<PizzaSize?>('pizzaSize');
+    final crustType = state.required().radioGroupValue<CrustType?>('crustType');
     final toppings = state
-        .checkboxValues<Toppings>('toppings')
+        .checkboxValues<Toppings?>('toppings')
         .map((e) => e.toString())
         .join(', ');
     final includeSides =
-        state.radioGroupValue<bool>('includeSides') == true ? 'Yes' : 'No';
+        state.radioGroupValue<bool?>('includeSides') == true ? 'Yes' : 'No';
     final specialInstructions =
         state.textFieldValue('specialInstructions') ?? 'None';
 
