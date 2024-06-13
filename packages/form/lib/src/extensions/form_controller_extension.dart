@@ -41,8 +41,8 @@ extension XFormController on FormController {
   ///
   /// - [fieldName] The name of the checkbox field to update.
   /// - [value] The new value for the checkbox field.
-  void updateCheckbox(String fieldName, bool? value) {
-    update<CheckboxFieldState<bool>, bool?>(fieldName, value);
+  void updateCheckbox(String fieldName, bool value) {
+    update<CheckboxFieldState<bool>, bool>(fieldName, value);
   }
 
   /// Updates a [CheckboxGroupFieldState] with a given [value].
@@ -50,12 +50,8 @@ extension XFormController on FormController {
   /// - [fieldName] The name of the checkbox group field to update.
   /// - [value] The new value for the checkbox group field.
   /// throws [ArgumentError] if the generic type T is not specified.
-  void updateCheckboxGroup<T>(String fieldName, Set<T>? value) {
-    if (T == Object) {
-      throw ArgumentError(
-          'The generic type T must be specified for updateCheckboxGroup<T>.');
-    }
-    update<CheckboxGroupFieldState<T>, Set<T>?>(fieldName, value);
+  void updateCheckboxGroup<T>(String fieldName, Set<T> value) {
+    update<CheckboxGroupFieldState<T>, Set<T>>(fieldName, value);
   }
 
   /// Toggles the value of a specific checkbox within a checkbox group.
@@ -70,11 +66,8 @@ extension XFormController on FormController {
   /// If `null`, the checkbox will be treated as not selected.
   ///
   /// This method automatically updates the state of the checkbox group field.
-  void toggleCheckbox<T>(String fieldName, {T? value, bool? selected}) {
+  void toggleCheckbox<T>(String fieldName, {required T value, bool? selected}) {
     final currentValues = state.checkboxValues<T>(fieldName);
-    if (value == null) {
-      return;
-    }
     if (selected ?? false) {
       currentValues.add(value);
     } else {
@@ -119,8 +112,8 @@ extension XFormController on FormController {
   ///
   /// - [fieldName] The name of the radio group field to update.
   /// - [value] The new value for the radio group field.
-  void updateRadioGroup<T>(String fieldName, T? value) {
-    update<RadioGroupFieldState<T>, T?>(fieldName, value);
+  void updateRadioGroup<T>(String fieldName, T value) {
+    update<RadioGroupFieldState<T>, T>(fieldName, value);
   }
 
   /// Updates a [HiddenFieldState] with a given [value].

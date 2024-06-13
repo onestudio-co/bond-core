@@ -18,12 +18,12 @@ import 'package:bond_form/bond_form.dart';
 /// ensures that the value is not null.
 ///
 /// Methods:
-/// - [textFieldValue]: Ensures the value of a text field is not null.
-/// - [radioGroupValue]: Ensures the value of a radio group field is not null.
-/// - [checkboxGroupValue]: Ensures the first selected value of a checkbox group is not null.
-/// - [dropDownValue]: Ensures the value of a dropdown field is not null.
-/// - [asyncDropDownValue]: Ensures the value of an async dropdown field is not null.
-/// - [hiddenFieldValue]: Ensures the value of a hidden field is not null.
+/// - [textFieldValue] Ensures the value of a text field is not null.
+/// - [radioGroupValue] Ensures the value of a radio group field is not null.
+/// - [checkboxGroupValue] Ensures the first selected value of a checkbox group is not null.
+/// - [dropDownValue] Ensures the value of a dropdown field is not null.
+/// - [asyncDropDownValue] Ensures the value of an async dropdown field is not null.
+/// - [hiddenFieldValue] Ensures the value of a hidden field is not null.
 class RequiredValues {
   final BondFormState state;
 
