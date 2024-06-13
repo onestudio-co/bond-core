@@ -4,7 +4,7 @@ import 'package:bond_form/bond_form.dart';
 ///
 /// A radio button group form field extends the [FormFieldState] class, providing
 /// a way to manage the state of multiple radio buttons within a group.
-class RadioGroupFieldState<T> extends FormFieldState<T?> {
+class RadioGroupFieldState<T> extends FormFieldState<T> {
   /// The list of individual radio button field states within the group.
   final List<RadioButtonFieldState<T>> radioButtons;
 
@@ -17,9 +17,9 @@ class RadioGroupFieldState<T> extends FormFieldState<T?> {
   RadioGroupFieldState(
     this.radioButtons, {
     required String label,
-    T? value,
+    required T value,
     String? error,
-    List<ValidationRule<T?>> rules = const [],
+    List<ValidationRule<T>> rules = const [],
   }) : super(
           value: value,
           label: label,
@@ -34,7 +34,7 @@ class RadioGroupFieldState<T> extends FormFieldState<T?> {
     String? label,
     bool? touched,
     bool? validateOnUpdate,
-    List<ValidationRule<T?>>? rules,
+    List<ValidationRule<T>>? rules,
   }) {
     return RadioGroupFieldState<T>(
       radioButtons,
