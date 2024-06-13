@@ -1,5 +1,15 @@
 ### Changelog
 
+## 0.0.1+25
+
+- **Refactor**: Separated field state and value retrieval methods into distinct files.
+    - Moved field state retrieval methods to `bond_form_extensions.dart`.
+    - Moved value retrieval methods to `bond_form_values.dart`.
+- **Enhancement**: Updated `required_values.dart` to include the `RequiredValues` class for
+  mandatory field checks.
+- **Improvement**: Improved overall code organization and maintainability by dividing
+  responsibilities into specific files.
+
 ## 0.0.1+24
 
 * fix `valid` method logic.
