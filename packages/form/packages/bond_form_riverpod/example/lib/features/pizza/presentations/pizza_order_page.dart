@@ -1,3 +1,4 @@
+import 'package:bond_core/bond_core.dart';
 import 'package:bond_form/bond_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -47,10 +48,34 @@ class PizzaOrderPage extends ConsumerWidget {
               ),
               const SizedBox(height: 16),
 
+              // Branch
+              DropdownButtonFormField<Branches>(
+                value: formState.dropDownValue('branch'),
+                items: formState
+                    .dropDownItems('branch')
+                    .map(
+                      (branch) => DropdownMenuItem<Branches>(
+                        value: branch.value,
+                        child: Text(branch.label),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) => controller.updateDropDown(
+                  'branch',
+                  value,
+                ),
+                style: context.textTheme.bodyMedium,
+                decoration: InputDecoration(
+                  hintText: formState.label('branch'),
+                  errorText: formState.error('branch'),
+                ),
+              ),
+              const SizedBox(height: 16),
+
               // Pizza Size
               Text(
                 formState.label('pizzaSize'),
-                style: Theme.of(context).textTheme.titleSmall,
+                style: context.textTheme.titleSmall,
               ),
               for (final radioButton in formState.radioButtonsOf('pizzaSize'))
                 ListTile(
@@ -66,7 +91,7 @@ class PizzaOrderPage extends ConsumerWidget {
               // Crust Type
               Text(
                 formState.label('crustType'),
-                style: Theme.of(context).textTheme.titleSmall,
+                style: context.textTheme.titleSmall,
               ),
               for (final radioButton in formState.radioButtonsOf('crustType'))
                 ListTile(
@@ -82,7 +107,7 @@ class PizzaOrderPage extends ConsumerWidget {
               // Toppings
               Text(
                 formState.label('toppings'),
-                style: Theme.of(context).textTheme.titleSmall,
+                style: context.textTheme.titleSmall,
               ),
               for (final checkbox in formState.checkboxesOf('toppings'))
                 CheckboxListTile(
@@ -98,7 +123,7 @@ class PizzaOrderPage extends ConsumerWidget {
               // Include Sides
               Text(
                 formState.label('includeSides'),
-                style: Theme.of(context).textTheme.titleSmall,
+                style: context.textTheme.titleSmall,
               ),
               for (final radioButton
                   in formState.radioButtonsOf('includeSides'))

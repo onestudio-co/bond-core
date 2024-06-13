@@ -16,6 +16,8 @@ enum Toppings {
   blackOlives
 }
 
+enum Branches { main, gaza, cairo }
+
 class PizzaOrderFormController
     extends AutoDisposeFormStateNotifier<String, Error> {
   // bond create form widget -- PizzaOrderFormController
@@ -35,6 +37,18 @@ class PizzaOrderFormController
           rules: [
             Rules.required(),
             Rules.phoneNumber(),
+          ],
+        ),
+        'branch': DropDownFieldState<Branches>(
+          Branches.main,
+          label: 'Select Branch',
+          items: Branches.values
+              .map(
+                (e) => DropDownItemState(e, label: e.name.toUpperCase()),
+              )
+              .toList(),
+          rules: [
+            Rules.required(),
           ],
         ),
         'pizzaSize': RadioGroupFieldState<PizzaSize?>(
@@ -101,6 +115,7 @@ class PizzaOrderFormController
     // so we can access the values through required helper methods.
     final customerName = state.required().textFieldValue('customerName');
     final phoneNumber = state.required().textFieldValue('phoneNumber');
+    final branch = state.required().dropDownValue('branch');
     final pizzaSize = state.required().radioGroupValue<PizzaSize?>('pizzaSize');
     final crustType = state.required().radioGroupValue<CrustType?>('crustType');
     final toppings = state
@@ -120,6 +135,7 @@ class PizzaOrderFormController
         return '''
         Customer Name: $customerName
         Phone Number: $phoneNumber
+        Branch: $branch
         Pizza Size: $pizzaSize
         Crust Type: $crustType
         Toppings: $toppings
