@@ -18,16 +18,16 @@ import 'package:bond_form/bond_form.dart';
 /// ```
 ///
 /// Methods:
-/// - [updateText]: Updates a [TextFieldState] with a given value.
-/// - [updateCheckbox]: Updates a [CheckboxFieldState] with a given value.
-/// - [updateCheckboxGroup]: Updates a [CheckboxGroupFieldState] with a given value.
-/// - [toggleCheckbox]: Toggles the value of a specific checkbox within a checkbox group.
-/// - [updateDate]: Updates a [DateFieldState] with a given value.
-/// - [updateDropDown]: Updates a [DropDownFieldState] with a given value.
-/// - [updateAsyncDropDown]: Updates a [AsyncDropDownFieldState] with a given value.
-/// - [updateRadioButton]: Updates a [RadioButtonFieldState] with a given value.
-/// - [updateRadioGroup]: Updates a [RadioGroupFieldState] with a given value.
-/// - [updateHiddenField]: Updates a [HiddenFieldState] with a given value.
+/// - [updateText] Updates a [TextFieldState] with a given value.
+/// - [updateCheckbox] Updates a [CheckboxFieldState] with a given value.
+/// - [updateCheckboxGroup] Updates a [CheckboxGroupFieldState] with a given value.
+/// - [toggleCheckbox] Toggles the value of a specific checkbox within a checkbox group.
+/// - [updateDate] Updates a [DateFieldState] with a given value.
+/// - [updateDropDown] Updates a [DropDownFieldState] with a given value.
+/// - [updateAsyncDropDown] Updates a [AsyncDropDownFieldState] with a given value.
+/// - [updateRadioButton] Updates a [RadioButtonFieldState] with a given value.
+/// - [updateRadioGroup] Updates a [RadioGroupFieldState] with a given value.
+/// - [updateHiddenField] Updates a [HiddenFieldState] with a given value.
 extension XFormController on FormController {
   /// Updates a [TextFieldState] with a given [value].
   ///
@@ -118,8 +118,8 @@ extension XFormController on FormController {
 
   /// Updates a [HiddenFieldState] with a given [value].
   ///
-  /// - [fieldName]: The name of the hidden field to update.
-  /// - [value]: The new value for the hidden field.
+  /// - [fieldName] The name of the hidden field to update.
+  /// - [value] The new value for the hidden field.
   void updateHiddenField<T>(String fieldName, T value) {
     update<HiddenFieldState<T>, T>(fieldName, value);
   }
