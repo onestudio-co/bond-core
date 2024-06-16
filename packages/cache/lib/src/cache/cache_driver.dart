@@ -18,8 +18,7 @@ abstract class CacheDriver {
   ///   - [defaultValue] The default value or function returning the value.
   /// - Returns: The cached data of type [T] or the default value if not found or invalid.
   /// - Throws: [ArgumentError] if the value type is not supported.
-  @protected
-  @visibleForTesting
+  @internal
   T get<T>(String key, {dynamic defaultValue, Factory<T>? fromJsonFactory}) {
     if (!has(key)) {
       return CommonCacheHelper.checkDefaultValue<T>(defaultValue);
@@ -54,8 +53,7 @@ abstract class CacheDriver {
   ///   - [fromJsonFactory] The factory function for deserialization of the list elements.
   /// - Returns: The list of cached data of type [T] or the default value if not found or invalid.
   /// - Throws: [ArgumentError] if the value type is not supported.
-  @protected
-  @visibleForTesting
+  @internal
   List<T> getAll<T>(
     String key, {
     dynamic defaultValue,
@@ -92,8 +90,7 @@ abstract class CacheDriver {
   ///   - [expiredAfter] The duration for which the cached data is valid.
   /// - Returns: A [Future] that completes with a [bool] indicating the success of the operation.
   /// - Throws: [ArgumentError] if the value type is not supported.
-  @protected
-  @visibleForTesting
+  @internal
   Future<bool> put<T>(String key, T value, [Duration? expiredAfter]) {
     final result =
         CommonCacheHelper.convertToCacheValue<T>(value, expiredAfter);
