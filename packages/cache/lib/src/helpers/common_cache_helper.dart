@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bond_cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 
 /// A typedef representing a JSON object commonly used in Dart applications.
@@ -71,12 +72,10 @@ class CommonCacheHelper {
   static Json convertToCacheValue<T>(T value, [Duration? expiredAfter]) {
     try {
       final decodedValue = jsonDecode(jsonEncode(value));
-      final data = {
-        'data': decodedValue,
-        'expiredAt':
-            expiredAfter == null ? null : DateTime.now().add(expiredAfter)
-      };
-      return data;
+      final expiredAt =
+          expiredAfter == null ? null : DateTime.now().add(expiredAfter);
+      final data = CacheData(data: decodedValue, expiredAt: expiredAt);
+      return data.toJson();
     } catch (_) {
       throw ArgumentError(
         'Unsupported type of value: $value. '

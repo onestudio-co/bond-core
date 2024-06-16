@@ -29,10 +29,17 @@ void _testGetWithDefaultValue<T>({
   }
 }
 
-void _testGet<T>(T data, {T? defaultValue, Factory<T>? fromJsonFactory}) {
+void _testGet<T>(
+  T data, {
+  Duration? expiredAfter,
+  T? defaultValue,
+  Factory<T>? fromJsonFactory,
+}) {
+  final expiredAt =
+      expiredAfter == null ? null : DateTime.now().add(expiredAfter);
   final cachedData = {
     'data': jsonDecode(jsonEncode(data)),
-    'expiredAt': null,
+    'expiredAt': expiredAt?.millisecondsSinceEpoch,
   };
   when(_mockDriver.has(any)).thenReturn(true);
   when(_mockDriver.retrieve(any)).thenReturn(cachedData);
@@ -62,7 +69,7 @@ void _testGetAllWithDefaultValue<T>({
 
   final result = _mockDriver.getAll<T>(
     'existing_key',
-    defaultValue: defaultValue ,
+    defaultValue: defaultValue,
   );
 
   expect(result, equals(defaultValue));
@@ -73,12 +80,15 @@ void _testGetAllWithDefaultValue<T>({
 
 void _testGetAll<T>(
   List<T> data, {
+  Duration? expiredAfter,
   List<T>? defaultValue,
   Factory<T>? fromJsonFactory,
 }) {
+  final expiredAt =
+      expiredAfter == null ? null : DateTime.now().add(expiredAfter);
   final cachedData = {
     'data': jsonDecode(jsonEncode(data)),
-    'expiredAt': null,
+    'expiredAt': expiredAt?.millisecondsSinceEpoch,
   };
   when(_mockDriver.has(any)).thenReturn(true);
   when(_mockDriver.retrieve(any)).thenReturn(cachedData);
