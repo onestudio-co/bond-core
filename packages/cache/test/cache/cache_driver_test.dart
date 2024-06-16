@@ -13,7 +13,7 @@ import 'mock_cache_driver.dart';
 
 part 'cache_driver_test_helpers.dart';
 
-class User{
+class User {
   final String name;
   final int age;
 
@@ -24,7 +24,7 @@ class User{
   }
 
   Map<String, dynamic> toJson() => {'name': name, 'age': age};
-  }
+}
 
 void main() {
   group('CacheDriver', () {
@@ -84,14 +84,16 @@ void main() {
           expect(result, isNull);
         });
 
-        test('throws an error when key does not exist for non-nullable type', () {
+        test('throws an error when key does not exist for non-nullable type',
+            () {
           when(_mockDriver.has(any)).thenReturn(false);
           expect(
-                () => _mockDriver.get<String>('key'),
+            () => _mockDriver.get<String>('key'),
             throwsA(isA<ArgumentError>().having(
-                  (e) => e.message,
+              (e) => e.message,
               'message',
-              contains('defaultValue must be of type String or a function returning String'),
+              contains(
+                  'defaultValue must be of type String or a function returning String'),
             )),
           );
         });
@@ -150,6 +152,14 @@ void main() {
             ),
           );
         });
+      });
+
+      test('handle expiredAfter correctly', () {
+        _testGet<String>(
+          'SÜẞ',
+          expiredAfter: Duration(seconds: 2),
+          defaultValue: null,
+        );
       });
     });
 
@@ -262,6 +272,14 @@ void main() {
             ),
           );
         });
+      });
+
+      test('handle expiredAfter correctly', () {
+        _testGetAll<String>(
+          ['SÜẞ', 'NB'],
+          expiredAfter: Duration(seconds: 10),
+          defaultValue: null,
+        );
       });
     });
 
