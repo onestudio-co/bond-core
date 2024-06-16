@@ -13,6 +13,19 @@ import 'mock_cache_driver.dart';
 
 part 'cache_driver_test_helpers.dart';
 
+class User{
+  final String name;
+  final int age;
+
+  User(this.name, this.age);
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(json['name'], json['age']);
+  }
+
+  Map<String, dynamic> toJson() => {'name': name, 'age': age};
+  }
+
 void main() {
   group('CacheDriver', () {
     setUp(() {
@@ -61,6 +74,24 @@ void main() {
               'message',
               equals(
                   'defaultValue must be of type int or a function returning int'),
+            )),
+          );
+        });
+
+        test('returns null when key does not exist for nullable type', () {
+          when(_mockDriver.has(any)).thenReturn(false);
+          final result = _mockDriver.get<User?>('key');
+          expect(result, isNull);
+        });
+
+        test('throws an error when key does not exist for non-nullable type', () {
+          when(_mockDriver.has(any)).thenReturn(false);
+          expect(
+                () => _mockDriver.get<String>('key'),
+            throwsA(isA<ArgumentError>().having(
+                  (e) => e.message,
+              'message',
+              contains('defaultValue must be of type String or a function returning String'),
             )),
           );
         });
