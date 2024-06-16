@@ -38,8 +38,7 @@ class InMemoryCacheDriver extends CacheDriver {
   /// Returns `true` to indicate a successful removal operation.
   @override
   Future<bool> forget(String key) async {
-    _cache.remove(key);
-    return true;
+    return _cache.remove(key) != null;
   }
 
   /// Checks if the cache contains data associated with the given [key].
