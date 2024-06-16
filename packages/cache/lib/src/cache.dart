@@ -95,7 +95,7 @@ class Cache {
   /// ```
   static Future<bool> add<T>(String key, T value,
       {Duration? expiredAfter}) async {
-    final exist = await has(key);
+    final exist = has(key);
     if (!exist) return put<T>(key, value, expiredAfter: expiredAfter);
     return false;
   }
@@ -136,7 +136,7 @@ class Cache {
   /// var success = Cache.increment("counter", 2);
   /// ```
   static Future<bool> increment(String key, [int amount = 1]) async {
-    final value = await get<int>(key);
+    final value = get<int>(key);
     return put<int>(key, value + amount);
   }
 
