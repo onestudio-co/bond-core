@@ -1,3 +1,10 @@
+### Changelog
+
+## 0.0.2+2
+* update bond_core dependency.
+* add readme.md file.
+* add example.md file.
+
 ## 0.0.2+1
 
 * add missing getAll methods.
