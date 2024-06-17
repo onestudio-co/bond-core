@@ -34,18 +34,19 @@ typedef Factory<T> = T Function(Map<String, dynamic>);
 /// ```dart
 /// bool isPrimitive = T.primitive; // true
 /// ```
-extension on Type {
+extension TypeExtensions on Type {
   bool get primitive {
-    final listInt = this == List<int>;
-    final listDouble = this == List<double>;
-    final listString = this == List<String>;
-    final listBool = this == List<bool>;
-    final listPrimitive = listInt || listDouble || listString || listBool;
-    return this == int ||
-        this == double ||
-        this == String ||
-        this == bool ||
-        listPrimitive;
+    // Convert the type to a string and remove any '?' to handle nullability
+    final typeStr = toString().replaceAll('?', '');
+
+    // Define a list of primitive types and their List equivalents as strings
+    const primitiveTypes = {
+      'int', 'double', 'String', 'bool',
+      'List<int>', 'List<double>', 'List<String>', 'List<bool>'
+    };
+
+    // Check if the non-nullable type string is in the set of primitive types
+    return primitiveTypes.contains(typeStr);
   }
 }
 
