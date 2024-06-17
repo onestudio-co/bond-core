@@ -10,8 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bond_core: 0.0.1+9
-  shared_preferences: 2.2.3
+  bond_core: ^0.0.1+9
+  shared_preferences: ^2.2.3
+  meta: ^1.11.0
 
 dev_dependencies:
   test: ^1.24.6
