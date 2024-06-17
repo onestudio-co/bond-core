@@ -1,6 +1,7 @@
-part of 'cache_driver.dart';
+part of 'bond_cache.dart';
 
 /// Represents data to be cached along with its expiration information.
+@internal
 class CacheData {
   final dynamic data;
   final DateTime? expiredAt;

@@ -28,7 +28,7 @@ void main() {
       final data = {'data': 'test_data', 'expiredAt': null};
 
       await cacheDriver.store(key, data);
-      await cacheDriver.flush();
+      await cacheDriver.removeAll();
 
       expect(cacheDriver.retrieve(key), isNull);
     });
@@ -38,7 +38,7 @@ void main() {
       final data = {'data': 'test_data', 'expiredAt': null};
 
       await cacheDriver.store(key, data);
-      await cacheDriver.forget(key);
+      await cacheDriver.remove(key);
 
       expect(cacheDriver.retrieve(key), isNull);
     });

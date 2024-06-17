@@ -98,13 +98,13 @@ void main() {
     test('forget should remove key from SharedPreferences', () async {
       const key = 'key';
 
-      await cacheDriver.forget(key);
+      await cacheDriver.remove(key);
 
       verify(mockSharedPreferences.remove(key)).called(1);
     });
 
     test('flush should clear SharedPreferences', () async {
-      await cacheDriver.flush();
+      await cacheDriver.removeAll();
 
       verify(mockSharedPreferences.clear()).called(1);
     });

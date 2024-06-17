@@ -1,4 +1,5 @@
 import 'package:bond_cache/bond_cache.dart';
+import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:test/test.dart';
 
@@ -6,7 +7,7 @@ import 'cache/mock_cache_driver.dart';
 
 void main() {
   setUp(() {
-    Cache.cacheDriver = InMemoryCacheDriver();
+    Cache.cacheDriver = BondCache(driver: InMemoryCacheDriver());
   });
 
   group('has', () {
@@ -35,7 +36,7 @@ void main() {
       );
     });
     test('returns correct CacheDriver instance for a store name', () {
-      var cacheDriver = Cache.store('myStore');
+      var cacheDriver = Cache.store('myStore').driver;
       expect(cacheDriver, isA<MockCacheDriver>());
     });
 
@@ -46,8 +47,8 @@ void main() {
         instanceName: 'newStore',
       );
 
-      var cacheDriver1 = Cache.store('myStore');
-      var cacheDriver2 = Cache.store('newStore');
+      var cacheDriver1 = Cache.store('myStore').driver;
+      var cacheDriver2 = Cache.store('newStore').driver;
 
       expect(cacheDriver1, isNot(equals(cacheDriver2)));
       expect(cacheDriver1, isA<MockCacheDriver>());
