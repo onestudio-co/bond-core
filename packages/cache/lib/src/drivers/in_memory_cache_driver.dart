@@ -28,7 +28,7 @@ class InMemoryCacheDriver extends CacheDriver {
   ///
   /// Returns `true` to indicate a successful flush operation.
   @override
-  Future<bool> flush() async {
+  Future<bool> removeAll() async {
     _cache.clear();
     return true;
   }
@@ -37,7 +37,7 @@ class InMemoryCacheDriver extends CacheDriver {
   ///
   /// Returns `true` to indicate a successful removal operation.
   @override
-  Future<bool> forget(String key) async {
+  Future<bool> remove(String key) async {
     return _cache.remove(key) != null;
   }
 

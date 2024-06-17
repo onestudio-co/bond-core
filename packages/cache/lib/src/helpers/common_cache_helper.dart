@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:bond_cache/bond_cache.dart';
+import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 
 /// A typedef representing a JSON object commonly used in Dart applications.

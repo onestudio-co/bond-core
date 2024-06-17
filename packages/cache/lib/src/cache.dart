@@ -1,3 +1,4 @@
+import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 
 import 'cache/cache_driver.dart';
@@ -6,7 +7,9 @@ import 'helpers/common_cache_helper.dart';
 /// A static class providing methods to interact with the caching system.
 class Cache {
   /// The cache driver used for caching operations.
-  static CacheDriver cacheDriver = sl<CacheDriver>();
+  static BondCache cacheDriver = BondCache(
+    driver: sl<CacheDriver>(),
+  );
 
   /// Retrieves a value from the cache with the specified [key].
   ///
@@ -253,8 +256,9 @@ class Cache {
   /// ```dart
   /// var myCacheDriver = Cache.store("myStore");
   /// ```
-  static CacheDriver store(String storeName) =>
-      sl<CacheDriver>(instanceName: storeName);
+  static BondCache store(String storeName) => BondCache(
+        driver: sl<CacheDriver>(instanceName: storeName),
+      );
 
   /// Clears all cached data in the cache store.
   ///

@@ -60,12 +60,12 @@ class SharedPreferencesCacheDriver extends CacheDriver {
   /// - Returns: A [Future] that completes with a [bool] indicating the success
   ///   of the operation.
   @override
-  Future<bool> forget(String key) => _sharedPreferences.remove(key);
+  Future<bool> remove(String key) => _sharedPreferences.remove(key);
 
   /// Clears all cached data, effectively flushing the entire cache.
   ///
   /// - Returns: A [Future] that completes with a [bool] indicating the success
   ///   of the operation.
   @override
-  Future<bool> flush() => _sharedPreferences.clear();
+  Future<bool> removeAll() => _sharedPreferences.clear();
 }
