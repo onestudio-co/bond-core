@@ -1,5 +1,9 @@
 ### Changelog
 
+## 0.0.3
+* update bond_core dependency.
+* improve code quality & write tests.
+
 ## 0.0.2+2
 * update bond_core dependency.
 * add readme.md file.
