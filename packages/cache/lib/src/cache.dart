@@ -79,6 +79,20 @@ class Cache {
   static Future<bool> put<T>(String key, T value, {Duration? expiredAfter}) =>
       cacheDriver.put<T>(key, value, expiredAfter);
 
+  /// Stores a list of values in the cache with the specified [key].
+  /// - Parameter [key] The unique identifier for the cached value.
+  /// - Parameter [value] The value to be stored in the cache.
+  /// - Parameter [expiredAfter] An optional duration after which the cached value should expire.
+  /// - Returns: `true` if the value was successfully stored in the cache, otherwise `false`.
+  /// - Throws: An error if there is an issue during the cache storage process.
+  /// Usage:
+  /// ```dart
+  /// var success = Cache.putAll<User>("users", myUsers, expiredAfter: Duration(days: 1));
+  /// ```
+  static Future<bool> putAll<T>(String key, List<T> value,
+          {Duration? expiredAfter}) =>
+      cacheDriver.putAll<T>(key, value, expiredAfter);
+
   /// Stores a value in the cache with the specified [key] if the key does not exist.
   ///
   /// If the [key] is already present in the cache, this method does nothing and returns `false`.
@@ -136,7 +150,7 @@ class Cache {
   /// var success = Cache.increment("counter", 2);
   /// ```
   static Future<bool> increment(String key, [int amount = 1]) async {
-    final value = get<int>(key);
+    final value = get<int?>(key) ?? 0;
     return put<int>(key, value + amount);
   }
 
@@ -154,7 +168,7 @@ class Cache {
   /// var success = Cache.decrement("counter", 2);
   /// ```
   static Future<bool> decrement(String key, [int amount = 1]) async {
-    final value = await get<int>(key);
+    final value = await get<int?>(key) ?? 0;
     return put<int>(key, value - amount);
   }
 
@@ -164,14 +178,24 @@ class Cache {
   /// If the [key] is not found, returns the provided [defaultValue].
   ///
   /// - Parameter [key] The unique identifier for the cached value.
+  /// - Parameter [defaultValue] The value to return if the [key] is not found in the cache.
+  /// - Parameter [fromJsonFactory] optional factory function that takes a Map<String, dynamic> (representing the JSON data) and returns an instance of type T.
   /// - Returns: The cached value if [key] is found, otherwise [defaultValue].
   /// - Throws: An error if there is an issue during the cache retrieval or removal process.
   /// Usage:
   /// ```dart
   /// var user = Cache.pull<User>("user");
   /// ```
-  static Future<T> pull<T>(String key) async {
-    final value = get<T>(key);
+  static Future<T> pull<T>(
+    String key, {
+    dynamic defaultValue,
+    Factory<T>? fromJsonFactory,
+  }) async {
+    final value = get<T>(
+      key,
+      defaultValue: defaultValue,
+      fromJsonFactory: fromJsonFactory,
+    );
     await forget(key);
     return value;
   }
