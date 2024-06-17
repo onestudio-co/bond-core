@@ -41,8 +41,14 @@ extension TypeExtensions on Type {
 
     // Define a list of primitive types and their List equivalents as strings
     const primitiveTypes = {
-      'int', 'double', 'String', 'bool',
-      'List<int>', 'List<double>', 'List<String>', 'List<bool>'
+      'int',
+      'double',
+      'String',
+      'bool',
+      'List<int>',
+      'List<double>',
+      'List<String>',
+      'List<bool>'
     };
 
     // Check if the non-nullable type string is in the set of primitive types

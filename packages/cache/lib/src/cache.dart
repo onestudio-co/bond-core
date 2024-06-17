@@ -168,7 +168,7 @@ class Cache {
   /// var success = Cache.decrement("counter", 2);
   /// ```
   static Future<bool> decrement(String key, [int amount = 1]) async {
-    final value = await get<int?>(key) ?? 0;
+    final value = get<int?>(key) ?? 0;
     return put<int>(key, value - amount);
   }
 
