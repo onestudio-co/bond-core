@@ -47,23 +47,15 @@ mixin CacheObservable {
     final mObservers = observers[key];
     if (mObservers != null) {
       for (final observer in mObservers.whereType<ObserverWrapper>()) {
-        if (observer.observer is ICacheObserver<T>) {
-          final iObserver = observer.observer as ICacheObserver<T>;
-          return iObserver.controller.stream;
+        if (observer.observer is StreamCacheObserver<T>) {
+          final streamObserver = observer.observer as StreamCacheObserver<T>;
+          return streamObserver.controller.stream;
         }
       }
     }
     // No existing observer of the correct type was found, create a new one
     final controller = StreamController<T>.broadcast();
-    final observer = ICacheObserver<T>(
-      controller,
-      onUpdate: (String key, T value) {
-        controller.add(value);
-      },
-      onDelete: (String key) {
-        controller.close();
-      },
-    );
+    final observer = StreamCacheObserver<T>(controller);
     watch(key, observer);
     return controller.stream;
   }
@@ -75,7 +67,7 @@ mixin CacheObservable {
   ///   - [observer] The observer to remove.
   /// If all observers for a key are removed, the key entry is also removed from the observers map.
   void unwatch<T>(String key, CacheObserver observer) {
-    observers[key]?.remove(observer);
+    observers[key]?.removeObserver(observer);
     if (observers[key]?.isEmpty ?? true) {
       observers.remove(key);
     }

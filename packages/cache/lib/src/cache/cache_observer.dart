@@ -4,6 +4,16 @@ extension CacheObserverList on List<CacheObserver> {
   bool containsObserver(CacheObserver observer) {
     return whereType<ObserverWrapper>().any((o) => o.observer == observer);
   }
+
+  bool removeObserver(CacheObserver observer) {
+    if (observer is ObserverWrapper) {
+      if (observer.observer is StreamCacheObserver) {
+        final streamObserver = observer.observer as StreamCacheObserver;
+        streamObserver.controller.close();
+      }
+    }
+    return remove(observer);
+  }
 }
 
 abstract class CacheObserver<T> {
@@ -44,25 +54,18 @@ class ObserverWrapper implements CacheObserver {
   }
 }
 
-class ICacheObserver<T> implements CacheObserver<T> {
+class StreamCacheObserver<T> implements CacheObserver<T> {
   final StreamController<T> controller;
-  final void Function(String key, T value) mOnUpdate;
-  final void Function(String key) mOnDelete;
 
-  ICacheObserver(
-    this.controller, {
-    required void Function(String key, T value) onUpdate,
-    required void Function(String key) onDelete,
-  })  : mOnUpdate = onUpdate,
-        mOnDelete = onDelete;
+  StreamCacheObserver(this.controller);
 
   @override
   void onDelete(String key) {
-    mOnDelete(key);
+    controller.close();
   }
 
   @override
   void onUpdate(String key, T newValue) {
-    mOnUpdate(key, newValue);
+    controller.add(newValue);
   }
 }
