@@ -86,5 +86,27 @@ void main() {
       expect(await streamListener.hasNext, isFalse);
       await streamListener.cancel();
     });
+
+    test('Ensures key type consistency', () async {
+      final key = 'consistent_key';
+
+      // Initially use the key with integers
+      final intStream = cache.stream<int>(key);
+      final intQueue = StreamQueue<int>(intStream);
+
+      // Notify an integer value
+      cache.notifyObservers<int>(key, 42);
+      expect(await intQueue.next, 42);
+
+      // Attempt to use the same key with a different type (e.g., String)
+      // Since the system should block this, the existing int stream should not be affected.
+      expect(() => cache.stream<String>(key), throwsA(isA<ArgumentError>()));
+
+      // Further confirm no new values or types are pushed to the int stream
+      cache.notifyObservers<int>(key, 43);
+      expect(await intQueue.next, 43);
+
+      await intQueue.cancel();
+    });
   });
 }
