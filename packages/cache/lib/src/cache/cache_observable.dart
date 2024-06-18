@@ -27,13 +27,13 @@ mixin CacheObservable {
   /// - Parameters:
   ///   -[key] The cache key to watch.
   ///   -[observer] The observer that will be notified when the key is updated or deleted.
-  void watch(String key, CacheObserver observer) {
+  void watch<T>(String key, CacheObserver<T> observer) {
     observers.putIfAbsent(key, () => []);
     if (observers[key]!.length >= maxObserversPerKey) {
       observers[key]!
           .removeAt(0); // Remove the oldest observer to maintain the limit
     }
-    observers[key]!.add(ObserverWrapper(observer, key));
+    observers[key]!.add(ObserverWrapper<T>(observer, key));
   }
 
   /// Returns a [Stream] that emits values when a specific cache key is updated.
