@@ -2,6 +2,7 @@ import 'package:async/async.dart';
 import 'package:test/test.dart';
 
 import 'cache_observable_test.dart';
+import 'helpers/mock_observer.dart';
 
 void main() {
   group('Stream method Tests', () {

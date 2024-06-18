@@ -3,7 +3,7 @@ import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:test/test.dart';
 
-import 'cache/mock_cache_driver.dart';
+import 'cache/helpers/mock_cache_driver.dart';
 
 void main() {
   setUp(() {

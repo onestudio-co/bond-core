@@ -22,8 +22,8 @@ abstract class CacheObserver<T> {
   void onDelete(String key);
 }
 
-class ObserverWrapper implements CacheObserver {
-  final CacheObserver observer;
+class ObserverWrapper<T> implements CacheObserver<T> {
+  final CacheObserver<T> observer;
   final String key;
   final String identifier;
 
@@ -49,7 +49,7 @@ class ObserverWrapper implements CacheObserver {
   }
 
   @override
-  void onUpdate(String key, dynamic newValue) {
+  void onUpdate(String key, T newValue) {
     observer.onUpdate(key, newValue);
   }
 }

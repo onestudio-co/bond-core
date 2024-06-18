@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../common/mock_service_provider.dart';
-import 'mock_cache_driver.dart';
+import 'helpers/mock_cache_driver.dart';
 
 void main() {
   late MockCacheDriver _mockDriver;
