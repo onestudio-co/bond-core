@@ -136,5 +136,24 @@ void main() {
       expect(cache.observers[key]?.containsObserver(observer), isTrue);
       verify(observer.onUpdate(key, 42)).called(1);
     });
+
+    test(
+        'Observer Throws ArgumentError on type mismatch'
+        ' between notified data and observer', () async {
+      final key = 'test_key';
+
+      // Create a mock observer for integers and watch the key
+      final observer = MockObserver<int>();
+      cache.watch<int>(key, observer);
+
+      // Expect an ArgumentError when trying to notify with a String instead of an int
+      expect(
+        () => cache.notifyObservers(key, '42'),
+        throwsA(isA<ArgumentError>()),
+      );
+
+      //  verify no calls were made to the observer's onUpdate due to type mismatch
+      verifyNever(observer.onUpdate(key, any));
+    });
   });
 }

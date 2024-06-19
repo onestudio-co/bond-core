@@ -266,7 +266,8 @@ class Cache {
   /// ```dart
   /// Cache.unwatch<int>(key, observer);
   /// ```
-  static void unwatch<T>(String key, CacheObserver<T> observer) {
+  ///
+  static void unwatch<T>(String key, [CacheObserver<T>? observer]) {
     cacheDriver.unwatch<T>(key, observer);
   }
 

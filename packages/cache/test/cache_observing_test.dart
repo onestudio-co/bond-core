@@ -37,7 +37,6 @@ void main() {
       final key = 'stream_key';
       final stream = Cache.stream<int>(key);
       final results = <int>[];
-      var streamClosed = false;
 
       // Listen to the stream
       final subscription = stream.listen(results.add);
@@ -85,7 +84,7 @@ void main() {
       final key = 'watch_key';
       final value = 1;
 
-      /// Setup watch
+      // Setup watch
       await Cache.put<int>(key, value);
       final observer = MockObserver<int>();
       Cache.watch<int>(key, observer);
@@ -96,6 +95,29 @@ void main() {
       // verify that onDelete was called
       verify(observer.onDelete(key)).called(1);
       verifyNever(observer.onUpdate(key, value));
+    });
+
+    test(
+        'watch throws ArgumentError and Prevents onUpdate'
+        ' Call When Updating With Mismatched Type', () async {
+      final key = 'watch_key';
+      final value = 1;
+      final valueString = 'value';
+
+      // Setup watch
+      await Cache.put<int>(key, value);
+      final observer = MockObserver<int>();
+      Cache.watch<int>(key, observer);
+
+      // trigger an update with a different type
+      expect(
+        () => Cache.put<String>(key, valueString),
+        throwsA(isA<ArgumentError>()),
+      );
+
+      // Ensure that the observer's onUpdate method was never called since the operation should fail
+      verifyNever(observer.onUpdate(key,
+          any)); // Using `any` to ensure no onUpdate calls occurred regardless of value
     });
 
     test('unwatch removes observer', () async {
