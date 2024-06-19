@@ -1,4 +1,5 @@
 import 'package:async/async.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import 'helpers/mock_observer.dart';
@@ -56,7 +57,7 @@ void main() {
       await streamListener.cancel();
     });
 
-    test('Stream closes on key deletion', () async {
+    test('Stream still emits on key deletion', () async {
       final key = 'test_key';
 
       final stream = cache.stream<int>(key);
@@ -67,23 +68,9 @@ void main() {
       cache.notifyObservers<int>(key, 44);
 
       expect(await streamListener.next, 42);
-      expect(await streamListener.hasNext, isFalse);
+      expect(await streamListener.hasNext, isTrue);
+      expect(await streamListener.next, 44);
 
-      await streamListener.cancel();
-    });
-
-    test('Stream closes on unwatch called', () async {
-      final key = 'test_key';
-
-      final stream = cache.stream<int>(key);
-      final streamListener = StreamQueue<int>(stream);
-
-      cache.notifyObservers<int>(key, 42);
-      cache.unwatch<int>(key, cache.observers[key]!.first);
-      cache.notifyObservers<int>(key, 44);
-
-      expect(await streamListener.next, 42);
-      expect(await streamListener.hasNext, isFalse);
       await streamListener.cancel();
     });
 
@@ -93,6 +80,7 @@ void main() {
       final key = 'consistent_key';
 
       // Initially use the key with integers
+      cache.watch<int>(key, MockObserver<int>());
       final intStream = cache.stream<int>(key);
       final intQueue = StreamQueue<int>(intStream);
 
@@ -109,6 +97,21 @@ void main() {
       expect(await intQueue.next, 43);
 
       await intQueue.cancel();
+    });
+
+    test('key can be watched and streamed at the same time', () async {
+      final key = 'test';
+
+      final observer = MockObserver<int>();
+      cache.watch<int>(key, observer);
+
+      final stream = cache.stream<int>(key);
+      final streamQueue = StreamQueue<int>(stream);
+
+      cache.notifyObservers<int>(key, 42);
+
+      expect(await streamQueue.next, 42);
+      verify(observer.onUpdate(key, 42)).called(1);
     });
   });
 }

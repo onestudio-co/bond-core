@@ -5,14 +5,11 @@ extension CacheObserverList on List<CacheObserver> {
     return whereType<ObserverWrapper>().any((o) => o.observer == observer);
   }
 
-  bool removeObserver(CacheObserver observer) {
-    if (observer is ObserverWrapper) {
-      if (observer.observer is StreamCacheObserver) {
-        final streamObserver = observer.observer as StreamCacheObserver;
-        streamObserver.controller.close();
-      }
-    }
-    return remove(observer);
+  List<StreamCacheObserver> streamObservers() {
+    return whereType<ObserverWrapper>()
+        .where((observer) => observer.observer is StreamCacheObserver)
+        .map((observer) => observer.observer as StreamCacheObserver)
+        .toList();
   }
 }
 
@@ -61,7 +58,7 @@ class StreamCacheObserver<T> implements CacheObserver<T> {
 
   @override
   void onDelete(String key) {
-    controller.close();
+    // how to handle this?
   }
 
   @override

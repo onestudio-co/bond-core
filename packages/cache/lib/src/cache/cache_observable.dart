@@ -43,12 +43,11 @@ mixin CacheObservable {
   ///  - Returns: A [Stream] that emits values of type [T] when the key is updated.
   ///  - Throws: An [ArgumentError] if the key is already being observed by a different type.
   Stream<T> stream<T>(String key) {
-    final mObservers = observers[key];
-    if (mObservers != null) {
-      for (final observer in mObservers.whereType<ObserverWrapper>()) {
-        if (observer.observer is StreamCacheObserver<T>) {
-          final streamObserver = observer.observer as StreamCacheObserver<T>;
-          return streamObserver.controller.stream;
+    final mObservers = observers[key]?.streamObservers();
+    if (mObservers != null && mObservers.isNotEmpty) {
+      for (final observer in mObservers) {
+        if (observer.controller.stream is Stream<T>) {
+          return observer.controller.stream as Stream<T>;
         }
       }
       throw ArgumentError(
@@ -67,11 +66,11 @@ mixin CacheObservable {
   ///   - [key] The cache key the observer is watching.
   ///   - [observer] The observer to remove.
   /// If all observers for a key are removed, the key entry is also removed from the observers map.
-  void unwatch<T>(String key, [CacheObserver? observer]) {
+  void unwatch<T>(String key, [CacheObserver<T>? observer]) {
     if (observer == null) {
       observers.remove(key);
     } else {
-      observers[key]?.removeObserver(observer);
+      observers[key]?.remove(observer);
       if (observers[key]?.isEmpty ?? true) {
         observers.remove(key);
       }
