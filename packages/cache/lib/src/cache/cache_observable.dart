@@ -41,8 +41,7 @@ mixin CacheObservable {
   /// - Parameters:
   ///  - [key] The cache key to watch.
   ///  - Returns: A [Stream] that emits values of type [T] when the key is updated.
-  ///  If the value stored in the cache is not of type [T], an error is emitted.
-  ///  If the key is deleted, the stream is closed.
+  ///  - Throws: An [ArgumentError] if the key is already being observed by a different type.
   Stream<T> stream<T>(String key) {
     final mObservers = observers[key];
     if (mObservers != null) {

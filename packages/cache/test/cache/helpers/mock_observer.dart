@@ -14,7 +14,7 @@ class MockObserver<T> extends Mock implements CacheObserver<T> {
   }
 
   @override
-  void onUpdate(String key, T newValue) {
+  void onUpdate(String key, T? newValue) {
     super.noSuchMethod(
       Invocation.method(#onUpdate, [key, newValue]),
     );
