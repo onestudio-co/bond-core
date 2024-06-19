@@ -82,12 +82,20 @@ mixin CacheObservable {
   /// - Parameters:
   ///   - [key] The cache key that has been updated.
   ///   - [newValue] The new value of the key after the update.
+  ///   - Throws: An [ArgumentError] if an observer is notified with a different type than expected.
   /// Each observer's [onUpdate] method is called with the new value.
   @protected
   @visibleForTesting
   void notifyObservers<T>(String key, T newValue) {
     observers[key]?.forEach((observer) {
-      observer.onUpdate(key, newValue);
+      try {
+        observer.onUpdate(key, newValue);
+      } catch (e) {
+        if (e is TypeError) {
+          throw ArgumentError(
+              'Observer type mismatch for key $key. Expected ${T.toString()}');
+        }
+      }
     });
   }
 
