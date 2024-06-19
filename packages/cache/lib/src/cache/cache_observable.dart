@@ -67,10 +67,14 @@ mixin CacheObservable {
   ///   - [key] The cache key the observer is watching.
   ///   - [observer] The observer to remove.
   /// If all observers for a key are removed, the key entry is also removed from the observers map.
-  void unwatch<T>(String key, CacheObserver observer) {
-    observers[key]?.removeObserver(observer);
-    if (observers[key]?.isEmpty ?? true) {
+  void unwatch<T>(String key, [CacheObserver? observer]) {
+    if (observer == null) {
       observers.remove(key);
+    } else {
+      observers[key]?.removeObserver(observer);
+      if (observers[key]?.isEmpty ?? true) {
+        observers.remove(key);
+      }
     }
   }
 
@@ -102,13 +106,11 @@ mixin CacheObservable {
       for (final observer in observers.values.expand((e) => e)) {
         observer.onDelete(key);
       }
-      observers.clear();
     } else {
       // Notify all observers for the specific key and then remove the key from observers.
       observers[key]?.forEach((observer) {
         observer.onDelete(key);
       });
-      observers.remove(key);
     }
   }
 }
