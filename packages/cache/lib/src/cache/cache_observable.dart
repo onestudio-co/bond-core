@@ -52,7 +52,8 @@ mixin CacheObservable {
           return streamObserver.controller.stream;
         }
       }
-      throw ArgumentError('Key $key is already being observed by a different type');
+      throw ArgumentError(
+          'Key $key is already being observed by a different type');
     }
     // No existing observer of the correct type was found, create a new one
     final controller = StreamController<T>.broadcast();
