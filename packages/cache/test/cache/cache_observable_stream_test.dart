@@ -1,7 +1,6 @@
 import 'package:async/async.dart';
 import 'package:test/test.dart';
 
-import 'cache_observable_test.dart';
 import 'helpers/mock_observer.dart';
 
 void main() {
@@ -88,7 +87,9 @@ void main() {
       await streamListener.cancel();
     });
 
-    test('Ensures key type consistency', () async {
+    test(
+        'Steam throws ArgumentError when use the same key with a different type',
+        () async {
       final key = 'consistent_key';
 
       // Initially use the key with integers
