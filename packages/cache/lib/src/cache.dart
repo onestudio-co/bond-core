@@ -246,6 +246,43 @@ class Cache {
     await put<T>(key, result);
   }
 
+  /// Adds an observer for a specific cache key.
+  /// - Parameters:
+  ///  -[key] The cache key to watch.
+  ///  -[observer] The observer that will be notified when the key is updated or deleted.
+  ///  Usage:
+  ///  ```dart
+  ///  Cache.watch<int>(key, observer);
+  ///  ```
+  static void watch<T>(String key, CacheObserver<T> observer) {
+    cacheDriver.watch<T>(key, observer);
+  }
+
+  /// Removes an observer for a specific cache key.
+  /// - Parameters:
+  /// -[key] The cache key the observer is watching.
+  /// -[observer] The observer to remove.
+  /// Usage:
+  /// ```dart
+  /// Cache.unwatch<int>(key, observer);
+  /// ```
+  static void unwatch<T>(String key, CacheObserver<T> observer) {
+    cacheDriver.unwatch<T>(key, observer);
+  }
+
+  /// Returns a [Stream] that emits values when a specific cache key is updated.
+  /// - Parameters:
+  /// -[key] The cache key to watch.
+  ///  - Returns: A [Stream] that emits values of type [T] when the key is updated.
+  ///  - Throws: [ArgumentError] if [Key] is already being observed by a different type.
+  ///  Usage:
+  ///  ```dart
+  ///  var stream = Cache.stream<int>(key);
+  ///  ```
+  static Stream<T> stream<T>(String key) {
+    return cacheDriver.stream<T>(key);
+  }
+
   /// Creates and returns a new [CacheDriver] instance with the specified [storeName].
   ///
   /// The [storeName] is used to uniquely identify different cache stores when using multiple cache drivers.
