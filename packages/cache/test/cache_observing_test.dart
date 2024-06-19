@@ -33,17 +33,14 @@ void main() {
       await subscription.cancel();
     });
 
-    test('stream closed when data removed', () async {
+    test('stream still emits after data removed', () async {
       final key = 'stream_key';
       final stream = Cache.stream<int>(key);
       final results = <int>[];
       var streamClosed = false;
 
       // Listen to the stream
-      final subscription = stream.listen(
-        results.add,
-        onDone: () => streamClosed = true, // Set flag when stream is closed
-      );
+      final subscription = stream.listen(results.add);
 
       // Trigger an update and then delete
       await Cache.put<int>(key, 1);
@@ -52,12 +49,14 @@ void main() {
       // Wait for all asynchronous operations to complete
       await Future.delayed(const Duration(milliseconds: 100));
 
-      // Verify that the stream was closed
-      expect(
-        streamClosed,
-        isTrue,
-        reason: 'The stream should be closed after the data is removed.',
-      );
+      // trigger another update
+      await Cache.put<int>(key, 2);
+
+      // Wait for all asynchronous operations to complete
+      await Future.delayed(const Duration(milliseconds: 100));
+
+      // verify that the stream emitted the updates
+      expect(results, [1, 2]);
 
       await subscription.cancel();
     });
