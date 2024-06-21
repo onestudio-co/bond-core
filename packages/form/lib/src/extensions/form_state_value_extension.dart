@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bond_form/bond_form.dart';
 
 import 'required_values.dart';
@@ -21,11 +23,13 @@ import 'required_values.dart';
 /// - [textFieldValue] Retrieves the value of a text field.
 /// - [radioGroupValue] Retrieves the value of a radio group field.
 /// - [checkboxSelected] Checks if a specific value is selected within a checkbox group.
+/// - [checkboxValues] Retrieves the selected values of a checkbox group.
 /// - [checkboxValue] Retrieves the value of a checkbox field.
 /// - [checkboxGroupValue] Retrieves the first selected value of a checkbox group.
 /// - [dropDownValue] Retrieves the value of a dropdown field.
 /// - [asyncDropDownValue] Retrieves the value of an async dropdown field.
 /// - [hiddenFieldValue] Retrieves the value of a hidden field.
+/// - [fileFieldValue] Retrieves the value of a file field.
 /// - [required] Retrieves the [RequiredValues] extension for the current form state.
 extension ValueBondFormState on BondFormState {
   /// Retrieves the value of a text field for a specified [fieldName].
@@ -128,6 +132,17 @@ extension ValueBondFormState on BondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   T hiddenFieldValue<T>(String fieldName) {
     return hiddenField<T>(fieldName).value;
+  }
+
+  /// Retrieves the value of a file field for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of a file field.
+  ///
+  /// - Parameter [fieldName] The name of the file field to fetch.
+  /// - Returns: The current value of the file field as a `File`, or `null` if not set.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  File? fileFieldValue(String fieldName) {
+    return fileField(fieldName).value;
   }
 
   /// Retrieves the [RequiredValues] extension for the current form state.

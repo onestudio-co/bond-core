@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bond_form/bond_form.dart';
 
 /// A utility class to ensure required form field values are not null.
@@ -96,11 +98,24 @@ class RequiredValues {
 
   /// Ensures the value of a hidden field is not null.
   ///
-  /// - Parameter [fieldName]: The name of the hidden field to fetch.
+  /// - Parameter [fieldName] The name of the hidden field to fetch.
   /// - Returns: The current value of the hidden field as a non-null `T`.
   /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
   T hiddenFieldValue<T>(String fieldName) {
     final value = state.hiddenFieldValue<T>(fieldName);
+    if (value == null) {
+      throw ArgumentError('Field $fieldName is required but its value is null');
+    }
+    return value;
+  }
+
+  /// Ensures the value of a file field is not null.
+  ///
+  /// - Parameter [fieldName] The name of the file field to fetch.
+  /// - Returns: The current value of the file field as a non-null `File`.
+  /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
+  File fileFieldValue(String fieldName) {
+    final value = state.fileFieldValue(fieldName);
     if (value == null) {
       throw ArgumentError('Field $fieldName is required but its value is null');
     }
