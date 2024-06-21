@@ -1,5 +1,10 @@
 ### Changelog
 
+## 0.0.1+26
+
+* Added `FileFieldState` class to manage the state of file form fields.
+    - `FileFieldState` provides a way to manage file input fields within a form.
+
 ## 0.0.1+25
 
 - **Refactor**: Separated field state and value retrieval methods into distinct files.
