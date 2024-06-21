@@ -19,6 +19,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [checkbox] Retrieves the state of a checkbox field.
 /// - [checkboxGroup] Retrieves the state of a checkbox group field.
 /// - [checkboxesOf] Retrieves a list of checkbox states.
+/// - [dateField] Retrieves the state of a date field.
 /// - [dropDownField] Retrieves the state of a dropdown field.
 /// - [dropDownItems] Retrieves a list of dropdown items.
 /// - [asyncDropDownField] Retrieves the state of an async dropdown field.
@@ -90,6 +91,17 @@ extension FieldBondFormState on BondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   List<CheckboxFieldState<T>> checkboxesOf<T>(String fieldName) {
     return checkboxGroup<T>(fieldName).checkboxes;
+  }
+
+  /// Retrieves the state of the date field for a specified [fieldName].
+  ///
+  /// This method retrieves the state of the date field identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the date field to retrieve the state from.
+  /// - Returns: The state of the date field.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  DateFieldState dateField(String fieldName) {
+    return get<DateFieldState, DateTime?>(fieldName);
   }
 
   /// Retrieves the state of the dropdown field for a specified [fieldName].
