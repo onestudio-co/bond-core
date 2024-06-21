@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bond_form/bond_form.dart';
 
 /// Extension methods for [BondFormState] providing convenience operations.
@@ -22,6 +24,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [asyncDropDownField] Retrieves the state of an async dropdown field.
 /// - [asyncDropDownItems] Retrieves a list of async dropdown items.
 /// - [hiddenField] Retrieves the state of a hidden field.
+/// - [fileField] Retrieves the state of a file field.
 extension FieldBondFormState on BondFormState {
   /// Retrieves the [TextFieldState] for a given text field.
   ///
@@ -142,5 +145,16 @@ extension FieldBondFormState on BondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   HiddenFieldState<T> hiddenField<T>(String fieldName) {
     return get<HiddenFieldState<T>, T>(fieldName);
+  }
+
+  /// Retrieves the state of the file field for a specified [fieldName].
+  ///
+  /// This method retrieves the state of the file field identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the file field to retrieve the state from.
+  /// - Returns: The state of the file field.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  FileFieldState fileField(String fieldName) {
+    return get<FileFieldState, File?>(fieldName);
   }
 }

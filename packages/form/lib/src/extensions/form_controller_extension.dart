@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bond_form/bond_form.dart';
 
 /// Extension methods for [FormController] providing more type-safe updates.
@@ -28,6 +30,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [updateRadioButton] Updates a [RadioButtonFieldState] with a given value.
 /// - [updateRadioGroup] Updates a [RadioGroupFieldState] with a given value.
 /// - [updateHiddenField] Updates a [HiddenFieldState] with a given value.
+/// - [updateFile] Updates a [FileFieldState] with a given value.
 extension XFormController on FormController {
   /// Updates a [TextFieldState] with a given [value].
   ///
@@ -122,5 +125,12 @@ extension XFormController on FormController {
   /// - [value] The new value for the hidden field.
   void updateHiddenField<T>(String fieldName, T value) {
     update<HiddenFieldState<T>, T>(fieldName, value);
+  }
+
+  /// Updates a [FileFieldState] with a given [value].
+  /// - [fieldName] The name of the file field to update.
+  /// - [value] The new value for the file field.
+  void updateFile(String fieldName, File? value) {
+    update<FileFieldState, File?>(fieldName, value);
   }
 }
