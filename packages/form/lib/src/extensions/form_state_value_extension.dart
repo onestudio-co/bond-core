@@ -26,6 +26,7 @@ import 'required_values.dart';
 /// - [checkboxValues] Retrieves the selected values of a checkbox group.
 /// - [checkboxValue] Retrieves the value of a checkbox field.
 /// - [checkboxGroupValue] Retrieves the first selected value of a checkbox group.
+/// - [dateFieldValue] Retrieves the value of a date field.
 /// - [dropDownValue] Retrieves the value of a dropdown field.
 /// - [asyncDropDownValue] Retrieves the value of an async dropdown field.
 /// - [hiddenFieldValue] Retrieves the value of a hidden field.
@@ -97,6 +98,17 @@ extension ValueBondFormState on BondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   bool checkboxSelected<T>(String fieldName, T value) {
     return checkboxValues<T>(fieldName).contains(value);
+  }
+
+  /// Retrieves the value of a date field for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of a date field.
+  ///
+  /// - Parameter [fieldName] The name of the date field to fetch.
+  /// - Returns: The current value of the date field as a `DateTime`, or `null` if not set.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  DateTime? dateFieldValue(String fieldName) {
+    return dateField(fieldName).value;
   }
 
   /// Retrieves the selected value of the dropdown field for a specified [fieldName].

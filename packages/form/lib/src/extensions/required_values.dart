@@ -23,6 +23,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [textFieldValue] Ensures the value of a text field is not null.
 /// - [radioGroupValue] Ensures the value of a radio group field is not null.
 /// - [checkboxGroupValue] Ensures the first selected value of a checkbox group is not null.
+/// - [dateFieldValue] Ensures the value of a date field is not null.
 /// - [dropDownValue] Ensures the value of a dropdown field is not null.
 /// - [asyncDropDownValue] Ensures the value of an async dropdown field is not null.
 /// - [hiddenFieldValue] Ensures the value of a hidden field is not null.
@@ -64,6 +65,19 @@ class RequiredValues {
   /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
   T checkboxGroupValue<T>(String fieldName) {
     final value = state.checkboxGroupValue<T>(fieldName);
+    if (value == null) {
+      throw ArgumentError('Field $fieldName is required but its value is null');
+    }
+    return value;
+  }
+
+  /// Ensures the value of a date field is not null.
+  ///
+  /// - Parameter [fieldName] The name of the date field to fetch.
+  /// - Returns: The current value of the date field as a non-null `DateTime`.
+  /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
+  DateTime dateFieldValue(String fieldName) {
+    final value = state.dateFieldValue(fieldName);
     if (value == null) {
       throw ArgumentError('Field $fieldName is required but its value is null');
     }
