@@ -318,5 +318,12 @@ class Rules {
           {String? message}) =>
       FileSizeRule(maxSizeInBytes: maxSizeInBytes, message: message);
 
-
+  /// Creates a [FileSizeRule] validation rule with the size in megabytes.
+  ///
+  /// This rule validates that the input file size is within a specified limit.
+  /// It can include a custom validation message.
+  static ValidationRule<File?> fileSizeInMegabytes(int maxSizeInMegabytes,
+          {String? message}) =>
+      FileSizeRule.megabyte(
+          maxSizeInMegabytes: maxSizeInMegabytes, message: message);
 }
