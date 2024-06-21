@@ -113,5 +113,69 @@ void main() {
       expect(await streamQueue.next, 42);
       verify(observer.onUpdate(key, 42)).called(1);
     });
+
+    test('Stream emits updates on data change with multiple observers',
+        () async {
+      final key = 'test_key';
+
+      final observer1 = MockObserver<int>();
+      final observer2 = MockObserver<int>();
+
+      cache.watch<int>(key, observer1);
+      cache.watch<int>(key, observer2);
+
+      final stream = cache.stream<int>(key);
+      final streamListener = StreamQueue<int>(stream);
+
+      cache.notifyObservers<int>(key, 42);
+
+      expect(await streamListener.next, 42);
+      verify(observer1.onUpdate(key, 42)).called(1);
+      verify(observer2.onUpdate(key, 42)).called(1);
+
+      await streamListener.cancel();
+    });
+
+    test('Unwatch remove stream observer and close controller', () async {
+      final key = 'test_key';
+
+      // Setup the stream and begin listening to it
+      final stream = cache.stream<int>(key);
+      final streamListener = StreamQueue<int>(stream);
+
+      // Simulate adding a value to trigger the stream
+      cache.notifyObservers<int>(key, 42);
+      expect(
+        await streamListener.next,
+        equals(42),
+        reason: 'Stream should receive initial value',
+      );
+
+      // Now unwatch the observer and expect the stream to be closed
+      cache.unwatch<int>(key);
+
+      // Simulate another update to verify the observer is no longer receiving updates
+      cache.notifyObservers<int>(key, 43);
+
+      // Verify that the stream does not receive new updates and is closed
+      var isStreamClosed = false;
+      stream.listen(
+        (_) {},
+        onDone: () => isStreamClosed = true,
+      );
+
+      // Allow time for any pending events to be processed
+      await Future.delayed(Duration(milliseconds: 100));
+
+      // Check if stream is closed
+      expect(
+        isStreamClosed,
+        isTrue,
+        reason: 'Stream should be closed after unwatch',
+      );
+
+      // Finally, clean up the stream listener
+      await streamListener.cancel();
+    });
   });
 }

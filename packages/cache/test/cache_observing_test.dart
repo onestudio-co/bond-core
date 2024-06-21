@@ -143,5 +143,43 @@ void main() {
       // verify that onUpdate was not called
       verifyNever(observer.onUpdate(key, value));
     });
+
+    test('unwatch remove stream observer and close controller', () async {
+      final key = 'watch_key';
+      final value = 1;
+
+      // Create and listen to the stream
+      final stream = Cache.stream<int>(key);
+      final results = <int>[];
+      var isStreamClosed = false;
+
+      final subscription = stream.listen(
+        results.add,
+        onDone: () => isStreamClosed = true, // Set flag when stream is closed
+      );
+
+      // Add a value to trigger the stream
+      await Cache.put<int>(key, value);
+
+      // Allow time for the stream to receive the value
+      await Future.delayed(Duration.zero);
+      expect(results, contains(value));
+
+      // Now unwatch and thereby remove the observer and close the stream
+      Cache.unwatch<int>(key);
+
+      // Wait for a small delay to allow unwatch effects to propagate
+      await Future.delayed(const Duration(milliseconds: 100));
+
+      // Cancel the subscription to clean up
+      await subscription.cancel();
+
+      // Verify the stream is closed
+      expect(
+        isStreamClosed,
+        isTrue,
+        reason: 'Stream should be closed after unwatching',
+      );
+    });
   });
 }
