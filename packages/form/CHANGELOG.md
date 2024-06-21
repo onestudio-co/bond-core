@@ -1,5 +1,12 @@
 ### Changelog
 
+## 0.0.1+27
+
+* Added date field support to form extensions.
+    - `BondFormState` updated with methods to handle date fields.
+        - `dateFieldValue`: Retrieves the value of a date field.
+        - `dateField`: Retrieves the state of a date field using a simplified `get` method.
+
 ## 0.0.1+26
 
 * Added `FileFieldState` class to manage the state of file form fields.
