@@ -68,9 +68,9 @@ mixin CacheObservable {
   /// If all observers for a key are removed, the key entry is also removed from the observers map.
   void unwatch<T>(String key, [CacheObserver<T>? observer]) {
     if (observer == null) {
-      observers.remove(key);
+      observers.removeObservers(key);
     } else {
-      observers[key]?.remove(observer);
+      observers[key]?.removeObserver(observer);
       if (observers[key]?.isEmpty ?? true) {
         observers.remove(key);
       }
