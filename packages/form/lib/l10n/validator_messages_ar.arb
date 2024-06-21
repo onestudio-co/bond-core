@@ -334,5 +334,16 @@
       "fieldName": {
       }
     }
+  },
+  "fileSizeValidationMessage": "حجم الملف {fieldName} يجب أن يكون أقل من {size}.",
+  "@fileSizeValidationMessage": {
+    "description": "رسالة التحقق للحقل الذي يجب أن يكون حجم الملف أقل من حجم معين",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "size": {
+      }
+    }
   }
 }

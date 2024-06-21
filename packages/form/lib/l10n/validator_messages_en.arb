@@ -334,5 +334,27 @@
       "fieldName": {
       }
     }
+  },
+  "fileSizeValidationMessage": "{fieldName} must be less than {size} bytes.",
+  "@fileSizeValidationMessage": {
+    "description": "Validation message for a file field that must be less than a specific size",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "size": {
+      }
+    }
+  },
+  "fileTypeValidationMessage": "{fieldName} must be of type {type}.",
+  "@fileTypeValidationMessage": {
+    "description": "Validation message for a file field that must be of a specific type",
+    "type": "text",
+    "placeholders": {
+      "fieldName": {
+      },
+      "type": {
+      }
+    }
   }
 }

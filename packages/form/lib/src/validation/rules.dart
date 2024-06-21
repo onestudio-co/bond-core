@@ -1,5 +1,7 @@
 library validation_rules;
 
+import 'dart:io';
+
 import 'package:bond_form/bond_form.dart';
 
 export 'rules/alpha.dart';
@@ -14,6 +16,8 @@ export 'rules/different.dart';
 export 'rules/digits.dart';
 export 'rules/digits_between.dart';
 export 'rules/email.dart';
+export 'rules/file_size_rule.dart';
+export 'rules/file_type_rule.dart';
 export 'rules/in_list.dart';
 export 'rules/integer.dart';
 export 'rules/is_false.dart';
@@ -297,4 +301,22 @@ class Rules {
   /// It can include a custom validation message.
   static ValidationRule<bool?> isFalse({String? message}) =>
       IsFalse(message: message);
+
+  /// Creates a [FileTypeRule] validation rule.
+  ///
+  /// This rule validates that the input file is of a specified type.
+  /// It can include a custom validation message.
+  static ValidationRule<File?> fileType(List<String> allowedMimeTypes,
+          {String? message}) =>
+      FileTypeRule(allowedMimeTypes: allowedMimeTypes, message: message);
+
+  /// Creates a [FileSizeRule] validation rule.
+  ///
+  /// This rule validates that the input file size is within a specified limit.
+  /// It can include a custom validation message.
+  static ValidationRule<File?> fileSize(int maxSizeInBytes,
+          {String? message}) =>
+      FileSizeRule(maxSizeInBytes: maxSizeInBytes, message: message);
+
+
 }

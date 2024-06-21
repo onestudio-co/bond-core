@@ -473,4 +473,26 @@ class ValidatorLocalizations {
       locale: localeName,
     );
   }
+
+  String fileSizeValidationMessage(String fieldName, int size) {
+    return Intl.message(
+      '$fieldName must be less than $size KB.',
+      name: 'fileSizeValidationMessage',
+      desc:
+          'Validation message for a field that must be less than a specific size',
+      args: [fieldName, size],
+      locale: localeName,
+    );
+  }
+
+  String fileTypeValidationMessage(String fieldName, String type) {
+    return Intl.message(
+      '$fieldName must be of type: $type.',
+      name: 'fileTypeValidationMessage',
+      desc:
+          'Validation message for a file field that must be of a specific type',
+      args: [fieldName, type],
+      locale: localeName,
+    );
+  }
 }
