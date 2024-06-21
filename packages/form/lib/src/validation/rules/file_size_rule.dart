@@ -16,6 +16,12 @@ class FileSizeRule extends ValidationRule<File?> {
     String? message,
   }) : super(message);
 
+  FileSizeRule.megabyte({
+    required int maxSizeInMegabytes,
+    String? message,
+  })  : maxSizeInBytes = maxSizeInMegabytes * 1024 * 1024,
+        super(message);
+
   @override
   String validatorMessage(String fieldName) =>
       l10n.fileSizeValidationMessage(fieldName, maxSizeInBytes);
