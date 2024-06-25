@@ -291,16 +291,18 @@ class Rules {
   /// Creates an [IsTrue] validation rule.
   ///
   /// This rule checks if a boolean value is true.
+  /// support bool, String, and num types.
   /// It can include a custom validation message.
-  static ValidationRule<bool?> isTrue({String? message}) =>
-      IsTrue(message: message);
+  static ValidationRule<T> isTrue<T>({String? message}) =>
+      IsTrue<T>(message: message);
 
   /// Creates an [IsFalse] validation rule.
   ///
   /// This rule checks if a boolean value is false.
+  /// support bool, String, and num types.
   /// It can include a custom validation message.
-  static ValidationRule<bool?> isFalse({String? message}) =>
-      IsFalse(message: message);
+  static ValidationRule<T> isFalse<T>({String? message}) =>
+      IsFalse<T>(message: message);
 
   /// Creates a [FileTypeRule] validation rule.
   ///

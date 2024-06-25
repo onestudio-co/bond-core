@@ -1,5 +1,9 @@
 ### Changelog
 
+## 0.0.1+28
+
+* Fix isTrue & isFalse rules to deal with null value and now support bool, String & num types.
+
 ## 0.0.1+27
 
 * Added date field support to form extensions.
