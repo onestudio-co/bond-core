@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bond_form/bond_form.dart';
+import 'package:bond_form/src/validation/has_validation_errors.dart';
 
 /// A mixin to manage the state and logic of a form.
 ///
@@ -39,41 +40,6 @@ mixin FormController<Success, Failure extends Error> {
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: status,
-    );
-  }
-
-  /// Sets an error message for the specified field and updates the form state to invalid.
-  ///
-  /// This method directly assigns the provided error message to the specified field and
-  /// updates the form's status to `BondFormStateStatus.invalid`.
-  ///
-  /// - [fieldName] The name of the field to set the error for.
-  /// - [error] The error message to set for the field.
-  void setError(String fieldName, String error) {
-    final field = state.get(fieldName);
-    state.fields[fieldName] = field.updateError(error);
-    state = state.copyWith(
-      fields: Map.from(state.fields),
-      status: BondFormStateStatus.invalid,
-    );
-  }
-
-  /// Updates the error message for the specified field and performs additional validation.
-  ///
-  /// This method updates the error message for the specified field by appending it to any existing
-  /// validation errors. It then updates the form's status to `BondFormStateStatus.invalid`.
-  ///
-  /// - [fieldName] The name of the field to update the error for.
-  /// - [error] The new error message to append to any existing validation errors for the field.
-  void updateError(String fieldName, String error) {
-    final field = state.get(fieldName);
-    final validationError = field.validate(state.fields);
-    state.fields[fieldName] = field.updateError(
-      validationError != null ? '$error\n$validationError' : error,
-    );
-    state = state.copyWith(
-      fields: Map.from(state.fields),
-      status: BondFormStateStatus.invalid,
     );
   }
 
