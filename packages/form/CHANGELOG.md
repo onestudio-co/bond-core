@@ -1,13 +1,5 @@
 ### Changelog
 
-## 0.0.1+29
-
-* add `setError` method to `FormController` mixin to set the error message of a specific field.
-* add `updateError` method to `FormController` mixin to update the error message of a specific
-  field.
-* The `setError` method directly sets a provided error message for a field, while the `updateError`
-  method appends the provided error message to any existing validation errors for the field.
-
 ## 0.0.1+28
 
 * Fix isTrue & isFalse rules to deal with null value and now support bool, String & num types.
