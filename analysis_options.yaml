@@ -7,7 +7,6 @@ linter:
     - no_adjacent_strings_in_list
     - valid_regexps
     - only_throw_errors
-    - avoid_returning_null_for_future
     - avoid_returning_null_for_void
 
     # Style
