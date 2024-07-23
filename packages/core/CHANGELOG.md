@@ -1,5 +1,43 @@
 ## Changelog
 
+## 0.0.2
+
+### Migration Guide
+
+1. **Update Override of `responseConvert`**:
+   If you previously overrode the `responseConvert` method, update your implementation to use
+   the `factories` getter instead.
+
+   **Before**:
+   ```dart
+   class MyServiceProvider with ResponseDecoding {
+     @override
+     T? responseConvert<T>(Map<String, dynamic> json) {
+       if (T == MyModel) {
+         return MyModel.fromJson(json) as T;
+       }
+       // Add other model conversions as needed...
+       return null;
+     }
+   }
+   ```
+
+   **After**:
+   ```dart
+   class MyServiceProvider with ResponseDecoding {
+     @override
+     Map<Type, JsonFactory> get factories => {
+       MyModel: (json) => MyModel.fromJson(json),
+       AnotherModel: (json) => AnotherModel.fromJson(json),
+       // Add other model factories as needed...
+     };
+   }
+   ```
+
+2. **Remove Direct Calls to `responseConvert`**:
+   Ensure that you no longer directly call or override `responseConvert`. Instead, rely on the
+   default implementation provided by the mixin.
+
 ## 0.0.1+9
 
 * add new extensions to map a `Future` results.
