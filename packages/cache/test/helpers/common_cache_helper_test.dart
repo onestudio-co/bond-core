@@ -182,6 +182,13 @@ void main() {
       expect(result, equals(model));
     });
 
+    test('Check for nullable registered type', () {
+      final json = {'data': 'any data'};
+      final model = RegisteredModel.fromJson(json);
+      final result = CommonCacheHelper.checkCachedData<RegisteredModel?>(json);
+      expect(result, equals(model));
+    });
+
     test(
         'Check for unregistered ResponseDecoding provider and '
         'not provided factory', () {

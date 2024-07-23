@@ -7,10 +7,7 @@ class MockServiceProvider extends Mock
     with ResponseDecoding
     implements ServiceProvider {
   @override
-  T? responseConvert<T>(Map<String, dynamic> json) {
-    if (T == RegisteredModel) {
-      return RegisteredModel.fromJson(json) as T;
-    }
-    return null;
-  }
+  Map<Type, JsonFactory> get factories => {
+        RegisteredModel: RegisteredModel.fromJson,
+      };
 }
