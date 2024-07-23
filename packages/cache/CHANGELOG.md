@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.3+1
+- Added support for nullable registered types in the cache package.
+
 ## 0.0.3
 ### Added
 - `watch`, `unwatch`, and `stream` methods to the Cache class to support reactive caching patterns.
