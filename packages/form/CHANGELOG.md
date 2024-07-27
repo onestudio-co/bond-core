@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.1+30
+* update dependence
+
 ## 0.0.1+29
 
 * add `setError` method to `FormController` mixin to set the error message of a specific field.
