@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:bond_cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
@@ -21,7 +22,9 @@ class BaseBondApiRequest<T> {
 
   Map<String, String> _headers = <String, String>{};
   Map<String, dynamic> _queryParameters = <String, dynamic>{};
-  Object? _body;
+  Map<String, dynamic>? _body;
+  Map<String, File>? _files;
+  Map<String, dynamic>? _data;
   Factory<T>? _factory;
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
@@ -48,6 +51,16 @@ class BaseBondApiRequest<T> {
     return this;
   }
 
+  BaseBondApiRequest<T> files(Map<String, File> files) {
+    _files = files;
+    return this;
+  }
+
+  BaseBondApiRequest<T> data(Map<String, dynamic> data) {
+    _data = data;
+    return this;
+  }
+
   BaseBondApiRequest<T> factory(Factory<T> factory) {
     _factory = factory;
     return this;
@@ -67,10 +80,11 @@ class BaseBondApiRequest<T> {
     // Perform the request using _dio and handle the response
     // Convert the response JSON to the desired model using the provided factory method, error handler, etc.
     try {
+      final data = await _getRequestData();
       final response = await _dio.request(
         _path,
         queryParameters: _queryParameters,
-        data: _body,
+        data: data,
         options: Options(
           method: _method,
           headers: _headers,
@@ -101,6 +115,15 @@ class BaseBondApiRequest<T> {
     }
   }
 
+  Future<dynamic> _getRequestData() async {
+    if (_files != null && _files!.isNotEmpty) {
+      final formData = await _createFormData(files: _files!, data: _data);
+      return formData;
+    } else {
+      return _body;
+    }
+  }
+
   Future<void> _cacheCustomKeys(Map<String, dynamic> result) async {
     for (final customKey in _customCacheKeys.entries) {
       final value = _getNestedValue(result, customKey.value);
@@ -121,5 +144,36 @@ class BaseBondApiRequest<T> {
       }
     }
     return value;
+  }
+
+  Future<FormData> _createFormData({
+    required Map<String, File> files,
+    Map<String, dynamic>? data,
+  }) async {
+    final formData = FormData();
+
+    for (final entry in files.entries) {
+      final fieldName = entry.key;
+      final file = entry.value;
+      formData.files.add(
+        MapEntry(
+          fieldName,
+          await MultipartFile.fromFile(file.path),
+        ),
+      );
+    }
+    if (data != null) {
+      for (final entry in data.entries) {
+        final fieldName = entry.key;
+        final value = entry.value;
+        formData.fields.add(
+          MapEntry(
+            fieldName,
+            value.toString(),
+          ),
+        );
+      }
+    }
+    return formData;
   }
 }
