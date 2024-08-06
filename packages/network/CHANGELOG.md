@@ -1,3 +1,8 @@
+## 0.0.5
+
+* support form data multipart request.
+
+
 ## 0.0.4
 
 * add currentPage property to Meta class.
