@@ -13,8 +13,10 @@ dependencies:
     sdk: flutter
 
   # Bond packages
-  bond_core: ^0.0.1+7
-  bond_form: ^0.0.1
+  bond_core:
+    path: ../../../../core
+  bond_form:
+    path: ../../../../form
   bond_form_riverpod:
     path: ../../bond_form_riverpod
 

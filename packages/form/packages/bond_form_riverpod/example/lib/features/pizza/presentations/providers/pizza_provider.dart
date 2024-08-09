@@ -16,10 +16,10 @@ enum Toppings {
   blackOlives
 }
 
-enum Branches { main, gaza, cairo }
+ enum Branches { main, gaza, cairo }
 
 class PizzaOrderFormController
-    extends AutoDisposeFormStateNotifier<String, Error> {
+    extends AutoDisposeFormStateNotifier<String, Error> with BodyConvertible {
   // bond create form widget -- PizzaOrderFormController
 
   @override
@@ -110,6 +110,14 @@ class PizzaOrderFormController
       };
 
   @override
+  void fieldTransformers(TransformersRegistry registry) {
+    registry.register<Branches, String>((value) => value.name);
+    registry.register<CrustType, String>((value) => value.name);
+    registry.register<PizzaSize, String>((value) => value.name);
+    registry.register<Toppings, String>((value) => value.name);
+  }
+
+  @override
   Future<String> onSubmit() async {
     // on summit called after the for validation is successful
     // so we can access the values through required helper methods.
@@ -127,6 +135,10 @@ class PizzaOrderFormController
     final specialInstructions =
         state.textFieldValue('specialInstructions') ?? 'None';
 
+    // or use body method to create body map with key and value that are suitable to send to api request
+
+    //final bodyContent = body();
+
     // Normally, you'd send these values to an API or a database here.
     // For demonstration, we'll just return a summary string.
     return Future.delayed(
@@ -138,7 +150,8 @@ class PizzaOrderFormController
         Branch: $branch
         Pizza Size: $pizzaSize
         Crust Type: $crustType
-        Toppings: $toppings
+        Toppings: 
+        $toppings
         Include Sides: $includeSides
         Special Instructions: $specialInstructions
       ''';

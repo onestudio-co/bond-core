@@ -1,5 +1,15 @@
 ### Changelog
 
+## 0.0.2
+
+* Automatic Body Generation with BodyConvertible Mixin
+•	Introduced the BodyConvertible mixin, which allows automatic generation of a request body map from form state values. This simplifies the process of extracting and transforming form field values into a key-value map suitable for API requests.
+•	The body() method automatically iterates over all form fields, applying registered transformers to generate the body map.
+
+* Flexible Field Transformers with TransformersRegistry
+  •	Added the TransformersRegistry class, which allows developers to register custom field transformers. These transformers can convert field values into any desired format, such as converting enum values to strings.
+  •	The registry supports both single values and collections (e.g., Set, List), automatically handling the transformation of collection elements.
+
 ## 0.0.1+30
 * update dependence
 

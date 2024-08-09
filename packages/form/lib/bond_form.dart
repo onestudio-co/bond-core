@@ -10,3 +10,5 @@ export 'src/form_fields.dart';
 export 'src/form_fields/form_field_state.dart';
 export 'src/validation/has_validation_errors.dart';
 export 'src/validation/rules.dart';
+export 'src/form_transformers/body_convertible.dart';
+export 'src/form_transformers/transformers_registry.dart';
