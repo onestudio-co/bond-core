@@ -49,12 +49,21 @@ abstract class FormFieldState<T> {
   /// Returns an error message if validation fails, otherwise returns `null`.
   @nonVirtual
   String? validate(Map<String, FormFieldState> fields) {
-    for (final rule in rules) {
-      if (!rule.validate(value, fields)) {
-        return rule.message(label);
+    final optionalRule = rules.whereType<Optional>().firstOrNull;
+    if (optionalRule != null) {
+      if (optionalRule.validate(value, fields)) {
+        return null; // No validation error, skip other rules
       }
     }
-    return null;
+
+    // Validate against all rules
+    for (final rule in rules) {
+      if (!(rule is Optional) && !rule.validate(value, fields)) {
+        return rule.message(label); // Return the first error message
+      }
+    }
+
+    return null; // All validations passed
   }
 
   /// Creates a new [FormFieldState] object by copying the existing state

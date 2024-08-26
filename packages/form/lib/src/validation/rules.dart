@@ -38,6 +38,7 @@ export 'rules/required_if.dart';
 export 'rules/same.dart';
 export 'rules/size.dart';
 export 'rules/url.dart';
+export 'rules/optional.dart';
 export 'validation_rule.dart';
 
 /// A utility class that provides convenient methods to create instances of

@@ -1,5 +1,16 @@
 ### Changelog
 
+## 0.0.3
+### Added
+- **Optional Rule**: Introduced the `Optional` validation rule that allows fields to be marked as optional. If the field is not present (null, empty string, or empty list), validation will pass, and all other rules will be skipped. If the field is present, other rules will be validated against the value.
+- **Enhanced Validation Logic**: The `validate` method in `FormFieldState` now properly handles the `Optional` rule, ensuring that optional fields can skip validation when appropriate.
+
+### Changed
+- **General Validation Logic**: Updated the general validation logic to support the new `Optional` rule, improving flexibility and making form validation more intuitive for optional fields.
+
+### Fixed
+- **Bug Fixes**: Resolved issues related to handling `null` and empty values in form validation, ensuring that the new `Optional` rule operates smoothly within the validation pipeline.
+
 ## 0.0.2
 
 * Automatic Body Generation with BodyConvertible Mixin
