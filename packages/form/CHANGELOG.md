@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.3+1
+* add missing method `optional` on `rules.dart` file
+
 ## 0.0.3
 ### Added
 - **Optional Rule**: Introduced the `Optional` validation rule that allows fields to be marked as optional. If the field is not present (null, empty string, or empty list), validation will pass, and all other rules will be skipped. If the field is present, other rules will be validated against the value.
