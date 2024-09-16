@@ -26,7 +26,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [asyncDropDownItems] Retrieves a list of async dropdown items.
 /// - [hiddenField] Retrieves the state of a hidden field.
 /// - [fileField] Retrieves the state of a file field.
-extension FieldBondFormState on BondFormState {
+extension FieldBondFormState on BaseBondFormState {
   /// Retrieves the [TextFieldState] for a given text field.
   ///
   /// This method simplifies fetching the state of a text field with a specified [fieldName].

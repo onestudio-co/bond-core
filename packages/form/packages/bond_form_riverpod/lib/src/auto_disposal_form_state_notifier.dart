@@ -11,11 +11,13 @@ import 'dart:async';
 /// state management solutions that need automatic resource cleanup.
 ///
 ///  Type Parameters:
-/// - [Success]: The type that will represent successful form submission.
-/// - [Failure]: The type that extends [Error] to represent failure in form submission.
+/// - [Success] The type that will represent successful form submission.
+/// - [Failure] The type that extends [Error] to represent failure in form submission.
 abstract class AutoDisposeFormStateNotifier<Success, Failure extends Error>
     extends AutoDisposeNotifier<BondFormState<Success, Failure>>
-    with FormController<Success, Failure> {
+    with
+        BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FormController<Success, Failure> {
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 

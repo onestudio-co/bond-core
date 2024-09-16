@@ -12,4 +12,4 @@ dependencies:
     sdk: flutter
   riverpod: ^2.5.1
 
-  bond_form: ^0.0.1
+  bond_form: ^0.0.3+2

@@ -31,7 +31,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [updateRadioGroup] Updates a [RadioGroupFieldState] with a given value.
 /// - [updateHiddenField] Updates a [HiddenFieldState] with a given value.
 /// - [updateFile] Updates a [FileFieldState] with a given value.
-extension XFormController on FormController {
+extension XFormController on BaseFormController {
   /// Updates a [TextFieldState] with a given [value].
   ///
   /// - [fieldName] The name of the text field to update.

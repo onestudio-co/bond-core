@@ -32,7 +32,7 @@ import 'required_values.dart';
 /// - [hiddenFieldValue] Retrieves the value of a hidden field.
 /// - [fileFieldValue] Retrieves the value of a file field.
 /// - [required] Retrieves the [RequiredValues] extension for the current form state.
-extension ValueBondFormState on BondFormState {
+extension ValueBondFormState on BaseBondFormState {
   /// Retrieves the value of a text field for a specified [fieldName].
   ///
   /// This method simplifies fetching the current value of a text field.

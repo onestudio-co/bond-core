@@ -22,7 +22,7 @@ packages:
       path: "../../.."
       relative: true
     source: path
-    version: "0.0.1+30"
+    version: "0.0.3+2"
   bond_form_riverpod:
     dependency: "direct main"
     description:

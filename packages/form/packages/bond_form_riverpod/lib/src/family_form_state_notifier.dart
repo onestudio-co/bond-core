@@ -7,12 +7,14 @@ import 'package:riverpod/riverpod.dart';
 /// of changes, and using the FormController mixin for form operations.
 ///
 /// Type Parameters:
-///   - [Success]: The data type that represents the result of a successful form submission.
-///   - [Failure]: The error type that extends [Error] representing the failure cases of form submission.
-///   - [Arg]: The type of the argument that will be passed to the form.
+///   - [Success] The data type that represents the result of a successful form submission.
+///   - [Failure] The error type that extends [Error] representing the failure cases of form submission.
+///   - [Arg] The type of the argument that will be passed to the form.
 abstract class FamilyFormStateNotifier<Success, Failure extends Error, Arg>
     extends FamilyNotifier<BondFormState<Success, Failure>, Arg>
-    with FormController<Success, Failure> {
+    with
+        BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FormController<Success, Failure> {
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 

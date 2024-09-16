@@ -11,12 +11,15 @@ import 'package:riverpod/riverpod.dart';
 /// state management solutions that need automatic resource cleanup.
 ///
 ///  Type Parameters:
-/// - [Success]: The type that will represent successful form submission.
-/// - [Failure]: The type that extends [Error] to represent failure in form submission.
-/// - [Arg]: The type of the argument that will be passed to the form.
-abstract class AutoDisposeFamilyFormStateNotifier<Success, Failure extends Error, Arg>
+/// - [Success] The type that will represent successful form submission.
+/// - [Failure] The type that extends [Error] to represent failure in form submission.
+/// - [Arg] The type of the argument that will be passed to the form.
+abstract class AutoDisposeFamilyFormStateNotifier<Success,
+        Failure extends Error, Arg>
     extends AutoDisposeFamilyNotifier<BondFormState<Success, Failure>, Arg>
-    with FormController<Success, Failure> {
+    with
+        BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FormController<Success, Failure> {
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 

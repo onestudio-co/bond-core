@@ -28,7 +28,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [asyncDropDownValue] Ensures the value of an async dropdown field is not null.
 /// - [hiddenFieldValue] Ensures the value of a hidden field is not null.
 class RequiredValues {
-  final BondFormState state;
+  final BaseBondFormState state;
 
   RequiredValues(this.state);
 

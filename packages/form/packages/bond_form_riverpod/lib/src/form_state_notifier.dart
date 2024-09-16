@@ -7,11 +7,13 @@ import 'dart:async';
 /// of changes, and using the FormController mixin for form operations.
 ///
 /// Type Parameters:
-///   - [Success]: The data type that represents the result of a successful form submission.
-///   - [Failure]: The error type that extends [Error] representing the failure cases of form submission.
+///   - [Success] The data type that represents the result of a successful form submission.
+///   - [Failure] The error type that extends [Error] representing the failure cases of form submission.
 abstract class FormStateNotifier<Success, Failure extends Error>
     extends Notifier<BondFormState<Success, Failure>>
-    with FormController<Success, Failure> {
+    with
+        BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FormController<Success, Failure> {
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;
 

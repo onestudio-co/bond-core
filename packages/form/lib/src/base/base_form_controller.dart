@@ -1,21 +1,26 @@
 import 'dart:developer';
 
 import 'package:bond_form/bond_form.dart';
+import 'package:meta/meta.dart';
 
-/// A mixin to manage the state and logic of a form.
+/// A base mixin to manage the state and logic of a form.
 ///
-/// The mixin defines methods for updating fields, validating the form,
-/// and handling form submission.
+/// This mixin provides foundational methods for managing form state, updating fields,
+/// validating the form, and handling form submission. It is intended to be used by
+/// form controllers that manage individual or stepper-based forms.
 ///
 /// Type Parameters:
-///   - [Success]: The data type that represents the result of a successful form submission.
-///   - [Failure]: The error type that extends [Error] representing the failure cases of form submission.
-mixin FormController<Success, Failure extends Error> {
+///   - [Success] The data type that represents the result of a successful form submission.
+///   - [Failure] The error type that extends [Error], representing the failure cases of form submission.
+///   - [State] The state type extending [BaseBondFormState] that holds the form's fields and submission status.
+@protected
+mixin BaseFormController<Success, Failure extends Error,
+    State extends BaseBondFormState<Success, Failure>> {
   /// Returns the current state of the form.
-  BondFormState<Success, Failure> get state;
+  State get state;
 
   /// Sets the new state for the form.
-  set state(BondFormState<Success, Failure> newState);
+  set state(State newState);
 
   /// Returns the map of field names to their corresponding `FormFieldState`.
   Map<String, FormFieldState> fields();
@@ -25,9 +30,10 @@ mixin FormController<Success, Failure extends Error> {
 
   /// Updates the field value and status.
   ///
-  /// Parameters:
-  ///   - [fieldName] The name of the field to update.
-  ///   - [value] The new value for the field.
+  /// This method updates the value and status of a specific form field.
+  ///
+  /// - [fieldName] The name of the field to update.
+  /// - [value] The new value for the field.
   void update<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
     state.fields[fieldName] = field.copyWith(
@@ -63,8 +69,8 @@ mixin FormController<Success, Failure extends Error> {
   /// This method updates the error message for the specified field by appending it to any existing
   /// validation errors. It then updates the form's status to `BondFormStateStatus.invalid`.
   ///
-  /// - [fieldName] The name of the field to update the error for.
-  /// - [error] The new error message to append to any existing validation errors for the field.
+  /// - [fieldName]: The name of the field to update the error for.
+  /// - [error]: The new error message to append to any existing validation errors for the field.
   void updateError(String fieldName, String error) {
     final field = state.get(fieldName);
     final validationError = field.validate(state.fields);
@@ -78,6 +84,10 @@ mixin FormController<Success, Failure extends Error> {
   }
 
   /// Validates all fields in the form.
+  ///
+  /// This method marks all fields as "touched" and validates them.
+  /// If all fields are valid, the form state is updated to `BondFormStateStatus.valid`;
+  /// otherwise, it is updated to `BondFormStateStatus.invalid`.
   void validate() {
     for (final fieldName in state.fields.keys) {
       final field = state.get(fieldName);
@@ -107,6 +117,8 @@ mixin FormController<Success, Failure extends Error> {
   }
 
   /// A private getter to check if all fields in the form are valid.
+  ///
+  /// Returns `true` if all fields are valid, otherwise `false`.
   bool get _allValid {
     var allValid = true;
     for (final fieldEntry in state.fields.entries) {
@@ -129,10 +141,12 @@ mixin FormController<Success, Failure extends Error> {
 
   /// Initiates the form submission process.
   ///
-  /// This method calls the [onSubmit] method and updates the form state accordingly.
+  /// This method validates the form and, if valid, triggers the [onSubmit] method.
   Future<void> submit() => _onSubmit();
 
   /// To be implemented by the subclass, detailing what should happen when a form is submitted.
+  ///
+  /// Returns the result of a successful submission.
   Future<Success> onSubmit();
 
   /// Internal method to handle form submission.

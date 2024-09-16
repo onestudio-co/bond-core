@@ -1,7 +1,5 @@
 import 'package:bond_form/bond_form.dart';
 
-import 'transformers_registry.dart';
-
 /// A mixin that adds functionality to convert form state into a
 /// map of key-value pairs suitable for creating a request body.
 mixin BodyConvertible<Success, Failure extends Error>
@@ -41,7 +39,7 @@ mixin BodyConvertible<Success, Failure extends Error>
   /// types for the request body.
   ///
   /// Parameters:
-  ///   - [registry]: The `TransformersRegistry` instance where
+  ///   - [registry] The `TransformersRegistry` instance where
   ///                 transformers should be registered.
-  void fieldTransformers(TransformersRegistry registry);
+  void fieldTransformers(TransformersRegistry registry) {}
 }
