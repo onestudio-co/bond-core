@@ -329,4 +329,6 @@ class Rules {
           {String? message}) =>
       FileSizeRule.megabyte(
           maxSizeInMegabytes: maxSizeInMegabytes, message: message);
+
+  static ValidationRule<T> optional<T>() => Optional<T>();
 }
