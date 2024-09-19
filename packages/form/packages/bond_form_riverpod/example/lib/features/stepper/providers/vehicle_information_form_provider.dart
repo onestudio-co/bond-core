@@ -3,8 +3,7 @@ import 'package:bond_form_riverpod/bond_form_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class VehicleInformationFormController
-    extends FormStateNotifier<Map<String, dynamic>, Error>
-    with BodyConvertible {
+    extends AutoDisposeStepFormStateNotifier<void, Error> {
   VehicleInformationFormController() : super();
 
   @override
@@ -33,17 +32,10 @@ class VehicleInformationFormController
           ],
         ),
       };
-
-  @override
-  void fieldTransformers(TransformersRegistry registry) {}
-
-  @override
-  Future<Map<String, dynamic>> onSubmit() async {
-    return body();
-  }
 }
 
 final vehicleInformationFormProvider = NotifierProvider.autoDispose<
-    VehicleInformationFormController, BondFormState<void, Error>>(
+    VehicleInformationFormController,
+    BondFormState<void, Error>>(
   VehicleInformationFormController.new,
 );
