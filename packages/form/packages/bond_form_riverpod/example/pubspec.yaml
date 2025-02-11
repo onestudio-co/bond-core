@@ -1,7 +1,7 @@
 name: example
 description: Bond project.
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -20,7 +20,7 @@ dependencies:
   bond_form_riverpod:
     path: ../../bond_form_riverpod
 
-  get_it: ^7.2.0
+  get_it: ^8.0.3
 
   # navigation packages
   go_router: ^10.1.1
