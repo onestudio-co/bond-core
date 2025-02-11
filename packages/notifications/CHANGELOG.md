@@ -2,7 +2,8 @@
 
 ### Breaking Changes
 - **Environment SDK Constraint:** Updated from `>=2.16.0 <3.0.0` to `>=3.0.0 <4.0.0` to support Dart 3. Users on Dart 2.x will need to upgrade.
-- **json_annotation:** Added `json_annotation` as a direct dev dependency.
+- **json_annotation:** Added `json_annotation` as a direct dependency. Users will need to add
+  `json_annotation` to their dependencies if they are using the `ServerNotificationModel` class.
 
 ## 0.0.2
 
