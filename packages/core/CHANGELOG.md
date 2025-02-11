@@ -1,5 +1,14 @@
 ## Changelog
 
+## 0.0.3
+
+### Changes
+
+- **Dependency Update**:
+    - Bumped `get_it` from `^7.6.4` to `^8.0.3`.
+
+> **Note**: This update should be seamless if you aren’t using any breaking changes introduced in `get_it` 8.0. However, if you rely on advanced `get_it` features, consult the official `get_it` documentation to ensure compatibility with the new version.
+
 ## 0.0.2
 
 ### Migration Guide
