@@ -1,4 +1,18 @@
-### Changelog
+# Changelog
+
+## 0.0.4
+
+### Changed
+- Bumped `bond_core` from `^0.0.2` to `^0.0.3`.
+- Bumped `shared_preferences` from `^2.2.3` to `^2.5.2`.
+- Bumped `meta` from `^1.11.0` to `^1.15.0`.
+- Updated dev dependencies:
+    - `test`: ^1.24.6 → ^1.25.15
+    - `mockito`: ^5.4.2 → ^5.4.5
+
+> **Note**: These updates ensure compatibility with the latest `bond_core` changes and other improved packages.
+
+---
 
 ## 0.0.3+1
 - Added support for nullable registered types in the cache package.
@@ -40,5 +54,3 @@
 * add missing flutter sdk as dependency.
 
 ## 0.0.1
-
-* initial release.
