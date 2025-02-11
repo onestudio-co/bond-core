@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.4+1
+- Downgraded `intl` from `^0.20.2` to `^0.19.0` to fix compatibility issues with Flutter.
+
 ## 0.0.4
 
 ### Changed
