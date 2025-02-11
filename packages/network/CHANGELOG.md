@@ -1,3 +1,18 @@
+## 0.0.6
+
+### Changed
+- **Dependencies Updated:**
+    - **dio:** upgraded from `^5.2.1+1` to `^5.8.0+1`.
+    - **equatable:** upgraded from `^2.0.5` to `^2.0.7`.
+    - **json_annotation:** upgraded from `^4.8.1` to `^4.9.0`.
+    - **json_serializable:** upgraded from `^6.7.1` to `^6.9.3`.
+    - **package_info_plus:** upgraded from `^4.1.0` to `^8.2.1`.
+    - **meta:** upgraded from `^1.8.0` to `^1.15.0`.
+    - **faker:** upgraded from `^2.0.0` to `^2.2.0`.
+- **Bond Dependencies Updated:**
+    - **bond_core:** upgraded from `^0.0.1` to `^0.0.3`.
+    - **bond_cache:** upgraded from `^0.0.1` to `^0.0.4+1`.
+
 ## 0.0.5
 
 * support form data multipart request.
