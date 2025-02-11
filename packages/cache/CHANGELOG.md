@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.4+1
+- **dev_dependencies:** Updated the `async` package to `^2.13.0` to resolve package validation warnings.
+
 ## 0.0.4
 
 ### Changed
