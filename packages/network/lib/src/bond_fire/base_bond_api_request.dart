@@ -25,6 +25,7 @@ class BaseBondApiRequest<T> {
   Map<String, dynamic>? _body;
   Map<String, File>? _files;
   Map<String, dynamic>? _data;
+  CancelToken? _cancelToken;
   Factory<T>? _factory;
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
@@ -61,6 +62,11 @@ class BaseBondApiRequest<T> {
     return this;
   }
 
+  BaseBondApiRequest<T> cancelToken(CancelToken cancelToken) {
+    _cancelToken = cancelToken;
+    return this;
+  }
+
   BaseBondApiRequest<T> factory(Factory<T> factory) {
     _factory = factory;
     return this;
@@ -89,6 +95,7 @@ class BaseBondApiRequest<T> {
           method: _method,
           headers: _headers,
         ),
+        cancelToken: _cancelToken,
       );
       if (_customCacheKeys.entries.isNotEmpty) {
         await _cacheCustomKeys(response.data);

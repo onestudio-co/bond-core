@@ -1,3 +1,8 @@
+## 0.0.7
+### Added
+- **Cancel Token Support:** Added support for cancel tokens in API requests to allow for request cancellation.
+
+
 ## 0.0.6
 
 ### Changed
