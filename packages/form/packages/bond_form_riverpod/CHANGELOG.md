@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.3+1
+- Bumped `bond_form` dependency to version `^0.0.5`.
+
 ## 0.0.3
 - Bumped `riverpod` dependency to version `^2.6.1`.
 - Bumped `bond_form` dependency to version `^0.0.4`.
