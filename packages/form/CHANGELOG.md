@@ -1,10 +1,21 @@
 ### Changelog
 
-## 0.0.4
+## 0.0.5
 ### Breaking Changes
 - Renamed `update` method to `updateField` in `GetxFormController` to avoid conflict with `GetxController`.
 - This change requires updating all instances where the `update` method was used to `updateField`.
-  
+
+## 0.0.4+1
+- Downgraded `intl` from `^0.20.2` to `^0.19.0` to fix compatibility issues with Flutter.
+
+## 0.0.4
+
+### Changed
+- **meta:** Upgraded from `^1.8.0` to `^1.15.0`.
+- **mime:** Upgraded from `^1.0.5` to `^2.0.0`.
+- **intl:** Upgraded from `^0.19.0` to `^0.20.2`.
+- **bond_core:** Upgraded from `^0.0.2` to `^0.0.3`.
+
 ## 0.0.3+1 
 - Introduced BaseFormController mixin to handle common form state logic and provide reusable form management functions.
 
