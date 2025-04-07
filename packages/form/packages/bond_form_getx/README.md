@@ -1,4 +1,3 @@
-```markdown
 # Bond Form Getx
 
 Form Bond also comes with out-of-the-box integration with Getx, a popular state management solution for Flutter. Getx allows for robust state management and combines well with Form Bond's strong form handling capabilities. With this integration, Form Bond brings the simplicity of creating complex forms and the robustness of managing state effectively in Flutter applications.
