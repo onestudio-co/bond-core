@@ -15,14 +15,14 @@ packages:
       path: "../../../../core"
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.0.3"
   bond_form:
     dependency: "direct main"
     description:
       path: "../../.."
       relative: true
     source: path
-    version: "0.0.3+2"
+    version: "0.0.4"
   bond_form_riverpod:
     dependency: "direct main"
     description:
@@ -92,10 +92,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_riverpod
-      sha256: "0f1974eff5bbe774bf1d870e406fc6f29e3d6f1c46bd9c58e7172ff68a785d7d"
+      sha256: "9532ee6db4a943a1ed8383072a2e3eeda041db5657cdf6d2acecf3c21ecbe7e1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.1"
+    version: "2.6.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -110,10 +110,10 @@ packages:
     dependency: "direct main"
     description:
       name: get_it
-      sha256: d0b88dc35a7f97fd91fec0cf8f165abd97a57977968d8fc02ba0bc92e14ba07e
+      sha256: f126a3e286b7f5b578bf436d5592968706c4c1de28a228b870ce375d9f743103
       url: "https://pub.dev"
     source: hosted
-    version: "7.6.6"
+    version: "8.0.3"
   go_router:
     dependency: "direct main"
     description:
@@ -214,10 +214,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: f21b32ffd26a36555e501b04f4a5dca43ed59e16343f1a30c13632b2351dfa4d
+      sha256: "59062512288d3056b2321804332a13ffdd1bf16df70dcc8e506e411280a72959"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.1"
+    version: "2.6.1"
   sky_engine:
     dependency: transitive
     description: flutter
