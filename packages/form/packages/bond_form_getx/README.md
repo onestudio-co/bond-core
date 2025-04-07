@@ -54,12 +54,12 @@ class LoginFormController extends GetxFormController<String, Error> {
     'email': TextFieldState(
       null,
       label: 'Email',
-      rules: [FormRules.required()],
+      rules: [Rules.required()],
     ),
     'password': TextFieldState(
       null,
       label: 'Password',
-      rules: [FormRules.required()],
+      rules: [Rules.required()],
     ),
   };
 
@@ -136,4 +136,3 @@ Contributions are welcome! However, we currently do not have a set guideline for
 ## License
 
 Bond Core is licensed under the [MIT License](LICENSE).
-```
