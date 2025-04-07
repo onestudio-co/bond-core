@@ -1,6 +1,6 @@
 name: bond_cache
 description: Cache is a Bond package provides a convenient way to handle caching in app.
-version: 0.0.3+1
+version: 0.0.4+1
 homepage: https://github.com/onestudio-co/flutter-bond
 repository: https://github.com/onestudio-co/bond-core/tree/main/packages/cache
 
@@ -10,10 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bond_core: ^0.0.2
-  shared_preferences: ^2.2.3
-  meta: ^1.11.0
+  bond_core: ^0.0.3
+  shared_preferences: ^2.5.2
+  meta: ^1.15.0
 
 dev_dependencies:
-  test: ^1.24.6
-  mockito: ^5.4.2
+  test: ^1.25.15
+  mockito: ^5.4.5
+  async: ^2.13.0
