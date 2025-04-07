@@ -34,7 +34,7 @@ mixin BaseFormController<Success, Failure extends Error,
   ///
   /// - [fieldName] The name of the field to update.
   /// - [value] The new value for the field.
-  void update<T extends FormFieldState<G>, G>(String fieldName, G value) {
+  void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
     state.fields[fieldName] = field.copyWith(
       value: value,

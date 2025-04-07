@@ -37,7 +37,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the text field to update.
   /// - [value] The new value for the text field.
   void updateText(String fieldName, String? value) {
-    update<TextFieldState, String?>(fieldName, value);
+    updateValue<TextFieldState, String?>(fieldName, value);
   }
 
   /// Updates a [CheckboxFieldState] with a given [value].
@@ -45,7 +45,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the checkbox field to update.
   /// - [value] The new value for the checkbox field.
   void updateCheckbox(String fieldName, bool value) {
-    update<CheckboxFieldState<bool>, bool>(fieldName, value);
+    updateValue<CheckboxFieldState<bool>, bool>(fieldName, value);
   }
 
   /// Updates a [CheckboxGroupFieldState] with a given [value].
@@ -54,7 +54,7 @@ extension XFormController on BaseFormController {
   /// - [value] The new value for the checkbox group field.
   /// throws [ArgumentError] if the generic type T is not specified.
   void updateCheckboxGroup<T>(String fieldName, Set<T> value) {
-    update<CheckboxGroupFieldState<T>, Set<T>>(fieldName, value);
+    updateValue<CheckboxGroupFieldState<T>, Set<T>>(fieldName, value);
   }
 
   /// Toggles the value of a specific checkbox within a checkbox group.
@@ -84,7 +84,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the date field to update.
   /// - [value] The new value for the date field.
   void updateDate(String fieldName, DateTime? value) {
-    update<DateFieldState, DateTime?>(fieldName, value);
+    updateValue<DateFieldState, DateTime?>(fieldName, value);
   }
 
   /// Updates a [DropDownFieldState] with a given [value].
@@ -92,7 +92,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the dropdown field to update.
   /// - [value] The new value for the dropdown field.
   void updateDropDown<T>(String fieldName, T value) {
-    update<DropDownFieldState<T>, T>(fieldName, value);
+    updateValue<DropDownFieldState<T>, T>(fieldName, value);
   }
 
   /// Updates a [AsyncDropDownFieldState] with a given [value].
@@ -100,7 +100,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the async dropdown field to update.
   /// - [value] The new value for the dropdown field.
   void updateAsyncDropDown<T>(String fieldName, T value) {
-    update<AsyncDropDownFieldState<T>, T>(fieldName, value);
+    updateValue<AsyncDropDownFieldState<T>, T>(fieldName, value);
   }
 
   /// Updates a [RadioButtonFieldState] with a given [value].
@@ -108,7 +108,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the radio button field to update.
   /// - [value] The new value for the radio button field.
   void updateRadioButton<T>(String fieldName, T value) {
-    update<RadioButtonFieldState<T>, T>(fieldName, value);
+    updateValue<RadioButtonFieldState<T>, T>(fieldName, value);
   }
 
   /// Updates a [RadioGroupFieldState] with a given [value].
@@ -116,7 +116,7 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the radio group field to update.
   /// - [value] The new value for the radio group field.
   void updateRadioGroup<T>(String fieldName, T value) {
-    update<RadioGroupFieldState<T>, T>(fieldName, value);
+    updateValue<RadioGroupFieldState<T>, T>(fieldName, value);
   }
 
   /// Updates a [HiddenFieldState] with a given [value].
@@ -124,13 +124,13 @@ extension XFormController on BaseFormController {
   /// - [fieldName] The name of the hidden field to update.
   /// - [value] The new value for the hidden field.
   void updateHiddenField<T>(String fieldName, T value) {
-    update<HiddenFieldState<T>, T>(fieldName, value);
+    updateValue<HiddenFieldState<T>, T>(fieldName, value);
   }
 
   /// Updates a [FileFieldState] with a given [value].
   /// - [fieldName] The name of the file field to update.
   /// - [value] The new value for the file field.
   void updateFile(String fieldName, File? value) {
-    update<FileFieldState, File?>(fieldName, value);
+    updateValue<FileFieldState, File?>(fieldName, value);
   }
 }

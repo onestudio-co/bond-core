@@ -1,5 +1,10 @@
 ### Changelog
 
+## 0.0.4
+### Breaking Changes
+- Renamed `update` method to `updateField` in `GetxFormController` to avoid conflict with `GetxController`.
+- This change requires updating all instances where the `update` method was used to `updateField`.
+  
 ## 0.0.3+1 
 - Introduced BaseFormController mixin to handle common form state logic and provide reusable form management functions.
 
