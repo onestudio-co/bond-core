@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.6
+- Add `TextEditingController` to `TextFieldState`.
+
 ## 0.0.5
 ### Breaking Changes
 - Renamed `update` method to `updateField` in `GetxFormController` to avoid conflict with `GetxController`.
