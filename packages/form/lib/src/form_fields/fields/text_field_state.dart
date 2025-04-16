@@ -1,6 +1,7 @@
 import 'package:bond_form/src/form_fields/form_field_state.dart';
 import 'package:bond_form/src/validation/validation_rule.dart';
 import 'package:flutter/widgets.dart' as widgets;
+import 'package:meta/meta.dart';
 
 /// Represents the state of a text input form field.
 ///
@@ -11,7 +12,10 @@ class TextFieldState extends FormFieldState<String?> {
   ///
   /// This controller is auto-initialized with the value passed to [TextFieldState].
   /// You can bind this directly to a [TextFormField] or [TextField] widget.
-  final widgets.TextEditingController controller;
+  final widgets.TextEditingController _controller;
+
+  @internal
+  widgets.TextEditingController get controller => _controller;
 
   /// Creates a new instance of [TextFieldState].
   ///
@@ -29,8 +33,15 @@ class TextFieldState extends FormFieldState<String?> {
     bool validateOnUpdate = true,
     bool touched = false,
     widgets.TextEditingController? controller,
-  })  : controller =
-            controller ?? widgets.TextEditingController(text: value ?? ''),
+  })  : _controller = controller ??
+            widgets.TextEditingController.fromValue(
+              widgets.TextEditingValue(
+                text: value ?? '',
+                selection: value != null
+                    ? widgets.TextSelection.collapsed(offset: value.length)
+                    : const widgets.TextSelection.collapsed(offset: 0),
+              ),
+            ),
         super(
           value: value,
           error: error,
@@ -49,7 +60,15 @@ class TextFieldState extends FormFieldState<String?> {
     bool? validateOnUpdate,
     List<ValidationRule<String?>>? rules,
   }) {
-    controller.text = value ?? '';
+    if (value?.isEmpty == true) {
+    } else if (value != null) {
+      _controller.value = _controller.value.copyWith(
+        text: value,
+        selection: widgets.TextSelection.collapsed(offset: value.length),
+      );
+    } else {
+      _controller.clear();
+    }
     return TextFieldState(
       value ?? this.value,
       error: error ?? this.error,
@@ -57,7 +76,7 @@ class TextFieldState extends FormFieldState<String?> {
       touched: touched ?? this.touched,
       validateOnUpdate: validateOnUpdate ?? this.validateOnUpdate,
       rules: rules ?? this.rules,
-      controller: controller,
+      controller: _controller,
     );
   }
 

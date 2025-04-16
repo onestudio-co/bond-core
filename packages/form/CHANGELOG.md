@@ -1,5 +1,13 @@
 ### Changelog
 
+## 0.0.6+2
+ - export missing `form_controller_text_field_extension` extension.
+
+## 0.0.6+1
+- Introduced a private `_controller` to avoid direct external access to the controller.
+ - Developers are now encouraged to access the controller only via the `textFieldController()` method on the controller. A
+ - Added `disposeTextFieldListener(fieldName)` to remove listeners manually.
+
 ## 0.0.6
 - Add `TextEditingController` to `TextFieldState`.
 
