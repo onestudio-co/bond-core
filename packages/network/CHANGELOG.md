@@ -1,3 +1,12 @@
+### Changelog
+
+## 0.0.8
+### Added
+- Introduced `_cacheStore` property to `GetBondApiRequest<T>` for selecting a custom cache store.
+- Added full Dart documentation for all public methods and properties in `GetBondApiRequest`.
+- Add Readme to the package.
+- Add example to the package.
+
 ## 0.0.7
 ### Added
 - **Cancel Token Support:** Added support for cancel tokens in API requests to allow for request cancellation.

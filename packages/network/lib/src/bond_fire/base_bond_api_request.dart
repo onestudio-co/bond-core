@@ -6,15 +6,16 @@ import 'package:bond_core/bond_core.dart';
 import 'package:dio/dio.dart';
 
 part 'cache_policy.dart';
-
 part 'get_bond_api_request.dart';
 
-/// BondApiRequest allows you to configure an API request
-/// by chaining methods for headers, query parameters, body, etc.
-
+/// A factory function used to convert JSON data to a model of type [T].
 typedef Factory<T> = T Function(Map<String, dynamic>);
+
+/// A factory function used to convert JSON error response to a custom [Error].
 typedef ErrorFactory<T extends Error> = T Function(Map<String, dynamic>);
 
+/// Represents a base class for configuring and executing HTTP requests using Dio
+/// with additional features such as custom header, body, files, cache and error handling.
 class BaseBondApiRequest<T> {
   final Dio _dio;
   final String _path;
@@ -29,6 +30,7 @@ class BaseBondApiRequest<T> {
   Factory<T>? _factory;
   ErrorFactory? _errorFactory;
   final Map<String, String> _customCacheKeys = {};
+  String? _cacheStore;
 
   BaseBondApiRequest(
     this._dio,
@@ -37,54 +39,117 @@ class BaseBondApiRequest<T> {
   })  : _path = path,
         _method = method;
 
+  /// Adds custom headers to the request.
+  ///
+  /// Parameters:
+  /// - [headers]: A map of headers to be added to the request.
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> header(Map<String, String> headers) {
     _headers = headers;
     return this;
   }
 
+  /// Adds query parameters to the request.
+  ///
+  /// -Parameters:
+  ///  - [queryParameters]: A map of query parameters to be added to the request.
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> queryParameters(Map<String, dynamic> queryParameters) {
     _queryParameters = queryParameters;
     return this;
   }
 
+  /// Sets a JSON body for the request.
+  ///
+  /// -Parameters:
+  /// - [body]: A map representing the JSON body to be sent with the request.
+  ///
+  ///  Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> body(Map<String, dynamic> body) {
     _body = body;
     return this;
   }
 
+  /// Attaches files to the request using a multipart form.
+  ///
+  /// -Parameters:
+  /// - [files]: A map of file paths to be attached to the request.
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> files(Map<String, File> files) {
     _files = files;
     return this;
   }
 
+  /// Sets form-data to be included alongside files in the request.
+  ///
+  /// -Parameters:
+  /// - [data]: A map representing the form-data to be sent with the request.
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> data(Map<String, dynamic> data) {
     _data = data;
     return this;
   }
 
+  /// Adds a cancel token to the request.
+  ///
+  /// -Parameters:
+  /// - [cancelToken]: A [CancelToken] instance used to cancel the request.
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> cancelToken(CancelToken cancelToken) {
     _cancelToken = cancelToken;
     return this;
   }
 
+  /// Sets a factory function to convert the response body to a model of type [T].
+  ///
+  /// -Parameters:
+  /// - [factory]: A function that takes a JSON map and returns an instance of type [T].
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> factory(Factory<T> factory) {
     _factory = factory;
     return this;
   }
 
+  /// Sets an error factory to convert failed responses into custom [Error]s.
+  ///
+  /// -Parameters:
+  /// - [errorFactory]: A function that takes a JSON map and returns an instance of type [Error].
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
   BaseBondApiRequest<T> errorFactory(ErrorFactory errorFactory) {
     _errorFactory = errorFactory;
     return this;
   }
 
-  BaseBondApiRequest<T> cacheCustomKey(String key, {required String path}) {
+  /// Enables caching a specific field from the response into a custom key.
+  /// Optionally specify a different cache store.
+  ///
+  /// -Parameters:
+  /// - [key]: The custom key under which the field will be cached.
+  /// - [path]: The path to the field in the response data.
+  /// - [store]: An optional custom cache store.
+  ///
+  /// Returns: The current [BaseBondApiRequest] instance for chaining.
+  BaseBondApiRequest<T> cacheCustomKey(
+    String key, {
+    required String path,
+    String? store,
+  }) {
     _customCacheKeys[key] = path;
+    _cacheStore = store;
     return this;
   }
 
+  /// Executes the request and returns the processed result.
+  ///
+  /// - Returns: A [Future] that resolves to the response of type [T].
   Future<T> execute() async {
-    // Perform the request using _dio and handle the response
-    // Convert the response JSON to the desired model using the provided factory method, error handler, etc.
     try {
       final data = await _getRequestData();
       final response = await _dio.request(
@@ -97,12 +162,20 @@ class BaseBondApiRequest<T> {
         ),
         cancelToken: _cancelToken,
       );
+
       if (_customCacheKeys.entries.isNotEmpty) {
         await _cacheCustomKeys(response.data);
       }
+
       if (_factory != null) {
         return _factory!(response.data);
       } else {
+        for (final provider in appProviders.whereType<ResponseDecoding>()) {
+          final model = provider.responseConvert<T>(response.data);
+          if (model != null) {
+            return model;
+          }
+        }
         return response.data;
       }
     } on DioException catch (error) {
@@ -122,24 +195,30 @@ class BaseBondApiRequest<T> {
     }
   }
 
+  /// Prepares data for the request body.
   Future<dynamic> _getRequestData() async {
     if (_files != null && _files!.isNotEmpty) {
-      final formData = await _createFormData(files: _files!, data: _data);
-      return formData;
+      return await _createFormData(files: _files!, data: _data);
     } else {
       return _body;
     }
   }
 
+  /// Caches specified fields from the response into local storage.
   Future<void> _cacheCustomKeys(Map<String, dynamic> result) async {
     for (final customKey in _customCacheKeys.entries) {
       final value = _getNestedValue(result, customKey.value);
       if (value != null) {
-        await Cache.put(customKey.key, value);
+        if (_cacheStore != null) {
+          await Cache.store(_cacheStore!).put(customKey.key, value);
+        } else {
+          await Cache.put(customKey.key, value);
+        }
       }
     }
   }
 
+  /// Extracts a nested field value from a map based on a dot-separated path.
   dynamic _getNestedValue(Map<String, dynamic> map, String key) {
     final keys = key.split('.');
     dynamic value = map;
@@ -153,6 +232,7 @@ class BaseBondApiRequest<T> {
     return value;
   }
 
+  /// Creates a FormData instance for uploading files and data.
   Future<FormData> _createFormData({
     required Map<String, File> files,
     Map<String, dynamic>? data,
@@ -169,6 +249,7 @@ class BaseBondApiRequest<T> {
         ),
       );
     }
+
     if (data != null) {
       for (final entry in data.entries) {
         final fieldName = entry.key;
@@ -181,6 +262,7 @@ class BaseBondApiRequest<T> {
         );
       }
     }
+
     return formData;
   }
 }

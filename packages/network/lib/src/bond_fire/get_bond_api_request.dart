@@ -1,15 +1,34 @@
 part of 'base_bond_api_request.dart';
 
+/// A specialized GET request class that supports caching and streaming.
+///
+/// This class extends [BaseBondApiRequest] and introduces caching strategies
+/// using the [BondCache] package. You can configure it to retrieve data from
+/// cache, network, or a combination of both.
 class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
   Duration? _cacheDuration;
   String? _cacheKey;
   CachePolicy _cachePolicy = CachePolicy.networkOnly;
 
+  /// Constructs a [GetBondApiRequest] with the given Dio client and API path.
+  ///
+  /// - Parameters:
+  ///   - [dio]: The Dio client for executing HTTP requests.
+  ///   - [path]: The endpoint URL path for the GET request.
   GetBondApiRequest(
     Dio dio,
     String path,
   ) : super(dio, path, method: 'GET');
 
+  /// Configures caching for the GET request.
+  ///
+  /// - Parameters:
+  ///   - [duration]: The time duration to keep the cache valid.
+  ///   - [cacheKey]: The custom key for storing the cache.
+  ///   - [cachePolicy]: The cache policy to apply.
+  ///   - [store]: Optional custom cache store name.
+  ///
+  /// - Returns: The current [GetBondApiRequest] instance for chaining.
   GetBondApiRequest<T> cache({
     Duration? duration,
     String? cacheKey,
@@ -21,13 +40,27 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
     return this;
   }
 
-  @override
-  GetBondApiRequest<T> cacheCustomKey(String key, {required String path}) {
+  /// Caches specific fields from the response based on custom keys and paths.
+  ///
+  /// - Parameters:
+  ///   - [key]: The custom cache key.
+  ///   - [path]: Dot-notation path inside the response JSON.
+  ///   - [store]: Optional custom cache store name.
+  ///
+  /// - Returns: The current [GetBondApiRequest] instance for chaining.
+  BaseBondApiRequest<T> cacheCustomKey(
+    String key, {
+    required String path,
+    String? store,
+  }) {
     _customCacheKeys[key] = path;
+    _cacheStore = store;
     return this;
   }
 
-  // Override the execute method for GET requests and implement caching
+  /// Executes the request according to the selected [CachePolicy].
+  ///
+  /// - Returns: The response of type [T].
   @override
   Future<T> execute() async {
     if (_cacheKey != null) {
