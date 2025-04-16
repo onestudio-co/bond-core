@@ -181,7 +181,9 @@ mixin BaseFormController<Success, Failure extends Error,
           status: BondFormStateStatus.submitted,
           success: result,
         );
-        onSuccess(result);
+        Future.microtask(() {
+          onSuccess(result);
+        });
       } catch (error) {
         if (error is HasValidationErrors) {
           _updateValidationErrors(error.errors);
@@ -190,7 +192,9 @@ mixin BaseFormController<Success, Failure extends Error,
           status: BondFormStateStatus.failed,
           failure: error as Failure,
         );
-        onFailure(error);
+        Future.microtask(() {
+          onFailure(error);
+        });
       }
     } else {
       for (final fieldEntry in state.fields.entries) {

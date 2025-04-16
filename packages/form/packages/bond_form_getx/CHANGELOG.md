@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.1+9
+### Changed
+- Bumped `bond_form` dependency to version `^0.0.7+1`.
+
 ## 0.0.1+8
 ### Changed
 - Bumped `bond_form` dependency to version `^0.0.7`.

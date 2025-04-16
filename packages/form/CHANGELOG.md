@@ -1,6 +1,13 @@
 ### Changelog
 
-## 0.0.7
+## 0.0.7+1
+###  Fixes
+
+- Fixed a timing issue where `onSuccess` and `onFailure` could conflict with internal `state` updates.
+- `onSuccess` / `onFailure` are now executed inside a `Future.microtask(...)` to ensure state changes (like `status`, `success`, or `failure`) are fully applied before triggering user-defined logic.
+- This improves UI consistency and prevents rare bugs where `setError()` or `updateField()` had no visible effect when called immediately after submission failure.
+
+- ## 0.0.7
 ### ✨ Features
 
 - **Lifecycle Hooks for Submission**
