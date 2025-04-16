@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.6+4
+- fix `BodyConvertible` `error` generics type to be extends any `Error`.
+
 ## 0.0.6+3
 - fix `TextFieldStaten` that's clear `_controller` on `copyWith` method when `value` is null.
 

@@ -4,7 +4,7 @@ import 'package:bond_form/bond_form.dart';
 /// map of key-value pairs suitable for creating a request body.
 mixin BodyConvertible<Success, Failure extends Error,
         State extends BaseBondFormState<Success, Failure>>
-    on BaseFormController<Success, Error, State> {
+    on BaseFormController<Success, Failure, State> {
   /// Generates a map from the form state, applying any transformations
   /// specified by the `fieldTransformers` method.
   ///
