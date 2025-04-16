@@ -1,5 +1,8 @@
 ### Changelog
 
+## 0.0.6+3
+- fix `TextFieldStaten` that's clear `_controller` on `copyWith` method when `value` is null.
+
 ## 0.0.6+2
  - export missing `form_controller_text_field_extension` extension.
 

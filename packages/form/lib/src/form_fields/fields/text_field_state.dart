@@ -60,15 +60,6 @@ class TextFieldState extends FormFieldState<String?> {
     bool? validateOnUpdate,
     List<ValidationRule<String?>>? rules,
   }) {
-    if (value?.isEmpty == true) {
-    } else if (value != null) {
-      _controller.value = _controller.value.copyWith(
-        text: value,
-        selection: widgets.TextSelection.collapsed(offset: value.length),
-      );
-    } else {
-      _controller.clear();
-    }
     return TextFieldState(
       value ?? this.value,
       error: error ?? this.error,
