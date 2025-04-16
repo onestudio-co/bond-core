@@ -1,5 +1,21 @@
 ### Changelog
 
+## 0.0.8
+
+### Added
+- Support for field key–specific transformations in `TransformersRegistry`.
+- New method `registerForField` to register transformers tied to a specific field name.
+- 
+### Changed
+- `BodyConvertible` now passes the `fieldKey` to the transformer for prioritized key-based transformation.
+
+### Example
+You can now add country code like this:
+```dart
+
+registry.registerForField<String, String>('phoneNumber', (value) => '+974$value');
+```
+
 ## 0.0.7+1
 ###  Fixes
 

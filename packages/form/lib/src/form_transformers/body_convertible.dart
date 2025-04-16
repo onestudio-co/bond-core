@@ -22,12 +22,8 @@ mixin BodyConvertible<Success, Failure extends Error,
     // Iterate through each field in the fields map
     state.fields.forEach((fieldName, fieldState) {
       final fieldValue = fieldState.value;
-      final newValue = _registry.transform(fieldValue);
-      if (newValue != null) {
-        map[fieldName] = newValue;
-      } else {
-        map[fieldName] = fieldValue;
-      }
+      final newValue = _registry.transform(fieldValue, fieldKey: fieldName);
+      map[fieldName] = newValue ?? fieldValue;
     });
 
     return map;

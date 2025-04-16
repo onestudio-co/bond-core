@@ -1,10 +1,12 @@
 import 'dart:convert';
+
 import 'field_transformer.dart';
 
 /// A registry for managing field transformers, allowing custom
 /// transformations of form field values based on their types.
 class TransformersRegistry {
-  final factories = <Type, FieldTransformerFactory<dynamic, Object>>{};
+  final factoriesByType = <Type, FieldTransformerFactory<dynamic, Object>>{};
+  final factoriesByKey = <String, FieldTransformerFactory<dynamic, Object>>{};
 
   /// Registers a transformer function for a specific field type.
   ///
@@ -18,7 +20,17 @@ class TransformersRegistry {
     final fieldTransformerFactory = FieldTransformerFactory<T, G>(
       transformationFunction: transformationFunction,
     );
-    factories[T] = fieldTransformerFactory;
+    factoriesByType[T] = fieldTransformerFactory;
+  }
+
+  /// Registers a transformer for a specific field name (key).
+  void registerForField<T, G extends Object>(
+    String fieldKey,
+    FieldTransformer<T, G> transformationFunction,
+  ) {
+    factoriesByKey[fieldKey] = FieldTransformerFactory<T, G>(
+      transformationFunction: transformationFunction,
+    );
   }
 
   /// Transforms a field value using the appropriate transformer
@@ -29,8 +41,12 @@ class TransformersRegistry {
   ///
   /// Returns: The transformed value, or the original value if no transformer
   /// is registered for its type.
-  dynamic transform(dynamic value) {
-    final transformer = factories[value.runtimeType];
+  dynamic transform(dynamic value, {String? fieldKey}) {
+    // Priority: field key transformer → type transformer
+    final keyTransformer = fieldKey != null ? factoriesByKey[fieldKey] : null;
+    final typeTransformer = factoriesByType[value.runtimeType];
+
+    final transformer = keyTransformer ?? typeTransformer;
 
     // If no transformer is found, check if there is a transformer for the base type
     if (transformer == null && value is Iterable) {
@@ -56,7 +72,7 @@ class TransformersRegistry {
     final firstElementType =
         collection.isNotEmpty ? collection.first.runtimeType : null;
     if (firstElementType != null) {
-      final transformer = factories[firstElementType];
+      final transformer = factoriesByType[firstElementType];
       if (transformer != null) {
         return jsonEncode(
           collection.map((item) => transformer.transform(item)).toList(),
