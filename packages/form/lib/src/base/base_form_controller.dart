@@ -149,6 +149,18 @@ mixin BaseFormController<Success, Failure extends Error,
   /// Returns the result of a successful submission.
   Future<Success> onSubmit();
 
+  /// Called when the form is successfully submitted. Can be overridden.
+  ///
+  /// Parameters:
+  /// - [result] The result of the successful form submission.
+  void onSuccess(Success result) {}
+
+  /// Called when form submission fails. Can be overridden.
+  ///
+  /// Parameters:
+  /// error: The error that occurred during form submission.
+  void onFailure(Failure error) {}
+
   /// Internal method to handle form submission.
   ///
   /// This method sets all fields to "touched", validates all fields,
@@ -169,6 +181,7 @@ mixin BaseFormController<Success, Failure extends Error,
           status: BondFormStateStatus.submitted,
           success: result,
         );
+        onSuccess(result);
       } catch (error) {
         if (error is HasValidationErrors) {
           _updateValidationErrors(error.errors);
@@ -177,6 +190,7 @@ mixin BaseFormController<Success, Failure extends Error,
           status: BondFormStateStatus.failed,
           failure: error as Failure,
         );
+        onFailure(error);
       }
     } else {
       for (final fieldEntry in state.fields.entries) {

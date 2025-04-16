@@ -1,5 +1,27 @@
 ### Changelog
 
+## 0.0.7
+### ✨ Features
+
+- **Lifecycle Hooks for Submission**
+    - Added `onSuccess(Success result)` to `BaseFormController`: triggered when form submission is successful.
+    - Added `onFailure(Failure error)` to `BaseFormController`: triggered when submission fails or throws.
+    - These methods can now be optionally overridden inside your controller class.
+    - Eliminates the need for manually listening to form state externally.
+
+### 🧠 Developer Experience
+
+- Improves readability and centralizes post-submit logic inside the controller.
+- Especially helpful for frameworks like GetX where external listeners (e.g., `ever`) were previously needed.
+
+### ✅ Example:
+
+```dart
+@override
+void onSuccess(MyResponse res) => Get.toNamed('/home');
+
+@override
+void onFailure(ServerError err) => Get.snackbar('Error', err.message);
 ## 0.0.6+4
 - fix `BodyConvertible` `error` generics type to be extends any `Error`.
 
