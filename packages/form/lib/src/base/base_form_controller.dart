@@ -188,13 +188,17 @@ mixin BaseFormController<Success, Failure extends Error,
         if (error is HasValidationErrors) {
           _updateValidationErrors(error.errors);
         }
-        state = state.copyWith(
-          status: BondFormStateStatus.failed,
-          failure: error as Failure,
-        );
-        Future.microtask(() {
-          onFailure(error);
-        });
+        if (error is Failure) {
+          state = state.copyWith(
+            status: BondFormStateStatus.failed,
+            failure: error,
+          );
+          Future.microtask(() {
+            onFailure(error);
+          });
+        } else {
+          rethrow;
+        }
       }
     } else {
       for (final fieldEntry in state.fields.entries) {
