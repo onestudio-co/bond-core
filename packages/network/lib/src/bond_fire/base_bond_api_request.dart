@@ -8,30 +8,77 @@ import 'package:dio/dio.dart';
 part 'cache_policy.dart';
 part 'get_bond_api_request.dart';
 
-/// A factory function used to convert JSON data to a model of type [T].
+/// A typedef for a data transformer function.
+///
+/// This function is used to transform raw response data into a map
+/// with `String` keys and `dynamic` values. It takes the raw data
+/// as input and returns a transformed map.
+typedef DataTransformer = Map<String, dynamic> Function(dynamic data);
+
+/// A typedef for a factory function that converts JSON data to a model of type [T].
+///
+/// This function takes a `Map<String, dynamic>` representing JSON data
+/// and returns an instance of type [T].
 typedef Factory<T> = T Function(Map<String, dynamic>);
 
-/// A factory function used to convert JSON error response to a custom [Error].
+/// A typedef for a factory function that converts JSON error responses to a custom [Error].
+///
+/// This function takes a `Map<String, dynamic>` representing a JSON error response
+/// and returns an instance of a custom [Error] of type [T].
 typedef ErrorFactory<T extends Error> = T Function(Map<String, dynamic>);
 
-/// Represents a base class for configuring and executing HTTP requests using Dio
+/// Represents a base class
+/// for configuring and executing HTTP requests using Dio
 /// with additional features such as custom header, body, files, cache and error handling.
 class BaseBondApiRequest<T> {
+  /// The Dio instance used to execute HTTP requests.
   final Dio _dio;
+
+  /// The path of the API endpoint for the request.
   final String _path;
+
+  /// The HTTP method (e.g., GET, POST, etc.) used for the request.
   final String _method;
 
+  /// A map of custom headers to be included in the request.
   Map<String, String> _headers = <String, String>{};
+
+  /// A map of query parameters to be appended to the request URL.
   Map<String, dynamic> _queryParameters = <String, dynamic>{};
+
+  /// The JSON body to be sent with the request, if applicable.
   Map<String, dynamic>? _body;
+
+  /// A map of files to be attached to the request as multipart form data.
   Map<String, File>? _files;
+
+  /// Additional form-data to be included alongside files in the request.
   Map<String, dynamic>? _data;
+
+  /// A token used to cancel the request if needed.
   CancelToken? _cancelToken;
+
+  /// A function to transform the raw response data into a desired format.
+  DataTransformer? _dataTransformer;
+
+  /// A factory function to convert the response body into a model of type [T].
   Factory<T>? _factory;
+
+  /// A factory function to convert error responses into custom [Error] objects.
   ErrorFactory? _errorFactory;
+
+  /// A map of custom cache keys and their corresponding paths in the response data.
   final Map<String, String> _customCacheKeys = {};
+
+  /// The name of the cache store to be used for caching, if specified.
   String? _cacheStore;
 
+  /// Constructs a new instance of [BaseBondApiRequest].
+  ///
+  /// - Parameters:
+  ///   - [dio]: The Dio instance used to execute HTTP requests.
+  ///   - [path]: The path of the API endpoint for the request.
+  ///   - [method]: The HTTP method (e.g., GET, POST, etc.) used for the request.
   BaseBondApiRequest(
     this._dio,
     String path, {
@@ -39,7 +86,7 @@ class BaseBondApiRequest<T> {
   })  : _path = path,
         _method = method;
 
-  /// Adds custom headers to the request.
+  /// Adds custom headers to the request.  /// Adds custom headers to the request.
   ///
   /// Parameters:
   /// - [headers]: A map of headers to be added to the request.
@@ -93,6 +140,37 @@ class BaseBondApiRequest<T> {
     _data = data;
     return this;
   }
+
+  /// Sets a data transformer function to process the response data.
+  ///
+  /// This method allows you to provide a custom transformer function that
+  /// processes the raw response data before it is returned. The transformer
+  /// function takes the raw response data as input and returns a transformed
+  /// map.
+  ///
+  /// - Parameters:
+  ///   - [transformer]: A function that takes the raw response data (dynamic)
+  ///     and returns a transformed map (`Map<String, dynamic>`).
+  ///
+  /// - Returns: The current [BaseBondApiRequest] instance for chaining.
+  BaseBondApiRequest<T> transform(DataTransformer transformer) {
+    _dataTransformer = transformer;
+    return this;
+  }
+
+  /// A shorthand method for setting a data transformer function.
+  ///
+  /// This method is equivalent to calling [transform] and is provided
+  /// for convenience. It sets a custom transformer function to process
+  /// the raw response data.
+  ///
+  /// - Parameters:
+  ///   - [transformer]: A function that takes the raw response data (dynamic)
+  ///     and returns a transformed map (`Map<String, dynamic>`).
+  ///
+  /// - Returns: The current [BaseBondApiRequest] instance for chaining.
+  BaseBondApiRequest<T> map(DataTransformer transformer) =>
+      transform(transformer);
 
   /// Adds a cancel token to the request.
   ///
@@ -163,20 +241,26 @@ class BaseBondApiRequest<T> {
         cancelToken: _cancelToken,
       );
 
+      dynamic responseData = response.data;
+
+      if (_dataTransformer != null) {
+        responseData = _dataTransformer!(responseData);
+      }
+
       if (_customCacheKeys.entries.isNotEmpty) {
-        await _cacheCustomKeys(response.data);
+        await _cacheCustomKeys(responseData);
       }
 
       if (_factory != null) {
         return _factory!(response.data);
       } else {
         for (final provider in appProviders.whereType<ResponseDecoding>()) {
-          final model = provider.responseConvert<T>(response.data);
+          final model = provider.responseConvert<T>(responseData);
           if (model != null) {
             return model;
           }
         }
-        return response.data;
+        return responseData;
       }
     } on DioException catch (error) {
       if (_errorFactory != null && error.response != null) {

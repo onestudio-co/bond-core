@@ -1,5 +1,16 @@
 ### Changelog
 
+## 0.0.9
+### Added
+- `map()` / `transform()` method in `BondFire` to mutate or transform raw API response before decoding.
+    - Useful for cases where the API returns a list instead of a map, e.g.:
+      ```dart
+      _api
+        .get<HomeCms>(url)
+        .map((data) => { "date": data })
+        .execute();
+      ```
+      
 ## 0.0.8
 ### Added
 - Introduced `_cacheStore` property to `GetBondApiRequest<T>` for selecting a custom cache store.
