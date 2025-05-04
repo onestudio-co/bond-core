@@ -1,5 +1,11 @@
 ### Changelog
 
+## 0.0.10
+### Added
+- Added `patch` method to `BondFire` to support PATCH HTTP requests.
+- Included DartDocs for the `patch` method.
+
+
 ## 0.0.9
 ### Added
 - `map()` / `transform()` method in `BondFire` to mutate or transform raw API response before decoding.
