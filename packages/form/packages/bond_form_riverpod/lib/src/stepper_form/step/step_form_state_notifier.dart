@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:bond_form/bond_form.dart';
 import 'package:riverpod/riverpod.dart';
-import 'dart:async';
 
 /// A state notifier for managing the state of a single step in a stepper form.
 ///
@@ -41,8 +42,10 @@ abstract class StepFormStateNotifier<Success, Failure extends Error>
   /// Returns:
   /// A new instance of [BondFormState] with the form fields.
   @override
-  BondFormState<Success, Failure> build() =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build() {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// Abstract method to handle form submission logic.
   ///

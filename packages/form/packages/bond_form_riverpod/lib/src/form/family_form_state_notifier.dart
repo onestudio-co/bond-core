@@ -35,8 +35,10 @@ abstract class FamilyFormStateNotifier<Success, Failure extends Error, Arg>
 
   /// Builds the initial state for the form.
   @override
-  BondFormState<Success, Failure> build(Arg arg) =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build(Arg arg) {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// An abstract method to be implemented by the subclass,
   /// detailing what should happen when the form is submitted.

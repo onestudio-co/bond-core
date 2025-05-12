@@ -41,12 +41,12 @@ extension TextFieldFormController on BaseFormController {
     controller.addListener(listener);
   }
 
-  /// Disposes the listener registered for the given text field, if any.
+  /// Remove the listener registered for the given text field, if any.
   ///
   /// This is useful when cleaning up resources, such as during `onClose()` in a controller.
   ///
   /// - Parameter [fieldName]: The name of the text field to unbind.
-  void disposeTextFieldListener(String fieldName) {
+  void removeTextFieldListener(String fieldName) {
     final listener = _textFieldListeners.remove(fieldName);
     if (listener != null) {
       final controller = state.textField(fieldName).controller;

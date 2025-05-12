@@ -48,8 +48,10 @@ abstract class FamilyStepFormStateNotifier<Success, Failure extends Error, Arg>
   /// Returns:
   /// A new instance of [BondFormState] with the form fields.
   @override
-  BondFormState<Success, Failure> build(Arg arg) =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build(Arg arg) {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// Abstract method to handle form submission logic.
   ///

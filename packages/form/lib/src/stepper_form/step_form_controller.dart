@@ -42,4 +42,11 @@ mixin StepFormController<Success, Failure extends Error>
     // Implement specific submission logic for this step if needed.
     return Future.value();
   }
+
+  @protected
+  void dispose() {
+    for (final field in fields().values.whereType<Disposable>()) {
+      field.dispose();
+    }
+  }
 }

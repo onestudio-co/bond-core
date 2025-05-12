@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 ///
 /// A text input form field extends the [FormFieldState] class and uses a
 /// [TextEditingController] to maintain a live connection with a `TextFormField`.
-class TextFieldState extends FormFieldState<String?> {
+class TextFieldState extends FormFieldState<String?> with Disposable {
   /// A controller to manage the current text being edited.
   ///
   /// This controller is auto-initialized with the value passed to [TextFieldState].
@@ -82,5 +82,10 @@ class TextFieldState extends FormFieldState<String?> {
       validateOnUpdate: validateOnUpdate,
       controller: controller,
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
   }
 }

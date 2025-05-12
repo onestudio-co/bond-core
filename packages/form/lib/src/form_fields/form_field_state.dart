@@ -1,6 +1,8 @@
 import 'package:bond_form/src/validation/rules.dart';
 import 'package:meta/meta.dart' show nonVirtual;
 
+part 'disposable.dart';
+
 /// Represents the state of a form field.
 ///
 /// A form field can have a generic type `T` for its value.

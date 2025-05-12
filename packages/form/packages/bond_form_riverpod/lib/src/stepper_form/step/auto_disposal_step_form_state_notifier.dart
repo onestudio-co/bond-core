@@ -41,8 +41,10 @@ abstract class AutoDisposeStepFormStateNotifier<Success, Failure extends Error>
   ///
   /// Returns a new [BondFormState] initialized with the fields managed by this form controller.
   @override
-  BondFormState<Success, Failure> build() =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build() {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// Abstract method to handle form submission logic.
   ///

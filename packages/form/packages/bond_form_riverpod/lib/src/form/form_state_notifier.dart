@@ -1,7 +1,7 @@
+import 'dart:async';
+
 import 'package:bond_form/bond_form.dart';
 import 'package:riverpod/riverpod.dart';
-
-import 'dart:async';
 
 /// A class to manage form state, extending a notifier to notify its subscribers
 /// of changes, and using the FormController mixin for form operations.
@@ -34,8 +34,10 @@ abstract class FormStateNotifier<Success, Failure extends Error>
 
   /// Builds the initial state for the form.
   @override
-  BondFormState<Success, Failure> build() =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build() {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// An abstract method to be implemented by the subclass,
   /// detailing what should happen when the form is submitted.

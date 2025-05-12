@@ -1,7 +1,7 @@
+import 'dart:async';
+
 import 'package:bond_form/bond_form.dart';
 import 'package:riverpod/riverpod.dart';
-
-import 'dart:async';
 
 /// `AutoDisposeFormStateNotifier` is an abstract class that manages the form state.
 /// It extends `AutoDisposeNotifier` to automatically manage resources and it uses
@@ -38,8 +38,10 @@ abstract class AutoDisposeFormStateNotifier<Success, Failure extends Error>
 
   /// Builds the initial state for the form.
   @override
-  BondFormState<Success, Failure> build() =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build() {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// An abstract method to be implemented by the subclass,
   /// detailing what should happen when the form is submitted.

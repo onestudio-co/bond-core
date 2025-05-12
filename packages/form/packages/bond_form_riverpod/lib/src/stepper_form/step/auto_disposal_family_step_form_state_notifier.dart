@@ -14,12 +14,12 @@ import 'package:riverpod/riverpod.dart';
 /// - [Success] The data type representing the result of a successful form submission.
 /// - [Failure] The error type that extends [Error] representing the failure cases of form submission.
 /// - [Arg] The argument type for the family provider, used to build the initial state.
-abstract class AutoDisposeFamilyStepFormStateNotifier<Success, Failure extends Error, Arg>
+abstract class AutoDisposeFamilyStepFormStateNotifier<Success,
+        Failure extends Error, Arg>
     extends AutoDisposeFamilyNotifier<BondFormState<Success, Failure>, Arg>
     with
         BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
         StepFormController<Success, Failure> {
-
   /// A flag indicating whether the validation process should stop on the first encountered error.
   final bool stopOnFirstError;
 
@@ -45,8 +45,10 @@ abstract class AutoDisposeFamilyStepFormStateNotifier<Success, Failure extends E
   /// [arg] is the argument passed by the family provider to initialize the state.
   /// Returns a new instance of [BondFormState] with the initial fields set.
   @override
-  BondFormState<Success, Failure> build(Arg arg) =>
-      BondFormState<Success, Failure>(fields: fields());
+  BondFormState<Success, Failure> build(Arg arg) {
+    ref.onDispose(dispose);
+    return BondFormState<Success, Failure>(fields: fields());
+  }
 
   /// Submits the form and processes the form data.
   ///

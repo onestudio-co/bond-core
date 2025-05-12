@@ -1,4 +1,5 @@
 import 'package:bond_form/bond_form.dart';
+import 'package:meta/meta.dart';
 
 /// A mixin to extend the functionality of a form controller by inheriting
 /// the base methods for managing form state, field updates, validation,
@@ -20,4 +21,11 @@ import 'package:bond_form/bond_form.dart';
 mixin FormController<Success, Failure extends Error>
     on BaseFormController<Success, Failure, BondFormState<Success, Failure>> {
   // Additional form-specific methods or properties can be added here if needed
+
+  @protected
+  void dispose() {
+    for (final field in fields().values.whereType<Disposable>()) {
+      field.dispose();
+    }
+  }
 }
