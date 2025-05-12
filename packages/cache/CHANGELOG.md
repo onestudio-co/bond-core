@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.4+2
+- Added export for `src/cache/bond_cache.dart` with `CacheData` hidden in `bond_cache.dart`.
+
 ## 0.0.4+1
 - **dev_dependencies:** Updated the `async` package to `^2.13.0` to resolve package validation warnings.
 

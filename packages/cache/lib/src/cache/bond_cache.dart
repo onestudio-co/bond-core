@@ -8,7 +8,6 @@ part 'cache_data.dart';
 part 'cache_observable.dart';
 part 'cache_observer.dart';
 
-@internal
 class BondCache with CacheObservable {
   @visibleForTesting
   final CacheDriver driver;
