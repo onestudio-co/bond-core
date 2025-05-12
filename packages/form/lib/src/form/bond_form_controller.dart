@@ -22,8 +22,18 @@ mixin FormController<Success, Failure extends Error>
     on BaseFormController<Success, Failure, BondFormState<Success, Failure>> {
   // Additional form-specific methods or properties can be added here if needed
 
+  /// Disposes resources used by the form controller.
+  ///
+  /// This method removes listeners from all `TextFieldState` fields and disposes
+  /// any fields that implement the `Disposable` interface. It should be called
+  /// when the controller is no longer needed to prevent memory leaks.
   @protected
   void dispose() {
+    for (final entry in fields().entries) {
+      if (entry.value is TextFieldState) {
+        removeTextFieldListener(entry.key);
+      }
+    }
     for (final field in fields().values.whereType<Disposable>()) {
       field.dispose();
     }

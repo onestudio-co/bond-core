@@ -1,4 +1,7 @@
 # Changelog
+## 0.0.4+1
+- Bumped `bond_form` dependency to version `^0.0.9+1`.
+
 ## 0.0.4
 - Added Disposable mixin to support proper resource cleanup for form states.
 
