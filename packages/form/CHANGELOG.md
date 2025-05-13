@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.9+2
+- Introduce `AsyncRadioGroupFieldState` to support asynchronous fetching of radio button group items.
+
 ## 0.0.9+1
 - Improved form controller resource cleanup by ensuring text field listeners are removed for all TextFieldState fields in FormController.dispose().
 

@@ -15,7 +15,9 @@ import 'package:bond_form/bond_form.dart';
 /// Methods:
 /// - [textField] Retrieves the state of a text field.
 /// - [radioGroup] Retrieves the state of a radio group field.
+/// - [asyncRadioGroup] Retrieves the state of an async radio group field.
 /// - [radioButtonsOf] Retrieves a list of radio button states.
+/// - [asyncRadioButtonsOf] Retrieves a list of async radio button states.
 /// - [checkbox] Retrieves the state of a checkbox field.
 /// - [checkboxGroup] Retrieves the state of a checkbox group field.
 /// - [checkboxesOf] Retrieves a list of checkbox states.
@@ -49,6 +51,17 @@ extension FieldBondFormState on BaseBondFormState {
     return get<RadioGroupFieldState<T>, T>(fieldName);
   }
 
+  /// Retrieves the state of the async radio group field for a specified [fieldName].
+  ///
+  /// This method retrieves the state of the async radio group field identified by the provided [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the async radio group field to retrieve the state from.
+  /// - Returns: The state of the async radio group field.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  AsyncRadioGroupFieldState<T> asyncRadioGroup<T>(String fieldName) {
+    return get<AsyncRadioGroupFieldState<T>, T>(fieldName);
+  }
+
   /// Retrieves a list of [RadioButtonFieldState] for a specified [fieldName].
   ///
   /// This method simplifies fetching radio button states for the given [fieldName].
@@ -58,6 +71,18 @@ extension FieldBondFormState on BaseBondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   List<RadioButtonFieldState<T>> radioButtonsOf<T>(String fieldName) {
     return radioGroup<T>(fieldName).radioButtons;
+  }
+
+  /// Retrieves a list of [RadioButtonFieldState] for a specified [fieldName].
+  ///
+  /// This method simplifies fetching async radio button states for the given [fieldName].
+  ///
+  /// - Parameter [fieldName] The name of the field to fetch.
+  /// - Returns: A list of [RadioButtonFieldState] instances.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  Future<List<RadioButtonFieldState<T>>> asyncRadioButtonsOf<T>(
+      String fieldName) {
+    return asyncRadioGroup<T>(fieldName).items;
   }
 
   /// Retrieves the state of the checkbox field for a specified [fieldName].

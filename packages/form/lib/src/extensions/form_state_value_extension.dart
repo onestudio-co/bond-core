@@ -22,6 +22,7 @@ import 'required_values.dart';
 /// Methods:
 /// - [textFieldValue] Retrieves the value of a text field.
 /// - [radioGroupValue] Retrieves the value of a radio group field.
+/// - [asyncRadioGroupValue] Retrieves the value of an async radio group field.
 /// - [checkboxSelected] Checks if a specific value is selected within a checkbox group.
 /// - [checkboxValues] Retrieves the selected values of a checkbox group.
 /// - [checkboxValue] Retrieves the value of a checkbox field.
@@ -53,6 +54,17 @@ extension ValueBondFormState on BaseBondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   T radioGroupValue<T>(String fieldName) {
     return radioGroup<T>(fieldName).value;
+  }
+
+  /// Retrieves the value of an `AsyncRadioGroupFieldState` for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of an async radio button group.
+  ///
+  /// - Parameter [fieldName] The name of the field to fetch.
+  /// - Returns: The current value of the field or `null` if not set.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  T asyncRadioGroupValue<T>(String fieldName) {
+    return asyncRadioGroup<T>(fieldName).value;
   }
 
   /// Retrieves the value of a checkbox field for a specified [fieldName].

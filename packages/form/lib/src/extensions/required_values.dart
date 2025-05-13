@@ -22,6 +22,7 @@ import 'package:bond_form/bond_form.dart';
 /// Methods:
 /// - [textFieldValue] Ensures the value of a text field is not null.
 /// - [radioGroupValue] Ensures the value of a radio group field is not null.
+/// - [asyncRadioGroupValue] Ensures the value of an async radio group field is not null.
 /// - [checkboxGroupValue] Ensures the first selected value of a checkbox group is not null.
 /// - [dateFieldValue] Ensures the value of a date field is not null.
 /// - [dropDownValue] Ensures the value of a dropdown field is not null.
@@ -52,6 +53,19 @@ class RequiredValues {
   /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
   T radioGroupValue<T>(String fieldName) {
     final value = state.radioGroupValue<T>(fieldName);
+    if (value == null) {
+      throw ArgumentError('Field $fieldName is required but its value is null');
+    }
+    return value;
+  }
+
+  /// Ensures the value of an async radio group field is not null.
+  ///
+  // - Parameter [fieldName] The name of the field to fetch.
+  /// - Returns: The current value of the field as a non-null `T`.
+  /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
+  T asyncRadioGroupValue<T>(String fieldName) {
+    final value = state.asyncRadioGroupValue<T>(fieldName);
     if (value == null) {
       throw ArgumentError('Field $fieldName is required but its value is null');
     }
