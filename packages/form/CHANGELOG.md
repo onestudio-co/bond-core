@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.9+3
+- Added `updateRadioGroupItems` method to `XFormController` extension in `form_controller_extension.dart` to allow updating a `RadioGroupFieldState` with a list of `RadioButtonFieldState` items.
+
 ## 0.0.9+2
 - Introduce `AsyncRadioGroupFieldState` to support asynchronous fetching of radio button group items.
 

@@ -30,6 +30,7 @@ import 'package:bond_form/bond_form.dart';
 /// - [updateRadioButton] Updates a [RadioButtonFieldState] with a given value.
 /// - [updateRadioGroup] Updates a [RadioGroupFieldState] with a given value.
 /// - [updateAsyncRadioGroup] Updates an [AsyncRadioGroupFieldState] with a given value.
+/// - [updateRadioGroupItems] Updates a [RadioGroupFieldState] with a list of [RadioButtonFieldState] items.
 /// - [updateHiddenField] Updates a [HiddenFieldState] with a given value.
 /// - [updateFile] Updates a [FileFieldState] with a given value.
 extension XFormController on BaseFormController {
@@ -126,6 +127,20 @@ extension XFormController on BaseFormController {
   /// - [value] The new value for the async radio group field.
   void updateAsyncRadioGroup<T>(String fieldName, T value) {
     updateValue<AsyncRadioGroupFieldState<T>, T>(fieldName, value);
+  }
+
+  /// Updates a [RadioGroupFieldState] with a list of [RadioButtonFieldState] items.
+  ///
+  /// - [fieldName] The name of the radio group field to update.
+  /// - [items] The new list of radio button items for the radio group.
+  void updateRadioGroupItems<T>(
+    String fieldName,
+    List<RadioButtonFieldState<T>> items,
+  ) {
+    state.fields[fieldName] = state.radioGroup<T>(fieldName);
+    state = state.copyWith(
+      fields: Map.from(state.fields),
+    );
   }
 
   /// Updates a [HiddenFieldState] with a given [value].

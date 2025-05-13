@@ -30,6 +30,7 @@ class RadioGroupFieldState<T> extends FormFieldState<T> {
   @override
   RadioGroupFieldState<T> copyWith({
     T? value,
+    List<RadioButtonFieldState<T>>? radioButtons,
     String? error,
     String? label,
     bool? touched,
@@ -37,7 +38,7 @@ class RadioGroupFieldState<T> extends FormFieldState<T> {
     List<ValidationRule<T>>? rules,
   }) {
     return RadioGroupFieldState<T>(
-      radioButtons,
+      radioButtons ?? this.radioButtons,
       value: value ?? this.value,
       error: error ?? this.error,
       label: label ?? this.label,
