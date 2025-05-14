@@ -24,4 +24,14 @@ class HiddenFieldState<T> extends FormFieldState<T> {
       value ?? this.value,
     );
   }
+
+  @override
+  HiddenFieldState<T?> copyWithNullable({
+    T? value,
+    String? error,
+  }) {
+    return HiddenFieldState<T?>(
+      value,
+    );
+  }
 }

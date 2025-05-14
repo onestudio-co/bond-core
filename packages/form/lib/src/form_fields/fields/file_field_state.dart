@@ -34,4 +34,16 @@ class FileFieldState extends FormFieldState<File?> {
       rules: rules ?? this.rules,
     );
   }
+
+  @override
+  FileFieldState copyWithNullable({
+    File? value,
+    String? error,
+  }) {
+    return FileFieldState(
+      value,
+      label: label,
+      rules: rules,
+    );
+  }
 }

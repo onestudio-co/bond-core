@@ -48,8 +48,11 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
   }
 
   @override
-  AsyncDropDownFieldState<T> updateError(String? error) {
-    return AsyncDropDownFieldState<T>(
+  AsyncDropDownFieldState<T?> copyWithNullable({
+    T? value,
+    String? error,
+  }) {
+    return AsyncDropDownFieldState<T?>(
       value,
       items: items,
       label: label,

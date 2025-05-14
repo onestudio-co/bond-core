@@ -1,5 +1,5 @@
-import 'package:bond_form/src/validation/validation_rule.dart';
 import 'package:bond_form/src/form_fields/form_field_state.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
 
 /// Represents the state of a date input form field.
 ///
@@ -41,7 +41,10 @@ class DateFieldState extends FormFieldState<DateTime?> {
   }
 
   @override
-  DateFieldState updateError(String? error) {
+  DateFieldState copyWithNullable({
+    DateTime? value,
+    String? error,
+  }) {
     return DateFieldState(
       value,
       error: error,

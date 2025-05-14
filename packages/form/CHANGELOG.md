@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.9+6
+- Implement `clearField(String field)` method to help set null values for fields.
+
 ## 0.0.9+5
 - Fix `updateRadioGroupItems` method.
 
@@ -32,7 +35,6 @@
 ### Example
 You can now add country code like this:
 ```dart
-
 registry.registerForField<String, String>('phoneNumber', (value) => '+974$value');
 ```
 
@@ -65,6 +67,8 @@ void onSuccess(MyResponse res) => Get.toNamed('/home');
 
 @override
 void onFailure(ServerError err) => Get.snackbar('Error', err.message);
+```
+
 ## 0.0.6+4
 - fix `BodyConvertible` `error` generics type to be extends any `Error`.
 

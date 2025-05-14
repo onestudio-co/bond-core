@@ -1,5 +1,5 @@
-import 'package:bond_form/src/validation/validation_rule.dart';
 import 'package:bond_form/src/form_fields/form_field_state.dart';
+import 'package:bond_form/src/validation/validation_rule.dart';
 
 import 'checkbox_field_state.dart';
 
@@ -44,7 +44,10 @@ class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>> {
   }
 
   @override
-  CheckboxGroupFieldState<T> updateError(String? error) {
+  CheckboxGroupFieldState<T> copyWithNullable({
+    Set<T>? value,
+    String? error,
+  }) {
     return CheckboxGroupFieldState<T>(
       checkboxes,
       value: value,

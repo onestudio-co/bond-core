@@ -47,8 +47,11 @@ class RadioGroupFieldState<T> extends FormFieldState<T> {
   }
 
   @override
-  RadioGroupFieldState<T> updateError(String? error) {
-    return RadioGroupFieldState<T>(
+  RadioGroupFieldState<T?> copyWithNullable({
+    T? value,
+    String? error,
+  }) {
+    return RadioGroupFieldState<T?>(
       radioButtons,
       value: value,
       error: error,

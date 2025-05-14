@@ -57,7 +57,7 @@ mixin BaseFormController<Success, Failure extends Error,
   /// - [error] The error message to set for the field.
   void setError(String fieldName, String error) {
     final field = state.get(fieldName);
-    state.fields[fieldName] = field.updateError(error);
+    state.fields[fieldName] = field.copyWithNullable(error: error);
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: BondFormStateStatus.invalid,
@@ -74,8 +74,8 @@ mixin BaseFormController<Success, Failure extends Error,
   void updateError(String fieldName, String error) {
     final field = state.get(fieldName);
     final validationError = field.validate(state.fields);
-    state.fields[fieldName] = field.updateError(
-      validationError != null ? '$error\n$validationError' : error,
+    state.fields[fieldName] = field.copyWithNullable(
+      error: validationError != null ? '$error\n$validationError' : error,
     );
     state = state.copyWith(
       fields: Map.from(state.fields),
@@ -102,7 +102,7 @@ mixin BaseFormController<Success, Failure extends Error,
       for (final fieldEntry in state.fields.entries) {
         final field = fieldEntry.value;
         final error = field.validate(state.fields);
-        state.fields[fieldEntry.key] = field.updateError(error);
+        state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
       }
       state = state.copyWith(
         fields: Map.from(state.fields),
@@ -127,13 +127,13 @@ mixin BaseFormController<Success, Failure extends Error,
       if (error != null) {
         allValid = false;
         if (field.touched) {
-          state.fields[fieldEntry.key] = field.updateError(error);
+          state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
         }
         if (stopOnFirstError) {
           break;
         }
       } else {
-        state.fields[fieldEntry.key] = field.updateError(null);
+        state.fields[fieldEntry.key] = field.copyWithNullable(error: null);
       }
     }
     return allValid;
@@ -204,7 +204,7 @@ mixin BaseFormController<Success, Failure extends Error,
       for (final fieldEntry in state.fields.entries) {
         final field = fieldEntry.value;
         final error = field.validate(state.fields);
-        state.fields[fieldEntry.key] = field.updateError(error);
+        state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
       }
       state = state.copyWith(
         fields: Map.from(state.fields),
@@ -229,11 +229,33 @@ mixin BaseFormController<Success, Failure extends Error,
     for (final fieldEntry in state.fields.entries) {
       final field = fieldEntry.value;
       final error = errors[fieldEntry.key]?.join('\n');
-      state.fields[fieldEntry.key] = field.updateError(error);
+      state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
     }
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: BondFormStateStatus.invalid,
+    );
+  }
+
+  /// Clears the value, error, and touched state of a specific form field.
+  ///
+  /// This method resets the specified field to its initial pristine state by setting
+  /// its value and error to `null` and marking it as not touched. The overall form
+  /// status is also set to `pristine`.
+  ///
+  /// - [field]: The name of the field to clear.
+  void clearField(String field) {
+    final fieldState = state.fields[field];
+    if (fieldState != null) {
+      state.fields[field] = fieldState.copyWith(
+        value: null,
+        error: null,
+        touched: false,
+      );
+    }
+    state = state.copyWith(
+      fields: Map.from(state.fields),
+      status: BondFormStateStatus.pristine,
     );
   }
 

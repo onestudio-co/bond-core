@@ -41,8 +41,11 @@ class CheckboxFieldState<T> extends FormFieldState<T> {
   }
 
   @override
-  CheckboxFieldState<T> updateError(String? error) {
-    return CheckboxFieldState<T>(
+  CheckboxFieldState<T?> copyWithNullable({
+    T? value,
+    String? error,
+  }) {
+    return CheckboxFieldState<T?>(
       value,
       error: error,
       label: label,
