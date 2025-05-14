@@ -47,13 +47,13 @@ class RadioGroupFieldState<T> extends FormFieldState<T> {
   }
 
   @override
-  RadioGroupFieldState<T?> copyWithNullable({
+  RadioGroupFieldState<T> copyWithNullable({
     T? value,
     String? error,
   }) {
-    return RadioGroupFieldState<T?>(
+    return RadioGroupFieldState<T>(
       radioButtons,
-      value: value,
+      value: value as T,
       error: error,
       label: label,
       rules: rules,

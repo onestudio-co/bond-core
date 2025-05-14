@@ -47,12 +47,12 @@ class DropDownFieldState<T> extends FormFieldState<T> {
   }
 
   @override
-  DropDownFieldState<T?> copyWithNullable({
+  DropDownFieldState<T> copyWithNullable({
     T? value,
     String? error,
   }) {
-    return DropDownFieldState<T?>(
-      value,
+    return DropDownFieldState<T>(
+      value as T,
       items: items,
       error: error,
       label: label,

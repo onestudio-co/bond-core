@@ -36,10 +36,15 @@ mixin BaseFormController<Success, Failure extends Error,
   /// - [value] The new value for the field.
   void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
-    state.fields[fieldName] = field.copyWith(
-      value: value,
-      touched: true,
-    );
+
+    final isNullValue = value == null;
+
+    if (isNullValue) {
+      state.fields[fieldName] = field.copyWithNullable(value: null);
+    } else {
+      state.fields[fieldName] = field.copyWith(value: value);
+    }
+
     final status =
         _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     state = state.copyWith(
@@ -234,28 +239,6 @@ mixin BaseFormController<Success, Failure extends Error,
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: BondFormStateStatus.invalid,
-    );
-  }
-
-  /// Clears the value, error, and touched state of a specific form field.
-  ///
-  /// This method resets the specified field to its initial pristine state by setting
-  /// its value and error to `null` and marking it as not touched. The overall form
-  /// status is also set to `pristine`.
-  ///
-  /// - [field]: The name of the field to clear.
-  void clearField(String field) {
-    final fieldState = state.fields[field];
-    if (fieldState != null) {
-      state.fields[field] = fieldState.copyWith(
-        value: null,
-        error: null,
-        touched: false,
-      );
-    }
-    state = state.copyWith(
-      fields: Map.from(state.fields),
-      status: BondFormStateStatus.pristine,
     );
   }
 

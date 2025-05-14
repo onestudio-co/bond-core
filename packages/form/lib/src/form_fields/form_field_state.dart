@@ -94,7 +94,7 @@ abstract class FormFieldState<T> {
   /// A null-tolerant version of `copyWith`, allowing you to **explicitly** set fields to `null`.
   ///
   /// This is useful for form reset behaviors like clearing a field's value or removing its error.
-  FormFieldState<T?> copyWithNullable({
+  FormFieldState<T> copyWithNullable({
     T? value,
     String? error,
   }) {

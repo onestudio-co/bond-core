@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.9+7
+- Remove `clearField()` and enhanced `updateValue()` to support null values using `copyWithNullable`, simplifying API and ensuring consistent handling across field types.
+
 ## 0.0.9+6
 - Implement `clearField(String field)` method to help set null values for fields.
 
@@ -28,7 +31,7 @@
 ### Added
 - Support for field key–specific transformations in `TransformersRegistry`.
 - New method `registerForField` to register transformers tied to a specific field name.
-- 
+
 ### Changed
 - `BodyConvertible` now passes the `fieldKey` to the transformer for prioritized key-based transformation.
 

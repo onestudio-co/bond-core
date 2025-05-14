@@ -47,12 +47,12 @@ class AsyncRadioGroupFieldState<T> extends FormFieldState<T> {
   }
 
   @override
-  AsyncRadioGroupFieldState<T?> copyWithNullable({
+  AsyncRadioGroupFieldState<T> copyWithNullable({
     T? value,
     String? error,
   }) {
-    return AsyncRadioGroupFieldState<T?>(
-      value,
+    return AsyncRadioGroupFieldState<T>(
+      value as T,
       items: items,
       label: label,
       rules: rules,
