@@ -1,4 +1,10 @@
 ### Changelog
+## 0.0.9+5
+- Fix `updateRadioGroupItems` method.
+
+## 0.0.9+4
+- Fix `updateRadioGroupItems` method.
+
 ## 0.0.9+3
 - Added `updateRadioGroupItems` method to `XFormController` extension in `form_controller_extension.dart` to allow updating a `RadioGroupFieldState` with a list of `RadioButtonFieldState` items.
 
