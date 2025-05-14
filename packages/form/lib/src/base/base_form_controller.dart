@@ -62,7 +62,7 @@ mixin BaseFormController<Success, Failure extends Error,
   /// - [error] The error message to set for the field.
   void setError(String fieldName, String error) {
     final field = state.get(fieldName);
-    state.fields[fieldName] = field.copyWithNullable(error: error);
+    state.fields[fieldName] = field.updateError(error);
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: BondFormStateStatus.invalid,
@@ -79,8 +79,8 @@ mixin BaseFormController<Success, Failure extends Error,
   void updateError(String fieldName, String error) {
     final field = state.get(fieldName);
     final validationError = field.validate(state.fields);
-    state.fields[fieldName] = field.copyWithNullable(
-      error: validationError != null ? '$error\n$validationError' : error,
+    state.fields[fieldName] = field.updateError(
+      validationError != null ? '$error\n$validationError' : error,
     );
     state = state.copyWith(
       fields: Map.from(state.fields),
@@ -107,7 +107,7 @@ mixin BaseFormController<Success, Failure extends Error,
       for (final fieldEntry in state.fields.entries) {
         final field = fieldEntry.value;
         final error = field.validate(state.fields);
-        state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
+        state.fields[fieldEntry.key] = field.updateError(error);
       }
       state = state.copyWith(
         fields: Map.from(state.fields),
@@ -132,13 +132,13 @@ mixin BaseFormController<Success, Failure extends Error,
       if (error != null) {
         allValid = false;
         if (field.touched) {
-          state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
+          state.fields[fieldEntry.key] = field.updateError(error);
         }
         if (stopOnFirstError) {
           break;
         }
       } else {
-        state.fields[fieldEntry.key] = field.copyWithNullable(error: null);
+        state.fields[fieldEntry.key] = field.updateError(null);
       }
     }
     return allValid;
@@ -209,7 +209,7 @@ mixin BaseFormController<Success, Failure extends Error,
       for (final fieldEntry in state.fields.entries) {
         final field = fieldEntry.value;
         final error = field.validate(state.fields);
-        state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
+        state.fields[fieldEntry.key] = field.updateError(error);
       }
       state = state.copyWith(
         fields: Map.from(state.fields),
@@ -234,7 +234,7 @@ mixin BaseFormController<Success, Failure extends Error,
     for (final fieldEntry in state.fields.entries) {
       final field = fieldEntry.value;
       final error = errors[fieldEntry.key]?.join('\n');
-      state.fields[fieldEntry.key] = field.copyWithNullable(error: error);
+      state.fields[fieldEntry.key] = field.updateError(error);
     }
     state = state.copyWith(
       fields: Map.from(state.fields),

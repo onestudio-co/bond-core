@@ -41,9 +41,18 @@ class DateFieldState extends FormFieldState<DateTime?> {
   }
 
   @override
+  DateFieldState updateError(String? error) {
+    return DateFieldState(
+      value,
+      error: error,
+      label: label,
+      rules: rules,
+    );
+  }
+
+  @override
   DateFieldState copyWithNullable({
     DateTime? value,
-    String? error,
   }) {
     return DateFieldState(
       value,

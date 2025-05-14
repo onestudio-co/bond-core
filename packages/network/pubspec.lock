@@ -44,7 +44,7 @@ packages:
       path: "../cache"
       relative: true
     source: path
-    version: "0.0.4+1"
+    version: "0.0.4+2"
   bond_core:
     dependency: "direct main"
     description:

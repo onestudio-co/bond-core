@@ -38,7 +38,6 @@ class FileFieldState extends FormFieldState<File?> {
   @override
   FileFieldState copyWithNullable({
     File? value,
-    String? error,
   }) {
     return FileFieldState(
       value,

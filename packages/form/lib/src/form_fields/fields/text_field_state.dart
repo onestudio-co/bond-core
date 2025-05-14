@@ -72,9 +72,21 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
   }
 
   @override
+  TextFieldState updateError(String? error) {
+    return TextFieldState(
+      value,
+      error: error,
+      label: label,
+      rules: rules,
+      touched: touched,
+      validateOnUpdate: validateOnUpdate,
+      controller: controller,
+    );
+  }
+
+  @override
   TextFieldState copyWithNullable({
     String? value,
-    String? error,
   }) {
     return TextFieldState(
       value,

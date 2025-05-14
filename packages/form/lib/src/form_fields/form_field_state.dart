@@ -91,17 +91,26 @@ abstract class FormFieldState<T> {
     List<ValidationRule<T>>? rules,
   });
 
+  /// Updates the `error` field for the [FormFieldState].
+  ///
+  /// This method is used to explicitly set or clear the error message associated
+  /// with the form field. It accepts a nullable string, allowing you to either set
+  /// an error message or clear any existing message.
+  ///
+  /// [error] The new error message string. Pass `null` to clear any existing error.
+  ///
+  /// Returns a new [FormFieldState] object with an updated error field.
+  FormFieldState<T> updateError(String? error) => copyWith(error: error);
+
   /// A null-tolerant version of `copyWith`, allowing you to **explicitly** set fields to `null`.
   ///
   /// This is useful for form reset behaviors like clearing a field's value or removing its error.
   FormFieldState<T> copyWithNullable({
     T? value,
-    String? error,
   }) {
     ;
     return copyWith(
       value: value,
-      error: error,
     );
   }
 

@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.9+8
+ - Fix `updateError` method.
+
 ## 0.0.9+7
 - Remove `clearField()` and enhanced `updateValue()` to support null values using `copyWithNullable`, simplifying API and ensuring consistent handling across field types.
 

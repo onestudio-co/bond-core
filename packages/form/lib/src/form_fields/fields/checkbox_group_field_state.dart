@@ -44,9 +44,19 @@ class CheckboxGroupFieldState<T> extends FormFieldState<Set<T>> {
   }
 
   @override
+  CheckboxGroupFieldState<T> updateError(String? error) {
+    return CheckboxGroupFieldState<T>(
+      checkboxes,
+      value: value,
+      error: error,
+      label: label,
+      rules: rules,
+    );
+  }
+
+  @override
   CheckboxGroupFieldState<T> copyWithNullable({
     Set<T>? value,
-    String? error,
   }) {
     return CheckboxGroupFieldState<T>(
       checkboxes,
