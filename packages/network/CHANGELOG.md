@@ -1,5 +1,9 @@
 ### Changelog
 
+## 0.0.11
+### Added
+- Added `this.total` property to the `Meta` model.
+
 ## 0.0.10
 ### Added
 - Added `patch` method to `BondFire` to support PATCH HTTP requests.
