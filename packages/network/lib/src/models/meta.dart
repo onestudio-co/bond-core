@@ -10,6 +10,7 @@ class Meta {
     required this.path,
     required this.perPage,
     required this.to,
+    required this.total,
     this.message,
   });
 
@@ -20,6 +21,7 @@ class Meta {
   @JsonKey(name: 'per_page')
   final int? perPage;
   final int? to;
+  final int? total;
   final String? message;
 
   factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
