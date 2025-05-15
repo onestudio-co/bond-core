@@ -4,11 +4,11 @@
 /// Parameters:
 ///   - [T] The input type (the original field value).
 ///   - [G] The output type (the transformed value).
-typedef FieldTransformer<T, G extends Object> = G Function(T value);
+typedef FieldTransformer<T, G extends Object?> = G Function(T value);
 
 /// A factory class that wraps a transformation function, allowing
 /// it to be used within the `TransformersRegistry`.
-class FieldTransformerFactory<T, G extends Object> {
+class FieldTransformerFactory<T, G extends Object?> {
   final FieldTransformer<T, G> transformationFunction;
 
   FieldTransformerFactory({

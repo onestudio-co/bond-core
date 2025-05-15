@@ -1,4 +1,12 @@
 ### Changelog
+## 0.0.10
+- Added support for `ignoredBodyKeys` to allow excluding specific fields from the request body.
+- Added `ignoreEmptyValues` flag to automatically skip null, empty String, or zero int values in the final body.
+- Added `remapKeys` to allow field name remapping in the output body (e.g., 'paymentMethod' → 'paymentDetails').
+- Added `mergeNestedMaps` to flatten nested `Map<String, dynamic>` into the root body when needed.
+- Added `postProcessBody(Map<String, dynamic>)` for custom final cleanup of the body map before sending.
+- Supported nullable transformation in `registerForField` to allow clean handling of optional or missing values in field transformations.
+
 ## 0.0.9+8
  - Fix `updateError` method.
 

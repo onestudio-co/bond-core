@@ -5,30 +5,29 @@ import 'field_transformer.dart';
 /// A registry for managing field transformers, allowing custom
 /// transformations of form field values based on their types.
 class TransformersRegistry {
-  final factoriesByType = <Type, FieldTransformerFactory<dynamic, Object>>{};
-  final factoriesByKey = <String, FieldTransformerFactory<dynamic, Object>>{};
+  final factoriesByType = <Type, FieldTransformerFactory<dynamic, Object?>>{};
+  final factoriesByKey = <String, FieldTransformerFactory<dynamic, Object?>>{};
 
   /// Registers a transformer function for a specific field type.
-  ///
   /// Parameters:
   ///   - [T] The type of the field value that the transformer handles.
   ///   - [G] The type that the field value should be transformed into.
   ///   - [transformationFunction] The function that performs the transformation.
-  void register<T, G extends Object>(
-    FieldTransformer<T, G> transformationFunction,
+  void register<T, G extends Object?>(
+    FieldTransformer<T, G?> transformationFunction,
   ) {
-    final fieldTransformerFactory = FieldTransformerFactory<T, G>(
+    final fieldTransformerFactory = FieldTransformerFactory<T, G?>(
       transformationFunction: transformationFunction,
     );
     factoriesByType[T] = fieldTransformerFactory;
   }
 
   /// Registers a transformer for a specific field name (key).
-  void registerForField<T, G extends Object>(
+  void registerForField<T, G extends Object?>(
     String fieldKey,
-    FieldTransformer<T, G> transformationFunction,
+    FieldTransformer<T, G?> transformationFunction,
   ) {
-    factoriesByKey[fieldKey] = FieldTransformerFactory<T, G>(
+    factoriesByKey[fieldKey] = FieldTransformerFactory<T, G?>(
       transformationFunction: transformationFunction,
     );
   }
