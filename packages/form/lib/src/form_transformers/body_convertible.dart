@@ -42,9 +42,7 @@ mixin BodyConvertible<Success, Failure extends Error,
 
       // Skip empty/null values if enabled
       if (ignoreEmptyValues &&
-          (value == null ||
-              (value is String && value.trim().isEmpty) ||
-              (value is num && value == 0))) {
+          (value == null || (value is String && value.trim().isEmpty))) {
         return;
       }
 

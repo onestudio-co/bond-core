@@ -9,6 +9,7 @@ class TransformersRegistry {
   final factoriesByKey = <String, FieldTransformerFactory<dynamic, Object?>>{};
 
   /// Registers a transformer function for a specific field type.
+  ///
   /// Parameters:
   ///   - [T] The type of the field value that the transformer handles.
   ///   - [G] The type that the field value should be transformed into.

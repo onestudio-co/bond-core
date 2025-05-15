@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.10+1
+- Fix `body` method to not ignore zero values even when `ignoreEmptyValues` set to true.
+
 ## 0.0.10
 - Added support for `ignoredBodyKeys` to allow excluding specific fields from the request body.
 - Added `ignoreEmptyValues` flag to automatically skip null, empty String, or zero int values in the final body.
