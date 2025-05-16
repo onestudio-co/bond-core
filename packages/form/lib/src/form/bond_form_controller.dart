@@ -29,12 +29,12 @@ mixin FormController<Success, Failure extends Error>
   /// when the controller is no longer needed to prevent memory leaks.
   @protected
   void dispose() {
-    for (final entry in fields().entries) {
+    for (final entry in state.fields.entries) {
       if (entry.value is TextFieldState) {
         removeTextFieldListener(entry.key);
       }
     }
-    for (final field in fields().values.whereType<Disposable>()) {
+    for (final field in state.fields.values.whereType<Disposable>()) {
       field.dispose();
     }
   }

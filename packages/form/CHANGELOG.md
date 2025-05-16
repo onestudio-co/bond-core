@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.10+2
+- Fixed: Avoided redundant API calls on screen pop by using state.`fields` instead of `fields()` inside the `dispose()` method.
+
 ## 0.0.10+1
 - Fix `body` method to not ignore zero values even when `ignoreEmptyValues` set to true.
 
