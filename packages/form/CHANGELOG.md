@@ -1,4 +1,10 @@
 ### Changelog
+## 0.0.10+5
+- Added `resolveAsyncField<T>(fieldName)` method on `BaseFormController` to resolve and update `AsyncHiddenFieldState<T>` values.
+- Returned `Future<T>` allows awaiting the resolved value in the UI or controller logic.
+- Automatically updates field value and clears error on success; captures and logs error on failure.
+- Marked `pendingValue` in `AsyncHiddenFieldState<T>` as `@internal` to enforce controlled access and avoid misuse.
+
 ## 0.0.10+4
 - Added `updateAsyncHiddenField`, `asyncHiddenField`, `asyncHiddenFieldValue` and required `asyncHiddenFieldValue` methods to `XFormController` and `XBondFormState` extensions respectively to support async hidden fields.
 

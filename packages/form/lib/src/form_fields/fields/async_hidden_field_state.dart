@@ -1,11 +1,13 @@
 import 'package:bond_form/src/form_fields/form_field_state.dart';
 import 'package:bond_form/src/validation/validation_rule.dart';
+import 'package:meta/meta.dart';
 
 /// Represents the state of a hidden field with an asynchronously loaded value.
 ///
 /// An `AsyncHiddenFieldState` extends the [FormFieldState] class, providing
 /// a way to manage the state of a hidden input whose value is loaded asynchronously.
 class AsyncHiddenFieldState<T> extends FormFieldState<T> {
+  @internal
   final Future<T> pendingValue;
 
   /// Creates a new instance of [AsyncHiddenFieldState].
@@ -15,10 +17,11 @@ class AsyncHiddenFieldState<T> extends FormFieldState<T> {
   AsyncHiddenFieldState(
     T value, {
     required this.pendingValue,
+    String? error,
   }) : super(
           value: value,
           label: '',
-          error: null,
+          error: error,
           rules: const [],
         );
 
@@ -35,17 +38,27 @@ class AsyncHiddenFieldState<T> extends FormFieldState<T> {
     return AsyncHiddenFieldState<T>(
       value ?? this.value,
       pendingValue: futureValue ?? this.pendingValue,
+      error: error ?? this.error,
     );
   }
 
   @override
   AsyncHiddenFieldState<T> copyWithNullable({
     T? value,
-    Future<T>? futureValue,
   }) {
     return AsyncHiddenFieldState<T>(
       value as T,
-      pendingValue: futureValue ?? this.pendingValue,
+      pendingValue: pendingValue,
+      error: error,
+    );
+  }
+
+  @override
+  AsyncHiddenFieldState<T> updateError(String? error) {
+    return AsyncHiddenFieldState<T>(
+      value,
+      pendingValue: pendingValue,
+      error: error,
     );
   }
 }
