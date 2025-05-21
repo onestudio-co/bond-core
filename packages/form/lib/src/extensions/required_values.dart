@@ -28,6 +28,8 @@ import 'package:bond_form/bond_form.dart';
 /// - [dropDownValue] Ensures the value of a dropdown field is not null.
 /// - [asyncDropDownValue] Ensures the value of an async dropdown field is not null.
 /// - [hiddenFieldValue] Ensures the value of a hidden field is not null.
+/// - [asyncHiddenFieldValue] Ensures the value of an async hidden field is not null.
+/// - [fileFieldValue] Ensures the value of a file field is not null.
 class RequiredValues {
   final BaseBondFormState state;
 
@@ -131,6 +133,19 @@ class RequiredValues {
   /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
   T hiddenFieldValue<T>(String fieldName) {
     final value = state.hiddenFieldValue<T>(fieldName);
+    if (value == null) {
+      throw ArgumentError('Field $fieldName is required but its value is null');
+    }
+    return value;
+  }
+
+  /// Ensures the value of an async hidden field is not null.
+  ///
+  /// - Parameter [fieldName] The name of the async hidden field to fetch.
+  /// - Returns: The current value of the async hidden field as a non-null `T`.
+  /// - Throws: [ArgumentError] if the field doesn't exist or if the value is null.
+  T asyncHiddenFieldValue<T>(String fieldName) {
+    final value = state.asyncHiddenFieldValue<T>(fieldName);
     if (value == null) {
       throw ArgumentError('Field $fieldName is required but its value is null');
     }

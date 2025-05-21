@@ -1,4 +1,10 @@
 ### Changelog
+## 0.0.10+4
+- Added `updateAsyncHiddenField`, `asyncHiddenField`, `asyncHiddenFieldValue` and required `asyncHiddenFieldValue` methods to `XFormController` and `XBondFormState` extensions respectively to support async hidden fields.
+
+## 0.0.10+3
+- Added `AsyncHiddenFieldState` to support hidden form fields with asynchronously loaded values
+
 ## 0.0.10+2
 - Fixed: Avoided redundant API calls on screen pop by using state.`fields` instead of `fields()` inside the `dispose()` method.
 

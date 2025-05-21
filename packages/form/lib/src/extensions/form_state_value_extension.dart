@@ -31,6 +31,7 @@ import 'required_values.dart';
 /// - [dropDownValue] Retrieves the value of a dropdown field.
 /// - [asyncDropDownValue] Retrieves the value of an async dropdown field.
 /// - [hiddenFieldValue] Retrieves the value of a hidden field.
+/// - [asyncHiddenFieldValue] Retrieves the value of an async hidden field.
 /// - [fileFieldValue] Retrieves the value of a file field.
 /// - [required] Retrieves the [RequiredValues] extension for the current form state.
 extension ValueBondFormState on BaseBondFormState {
@@ -156,6 +157,17 @@ extension ValueBondFormState on BaseBondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   T hiddenFieldValue<T>(String fieldName) {
     return hiddenField<T>(fieldName).value;
+  }
+
+  /// Retrieves the value of an async hidden field for a specified [fieldName].
+  ///
+  /// This method simplifies fetching the current value of an async hidden field.
+  ///
+  /// - Parameter [fieldName] The name of the async hidden field to fetch.
+  /// - Returns: The current value of the async hidden field as a `T`, or `null` if not set.
+  /// - Throws: [ArgumentError] if the field doesn't exist.
+  T asyncHiddenFieldValue<T>(String fieldName) {
+    return asyncHiddenField<T>(fieldName).value;
   }
 
   /// Retrieves the value of a file field for a specified [fieldName].
