@@ -7,6 +7,7 @@ import 'package:meta/meta.dart';
 /// An `AsyncHiddenFieldState` extends the [FormFieldState] class, providing
 /// a way to manage the state of a hidden input whose value is loaded asynchronously.
 class AsyncHiddenFieldState<T> extends FormFieldState<T> {
+  /// Do not access directly — use `resolveAsyncField()` from `BaseFormController` instead.
   @internal
   final Future<T> pendingValue;
 

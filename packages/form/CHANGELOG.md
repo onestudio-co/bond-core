@@ -1,4 +1,7 @@
 ### Changelog
+## 0.0.10+6
+- Updated `intl` dependency to `^0.20.2` to ensure compatibility with the latest Flutter versions.
+
 ## 0.0.10+5
 - Added `resolveAsyncField<T>(fieldName)` method on `BaseFormController` to resolve and update `AsyncHiddenFieldState<T>` values.
 - Returned `Future<T>` allows awaiting the resolved value in the UI or controller logic.

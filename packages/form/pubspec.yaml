@@ -1,6 +1,6 @@
 name: bond_form
 description: Form is a Bond package provides a convenient way to handle Form.
-version: 0.0.10+5
+version: 0.0.10+6
 homepage: https://github.com/onestudio-co/flutter-bond
 repository: https://github.com/onestudio-co/bond-core/tree/main/packages/form
 
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   meta: ^1.8.0
   mime: ^1.0.5
-  intl: ^0.19.0
+  intl: ^0.20.2
 
   bond_core: ^0.0.3
 
