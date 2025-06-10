@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.0.13
+
+* Added type safety validation in field listeners
+* Enhanced error messages for type mismatches
+* Added runtime type checking for field values and listeners
+* Improved debugging capabilities for field type mismatches
+
 ## 0.0.12
 
 * Improved type safety in field listeners
