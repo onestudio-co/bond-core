@@ -1,4 +1,10 @@
 # Changelog
+
+## 0.0.5
+
+* Updated bond_form dependency to latest version
+* Improved type safety in form handling
+
 ## 0.0.4
 * Updated to use new field tracking functionality from bond_form
 * Added support for field value change tracking

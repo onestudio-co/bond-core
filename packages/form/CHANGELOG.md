@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.12
+
+* Improved type safety in field listeners
+* Enhanced field value type checking in notifyFieldListeners
+* Updated removeFieldListener to support generic types
+
 ## 0.0.11
 
 * Refactored field tracking logic into separate `FieldChangeTrackingMixin`
@@ -350,3 +356,4 @@ void onFailure(ServerError err) => Get.snackbar('Error', err.message);
 ## 0.0.1
 
 * initial release.
+

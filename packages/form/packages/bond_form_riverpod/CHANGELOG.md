@@ -1,4 +1,11 @@
 # Changelog
+
+## 0.0.7
+
+* Updated bond_form dependency to latest version
+* Enhanced type safety support in form handling
+* Improved Riverpod integration with generic types
+
 ## 0.0.6
 * Updated to use new field tracking functionality from bond_form
 * Added support for field value change tracking
@@ -70,7 +77,6 @@
 ## 0.0.3+5
 - Bumped `bond_form` dependency to version `^0.0.6+3`.
 
-
 ## 0.0.3+4
 - Bumped `bond_form` dependency to version `^0.0.6+2`.
 
@@ -110,3 +116,4 @@
 ## 0.0.1
 
 * initial release.
+

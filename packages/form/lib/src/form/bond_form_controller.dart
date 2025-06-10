@@ -26,7 +26,7 @@ mixin FormController<Success, Failure extends Error>
   @override
   void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
     super.updateValue<T, G>(fieldName, value);
-    notifyFieldListeners(fieldName, value);
+    notifyFieldListeners<G>(fieldName, value);
   }
 
   @override

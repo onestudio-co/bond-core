@@ -22,16 +22,11 @@ mixin FieldChangeTrackingMixin<Success, Failure extends Error>
     }
   }
 
-  /// Check if a specific field's value has changed from its initial value
-  bool hasFieldChanged(String fieldName) {
-    if (!state.fields.containsKey(fieldName)) return false;
-    if (!_initialFieldValues.containsKey(fieldName)) return true;
-    return state.fields[fieldName]!.value != _initialFieldValues[fieldName];
-  }
-
-  /// Add a listener for a specific field's changes
-  void addFieldListener(String fieldName, void Function(dynamic) listener) {
-    _fieldListeners.putIfAbsent(fieldName, () => []).add(listener);
+  /// Add a listener for a specific field's changes and returns the current field value
+  void addFieldListener<T>(String fieldName, void Function(T) listener) {
+    _fieldListeners
+        .putIfAbsent(fieldName, () => [])
+        .add(listener as void Function(dynamic));
   }
 
   /// Remove a listener for a specific field's changes
@@ -43,8 +38,10 @@ mixin FieldChangeTrackingMixin<Success, Failure extends Error>
   }
 
   /// Called when a field is updated to notify any registered listeners
-  void notifyFieldListeners(String field, dynamic value) {
-    _fieldListeners[field]?.forEach((listener) => listener(value));
+  void notifyFieldListeners<T>(String field, T value) {
+    _fieldListeners[field]?.forEach((listener) {
+      listener(value);
+    });
   }
 
   /// resets the initial field values
