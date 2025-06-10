@@ -19,8 +19,21 @@ import 'package:meta/meta.dart';
 ///   This mixin provides all essential methods and properties for interacting
 ///   with a form's fields and its state, allowing for a streamlined implementation.
 mixin FormController<Success, Failure extends Error>
-    on BaseFormController<Success, Failure, BondFormState<Success, Failure>> {
-  // Additional form-specific methods or properties can be added here if needed
+    on
+        BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FieldChangeTrackingMixin<Success, Failure> {
+  /// Updates the field value and notifies any registered listeners
+  @override
+  void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
+    super.updateValue<T, G>(fieldName, value);
+    notifyFieldListeners(fieldName, value);
+  }
+
+  @override
+  void clear() {
+    super.clear();
+    resetInitialFieldsValue();
+  }
 
   /// Disposes resources used by the form controller.
   ///
@@ -37,5 +50,6 @@ mixin FormController<Success, Failure extends Error>
     for (final field in state.fields.values.whereType<Disposable>()) {
       field.dispose();
     }
+    disposeTracking();
   }
 }

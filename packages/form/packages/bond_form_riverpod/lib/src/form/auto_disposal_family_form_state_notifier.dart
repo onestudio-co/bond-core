@@ -19,6 +19,7 @@ abstract class AutoDisposeFamilyFormStateNotifier<Success,
     extends AutoDisposeFamilyNotifier<BondFormState<Success, Failure>, Arg>
     with
         BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FieldChangeTrackingMixin<Success, Failure>,
         FormController<Success, Failure> {
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;

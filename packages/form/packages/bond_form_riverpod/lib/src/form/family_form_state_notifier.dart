@@ -14,6 +14,7 @@ abstract class FamilyFormStateNotifier<Success, Failure extends Error, Arg>
     extends FamilyNotifier<BondFormState<Success, Failure>, Arg>
     with
         BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FieldChangeTrackingMixin<Success, Failure>,
         FormController<Success, Failure> {
   /// Determines whether the validation should stop at the first error.
   final bool stopOnFirstError;

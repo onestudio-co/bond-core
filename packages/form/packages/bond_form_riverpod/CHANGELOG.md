@@ -1,4 +1,9 @@
 # Changelog
+## 0.0.6
+* Updated to use new field tracking functionality from bond_form
+* Added support for field value change tracking
+* Updated dependency on bond_form to ^0.0.11
+
 ## 0.0.3+6
 - Bumped `bond_form` dependency to version `^0.0.10+6`.
 

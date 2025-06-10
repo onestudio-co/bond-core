@@ -13,6 +13,7 @@ abstract class GetxFormController<Success, Failure extends Error>
     extends GetxController
     with
         BaseFormController<Success, Failure, BondFormState<Success, Failure>>,
+        FieldChangeTrackingMixin<Success, Failure>,
         FormController<Success, Failure> {
   /// The GetxController instance that manages the form state.
   ///

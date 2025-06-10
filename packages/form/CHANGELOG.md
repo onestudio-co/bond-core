@@ -1,4 +1,14 @@
-### Changelog
+# Changelog
+
+## 0.0.11
+
+* Refactored field tracking logic into separate `FieldChangeTrackingMixin`
+* Enhanced form state management with improved field tracking
+* Added `resetInitialFieldsValue` method to reset tracking state
+* Added field change tracking with `hasFieldChanged` method
+* Improved handling of field value listeners
+* Added clear method override to reset initial field values
+
 ## 0.0.10+6
 - Updated `intl` dependency to `^0.20.2` to ensure compatibility with the latest Flutter versions.
 
