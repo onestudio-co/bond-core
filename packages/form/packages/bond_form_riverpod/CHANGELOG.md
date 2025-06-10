@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.8
+
+* Updated bond_form dependency to ^0.0.13
+* Enhanced type safety with improved field listeners
+* Better error messages for type mismatches
+
 ## 0.0.7
 
 * Updated bond_form dependency to latest version
