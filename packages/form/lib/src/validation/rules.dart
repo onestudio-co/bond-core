@@ -8,6 +8,7 @@ export 'rules/alpha.dart';
 export 'rules/alpha_dash.dart';
 export 'rules/alpha_num.dart';
 export 'rules/between.dart';
+export 'rules/between_value.dart';
 export 'rules/boolean.dart';
 export 'rules/date.dart';
 export 'rules/date_after.dart';
@@ -30,6 +31,7 @@ export 'rules/min_selected.dart';
 export 'rules/min_value.dart';
 export 'rules/not_in_list.dart';
 export 'rules/numeric.dart';
+export 'rules/optional.dart';
 export 'rules/phone_number.dart';
 export 'rules/range_selected.dart';
 export 'rules/regex.dart';
@@ -38,7 +40,6 @@ export 'rules/required_if.dart';
 export 'rules/same.dart';
 export 'rules/size.dart';
 export 'rules/url.dart';
-export 'rules/optional.dart';
 export 'validation_rule.dart';
 
 /// A utility class that provides convenient methods to create instances of
@@ -102,6 +103,14 @@ class Rules {
   static ValidationRule<String> between(
           {required num min, required num max, String? message}) =>
       Between(min, max, message: message);
+
+  /// Create a [BetweenValue] validation rule.
+  ///
+  /// This rule checks if a numeric value is between [min] and [max] (inclusive).
+  /// /// It can include a custom validation message.
+  static ValidationRule<String> betweenValue(
+          {required num min, required num max, String? message}) =>
+      BetweenValue(min, max, message: message);
 
   /// Creates a [Boolean] validation rule.
   ///
@@ -171,7 +180,7 @@ class Rules {
   ///
   /// This rule checks if a numeric value is less than or equal to [max].
   /// It can include a custom validation message.
-  static ValidationRule<num> maxValue(int max, {String? message}) =>
+  static ValidationRule<String> maxValue(int max, {String? message}) =>
       MaxValue(max, message: message);
 
   /// Creates a [MinLength] validation rule.
@@ -185,7 +194,7 @@ class Rules {
   ///
   /// This rule checks if a numeric value is greater than or equal to [min].
   /// It can include a custom validation message.
-  static ValidationRule<num> minValue(int min, {String? message}) =>
+  static ValidationRule<String> minValue(int min, {String? message}) =>
       MinValue(min, message: message);
 
   /// Creates a [NotInList] validation rule.

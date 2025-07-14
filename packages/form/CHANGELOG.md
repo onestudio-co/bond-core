@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.14
+* Added new `BetweenValue` rule to validate if a field value is between two specified values.
+* Updated `MaxValue` and `MinValue` rules to support `String` types.
+
 ## 0.0.13
 
 * Added type safety validation in field listeners
