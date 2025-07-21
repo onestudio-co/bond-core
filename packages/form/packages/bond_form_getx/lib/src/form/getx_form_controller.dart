@@ -50,6 +50,25 @@ abstract class GetxFormController<Success, Failure extends Error>
     );
   }
 
+  /// Updates the value of a specific field in the form.
+  ///
+  /// This method updates the value of a field identified by [fieldName] with the provided [value].
+  /// It uses the generic type parameters [T] for the field state and [G] for the value type.
+  /// This method also triggers a reactive update for the field in the form state.
+  ///
+  /// - [fieldName]: The name of the field to update.
+  /// - [value]: The new value to set for the field.
+  /// - [T]: The type of the field state, which extends `FormFieldState<G>`.
+  /// - [G]: The type of the value being set for the field.
+  ///
+  /// Throws an [ArgumentError] if no field with the specified [fieldName] and [G] Tpe is found.
+  @override
+  void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
+    super.updateValue<T, G>(fieldName, value);
+
+    update([fieldName]);
+  }
+
   /// Disposes the controller and cleans up resources.
   ///
   /// This method is called when the controller is removed from memory.
