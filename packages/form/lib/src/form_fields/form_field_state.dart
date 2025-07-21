@@ -40,7 +40,7 @@ abstract class FormFieldState<T> {
     this.error,
     required this.label,
     this.touched = false,
-    this.validateOnUpdate = true,
+    this.validateOnUpdate = false,
     this.rules = const [],
   });
 
@@ -111,6 +111,7 @@ abstract class FormFieldState<T> {
     ;
     return copyWith(
       value: value,
+      touched: true,
     );
   }
 

@@ -37,16 +37,29 @@ mixin BaseFormController<Success, Failure extends Error,
   void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
 
-    final isNullValue = value == null;
+    final updatedField = value != null
+        ? field.copyWith(value: value, touched: true)
+        : field.copyWithNullable(value: null); // touched explicitly set to true
 
-    if (isNullValue) {
-      state.fields[fieldName] = field.copyWithNullable(value: null);
-    } else {
-      state.fields[fieldName] = field.copyWith(value: value);
+    // Validate this field only if it's meant to be validated on update
+    final error = updatedField.validateOnUpdate
+        ? updatedField.validate(state.fields)
+        : null;
+
+    final updatedWithError = updatedField.updateError(error);
+    state.fields[fieldName] = updatedWithError;
+
+    var status = state.status;
+
+    if (updatedField.validateOnUpdate) {
+      if (error != null) {
+        status = BondFormStateStatus.invalid;
+      } else if (state.status == BondFormStateStatus.invalid) {
+        // Only promote to valid if all fields are now valid
+        status =
+            _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+      }
     }
-
-    final status =
-        _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: status,
