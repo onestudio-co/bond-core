@@ -1,4 +1,8 @@
 # Changelog
+## 0.0.8
+* Add reactive field value update in `GetxFormController`
+* Updated bond_form dependency to ^0.0.15
+
 ## 0.0.7
 * Updated bond_form dependency to ^0.0.14
 

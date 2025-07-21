@@ -1,4 +1,6 @@
 # Changelog
+## 0.0.15
+* Refine form field update and validation logic.
 
 ## 0.0.14
 * Added new `BetweenValue` rule to validate if a field value is between two specified values.
