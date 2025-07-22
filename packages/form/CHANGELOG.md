@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.17
+* Fix `updateValue` method from `BaseFormController`.
+
 ## 0.0.16
 * Sync text controller on state updates for `TextFieldState`.
 
