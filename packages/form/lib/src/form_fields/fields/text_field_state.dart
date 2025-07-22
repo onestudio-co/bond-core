@@ -60,8 +60,10 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
     bool? validateOnUpdate,
     List<ValidationRule<String?>>? rules,
   }) {
+    final newValue = value ?? this.value;
+    _syncController(newValue);
     return TextFieldState(
-      value ?? this.value,
+      newValue,
       error: error ?? this.error,
       label: label ?? this.label,
       touched: touched ?? this.touched,
@@ -88,6 +90,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
   TextFieldState copyWithNullable({
     String? value,
   }) {
+    _syncController(value);
     return TextFieldState(
       value,
       error: error,
@@ -97,6 +100,16 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
       validateOnUpdate: validateOnUpdate,
       controller: controller,
     );
+  }
+
+  void _syncController(String? newValue) {
+    final text = newValue ?? '';
+    if (_controller.text != text) {
+      _controller.value = widgets.TextEditingValue(
+        text: text,
+        selection: widgets.TextSelection.collapsed(offset: text.length),
+      );
+    }
   }
 
   @override
