@@ -1,4 +1,8 @@
 # Changelog
+
+## 0.0.16
+* Sync text controller on state updates for `TextFieldState`.
+
 ## 0.0.15
 * Refine form field update and validation logic.
 
