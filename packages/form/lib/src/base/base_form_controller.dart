@@ -51,15 +51,15 @@ mixin BaseFormController<Success, Failure extends Error,
 
     var status = state.status;
 
-    if (updatedField.validateOnUpdate) {
-      if (error != null) {
-        status = BondFormStateStatus.invalid;
-      } else if (state.status == BondFormStateStatus.invalid) {
-        // Only promote to valid if all fields are now valid
-        status =
-            _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
-      }
+    if (error != null) {
+      status = BondFormStateStatus.invalid;
+    } else if (state.status == BondFormStateStatus.invalid ||
+        state.status == BondFormStateStatus.pristine) {
+      // Only promote to valid if all fields are now valid
+      status =
+          _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
     }
+
     state = state.copyWith(
       fields: Map.from(state.fields),
       status: status,
