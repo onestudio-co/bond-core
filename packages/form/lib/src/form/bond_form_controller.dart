@@ -31,6 +31,11 @@ mixin FormController<Success, Failure extends Error>
 
   @override
   void clear() {
+    for (final entry in state.fields.entries) {
+      if (entry.value is TextFieldState) {
+        removeTextFieldListener(entry.key);
+      }
+    }
     super.clear();
     resetInitialFieldsValue();
   }
