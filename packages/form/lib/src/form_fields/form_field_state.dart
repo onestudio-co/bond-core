@@ -100,7 +100,7 @@ abstract class FormFieldState<T> {
   /// [error] The new error message string. Pass `null` to clear any existing error.
   ///
   /// Returns a new [FormFieldState] object with an updated error field.
-  FormFieldState<T> updateError(String? error) => copyWith(error: error);
+  FormFieldState<T> updateError(String? error);
 
   /// A null-tolerant version of `copyWith`, allowing you to **explicitly** set fields to `null`.
   ///

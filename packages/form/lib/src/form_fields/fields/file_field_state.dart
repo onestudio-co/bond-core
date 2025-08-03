@@ -45,4 +45,7 @@ class FileFieldState extends FormFieldState<File?> {
       rules: rules,
     );
   }
+
+  @override
+  FileFieldState updateError(String? error) => copyWith(error: error);
 }

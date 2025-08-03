@@ -29,4 +29,7 @@ class RadioButtonFieldState<T> extends FormFieldState<T> {
       label: label ?? this.label,
     );
   }
+
+  @override
+  RadioButtonFieldState<T> updateError(String? error) => copyWith(error: error);
 }

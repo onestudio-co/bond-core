@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.21+1
+## 0.0.21+2
 * Fix `setError` method from `BaseFormController`.
 
 ## 0.0.20

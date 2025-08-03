@@ -27,4 +27,7 @@ class DropDownItemState<T> extends FormFieldState<T> {
       label: label ?? this.label,
     );
   }
+
+  @override
+  DropDownItemState<T> updateError(String? error) => copyWith(error: error);
 }

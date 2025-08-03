@@ -33,4 +33,7 @@ class HiddenFieldState<T> extends FormFieldState<T> {
       value as T,
     );
   }
+
+  @override
+  HiddenFieldState<T> updateError(String? error) => copyWith(error: error);
 }
