@@ -48,6 +48,7 @@ abstract class GetxFormController<Success, Failure extends Error>
     formState.value = BondFormState<Success, Failure>(
       fields: fields(),
     );
+    initializeFieldTracking();
   }
 
   /// Updates the value of a specific field in the form.

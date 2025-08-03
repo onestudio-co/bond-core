@@ -40,7 +40,7 @@ mixin BaseFormController<Success, Failure extends Error,
     var updatedField = value != null
         ? field.copyWith(value: value)
         : field.copyWithNullable(value: null);
-    // Validate this field only if it's meant to be validated on update
+
     final error = updatedField.validate(state.fields);
 
     if (error == null) {
@@ -74,12 +74,21 @@ mixin BaseFormController<Success, Failure extends Error,
   ///
   /// - [fieldName] The name of the field to set the error for.
   /// - [error] The error message to set for the field.
-  void setError(String fieldName, String error) {
+  void setError(String fieldName, String? error) {
     final field = state.get(fieldName);
     state.fields[fieldName] = field.updateError(error);
+    var status = state.status;
+    if (error != null) {
+      status = BondFormStateStatus.invalid;
+    } else if (state.status == BondFormStateStatus.invalid ||
+        state.status == BondFormStateStatus.pristine) {
+      // Only promote to valid if all fields are now valid
+      status =
+          _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+    }
     state = state.copyWith(
       fields: Map.from(state.fields),
-      status: BondFormStateStatus.invalid,
+      status: status,
     );
   }
 

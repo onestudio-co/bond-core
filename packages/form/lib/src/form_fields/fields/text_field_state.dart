@@ -75,6 +75,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
 
   @override
   TextFieldState updateError(String? error) {
+    _syncController(value);
     return TextFieldState(
       value,
       error: error,
