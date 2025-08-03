@@ -37,9 +37,9 @@ mixin BaseFormController<Success, Failure extends Error,
   void updateValue<T extends FormFieldState<G>, G>(String fieldName, G value) {
     var field = state.get<T, G>(fieldName);
 
-    final updatedField = value != null
-        ? field.copyWith(value: value, touched: true)
-        : field.copyWithNullable(value: null); // touched explicitly set to true
+    var updatedField = value != null
+        ? field.copyWith(value: value)
+        : field.copyWithNullable(value: null);
 
     // Validate this field only if it's meant to be validated on update
     final error = updatedField.validate(state.fields);
@@ -48,8 +48,9 @@ mixin BaseFormController<Success, Failure extends Error,
         updatedField.touched &&
         updatedField.validateOnUpdate) {
       // If the field is touched and has an error, update the error
-      state.fields[fieldName] = updatedField.updateError(error);
+      updatedField = updatedField.updateError(error);
     }
+    state.fields[fieldName] = updatedField;
 
     var status = state.status;
 

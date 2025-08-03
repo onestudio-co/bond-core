@@ -111,7 +111,6 @@ abstract class FormFieldState<T> {
     ;
     return copyWith(
       value: value,
-      touched: true,
     );
   }
 
