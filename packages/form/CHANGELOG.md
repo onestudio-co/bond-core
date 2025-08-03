@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.18
+* Fix `updateValue` error logic method from `BaseFormController`.
+
 ## 0.0.17
 * Fix `updateValue` method from `BaseFormController`.
 
