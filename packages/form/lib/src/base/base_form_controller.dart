@@ -42,12 +42,14 @@ mixin BaseFormController<Success, Failure extends Error,
         : field.copyWithNullable(value: null); // touched explicitly set to true
 
     // Validate this field only if it's meant to be validated on update
-    final error = updatedField.validateOnUpdate
-        ? updatedField.validate(state.fields)
-        : null;
+    final error = updatedField.validate(state.fields);
 
-    final updatedWithError = updatedField.updateError(error);
-    state.fields[fieldName] = updatedWithError;
+    if (error != null &&
+        updatedField.touched &&
+        updatedField.validateOnUpdate) {
+      // If the field is touched and has an error, update the error
+      state.fields[fieldName] = updatedField.updateError(error);
+    }
 
     var status = state.status;
 
