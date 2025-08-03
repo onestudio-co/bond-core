@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.19
+* Remove forced `touched` update in form field value changes
+
 ## 0.0.18
 * Fix `updateValue` error logic method from `BaseFormController`.
 
