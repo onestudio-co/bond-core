@@ -57,8 +57,9 @@ mixin BaseFormController<Success, Failure extends Error,
     } else if (state.status == BondFormStateStatus.invalid ||
         state.status == BondFormStateStatus.pristine) {
       // Only promote to valid if all fields are now valid
-      status =
-          _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+      status = _allValid(false)
+          ? BondFormStateStatus.valid
+          : BondFormStateStatus.invalid;
     }
 
     state = state.copyWith(
@@ -83,8 +84,9 @@ mixin BaseFormController<Success, Failure extends Error,
     } else if (state.status == BondFormStateStatus.invalid ||
         state.status == BondFormStateStatus.pristine) {
       // Only promote to valid if all fields are now valid
-      status =
-          _allValid ? BondFormStateStatus.valid : BondFormStateStatus.invalid;
+      status = _allValid(false)
+          ? BondFormStateStatus.valid
+          : BondFormStateStatus.invalid;
     }
     state = state.copyWith(
       fields: Map.from(state.fields),
@@ -121,7 +123,7 @@ mixin BaseFormController<Success, Failure extends Error,
       final field = state.get(fieldName);
       state.fields[fieldName] = field.copyWith(touched: true);
     }
-    if (_allValid) {
+    if (_allValid(true)) {
       state = state.copyWith(
         fields: Map.from(state.fields),
         status: BondFormStateStatus.valid,
@@ -147,14 +149,14 @@ mixin BaseFormController<Success, Failure extends Error,
   /// A private getter to check if all fields in the form are valid.
   ///
   /// Returns `true` if all fields are valid, otherwise `false`.
-  bool get _allValid {
+  bool _allValid(bool forceSetError) {
     var allValid = true;
     for (final fieldEntry in state.fields.entries) {
       final field = fieldEntry.value;
       final error = field.validate(state.fields);
       if (error != null) {
         allValid = false;
-        if (field.touched) {
+        if (field.touched && forceSetError) {
           state.fields[fieldEntry.key] = field.updateError(error);
         }
         if (stopOnFirstError) {
@@ -198,7 +200,7 @@ mixin BaseFormController<Success, Failure extends Error,
       final field = state.get(fieldName);
       state.fields[fieldName] = field.copyWith(touched: true);
     }
-    if (_allValid) {
+    if (_allValid(true)) {
       state = state.copyWith(
         fields: Map.from(state.fields),
         status: BondFormStateStatus.submitting,
