@@ -173,7 +173,7 @@ extension FieldBondFormState on BaseBondFormState {
   /// - Returns: A list of [DropDownItemState] representing the items of the async dropdown field.
   /// - Throws: [ArgumentError] if the field doesn't exist.
   Future<List<DropDownItemState<T>>> asyncDropDownItems<T>(String fieldName) {
-    return asyncDropDownField<T>(fieldName).items;
+    return asyncDropDownField<T>(fieldName).resolvedItems;
   }
 
   /// Retrieves the hidden field state for a specified [fieldName].

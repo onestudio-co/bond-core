@@ -8,7 +8,8 @@ import 'package:bond_form/src/validation/rules.dart';
 class AsyncDropDownFieldState<T> extends FormFieldState<T> {
   /// The future that resolves to the list of individual item states within the dropdown.
 
-  final Future<List<DropDownItemState<T>>> items;
+  final Future<List<DropDownItemState<T>>> _items;
+  final List<DropDownItemState<T>>? cachedItems;
 
   /// Creates a new instance of [AsyncDropDownFieldState].
   ///
@@ -17,10 +18,11 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
   /// - [label] The label or name of the dropdown form field (required).
   /// - [rules] The list of validation rules to apply to the dropdown field (default is an empty list).
   AsyncDropDownFieldState(
-    T value, {
-    required this.items,
+    T value,
+    this._items, {
     required String label,
     String? error,
+    this.cachedItems,
     List<ValidationRule<T>> rules = const [],
   }) : super(
           value: value,
@@ -28,6 +30,12 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
           error: error,
           rules: rules,
         );
+
+  Future<List<DropDownItemState<T>>> get resolvedItems async {
+    if (cachedItems != null) return cachedItems!;
+    final resolved = await _items;
+    return resolved;
+  }
 
   @override
   AsyncDropDownFieldState<T> copyWith({
@@ -37,10 +45,12 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
     bool? touched,
     bool? validateOnUpdate,
     List<ValidationRule<T>>? rules,
+    List<DropDownItemState<T>>? cachedItems,
   }) {
     return AsyncDropDownFieldState<T>(
       value ?? this.value,
-      items: items,
+      _items,
+      cachedItems: cachedItems ?? this.cachedItems,
       label: label ?? this.label,
       rules: rules ?? this.rules,
       error: error ?? this.error,
@@ -51,7 +61,8 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
   AsyncDropDownFieldState<T> updateError(String? error) {
     return AsyncDropDownFieldState<T>(
       value,
-      items: items,
+      _items,
+      cachedItems: cachedItems,
       label: label,
       rules: rules,
       error: error,
@@ -64,7 +75,8 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
   }) {
     return AsyncDropDownFieldState<T>(
       value as T,
-      items: items,
+      _items,
+      cachedItems: cachedItems,
       label: label,
       rules: rules,
       error: error,
