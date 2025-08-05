@@ -46,7 +46,10 @@ extension FormControllerUpdateItemsExtension on BaseFormController {
     final field = state.asyncDropDownField<T>(fieldName);
     final cached = List<DropDownItemState<T>>.from(field.cachedItems ?? []);
     cached.insert(index, DropDownItemState<T>(value, label: label));
-    state.fields[fieldName] = field.copyWith(cachedItems: cached);
+
+    state.fields[fieldName] =
+        field.copyWith(cachedItems: cached, items: Future.value(cached));
+
     state = state.copyWith(fields: state.fields);
   }
 
@@ -70,7 +73,10 @@ extension FormControllerUpdateItemsExtension on BaseFormController {
 
     cached[index] = DropDownItemState<T>(value, label: label);
 
-    state.fields[fieldName] = field.copyWith(cachedItems: cached);
+    state.fields[fieldName] = field.copyWith(
+      cachedItems: cached,
+      items: Future.value(cached),
+    );
     state = state.copyWith(fields: state.fields);
   }
 }
