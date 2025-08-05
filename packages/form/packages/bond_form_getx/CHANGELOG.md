@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.0.15
+* Updated bond_form dependency to ^0.0.22
+
 ## 0.0.14+4
 * Updated bond_form dependency to ^0.0.21+4
 
