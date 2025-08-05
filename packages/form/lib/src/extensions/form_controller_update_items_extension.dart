@@ -28,7 +28,9 @@ import 'package:bond_form/bond_form.dart';
 /// Methods:
 /// - [insertAsyncDropDownItem] Adds a new dropdown item to the cached list at a given index.
 /// - [updateAsyncDropDownItem] Updates the label of an existing cached dropdown item.
-extension FormControllerUpdateItemsExtension on BaseFormController {
+extension FormControllerUpdateItemsExtension<Success, Failure extends Error,
+        State extends BaseBondFormState<Success, Failure>>
+    on BaseFormController<Success, Failure, State> {
   /// Inserts a new [value] into the items list of an [AsyncDropDownFieldState].
   ///
   /// This method allows dynamically adding a new item to the dropdown field,
@@ -50,7 +52,7 @@ extension FormControllerUpdateItemsExtension on BaseFormController {
     state.fields[fieldName] =
         field.copyWith(cachedItems: cached, items: Future.value(cached));
 
-    state = state.copyWith(fields: state.fields);
+    state = state.copyWith(fields: Map.from(state.fields));
   }
 
   /// Updates an existing dropdown item in an [AsyncDropDownFieldState] by its value.
@@ -77,6 +79,6 @@ extension FormControllerUpdateItemsExtension on BaseFormController {
       cachedItems: cached,
       items: Future.value(cached),
     );
-    state = state.copyWith(fields: state.fields);
+    state = state.copyWith(fields: Map.from(state.fields));
   }
 }

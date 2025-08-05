@@ -11,7 +11,7 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
 
   @protected
   final Future<List<DropDownItemState<T>>> items;
-  final List<DropDownItemState<T>>? cachedItems;
+  List<DropDownItemState<T>>? cachedItems;
 
   /// Creates a new instance of [AsyncDropDownFieldState].
   ///
@@ -34,8 +34,8 @@ class AsyncDropDownFieldState<T> extends FormFieldState<T> {
         );
 
   Future<List<DropDownItemState<T>>> get resolvedItems async {
-    if (cachedItems != null) return cachedItems!;
     final resolved = await items;
+    this.cachedItems = resolved;
     return resolved;
   }
 

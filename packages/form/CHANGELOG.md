@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.22+1
+## 0.0.22+2
 * Added insertAsyncDropDownItem method to support dynamic item injection into async dropdowns
 * Added updateAsyncDropDownItem method to update existing dropdown item labels
 * Added internal caching support for async dropdown items
