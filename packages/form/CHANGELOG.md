@@ -1,11 +1,12 @@
 # Changelog
 
-## 0.0.22+2
+## 0.0.22+3
 * Added insertAsyncDropDownItem method to support dynamic item injection into async dropdowns
 * Added updateAsyncDropDownItem method to update existing dropdown item labels
 * Added internal caching support for async dropdown items
 * Improved async dropdown flow to support inline item creation without refetching
 * Added documentation for new item insertion and update methods
+* Form status downgrade after submission or failure and then any field updated
 
 ## 0.0.21+4
 * Fix `setError` method from `BaseFormController`.
