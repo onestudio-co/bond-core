@@ -52,7 +52,15 @@ mixin BaseFormController<Success, Failure extends Error,
 
     var status = state.status;
 
-    if (error != null) {
+    // Downgrade status if it was previously submitted or failed
+    if (state.status == BondFormStateStatus.submitted ||
+        state.status == BondFormStateStatus.failed) {
+      status = error != null
+          ? BondFormStateStatus.invalid
+          : _allValid(false)
+              ? BondFormStateStatus.valid
+              : BondFormStateStatus.invalid;
+    } else if (error != null) {
       status = BondFormStateStatus.invalid;
     } else if (state.status == BondFormStateStatus.invalid ||
         state.status == BondFormStateStatus.pristine) {
