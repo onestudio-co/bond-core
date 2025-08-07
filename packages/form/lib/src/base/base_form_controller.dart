@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui' as widgets;
 
 import 'package:bond_form/bond_form.dart';
 import 'package:meta/meta.dart';
@@ -27,6 +28,10 @@ mixin BaseFormController<Success, Failure extends Error,
 
   /// A flag indicating if the validation should stop on encountering the first error.
   bool stopOnFirstError = false;
+
+  /// A map to hold listeners for text field changes.
+  @internal
+  final textFieldListeners = <String, widgets.VoidCallback>{};
 
   /// Updates the field value and status.
   ///

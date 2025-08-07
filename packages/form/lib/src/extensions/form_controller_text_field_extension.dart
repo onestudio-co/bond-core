@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart' as widgets;
 ///
 /// This extension provides access to the `TextEditingController` for a field,
 /// ensures it's observed for changes, and allows safe disposal of listeners.
-final _textFieldListeners = <String, widgets.VoidCallback>{};
 
 extension TextFieldFormController on BaseFormController {
   /// Retrieves the [TextEditingController] for a given text field and ensures it is observed.
@@ -31,13 +30,13 @@ extension TextFieldFormController on BaseFormController {
   ///   - [controller]: The [TextEditingController] instance to observe.
   void _observeTextField(
       String fieldName, widgets.TextEditingController controller) {
-    if (_textFieldListeners.containsKey(fieldName)) return;
+    if (textFieldListeners.containsKey(fieldName)) return;
 
     final listener = () {
       updateValue<TextFieldState, String?>(fieldName, controller.text);
     };
 
-    _textFieldListeners[fieldName] = listener;
+    textFieldListeners[fieldName] = listener;
     controller.addListener(listener);
   }
 
@@ -47,7 +46,7 @@ extension TextFieldFormController on BaseFormController {
   ///
   /// - Parameter [fieldName]: The name of the text field to unbind.
   void removeTextFieldListener(String fieldName) {
-    final listener = _textFieldListeners.remove(fieldName);
+    final listener = textFieldListeners.remove(fieldName);
     if (listener != null) {
       final controller = state.textField(fieldName).controller;
       controller.removeListener(listener);
