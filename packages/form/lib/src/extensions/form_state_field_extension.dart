@@ -83,7 +83,7 @@ extension FieldBondFormState on BaseBondFormState {
   /// - Throws: [ArgumentError] if the field doesn't exist.
   Future<List<RadioButtonFieldState<T>>> asyncRadioButtonsOf<T>(
       String fieldName) {
-    return asyncRadioGroup<T>(fieldName).items;
+    return asyncRadioGroup<T>(fieldName).resolvedItems;
   }
 
   /// Retrieves the state of the checkbox field for a specified [fieldName].

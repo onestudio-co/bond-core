@@ -8,6 +8,11 @@
 * Added documentation for new item insertion and update methods
 * Form status downgrade after submission or failure and then any field updated
 * Added `replaceAsyncDropDownItems` method to `FormControllerUpdateItemsExtension`
+* Added
+  •	Async Radio Group Field Utilities
+  •	insertAsyncRadioItem<T> — Inserts a new cached async radio item at a specific index without refetching from the API.
+  •	updateAsyncRadioItem<T> — Updates the label of an existing async radio item by its value.
+  •	replaceAsyncRadioItems<T> — Replaces all cached async radio items with a new list.
 
 ## 0.0.21+4
 * Fix `setError` method from `BaseFormController`.

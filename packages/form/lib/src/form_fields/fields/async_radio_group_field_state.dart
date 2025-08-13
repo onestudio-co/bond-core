@@ -1,5 +1,6 @@
 import 'package:bond_form/src/form_fields.dart';
 import 'package:bond_form/src/validation/rules.dart';
+import 'package:meta/meta.dart';
 
 /// Represents the state of an asynchronous radio button group form field.
 ///
@@ -7,7 +8,9 @@ import 'package:bond_form/src/validation/rules.dart';
 /// a way to manage the state of a radio button group with asynchronously loaded items.
 class AsyncRadioGroupFieldState<T> extends FormFieldState<T> {
   /// The future that resolves to the list of individual radio button states within the group.
+  @protected
   final Future<List<RadioButtonFieldState<T>>> items;
+  List<RadioButtonFieldState<T>>? cachedItems;
 
   /// Creates a new instance of [AsyncRadioGroupFieldState].
   ///
@@ -20,6 +23,7 @@ class AsyncRadioGroupFieldState<T> extends FormFieldState<T> {
     required this.items,
     required String label,
     String? error,
+    this.cachedItems,
     List<ValidationRule<T>> rules = const [],
   }) : super(
           value: value,
@@ -28,18 +32,27 @@ class AsyncRadioGroupFieldState<T> extends FormFieldState<T> {
           rules: rules,
         );
 
+  Future<List<RadioButtonFieldState<T>>> get resolvedItems async {
+    final resolved = await items;
+    this.cachedItems = resolved;
+    return resolved;
+  }
+
   @override
   AsyncRadioGroupFieldState<T> copyWith({
     T? value,
     String? error,
+    Future<List<RadioButtonFieldState<T>>>? items,
     String? label,
     bool? touched,
     bool? validateOnUpdate,
     List<ValidationRule<T>>? rules,
+    List<RadioButtonFieldState<T>>? cachedItems,
   }) {
     return AsyncRadioGroupFieldState<T>(
       value ?? this.value,
-      items: items,
+      items: items ?? this.items,
+      cachedItems: cachedItems ?? this.cachedItems,
       label: label ?? this.label,
       rules: rules ?? this.rules,
       error: error ?? this.error,
@@ -51,6 +64,7 @@ class AsyncRadioGroupFieldState<T> extends FormFieldState<T> {
     return AsyncRadioGroupFieldState<T>(
       value,
       items: items,
+      cachedItems: cachedItems,
       label: label,
       rules: rules,
       error: error,
@@ -64,6 +78,7 @@ class AsyncRadioGroupFieldState<T> extends FormFieldState<T> {
     return AsyncRadioGroupFieldState<T>(
       value as T,
       items: items,
+      cachedItems: cachedItems,
       label: label,
       rules: rules,
       error: error,

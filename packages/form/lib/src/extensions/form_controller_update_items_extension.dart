@@ -28,6 +28,7 @@ import 'package:bond_form/bond_form.dart';
 /// Methods:
 /// - [insertAsyncDropDownItem] Adds a new dropdown item to the cached list at a given index.
 /// - [updateAsyncDropDownItem] Updates the label of an existing cached dropdown item.
+/// - [replaceAsyncDropDownItems] Replaces all cached dropdown items with a new list.
 extension FormControllerUpdateItemsExtension<Success, Failure extends Error,
         State extends BaseBondFormState<Success, Failure>>
     on BaseFormController<Success, Failure, State> {
@@ -97,6 +98,75 @@ extension FormControllerUpdateItemsExtension<Success, Failure extends Error,
 
     state.fields[fieldName] = field.copyWith(
       cachedItems: List<DropDownItemState<T>>.from(items),
+      items: Future.value(items),
+    );
+
+    state = state.copyWith(fields: Map.from(state.fields));
+  }
+
+  /// Inserts a new radio button item into the cached items of an async radio group field.
+  ///
+  /// - [fieldName]: The name of the async radio group field to update.
+  /// - [value]: The value of the new radio button item.
+  /// - [label]: The label for the new radio button item.
+  /// - [index]: The position in the list where the new item should be inserted (default is `0`).
+  void insertAsyncRadioItem<T>(
+    String fieldName, {
+    required T value,
+    required String label,
+    int index = 0,
+  }) {
+    final field = state.asyncRadioGroup<T>(fieldName);
+    final cached = List<RadioButtonFieldState<T>>.from(field.cachedItems ?? []);
+    cached.insert(index, RadioButtonFieldState<T>(value, label: label));
+
+    state.fields[fieldName] = field.copyWith(
+      cachedItems: cached,
+      items: Future.value(cached),
+    );
+
+    state = state.copyWith(fields: Map.from(state.fields));
+  }
+
+  /// Updates the label of an existing radio button item in an async radio group field by its value.
+  ///
+  /// - [fieldName]: The name of the async radio group field.
+  /// - [value]: The value to search for and update.
+  /// - [label]: The new label for the existing radio button item.
+  ///
+  /// If the item doesn't exist, this method does nothing.
+  void updateAsyncRadioItem<T>(
+    String fieldName, {
+    required T value,
+    required String label,
+  }) {
+    final field = state.asyncRadioGroup<T>(fieldName);
+    final cached = List<RadioButtonFieldState<T>>.from(field.cachedItems ?? []);
+
+    final index = cached.indexWhere((item) => item.value == value);
+    if (index == -1) return; // Value not found; exit
+
+    cached[index] = RadioButtonFieldState<T>(value, label: label);
+
+    state.fields[fieldName] = field.copyWith(
+      cachedItems: cached,
+      items: Future.value(cached),
+    );
+    state = state.copyWith(fields: Map.from(state.fields));
+  }
+
+  /// Replaces all cached radio button items in an async radio group field with a new list.
+  ///
+  /// - [fieldName]: The name of the async radio group field to update.
+  /// - [items]: The new list of radio button items to set.
+  void replaceAsyncRadioItems<T>(
+    String fieldName,
+    List<RadioButtonFieldState<T>> items,
+  ) {
+    final field = state.asyncRadioGroup<T>(fieldName);
+
+    state.fields[fieldName] = field.copyWith(
+      cachedItems: List<RadioButtonFieldState<T>>.from(items),
       items: Future.value(items),
     );
 
