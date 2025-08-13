@@ -81,4 +81,25 @@ extension FormControllerUpdateItemsExtension<Success, Failure extends Error,
     );
     state = state.copyWith(fields: Map.from(state.fields));
   }
+
+  /// Replaces all existing cached dropdown items with a new list of items.
+  ///
+  /// This is useful when you want to completely refresh the dropdown options
+  /// without refetching from the API.
+  ///
+  /// - [fieldName]: The name of the async dropdown field to update.
+  /// - [items]: The new list of dropdown items to set.
+  void replaceAsyncDropDownItems<T>(
+    String fieldName,
+    List<DropDownItemState<T>> items,
+  ) {
+    final field = state.asyncDropDownField<T>(fieldName);
+
+    state.fields[fieldName] = field.copyWith(
+      cachedItems: List<DropDownItemState<T>>.from(items),
+      items: Future.value(items),
+    );
+
+    state = state.copyWith(fields: Map.from(state.fields));
+  }
 }
