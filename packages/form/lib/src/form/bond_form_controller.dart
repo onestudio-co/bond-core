@@ -34,6 +34,7 @@ mixin FormController<Success, Failure extends Error>
     for (final entry in state.fields.entries) {
       if (entry.value is TextFieldState) {
         removeTextFieldListener(entry.key);
+        removeTextFieldFocusListener(entry.key);
       }
     }
     super.clear();
@@ -50,6 +51,7 @@ mixin FormController<Success, Failure extends Error>
     for (final entry in state.fields.entries) {
       if (entry.value is TextFieldState) {
         removeTextFieldListener(entry.key);
+        removeTextFieldFocusListener(entry.key);
       }
     }
     for (final field in state.fields.values.whereType<Disposable>()) {

@@ -14,8 +14,17 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
   /// You can bind this directly to a [TextFormField] or [TextField] widget.
   final widgets.TextEditingController _controller;
 
+  /// A focus node to manage the focus state of the text input field.
+  ///
+  /// This is useful for managing focus behavior in the UI, such as moving focus to the
+  /// next field or handling keyboard input.
+  final widgets.FocusNode _focusNode;
+
   @internal
   widgets.TextEditingController get controller => _controller;
+
+  @internal
+  widgets.FocusNode get focusNode => _focusNode;
 
   /// Creates a new instance of [TextFieldState].
   ///
@@ -33,6 +42,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
     bool validateOnUpdate = true,
     bool touched = false,
     widgets.TextEditingController? controller,
+    widgets.FocusNode? focusNode,
   })  : _controller = controller ??
             widgets.TextEditingController.fromValue(
               widgets.TextEditingValue(
@@ -42,6 +52,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
                     : const widgets.TextSelection.collapsed(offset: 0),
               ),
             ),
+        _focusNode = focusNode ?? widgets.FocusNode(),
         super(
           value: value,
           error: error,
@@ -70,6 +81,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
       validateOnUpdate: validateOnUpdate ?? this.validateOnUpdate,
       rules: rules ?? this.rules,
       controller: _controller,
+      focusNode: _focusNode,
     );
   }
 
@@ -84,6 +96,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
       touched: touched,
       validateOnUpdate: validateOnUpdate,
       controller: controller,
+      focusNode: focusNode,
     );
   }
 
@@ -100,6 +113,7 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
       touched: touched,
       validateOnUpdate: validateOnUpdate,
       controller: controller,
+      focusNode: focusNode,
     );
   }
 
@@ -116,5 +130,6 @@ class TextFieldState extends FormFieldState<String?> with Disposable {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
   }
 }

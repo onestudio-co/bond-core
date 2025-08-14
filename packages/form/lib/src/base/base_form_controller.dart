@@ -32,6 +32,8 @@ mixin BaseFormController<Success, Failure extends Error,
   /// A map to hold listeners for text field changes.
   @internal
   final textFieldListeners = <String, widgets.VoidCallback>{};
+  @internal
+  final textFieldFocusListeners = <String, widgets.VoidCallback>{};
 
   /// Updates the field value and status.
   ///
