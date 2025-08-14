@@ -6,7 +6,9 @@ import 'package:flutter/widgets.dart' as widgets;
 /// This extension provides access to the `TextEditingController` for a field,
 /// ensures it's observed for changes, and allows safe disposal of listeners.
 
-extension TextFieldFormController on BaseFormController {
+extension TextFieldFormController<Success, Failure extends Error,
+        State extends BaseBondFormState<Success, Failure>>
+    on BaseFormController<Success, Failure, State> {
   /// Retrieves the [TextEditingController] for a given text field and ensures it is observed.
   ///
   /// If a listener hasn't been registered for the given [fieldName], this method

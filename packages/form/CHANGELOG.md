@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.22+7
+## 0.0.22+9
 * Added insertAsyncDropDownItem method to support dynamic item injection into async dropdowns
 * Added updateAsyncDropDownItem method to update existing dropdown item labels
 * Added internal caching support for async dropdown items
@@ -13,6 +13,7 @@
   •	insertAsyncRadioItem<T> — Inserts a new cached async radio item at a specific index without refetching from the API.
   •	updateAsyncRadioItem<T> — Updates the label of an existing async radio item by its value.
   •	replaceAsyncRadioItems<T> — Replaces all cached async radio items with a new list.
+* Corrected validation to run against the updated (touched) field
 
 ## 0.0.21+4
 * Fix `setError` method from `BaseFormController`.
