@@ -27,6 +27,18 @@ typedef Factory<T> = T Function(Map<String, dynamic>);
 /// and returns an instance of a custom [Error] of type [T].
 typedef ErrorFactory<T extends Error> = T Function(Map<String, dynamic>);
 
+/// Internal class representing a custom cache key configuration.
+///
+/// - [path]: The dot-separated path to the field in the response data to cache.
+/// - [put]: A function to store the extracted value in the cache.
+class _CustomCacheKey {
+  final String path;
+  final Future<bool> Function(dynamic value) put;
+
+  /// Creates a [_CustomCacheKey] with the specified [path] and [put] function.
+  _CustomCacheKey(this.path, this.put);
+}
+
 /// Represents a base class
 /// for configuring and executing HTTP requests using Dio
 /// with additional features such as custom header, body, files, cache and error handling.
@@ -68,10 +80,7 @@ class BaseBondApiRequest<T> {
   ErrorFactory? _errorFactory;
 
   /// A map of custom cache keys and their corresponding paths in the response data.
-  final Map<String, String> _customCacheKeys = {};
-
-  /// The name of the cache store to be used for caching, if specified.
-  String? _cacheStore;
+  final Map<String, _CustomCacheKey> _customCacheKeys = {};
 
   /// Constructs a new instance of [BaseBondApiRequest].
   ///
@@ -205,22 +214,29 @@ class BaseBondApiRequest<T> {
     return this;
   }
 
-  /// Enables caching a specific field from the response into a custom key.
-  /// Optionally specify a different cache store.
+  /// Adds a custom cache key configuration for caching a specific field from the response.
   ///
-  /// -Parameters:
-  /// - [key]: The custom key under which the field will be cached.
-  /// - [path]: The path to the field in the response data.
-  /// - [store]: An optional custom cache store.
+  /// - [key]: The cache key under which the value will be stored.
+  /// - [path]: The dot-separated path to the field in the response data to cache.
+  /// - [store]: Optional. The name of the cache store to use. If not provided, the default store is used.
   ///
   /// Returns: The current [BaseBondApiRequest] instance for chaining.
-  BaseBondApiRequest<T> cacheCustomKey(
+  BaseBondApiRequest<T> cacheCustomKey<V>(
     String key, {
     required String path,
     String? store,
   }) {
-    _customCacheKeys[key] = path;
-    _cacheStore = store;
+    _customCacheKeys[key] = _CustomCacheKey(
+      path,
+      (value) async {
+        if (store != null) {
+          await Cache.store(store).put<V>(key, value);
+        } else {
+          await Cache.put<V>(key, value);
+        }
+        return true;
+      },
+    );
     return this;
   }
 
@@ -290,14 +306,11 @@ class BaseBondApiRequest<T> {
 
   /// Caches specified fields from the response into local storage.
   Future<void> _cacheCustomKeys(Map<String, dynamic> result) async {
-    for (final customKey in _customCacheKeys.entries) {
-      final value = _getNestedValue(result, customKey.value);
+    for (final entry in _customCacheKeys.entries) {
+      final custom = entry.value;
+      final value = _getNestedValue(result, custom.path);
       if (value != null) {
-        if (_cacheStore != null) {
-          await Cache.store(_cacheStore!).put(customKey.key, value);
-        } else {
-          await Cache.put(customKey.key, value);
-        }
+        await custom.put(value); // This will call Cache.put<V>(...)
       }
     }
   }

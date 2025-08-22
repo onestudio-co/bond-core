@@ -40,24 +40,6 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
     return this;
   }
 
-  /// Caches specific fields from the response based on custom keys and paths.
-  ///
-  /// - Parameters:
-  ///   - [key]: The custom cache key.
-  ///   - [path]: Dot-notation path inside the response JSON.
-  ///   - [store]: Optional custom cache store name.
-  ///
-  /// - Returns: The current [GetBondApiRequest] instance for chaining.
-  BaseBondApiRequest<T> cacheCustomKey(
-    String key, {
-    required String path,
-    String? store,
-  }) {
-    _customCacheKeys[key] = path;
-    _cacheStore = store;
-    return this;
-  }
-
   /// Executes the request according to the selected [CachePolicy].
   ///
   /// - Returns: The response of type [T].
@@ -105,7 +87,7 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
 
   Future<T> _executeAndCache() async {
     final result = await super.execute();
-    await Cache.put(_cacheKey!, result, expiredAfter: _cacheDuration);
+    await Cache.put<T>(_cacheKey!, result, expiredAfter: _cacheDuration);
     return result;
   }
 
