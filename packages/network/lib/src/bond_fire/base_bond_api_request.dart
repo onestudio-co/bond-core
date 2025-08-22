@@ -229,10 +229,14 @@ class BaseBondApiRequest<T> {
     _customCacheKeys[key] = _CustomCacheKey(
       path,
       (value) async {
+        final model = _getModel<V>(value);
+        if (model == null) {
+          return false;
+        }
         if (store != null) {
-          await Cache.store(store).put<V>(key, value);
+          await Cache.store(store).put<V>(key, model);
         } else {
-          await Cache.put<V>(key, value);
+          await Cache.put<V>(key, model);
         }
         return true;
       },
@@ -361,5 +365,50 @@ class BaseBondApiRequest<T> {
     }
 
     return formData;
+  }
+
+  /// Converts a dynamic value to a model of type [V].
+  ///
+  /// If [V] is a primitive type, asserts that the value is of type [T] and casts it.
+  /// Otherwise, attempts to convert the value using available [ResponseDecoding] providers.
+  /// Returns the converted model or `null` if conversion fails.
+  V? _getModel<V>(dynamic value) {
+    if (V.primitive) {
+      assert(
+        value is T,
+        'Cached value must be of type $V, but was ${value.runtimeType}',
+      );
+      return value as V;
+    }
+
+    for (final provider in appProviders.whereType<ResponseDecoding>()) {
+      final model = provider.responseConvert<V>(value);
+      if (model != null) {
+        return model;
+      }
+    }
+    return null;
+  }
+}
+
+extension _TypeExtensions on Type {
+  bool get primitive {
+    // Convert the type to a string and remove any '?' to handle nullability
+    final typeStr = toString().replaceAll('?', '');
+
+    // Define a list of primitive types and their List equivalents as strings
+    const primitiveTypes = {
+      'int',
+      'double',
+      'String',
+      'bool',
+      'List<int>',
+      'List<double>',
+      'List<String>',
+      'List<bool>'
+    };
+
+    // Check if the non-nullable type string is in the set of primitive types
+    return primitiveTypes.contains(typeStr);
   }
 }

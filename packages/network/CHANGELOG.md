@@ -1,6 +1,6 @@
 ### Changelog
 
-## 0.0.11+1
+## 0.0.11+2
 ### Added
 - Added `this.total` property to the `Meta` model.
 - Updated `bond_cache` dependency to `^0.0.4+3`.
