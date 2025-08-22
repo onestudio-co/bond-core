@@ -1,5 +1,4 @@
 import 'package:bond_cache/bond_cache.dart';
-import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:test/test.dart';
 
@@ -30,8 +29,8 @@ void main() {
   });
   group('store', () {
     setUpAll(() {
-      sl.registerFactory<CacheDriver>(
-        () => MockCacheDriver(),
+      sl.registerFactory<BondCache>(
+        () => BondCache(driver: MockCacheDriver()),
         instanceName: 'myStore',
       );
     });
@@ -42,8 +41,8 @@ void main() {
 
     test('returns separate instances for different store names', () {
       // Setup a different instance for a new store name
-      sl.registerFactory<CacheDriver>(
-        () => MockCacheDriver(),
+      sl.registerFactory<BondCache>(
+        () => BondCache(driver: MockCacheDriver()),
         instanceName: 'newStore',
       );
 

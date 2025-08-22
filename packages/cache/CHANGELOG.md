@@ -1,7 +1,8 @@
 # Changelog
 
-## 0.0.4+2
+## 0.0.4+3
 - Added export for `src/cache/bond_cache.dart` with `CacheData` hidden in `bond_cache.dart`.
+- Fix `store` method to return `BondCache` from `sl` instead of `CacheDriver`.
 
 ## 0.0.4+1
 - **dev_dependencies:** Updated the `async` package to `^2.13.0` to resolve package validation warnings.
