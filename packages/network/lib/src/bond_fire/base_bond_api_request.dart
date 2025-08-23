@@ -375,7 +375,7 @@ class BaseBondApiRequest<T> {
   V? _getModel<V>(dynamic value) {
     if (V.primitive) {
       assert(
-        value is T,
+        value is V,
         'Cached value must be of type $V, but was ${value.runtimeType}',
       );
       return value as V;
