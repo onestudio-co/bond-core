@@ -38,3 +38,35 @@ extension AsyncFieldFormController on BaseFormController {
     });
   }
 }
+
+extension XAsyncRadioGroupFieldState<T> on AsyncRadioGroupFieldState<T?> {
+  Future<List<RadioButtonFieldState<T>>> get nonNullItems async {
+    // Wait for the items to be resolved
+    final resolvedItems = await this.resolvedItems;
+
+    // Filter out null values and map them to RadioButtonFieldState
+    return resolvedItems
+        .where((item) => item.value != null)
+        .map((item) => RadioButtonFieldState<T>(
+              item.value as T,
+              label: item.label,
+            ))
+        .toList();
+  }
+}
+
+extension XAsyncDropDownFieldState<T> on AsyncDropDownFieldState<T?> {
+  Future<List<DropDownItemState<T>>> get nonNullItems async {
+    // Wait for the items to be resolved
+    final resolvedItems = await this.resolvedItems;
+
+    // Filter out null values and map them to DropDownItemState
+    return resolvedItems
+        .where((item) => item.value != null)
+        .map((item) => DropDownItemState<T>(
+              item.value as T,
+              label: item.label,
+            ))
+        .toList();
+  }
+}
