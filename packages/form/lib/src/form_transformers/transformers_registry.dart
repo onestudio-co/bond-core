@@ -74,8 +74,10 @@ class TransformersRegistry {
     if (firstElementType != null) {
       final transformer = factoriesByType[firstElementType];
       if (transformer != null) {
-        return jsonEncode(
-          collection.map((item) => transformer.transform(item)).toList(),
+        return jsonDecode(
+          jsonEncode(
+            collection.map((item) => transformer.transform(item)).toList(),
+          ),
         );
       }
     }
