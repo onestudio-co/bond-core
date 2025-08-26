@@ -9,7 +9,8 @@ class HiddenFieldState<T> extends FormFieldState<T> {
   /// Creates a new instance of [HiddenFieldState].
   ///
   /// - [value] The value associated with the hidden field (optional).
-  HiddenFieldState(T value) : super(value: value, label: '', rules: const []);
+  HiddenFieldState(T value, {List<ValidationRule<T>> rules = const []})
+      : super(value: value, label: '', rules: rules);
 
   @override
   HiddenFieldState<T> copyWith({
@@ -31,6 +32,7 @@ class HiddenFieldState<T> extends FormFieldState<T> {
   }) {
     return HiddenFieldState<T>(
       value as T,
+      rules: rules,
     );
   }
 
