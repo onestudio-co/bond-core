@@ -16,11 +16,13 @@ class Optional<T> extends ValidationRule<T> {
   @override
   bool validate(T value, Map<String, FormFieldState> fields) {
     // If the value is null, an empty string, or an empty list, skip validation
-    if (value == null || (value is String && value.isEmpty) || (value is List && value.isEmpty)) {
+    if (value == null ||
+        (value is String && value.isEmpty) ||
+        (value is Iterable && value.isEmpty)) {
       return true;
     }
 
     // If the value is present, we proceed to validate with other rules
-    return false;  // Returning false indicates that other rules should now validate this field
+    return false; // Returning false indicates that other rules should now validate this field
   }
 }
