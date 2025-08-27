@@ -61,6 +61,6 @@ class RequiredIf<T> extends ValidationRule<T> {
       }
     }
 
-    return true;
+    return requiredConditionFulfilled;
   }
 }
