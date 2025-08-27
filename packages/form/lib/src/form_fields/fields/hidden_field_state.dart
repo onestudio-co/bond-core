@@ -23,6 +23,7 @@ class HiddenFieldState<T> extends FormFieldState<T> {
   }) {
     return HiddenFieldState<T>(
       value ?? this.value,
+      rules: rules ?? this.rules,
     );
   }
 
