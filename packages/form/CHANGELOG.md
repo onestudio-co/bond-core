@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.22+16
+## 0.0.22+17
 * Added insertAsyncDropDownItem method to support dynamic item injection into async dropdowns
 * Added updateAsyncDropDownItem method to update existing dropdown item labels
 * Added internal caching support for async dropdown items
@@ -18,6 +18,7 @@
 * return `jsonDecode` for collections not raw `String` on `body()` method
 * Support `rules` on `HiddenFieldState`
 * Fix `OptioalRule` to work with `Iterable` types like `List` and `Set`
+* Fix `RequiredIfRule` to work with `Iterable` types like `List` and `Set`.
 
 ## 0.0.21+4
 * Fix `setError` method from `BaseFormController`.

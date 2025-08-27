@@ -54,7 +54,7 @@ class RequiredIf<T> extends ValidationRule<T> {
     if (requiredConditionFulfilled) {
       if (value is String) {
         return value.isNotEmpty;
-      } else if (value is List) {
+      } else if (value is Iterable) {
         return value.isNotEmpty;
       } else {
         return value != null;
