@@ -51,21 +51,37 @@ abstract class FormFieldState<T> {
   /// Returns an error message if validation fails, otherwise returns `null`.
   @nonVirtual
   String? validate(Map<String, FormFieldState> fields) {
+    bool _isBlank(dynamic value) {
+      if (value == null) return true;
+      if (value is String) return value.trim().isEmpty;
+      if (value is Iterable) return value.isEmpty;
+      return false;
+    }
+
+    // 1) Optional: if Optional passes, skip everything
     final optionalRule = rules.whereType<Optional>().firstOrNull;
-    if (optionalRule != null) {
-      if (optionalRule.validate(value, fields)) {
-        return null; // No validation error, skip other rules
+    if (optionalRule != null && optionalRule.validate(value, fields)) {
+      return null;
+    }
+
+    // 2) RequiredIf: if NOT required and value is blank => skip everything
+    final requiredIfRule = rules.whereType<RequiredIf>().firstOrNull;
+    if (requiredIfRule != null) {
+      final requiredNow = requiredIfRule.isRequired(fields);
+      if (!requiredNow && _isBlank(value)) {
+        return null; // not required + empty => OK, skip other rules
       }
     }
 
-    // Validate against all rules
+    // 3) Validate the rest (excluding Optional; RequiredIf will pass/fail itself)
     for (final rule in rules) {
-      if (!(rule is Optional) && !rule.validate(value, fields)) {
-        return rule.message(label); // Return the first error message
+      if (rule is Optional) continue;
+      if (!rule.validate(value, fields)) {
+        return rule.message(label);
       }
     }
 
-    return null; // All validations passed
+    return null; // All good
   }
 
   /// Creates a new [FormFieldState] object by copying the existing state

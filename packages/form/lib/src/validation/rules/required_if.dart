@@ -41,26 +41,30 @@ class RequiredIf<T> extends ValidationRule<T> {
   String validatorMessage(String fieldName) =>
       l10n.requiredValidationMessage(fieldName);
 
+  /// Expose whether the field *should be required* given the current form state.
+  bool isRequired(Map<String, FormFieldState> fields) {
+    if (condition != null) return condition!();
+    if (otherFieldName != null) {
+      return fields[otherFieldName!]?.value == equalTo;
+    }
+    return false;
+  }
+
   @override
   bool validate(T value, Map<String, FormFieldState> fields) {
-    var requiredConditionFulfilled = false;
-
-    if (condition != null) {
-      requiredConditionFulfilled = condition!();
-    } else if (fields[otherFieldName!]?.value == equalTo) {
-      requiredConditionFulfilled = true;
+    bool _isBlank(dynamic value) {
+      if (value == null) return true;
+      if (value is String) return value.trim().isEmpty;
+      if (value is Iterable) return value.isEmpty;
+      return false;
     }
 
-    if (requiredConditionFulfilled) {
-      if (value is String) {
-        return value.isNotEmpty;
-      } else if (value is Iterable) {
-        return value.isNotEmpty;
-      } else {
-        return value != null;
-      }
+    final requiredNow = isRequired(fields);
+    if (!requiredNow) {
+      // Not required => always pass
+      return true;
     }
-
-    return requiredConditionFulfilled;
+    // Required => must be non-empty
+    return !_isBlank(value);
   }
 }
