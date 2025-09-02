@@ -161,8 +161,8 @@ void main() {
     });
 
     test('Check for String type', () {
-      final result = CommonCacheHelper.checkCachedData<String>('SÜẞ');
-      expect(result, equals('SÜẞ'));
+      final result = CommonCacheHelper.checkCachedData<String>('SALAH');
+      expect(result, equals('SALAH'));
     });
 
     test('Check for provided factory', () {
@@ -241,18 +241,18 @@ void main() {
       });
 
       test('Check for List<String> type', () {
-        final result = CommonCacheHelper.convertList<String>(['SÜẞ', 'NB']);
-        expect(result, equals(['SÜẞ', 'NB']));
+        final result = CommonCacheHelper.convertList<String>(['SALAH', 'NB']);
+        expect(result, equals(['SALAH', 'NB']));
       });
 
       test('Check for List of registered type', () {
         final cachedValue = [
           {'data': 'NB'},
-          {'data': 'SÜẞ'},
+          {'data': 'SALAH'},
         ];
         final expectedResult = [
           RegisteredModel.data('NB'),
-          RegisteredModel.data('SÜẞ'),
+          RegisteredModel.data('SALAH'),
         ];
         final result = CommonCacheHelper.convertList<RegisteredModel>(
           cachedValue,
@@ -263,11 +263,11 @@ void main() {
       test('Check for List of provided factory', () {
         final cachedValue = [
           {'data': 'NB'},
-          {'data': 'SÜẞ'},
+          {'data': 'SALAH'},
         ];
         final expectedResult = [
           NotRegisteredModel.data('NB'),
-          NotRegisteredModel.data('SÜẞ'),
+          NotRegisteredModel.data('SALAH'),
         ];
         final result = CommonCacheHelper.convertList<NotRegisteredModel>(
           cachedValue,
@@ -281,7 +281,7 @@ void main() {
           () {
         final cachedValue = [
           {'data': 'NB'},
-          {'data': 'SÜẞ'},
+          {'data': 'SALAH'},
         ];
         expect(
           () => CommonCacheHelper.convertList<NotRegisteredModel>(cachedValue),

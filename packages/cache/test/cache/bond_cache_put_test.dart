@@ -72,15 +72,15 @@ void main() {
     test('returns true when storing String value', () async {
       _mockDriver.whenStoreThenAnswer<String>(
         key: 'string_key',
-        value: 'SÜẞ',
+        value: 'SALAH',
         answer: true,
       );
 
-      final result = await _cache.put<String>('string_key', 'SÜẞ');
+      final result = await _cache.put<String>('string_key', 'SALAH');
 
       expect(result, isTrue);
       verify(_mockDriver.store('string_key', {
-        'data': 'SÜẞ',
+        'data': 'SALAH',
         'expiredAt': null,
       })).called(1);
     });
@@ -168,15 +168,15 @@ void main() {
     test('returns true when storing List<String> value', () async {
       _mockDriver.whenStoreThenAnswer<List<String>>(
         key: 'string_key',
-        value: ['SÜẞ', 'NB'],
+        value: ['SALAH', 'NB'],
         answer: true,
       );
 
-      final result = await _cache.putAll<String>('string_key', ['SÜẞ', 'NB']);
+      final result = await _cache.putAll<String>('string_key', ['SALAH', 'NB']);
 
       expect(result, isTrue);
       verify(_mockDriver.store('string_key', {
-        'data': ['SÜẞ', 'NB'],
+        'data': ['SALAH', 'NB'],
         'expiredAt': null,
       })).called(1);
     });

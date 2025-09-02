@@ -188,7 +188,7 @@ void main() {
           key: 'existing_key',
           returnValue: true,
         );
-        final data = 'SÜẞ';
+        final data = 'SALAH';
         _mockDriver.whenRetrieveThenReturn(
           key: 'existing_key',
           cachedData: {'data': data, 'expiredAt': null},
@@ -202,7 +202,7 @@ void main() {
 
     group('custom types', () {
       test('returns cached registered type when key exists and is valid', () {
-        final json = {'data': 'SÜẞ'};
+        final json = {'data': 'SALAH'};
         final data = RegisteredModel.fromJson(json);
 
         _mockDriver.whenHasThenReturn(
@@ -210,7 +210,7 @@ void main() {
           returnValue: true,
         );
         _mockDriver.whenRetrieveThenReturn(key: 'existing_key', cachedData: {
-          'data': {'data': 'SÜẞ'},
+          'data': {'data': 'SALAH'},
           'expiredAt': null,
         });
 
@@ -220,7 +220,7 @@ void main() {
       });
 
       test('returns cached provided type when key exists and is valid', () {
-        final json = {'data': 'SÜẞ'};
+        final json = {'data': 'SALAH'};
         final data = NotRegisteredModel.fromJson(json);
 
         _mockDriver.whenHasThenReturn(
@@ -228,7 +228,7 @@ void main() {
           returnValue: true,
         );
         _mockDriver.whenRetrieveThenReturn(key: 'existing_key', cachedData: {
-          'data': {'data': 'SÜẞ'},
+          'data': {'data': 'SALAH'},
           'expiredAt': null,
         });
 
@@ -242,7 +242,7 @@ void main() {
 
       test('throws an argument error exception for unregistered cached type',
           () {
-        final json = {'data': 'SÜẞ'};
+        final json = {'data': 'SALAH'};
         final cachedData = {'data': json, 'expiredAt': null};
         _mockDriver.whenHasThenReturn(
           key: 'existing_key',
@@ -416,7 +416,7 @@ void main() {
           key: 'existing_key',
           returnValue: true,
         );
-        final data = ['SÜẞ', 'NB'];
+        final data = ['SALAH', 'NB'];
         _mockDriver.whenRetrieveThenReturn(
           key: 'existing_key',
           cachedData: {'data': data, 'expiredAt': null},
@@ -430,7 +430,7 @@ void main() {
 
     group('custom types', () {
       test('returns cached registered type when key exists and is valid', () {
-        final json = {'data': 'SÜẞ'};
+        final json = {'data': 'SALAH'};
         final json2 = {'data': 'NB'};
         final data = [
           RegisteredModel.fromJson(json),
@@ -454,7 +454,7 @@ void main() {
       });
 
       test('returns cached provided type when key exists and is valid', () {
-        final json = {'data': 'SÜẞ'};
+        final json = {'data': 'SALAH'};
         final json2 = {'data': 'NB'};
         final data = [
           NotRegisteredModel.fromJson(json),
@@ -482,7 +482,7 @@ void main() {
 
       test('throws an argument error exception for unregistered cached type',
           () {
-        final json = {'data': 'SÜẞ'};
+        final json = {'data': 'SALAH'};
         final json2 = {'data': 'NB'};
         final cachedData = {
           'data': [json, json2],

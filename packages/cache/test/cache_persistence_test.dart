@@ -1,5 +1,4 @@
 import 'package:bond_cache/bond_cache.dart';
-import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -22,7 +21,7 @@ void main() {
   group('remember and rememberForever', () {
     test('remember stores value with expiration', () async {
       final key = 'user';
-      final fetchedValue = 'SÜẞ';
+      final fetchedValue = 'SALAH';
 
       when(mockFunction.fetchUserFromApi()).thenAnswer(
         (_) async => fetchedValue,
@@ -67,7 +66,7 @@ void main() {
 
     test('rememberForever stores value indefinitely', () async {
       final key = 'user';
-      final fetchedValue = 'SÜẞ';
+      final fetchedValue = 'SALAH';
       when(mockFunction.fetchUserFromApi()).thenAnswer(
         (_) async => fetchedValue,
       );

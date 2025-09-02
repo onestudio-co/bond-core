@@ -43,7 +43,7 @@ import 'package:bond_cache/bond_cache.dart';
 
 // Example usage
 final user = Cache.get<User>('user');
-Cache.put<User>('user', User(id: 1, name: 'SÜẞ'));
+Cache.put<User>('user', User(id: 1, name: 'SALAH'));
 ```
 
 ## Documentation

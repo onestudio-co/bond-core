@@ -7,7 +7,7 @@ import 'package:bond_cache/bond_cache.dart';
 final user = Cache.get<User>('user', defaultValue: User(id: 1, name: 'Default User'));
 
 // Update the cache
-Cache.put<User>('user', User(id: 2, name: 'SÜẞ'));
+Cache.put<User>('user', User(id: 2, name: 'SALAH'));
 
 // Retrieve the updated value
 final updatedUser = Cache.get<User>('user');
