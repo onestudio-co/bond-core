@@ -1,10 +1,11 @@
 ### Changelog
 
-## 0.0.11+3
+## 0.0.11+4
 ### Added
 - Added `this.total` property to the `Meta` model.
 - Updated `bond_cache` dependency to `^0.0.4+3`.
 - Refactored custom cache key handling in BaseBondApiRequest to support caching with explicit data types.
+- Support factory on `cacheCustomKey` method.
 
 ## 0.0.10
 ### Added

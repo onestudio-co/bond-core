@@ -225,11 +225,17 @@ class BaseBondApiRequest<T> {
     String key, {
     required String path,
     String? store,
+    Factory? factory,
   }) {
     _customCacheKeys[key] = _CustomCacheKey(
       path,
       (value) async {
-        final model = _getModel<V>(value);
+        var model;
+        if (factory != null) {
+          model = factory(value);
+        } else {
+          model = _getModel<V>(value);
+        }
         if (model == null) {
           return false;
         }
