@@ -6,6 +6,7 @@
 - Updated `bond_cache` dependency to `^0.0.4+3`.
 - Refactored custom cache key handling in BaseBondApiRequest to support caching with explicit data types.
 - Support factory on `cacheCustomKey` method.
+- Fix `cache` method to return `T` instead of `dynamic`.
 
 ## 0.0.10
 ### Added
