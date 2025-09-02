@@ -278,7 +278,7 @@ class BaseBondApiRequest<T> {
       }
 
       if (_factory != null) {
-        return _factory!(response.data);
+        return _factory!(responseData);
       } else {
         for (final provider in appProviders.whereType<ResponseDecoding>()) {
           final model = provider.responseConvert<T>(responseData);
