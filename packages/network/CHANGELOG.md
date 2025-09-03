@@ -9,6 +9,7 @@
 - Fix `cache` method to return `T` instead of `dynamic`.
 - Fix `_factory` method should take response after `_dataTransformer` done.
 - Improve cache handling in `GetBondApiRequest`.
+- Add new CachePolicy `cacheFirst` to read from cache first, if not found then read from network and save to cache.
 
 ## 0.0.10
 ### Added

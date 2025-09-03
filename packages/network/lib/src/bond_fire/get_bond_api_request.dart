@@ -48,6 +48,15 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
     if (_cacheKey != null) {
       final hasCache = await Cache.has(_cacheKey!);
       switch (_cachePolicy) {
+        case CachePolicy.cacheOnly:
+          if (hasCache) {
+            final cachedValue =
+                await Cache.get<T?>(_cacheKey!, fromJsonFactory: _factory);
+            if (cachedValue != null) {
+              return cachedValue; // Skip network entirely
+            }
+          }
+          return await _executeAndCache();
         case CachePolicy.cacheElseNetwork:
           if (hasCache) {
             final cachedValue =
