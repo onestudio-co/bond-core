@@ -1,5 +1,4 @@
 import 'package:bond_cache/bond_cache.dart';
-import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 

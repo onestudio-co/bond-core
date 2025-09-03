@@ -51,7 +51,10 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
         case CachePolicy.cacheElseNetwork:
           if (hasCache) {
             final cachedValue =
-                await Cache.get<T>(_cacheKey!, fromJsonFactory: _factory);
+                await Cache.get<T?>(_cacheKey!, fromJsonFactory: _factory);
+            if (cachedValue == null) {
+              return await _executeAndCache();
+            }
             _executeAndCache();
             return cachedValue;
           } else {
@@ -62,7 +65,11 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
             return await _executeAndCache();
           } catch (_) {
             if (hasCache) {
-              return await Cache.get<T>(_cacheKey!, fromJsonFactory: _factory);
+              final cachedValue =
+                  await Cache.get<T?>(_cacheKey!, fromJsonFactory: _factory);
+              if (cachedValue != null) {
+                return cachedValue;
+              }
             }
             rethrow;
           }
@@ -95,7 +102,11 @@ class GetBondApiRequest<T extends Jsonable> extends BaseBondApiRequest<T> {
     if (_cacheKey != null) {
       final hasCache = await Cache.has(_cacheKey!);
       if (hasCache) {
-        yield await Cache.get<T>(_cacheKey!, fromJsonFactory: _factory);
+        final cachedValue =
+            Cache.get<T?>(_cacheKey!, fromJsonFactory: _factory);
+        if (cachedValue != null) {
+          yield cachedValue;
+        }
       }
     }
     yield await _executeAndCache();

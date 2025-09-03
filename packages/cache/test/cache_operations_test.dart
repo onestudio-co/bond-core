@@ -1,5 +1,4 @@
 import 'package:bond_cache/bond_cache.dart';
-import 'package:bond_cache/src/cache/bond_cache.dart';
 import 'package:bond_core/bond_core.dart';
 import 'package:test/test.dart';
 
@@ -124,5 +123,4 @@ void main() {
       expect(result, equals(value));
     });
   });
-
 }
